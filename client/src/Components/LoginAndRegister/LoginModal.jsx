@@ -13,7 +13,7 @@ import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import '../../index.css';
 import { useDispatch, useSelector } from "react-redux";
-import register, { getAllUsers } from '../../REDUX/actions/action';
+import { getAllUsers } from '../../REDUX/actions/action';
 
 
 
