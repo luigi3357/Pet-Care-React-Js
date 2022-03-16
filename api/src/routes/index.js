@@ -14,6 +14,7 @@ const FilterRoutes = require('./Filters');
 const AuthRouter = require('./Auth');
 const sms = require('./smsvalidacion')
 const MercadoPagoRoutes = require("./mercadoPago")
+const BookingRoutes = require("./bookings")
 
 
 
@@ -27,6 +28,7 @@ router.use('/search', SearchRoutes)
 router.use("/mercadoPago", MercadoPagoRoutes)
 router.use("/filter", FilterRoutes)
 router.use('/Auth', AuthRouter);
+router.use('/bookings', BookingRoutes);
 
 
 
