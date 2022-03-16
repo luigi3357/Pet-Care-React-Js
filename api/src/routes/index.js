@@ -11,7 +11,7 @@ const ReviewRoutes = require('./reviews');
 const UploadRoutes = require('./uploadform');
 const SearchRoutes = require('./searchBar');
 const FilterRoutes = require('./Filters');
-const AuthRouter = require('./Auth');
+//const AuthRouter = require('./Auth');
 
 const MercadoPagoRoutes = require("./mercadoPago")
 
@@ -26,7 +26,7 @@ router.use('/upload', UploadRoutes)
 router.use('/search', SearchRoutes)
 router.use("/mercadoPago", MercadoPagoRoutes)
 router.use("/filter", FilterRoutes)
-router.use('/Auth', AuthRouter);
+//router.use('/Auth', AuthRouter);
 
 
 

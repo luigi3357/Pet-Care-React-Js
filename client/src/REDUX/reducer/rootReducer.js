@@ -4,9 +4,9 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
-        case "":
+        case "POST_PAYMENT":
             return{
-
+                ...state
             }                    
         default:
             return state
