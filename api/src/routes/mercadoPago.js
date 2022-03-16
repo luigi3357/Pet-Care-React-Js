@@ -30,13 +30,10 @@ router.post("/checkout", (req, res) => {
                  currency_id: 'ARS'
              }
          ],
-         payer: {
-           email: 'demo@mail.com'
-         },
          back_urls:{
-               "success": "https://petcare.com/success",
-              "pending": "https://petcare.com/pending",   
-              "failure": "https://petcare.com/failure"
+               "success": "http://localhost:3001/mercadoPago/feedback",
+              "pending": "http://localhost:3001/mercadoPago/feedback",   
+              "failure": "http://localhost:3001/mercadoPago/feedback"
             },
      };
 
@@ -57,8 +54,8 @@ router.post("/checkout", (req, res) => {
       //global.id = response.body.id;
 
       console.log(data.response);
-      //res.redirect(response.body.init_point)
-      res.send(JSON.stringify(data.response.init_point))
+      res.redirect(data.response.init_point)
+      // res.send(JSON.stringify(data.response.init_point))
     })
     .catch(function (error) {
       console.log(error);
