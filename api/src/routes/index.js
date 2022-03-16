@@ -12,7 +12,7 @@ const UploadRoutes = require('./uploadform');
 const SearchRoutes = require('./searchBar');
 const FilterRoutes = require('./Filters');
 const AuthRouter = require('./Auth');
-
+const sms = require('./smsvalidacion')
 const MercadoPagoRoutes = require("./mercadoPago")
 
 
