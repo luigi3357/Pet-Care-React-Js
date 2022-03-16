@@ -3,12 +3,15 @@ const { User, Post, Review } = require("../db");
 const { checkUUIDV } = require("../services/checkUUID");
 const { infoTotalDb } = require("../services/getDb");
 const { search } = require("../services/login");
-const { searchUserIncludingReview, ratingAverage, ratingUpdate } = require("../services/ratingCalculation");
+const {
+  searchUserIncludingReview,
+  ratingAverage,
+  } = require("../services/ratingCalculation");
 const { Update } = require("../services/updateUser");
 
 const router = Router();
 
-router.get("/:id", async (req, res, next) => {
+router.get("/profile/:id", async (req, res, next) => {
   const { id } = req.params;
   try {
     if (await checkUUIDV(id)) {
@@ -45,18 +48,28 @@ router.get("/", async (req, res) => {
   res.send(infoUser);
 });
 
-/*         rating test          */
+/*         Update Rating          */
 router.put("/rate", async (req, res, next) => {
-  const { email } = req.body
-
+  const { email } = req.body;
+  
   const user = await searchUserIncludingReview(email);
   const new_rating = ratingAverage(user);
-  const updated = await Update({rating: new_rating, email})
-
+  const updated = await Update({ rating: new_rating, email });
+  
   res.send(updated);
 });
 
-
-
+/*         Account Delete          */
+router.delete("/delete/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deletedUser = await User.destroy({
+      where: { id },
+    });
+    res.send('Usuario eliminado con éxito');
+  } catch (error) {
+    res.status(400).send("No se pudo eliminar el usuario");
+  }
+});
 
 module.exports = router;
