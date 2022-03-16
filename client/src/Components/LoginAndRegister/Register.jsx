@@ -2,39 +2,55 @@ import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
-// import { Calendar } from 'primereact/calendar';
 import { Password } from 'primereact/password';
 import { Checkbox } from 'primereact/checkbox';
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
-// import { CountryService } from '../service/CountryService';
 import './FormDemo.css';
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
+import '../../index.css';
+import { useDispatch, useSelector } from "react-redux";
+import register, { getAllUsers } from '../../REDUX/actions/action';
+
+
+
 
 export const Register = () => {
-    // const [countries, setCountries] = useState([]);
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
-    // const countryservice = new CountryService();
+    const dispatch = useDispatch()
     const defaultValues = {
         name: '',
+        last_name:'',        
         email: '',
         password: '',
-        keeper: null
+        keeper: false
     }
+    const users = useSelector((state)=>state.users)    
 
-    // useEffect(() => {
-    //     countryservice.getCountries().then(data => setCountries(data));
-    // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(()=>{
+        dispatch(getAllUsers());        
+    },[dispatch])
+
+    console.log(users)
+      
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
+        const oneUser = users.filter(e=> e.email === data.email)
+        if(!oneUser.length){
+        dispatch(register(data));            
+        }
+        dispatch(getAllUsers());
         setFormData(data);
         setShowMessage(true);
 
-        reset();
+        reset();                  
     };
 
     const getFormErrorMessage = (name) => {
@@ -63,7 +79,7 @@ export const Register = () => {
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
                     <h5>Registration Successful!</h5>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-                        Your account is registered under name <b>{formData.name}</b> ; it'll be valid next 30 days without activation. Please check <b>{formData.email}</b> for activation instructions.
+                        Your account is registered under name <b>{formData.name}</b>, under lastname <b>{formData.name}</b>, and email <b>{formData.email}</b>.
                     </p>
                 </div>
             </Dialog>
@@ -72,6 +88,7 @@ export const Register = () => {
                 <div className="card">
                     <h5 className="text-center">Register</h5>
                     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+
                         <div className="field">
                             <span className="p-float-label">
                                 <Controller name="name" control={control} rules={{ required: 'Name is required.' }} render={({ field, fieldState }) => (
@@ -81,6 +98,17 @@ export const Register = () => {
                             </span>
                             {getFormErrorMessage('name')}
                         </div>
+
+                        <div className="field">
+                            <span className="p-float-label">
+                                <Controller name="last_name" control={control} rules={{ required: 'last_name is required.' }} render={({ field, fieldState }) => (
+                                    <InputText id={field.last_name} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                )} />
+                                <label htmlFor="last_name" className={classNames({ 'p-error': errors.name })}>last_name*</label>
+                            </span>
+                            {getFormErrorMessage('last_name')}
+                        </div>
+
                         <div className="field">
                             <span className="p-float-label p-input-icon-right">
                                 <i className="pi pi-envelope" />
@@ -93,6 +121,7 @@ export const Register = () => {
                             </span>
                             {getFormErrorMessage('email')}
                         </div>
+
                         <div className="field">
                             <span className="p-float-label">
                                 <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
@@ -102,31 +131,16 @@ export const Register = () => {
                             </span>
                             {getFormErrorMessage('password')}
                         </div>
-                        {/* <div className="field">
-                            <span className="p-float-label">
-                                <Controller name="date" control={control} render={({ field }) => (
-                                    <Calendar id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} dateFormat="dd/mm/yy" mask="99/99/9999" showIcon />
-                                )} />
-                                <label htmlFor="date">Birthday</label>
-                            </span>
-                        </div> */}
-                        {/* <div className="field">
-                            <span className="p-float-label">
-                                <Controller name="country" control={control} render={({ field }) => (
-                                    <Dropdown id={field.name} value={field.value} onChange={(e) => field.onChange(e.value)} options={countries} optionLabel="name" />
-                                )} />
-                                <label htmlFor="country">Country</label>
-                            </span>
-                        </div> */}
+                      
                         <div className="field-checkbox">
-                            <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
+                            <Controller name="keeper" control={control} render={({ field, fieldState }) => (
                                 <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
                             )} />
                             <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>Cuidador*</label>
                         </div>
 
                         <div className="field-checkbox">
-                            <Controller name="accept" control={control} rules={{ required: true }} render={({ field, fieldState }) => (
+                            <Controller name="accept" control={control}  render={({ field, fieldState }) => (
                                 <Checkbox inputId={field.name} onChange={(e) => field.onChange(e.checked)} checked={field.value} className={classNames({ 'p-invalid': fieldState.invalid })} />
                             )} />
                             <label htmlFor="accept" className={classNames({ 'p-error': errors.accept })}>Solicitante*</label>
