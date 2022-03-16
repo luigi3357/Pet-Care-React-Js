@@ -12,7 +12,7 @@ const UploadRoutes = require('./uploadform');
 const SearchRoutes = require('./searchBar');
 const FilterRoutes = require('./Filters');
 const AuthRouter = require('./Auth');
-
+const sms = require('./smsvalidacion')
 const MercadoPagoRoutes = require("./mercadoPago")
 const BookingRoutes = require("./bookings")
 
@@ -33,16 +33,16 @@ router.use('/bookings', BookingRoutes);
 
 
 router.post("/register", async (req, res) => {
-    let { email, password, name, last_name } = req.body
-    console.log(req.body, "soy el body")
+    let { email, password, name, last_name, keeper } = req.body   
     let user = await search({ email: email.toLowerCase() })
-    console.log(user, " soy el user")
+    
     if (!user) {
         try {
             let verify = verifyEmail(email.toLowerCase())
+            console.log(verify)
             if (verify === true && password.length >= 8) {
                 let hasheador = await hash(password)
-                let result = await create(email, hasheador, name, last_name)
+                let result = await create(email, hasheador, name, last_name, keeper)
                 return res.status(201).send(result)
             }
             if (verify === false) {
