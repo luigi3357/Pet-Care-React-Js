@@ -13,20 +13,20 @@ async function hash(password){
     return hash
 }
 
-async function create (email,hasheador,name, last_name){
+async function create (email,hasheador,name, last_name, keeper){
     let Creado = User.findOrCreate({
         where:{
             password: hasheador,
             email:email.toLowerCase(),
             name: name, 
-            last_name: last_name
+            last_name: last_name,
+            keeper: keeper
           }
        })
        return Creado
 }
 
 async function search (body){
-    console.log(body)
    let user = await User.findOne({
        where: body
    })
