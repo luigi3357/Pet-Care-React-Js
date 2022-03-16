@@ -5,8 +5,9 @@ const { User } = require("./src/db");
 const { createPost, createReview } = require("./data/funcionesPreCarga.js");
 
 conn.sync({ force: true }).then(async () => {
-    const users = new Promise(()=>{user.forEach(async (element) => {
-       await User.findOrCreate({
+  try {
+    const users = user.forEach((element) => {
+      User.findOrCreate({
         where: {
           email: element.email,
           name: element.name,
@@ -19,14 +20,14 @@ conn.sync({ force: true }).then(async () => {
           myImages: element.myImages,
         },
       });
-})}).then(()=>{
-      const posts = post.map((e) => createPost(e));
-    }).then(()=>{
-      const reviews = feedback.map((el) => createReview(el));
-    }).catch((e)=>{
-      console.log(error);
-    })
-  
+    });
+
+    const posts = post.map((e) => createPost(e));
+
+    const reviews = feedback.map((el) => createReview(el));
+  } catch (error) {
+    console.log(error);
+  }
   server.listen(3001, () => {
     console.log("%s listening at 3001");
   });
