@@ -26,12 +26,15 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Post, Review } = sequelize.models;
+const { User, Post, Review, Booking } = sequelize.models;
 
 User.hasMany(Post, {as: "posteos", foreignKey: {name:"author_id", allowNull: false}})
 Post.belongsTo(User,{as: "author", foreignKey: {name:"author_id", allowNull: false}})
 User.hasMany(Review, {as: "reviews", foreignKey: "reviewedUser_id" })
 Review.belongsTo(User, {as: 'reviwedUser', foreignKey: 'reviewedUser_id'})
+User.hasMany(Booking, {as: "reservaciones",foreignKey: "client" })
+User.hasMany(Booking, {as: "contrataciones",foreignKey: "keeper" })
+
 
 
 

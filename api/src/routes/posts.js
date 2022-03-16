@@ -38,4 +38,27 @@ router.post('/create', async (req, res, next)=>{
     }
   })
 
+  router.delete("/deleteAll/:id", async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const deletedPosts = await Post.destroy({
+        where: { author_id: id },
+      });
+      res.send('Publicaciones eliminadas con éxito');
+    } catch (error) {
+      res.status(400).send("No se pudieron eliminar las publicacones");
+    }
+  });
+  router.delete("/delete/:id", async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const deletedPost = await Post.destroy({
+        where: { id },
+      });
+      res.send('Publicacion eliminada con éxito');
+    } catch (error) {
+      res.status(400).send("No se pudo eliminar el usuario");
+    }
+  });
+
 module.exports = router;

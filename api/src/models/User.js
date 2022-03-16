@@ -59,6 +59,10 @@ module.exports = (sequelize) => {
     },
     myImages: {
       type: DataTypes.ARRAY(DataTypes.STRING),
+    },
+    deleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
     },
   );

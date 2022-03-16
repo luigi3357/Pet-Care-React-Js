@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { User, Post, Review } = require("../db");
+const { User, Post, Review, Booking } = require("../db");
 const { checkUUIDV } = require("../services/checkUUID");
 const { infoTotalDb } = require("../services/getDb");
 const { search } = require("../services/login");
@@ -28,9 +28,11 @@ router.get("/profile/:id", async (req, res, next) => {
             model: Review,
             as: "reviews",
           },
+          'reservaciones',
+          'contrataciones'
         ],
       });
-      if (user) {
+      if (user && !user.deleted) {
         res.send(user);
       } else {
         return res.status(400).send("El usuario no existe");
@@ -60,12 +62,16 @@ router.put("/rate", async (req, res, next) => {
 });
 
 /*         Account Delete          */
-router.delete("/delete/:id", async (req, res, next) => {
+router.put("/delete/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedUser = await User.destroy({
-      where: { id },
-    });
+    const user = await User.findOne({where: {id}})
+    console.log(user.email)
+    if(user){
+      const deleted = await User.update({ deleted: true}, {where: {email: user.email}});
+  
+    //res.send(updated);
+    }
     res.send('Usuario eliminado con éxito');
   } catch (error) {
     res.status(400).send("No se pudo eliminar el usuario");
