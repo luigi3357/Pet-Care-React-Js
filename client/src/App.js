@@ -4,6 +4,7 @@ import Payment from "./Pages/Payment"
 import { Register } from './Components/LoginAndRegister/Register';
 import { Login } from './Components/LoginAndRegister/LoginModal';
 import { RatingDemo }from './Components/Review'
+import { DetailsPage } from './Pages/DetailsPage'; 
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/Register" element={<Register/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/rating" element={<RatingDemo/>}/>
+        <Route path="/DetailsPage" element={<DetailsPage/>}/>
 
       </Routes>
     </Router>    
