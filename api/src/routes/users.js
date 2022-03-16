@@ -2,13 +2,12 @@ const { Router } = require("express");
 const { User, Post, Review, Booking } = require("../db");
 const { checkUUIDV } = require("../services/checkUUID");
 const { infoTotalDb } = require("../services/getDb");
-const { search } = require("../services/login");
+const { search, hash } = require("../services/login");
 const {
   searchUserIncludingReview,
   ratingAverage,
   } = require("../services/ratingCalculation");
 const { Update } = require("../services/updateUser");
-
 const router = Router();
 
 router.get("/profile/:id", async (req, res, next) => {
@@ -77,5 +76,37 @@ router.put("/delete/:id", async (req, res, next) => {
     res.status(400).send("No se pudo eliminar el usuario");
   }
 });
+
+
+//editamos la informacion del usuario
+
+router.put("/edit", async (req, res) => {
+  const { email, name, last_name, phone, password, bio, location} = req.body
+
+  let user = await search({ email: email})
+
+  if (user) {
+      let resetInfoUser = await User.update({ name: name, last_name: last_name, phone: phone, bio:bio, location: location},   
+          { where: { email:email }})
+      return res.send(resetInfoUser)
+  }
+  return res.status(404).send("Usuario no encontrado")
+})
+
+//ruta para editar si quiere o no 2FA y un cambio de contraseña
+
+router.put("/security", async (req, res) => {
+  const { email, password, key_2fa } = req.body
+
+  let user = await search({ email: email})
+  let passwordHasheada= await hash(password)
+
+  if (user) {
+      let resetInfoUser = await User.update({ password: passwordHasheada, key_2fa:key_2fa  },   
+          { where: { email:email }})
+      return res.send(resetInfoUser)
+  }
+  return res.status(404).send("Usuario no encontrado")
+})
 
 module.exports = router;
