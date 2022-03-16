@@ -28,7 +28,7 @@ export const Register = () => {
         last_name:'',        
         email: '',
         password: '',
-        keeper: false
+        keeper: false,        
     }
     const users = useSelector((state)=>state.users)    
 
@@ -44,12 +44,13 @@ export const Register = () => {
     const onSubmit = (data) => {
         const oneUser = users.filter(e=> e.email === data.email)
         if(!oneUser.length){
-        dispatch(register(data));            
-        }
+        dispatch(register(data));  
         dispatch(getAllUsers());
         setFormData(data);
         setShowMessage(true);
-
+        }else{
+            setShowMessage(false)
+        }        
         reset();                  
     };
 
@@ -74,6 +75,7 @@ export const Register = () => {
 
     return (
         <div className="form-demo">
+            
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex justify-content-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>

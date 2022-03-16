@@ -57,3 +57,15 @@ export default function register (payload){
           });
       };   
   };
+
+  //forgot password
+  
+  export const forgotPassword = (payload) => {    
+      return async (dispatch) => {
+        let json = await axios.put(
+          `http://${localhost}:3001/forgot-password`,
+          payload
+        );
+        return json;
+      };   
+  };  

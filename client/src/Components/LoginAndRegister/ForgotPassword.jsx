@@ -16,7 +16,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from '../../REDUX/actions/action';
 
 
-export const Login = () => {
+
+
+export const ForgotPassword = () => {
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const dispatch = useDispatch()
@@ -27,12 +29,12 @@ export const Login = () => {
         password: '',
         keeper: false
     }
-
     const users = useSelector((state)=>state.users)    
 
     useEffect(()=>{
         dispatch(getAllUsers());        
     },[dispatch])
+        
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
@@ -77,7 +79,7 @@ export const Login = () => {
 
             <div className="flex justify-content-center">
                 <div className="card">
-                    <h5 className="text-center"> Login </h5>
+                    <h5 className="text-center">Forgot Password</h5>
                     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
 
                         <div className="field">
@@ -92,16 +94,6 @@ export const Login = () => {
                             </span>
                             {getFormErrorMessage('email')}
                         </div>
-
-                        <div className="field">
-                            <span className="p-float-label">
-                                <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
-                                    <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
-                                )} />
-                                <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
-                            </span>
-                            {getFormErrorMessage('password')}
-                        </div>  
 
                         <Button type="submit" label="Submit" className="mt-2" />
                     </form>
