@@ -9,7 +9,11 @@ export const Home = () => {
       <NavBar />
       <div className="flex flex-column align-items-center text-center justify-content-center w-full">
         <Filters />
-        <PostCard />
+        <PostCard
+          title="CUIDO PERROS EN MI CASA 24hs"
+          rating={3}
+          bookings={8}
+        />
       </div>
     </div>
   );
