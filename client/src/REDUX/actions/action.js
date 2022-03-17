@@ -8,7 +8,7 @@ const localhost = 'http://localhost:3001'
 
 export function postPayment(payload){
     return async function (dispatch) {
-        const json = await axios.post("http://localhost:3001/mercadoPago/checkout/", payload);
+        const json = await axios.post(`${localhost}/mercadoPago/checkout/`, payload);
         console.log(json)
         return json;
     }
@@ -63,7 +63,7 @@ export default function register (payload){
   export const forgotPassword = (payload) => {    
       return async (dispatch) => {
         let json = await axios.put(
-          `http://${localhost}:3001/forgot-password`,
+          `${localhost}/forgot-password`,
           payload
         );
         return json;
