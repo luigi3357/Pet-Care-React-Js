@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
@@ -20,6 +20,7 @@ import { Toast } from "primereact/toast";
 import { NavBar } from "../NavBar";
 
 export const Login = () => {
+  const navigate = useNavigate()
   const [showMessage, setShowMessage] = useState(false);
   const [showExist, setShowExist] = useState(false);
   const [formData, setFormData] = useState({});
@@ -53,6 +54,7 @@ export const Login = () => {
       if (verifyPassword === true) {
         setShowMessage(true);
         dispatch(getLogin(data.email));
+        navigate("/")
         reset();
       } else {
         shownotmatch();

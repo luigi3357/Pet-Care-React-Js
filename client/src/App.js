@@ -11,12 +11,16 @@ import { RatingDemo } from "./Components/Review";
 import { DetailsPage } from "./Pages/DetailsPage";
 // import { Profile } from "./Pages/Profile";
 import { Home } from "./Pages/Home";
+import { ForgotPassword } from './Components/LoginAndRegister/ForgotPassword';
+import { MailCode } from './Components/LoginAndRegister/mailCode';
 // import InputSearchB from "../src/Components/FormPost/";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/mailcode" element={<MailCode/>}/>   
+        <Route path ="/forgotPassword" element={<ForgotPassword/>}/>
         <Route path="/" element={<Home />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/Register" element={<Register />} />
