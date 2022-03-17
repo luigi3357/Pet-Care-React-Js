@@ -7,6 +7,7 @@ async function Update(body){
     if(user){
         const result = await User.update(
             {
+             token_2FA: body.token_2FA ? body.token_2FA : null,
              password: body.hasheador ? body.hasheador : user.password,
              token: body.token ? body.token : null,
              name: body.name ? body.name : user.name ? user.name: null,

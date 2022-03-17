@@ -23,6 +23,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
 
     },
+    token_2FA: {
+      type: DataTypes.STRING,
+
+    },
     name: {
       type: DataTypes.STRING,
 
