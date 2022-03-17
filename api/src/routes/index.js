@@ -12,14 +12,14 @@ const UploadRoutes = require('./uploadform');
 const SearchRoutes = require('./searchBar');
 const FilterRoutes = require('./Filters');
 const AuthRouter = require('./Auth');
-const sms = require('./smsvalidacion')
+const Sms = require('./smsvalidacion')
 const MercadoPagoRoutes = require("./mercadoPago")
 const BookingRoutes = require("./bookings")
 
 
 
 const router = Router();
-
+router.use("/mensaje", Sms)
 router.use("/users", UserRoutes)
 router.use('/posts', PostsRoutes)
 router.use('/reviews', ReviewRoutes)
