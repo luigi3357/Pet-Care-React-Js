@@ -16,11 +16,13 @@ import 'primeflex/primeflex.css';
 import '../../index.css';
 import { useDispatch, useSelector } from "react-redux";
 import register, { getAllUsers } from '../../REDUX/actions/action';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 export const Register = () => {
+    const navigate = useNavigate()
     const [showMessage, setShowMessage] = useState(false);
     const[showExist,setShowExist]=useState(false);
     const [formData, setFormData] = useState({});
@@ -43,7 +45,10 @@ export const Register = () => {
       
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
-    
+    function handleNavigate(){
+        setShowMessage(false)
+        navigate("/login")
+    }
 
     const onSubmit = (data) => {
         const oneUser = users.filter(e=> e.email === data.email)
@@ -81,7 +86,7 @@ export const Register = () => {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
     };
 
-    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
+    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() =>handleNavigate()} /></div>;
     const dialogFooterExist = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowExist(false)} /></div>;
     const passwordHeader = <h6>Pick a password</h6>;
     const passwordFooter = (
