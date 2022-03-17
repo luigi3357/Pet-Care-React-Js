@@ -6,17 +6,9 @@ import { Password } from 'primereact/password';
 import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
-import './FormDemo.css';
-import 'primeicons/primeicons.css';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
-import 'primereact/resources/primereact.css';
-import 'primeflex/primeflex.css';
-import '../../index.css';
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword, getAllUsers, getLogin } from '../../REDUX/actions/action';
 import { useNavigate } from 'react-router-dom';
-
-
 
 
 export const ForgotPassword = () => {

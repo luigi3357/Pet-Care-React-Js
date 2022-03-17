@@ -11,7 +11,7 @@ import { MailCode } from './Components/LoginAndRegister/mailCode';
 import { Login } from "./Components/LoginAndRegister/LoginModal";
 import { RatingDemo } from "./Components/Review";
 import { DetailsPage } from "./Pages/DetailsPage";
-// import { Profile } from "./Pages/Profile";
+import { Profile } from "./Pages/Profile";
 import { Home } from "./Pages/Home";
 // import InputSearchB from "../src/Components/FormPost/";
 
@@ -20,12 +20,14 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/mailcode" element={<MailCode/>}/>           
+        <Route path="/forgotPassword" element={<ForgotPassword/>}/>   
         <Route path="/payment" element={<Payment />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/rating" element={<RatingDemo />} />
         <Route path="/DetailsPage" element={<DetailsPage />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/profile" element={<Profile />} />
         {/* <Route path="/formpublic" element={<Form/>}/>         */}
       </Routes>
     </Router>
