@@ -1,6 +1,5 @@
 const { Router } = require('express');
-const bodyParser = require("body-parser");
-
+const bodyParser = require('body-parser')
 // SDK de Mercado Pago
 const mercadopago = require("mercadopago");
 
@@ -9,7 +8,6 @@ const mercadopago = require("mercadopago");
 const router = Router();
 
 //router.use(bodyParser.urlencoded({ extended: true}))
-
 // Agrega credenciales
 //aca vinculamos el usuario dueño de la empresa a la que legará el dinero
 mercadopago.configure({
@@ -18,7 +16,7 @@ mercadopago.configure({
 
 //routes
 
-router.post("/checkout/", (req, res) => {
+router.post("/checkout/", (req, res, next) => {
     // Crea un objeto de preferencia
     //
     /* let preference = {
@@ -44,22 +42,24 @@ router.post("/checkout/", (req, res) => {
                 quantity: 1,
             }
         ],
+        back_urls:{
+          "success": "http://localhost:3000/payment",
+          "pending": "https://localhost:3000/feedback",   
+          "failure": "https://localhost:3000/feedback"
+        }, auto_return: "approved"
     };
   
   mercadopago.preferences
     .create(preference)
-    .then(function (response) {
+    .then( (response) =>{
       // Este valor reemplazará el string "<%= global.id %>" en tu HTML
       //global.id = response.body.id;
 
-      console.log(response.body);
-      res.redirect(response.body.init_point)
-      
-      
-      //res.send(JSON.stringify(data.response.init_point))
+      console.log(response.body.init_point);
+      res.json(response.body.init_point)
     })
     .catch(function (error) {
-      console.log(error);
+      next(error);
     });
     
 }) 

@@ -7,7 +7,7 @@ import Payment from "./Pages/Payment"
 import { Register } from './Components/LoginAndRegister/Register';
 import { Login } from './Components/LoginAndRegister/LoginModal';
 import { RatingDemo }from './Components/Review'
-import { DetailsPage } from './Pages/DetailsPage'; 
+import  DetailsPage  from './Pages/DetailsPage'; 
 
 
 

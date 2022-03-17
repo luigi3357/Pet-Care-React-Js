@@ -25,11 +25,11 @@ export default function Payment (){
         e.preventDefault();
         console.log(input)
         dispatch(postPayment(input))
-        alert("payment was created successfully")
         setInput({
             title: "",
             unit_price: 0,
         })
+        window.location.assign('https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=1083035041-ee8506c2-4ea9-477c-a401-4a77fcd7aa11')
         //history.push("/home")
     }
     return (
