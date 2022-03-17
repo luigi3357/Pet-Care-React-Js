@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Link } from "react-router-dom";
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
@@ -17,29 +16,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from '../../REDUX/actions/action';
 
 
-export const Login = () => {
+
+
+export const ForgotPassword = () => {
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const dispatch = useDispatch()
     const defaultValues = {
+        name: '',
+        last_name:'',        
         email: '',
         password: '',
+        keeper: false
     }
+    const users = useSelector((state)=>state.users)    
 
-    const users = useSelector((state) => state.users)
-
-    useEffect(() => {
-        dispatch(getAllUsers());
-    }, [dispatch])
+    useEffect(()=>{
+        dispatch(getAllUsers());        
+    },[dispatch])
+        
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        const oneUser = users.filter(e => e.email === data.email)
+        const oneUser = users.filter(e=> e.email === data.email)       
         setFormData(data);
         setShowMessage(true);
 
-        reset();
+        reset();                  
     };
 
     const getFormErrorMessage = (name) => {
@@ -75,51 +79,24 @@ export const Login = () => {
 
             <div className="flex justify-content-center">
                 <div className="card">
-                    <h5 className="text-center"> Login </h5>
+                    <h5 className="text-center">Forgot Password</h5>
                     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
 
                         <div className="field">
                             <span className="p-float-label p-input-icon-right">
                                 <i className="pi pi-envelope" />
                                 <Controller name="email" control={control}
-                                    rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' } }}
+                                    rules={{ required: 'Email is required.', pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, message: 'Invalid email address. E.g. example@email.com' }}}
                                     render={({ field, fieldState }) => (
                                         <InputText id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
-                                    )} />
+                                )} />
                                 <label htmlFor="email" className={classNames({ 'p-error': !!errors.email })}>Email*</label>
                             </span>
                             {getFormErrorMessage('email')}
                         </div>
 
-                        <div className="field">
-                            <span className="p-float-label">
-                                <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
-                                    <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
-                                )} />
-                            </span>
-                            {/* <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
-                            
-                            {getFormErrorMessage('password')} */}
-                        </div>
                         <Button type="submit" label="Submit" className="mt-2" />
                     </form>
-
-                    <div>
-                        <Link to="/forgotPassword">Forgot Password?</Link>
-                    </div>
-                    
-                    <div>
-                    <p>No tienes cuenta?</p>
-          <Link to="/register">
-          <p>REGISTRATE</p>
-          </Link>
-           
-                    </div>
-
-                    <div>                        
-                        <a href="http://localhost:3001/Auth/login/federated/google">Google</a>                        
-                    </div>
-
                 </div>
             </div>
         </div>
