@@ -13,37 +13,41 @@ import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import '../../index.css';
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from '../../REDUX/actions/action';
+import { forgotPassword, getAllUsers, getLogin } from '../../REDUX/actions/action';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 export const ForgotPassword = () => {
+    const navigate = useNavigate()
     const [showMessage, setShowMessage] = useState(false);
     const [formData, setFormData] = useState({});
     const dispatch = useDispatch()
-    const defaultValues = {
-        name: '',
-        last_name:'',        
-        email: '',
-        password: '',
-        keeper: false
+    const defaultValues = {          
+        email: '',        
     }
     const users = useSelector((state)=>state.users)    
 
     useEffect(()=>{
         dispatch(getAllUsers());        
     },[dispatch])
-        
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
 
     const onSubmit = (data) => {
-        const oneUser = users.filter(e=> e.email === data.email)       
-        setFormData(data);
-        setShowMessage(true);
+        const oneUser = users.filter(e=> e.email === data.email)
+        if(oneUser.length){
+            setFormData(data);
+            setShowMessage(true);
+            dispatch(forgotPassword(data));
+            dispatch(getLogin(data.email));
+            setTimeout(() => {
+                navigate("/mailcode")
+              }, 2000);            
+        }
 
-        reset();                  
+        reset();
     };
 
     const getFormErrorMessage = (name) => {
@@ -51,19 +55,7 @@ export const ForgotPassword = () => {
     };
 
     const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
-    const passwordHeader = <h6>Pick a password</h6>;
-    const passwordFooter = (
-        <React.Fragment>
-            <Divider />
-            <p className="mt-2">Suggestions</p>
-            <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: '1.5' }}>
-                <li>At least one lowercase</li>
-                <li>At least one uppercase</li>
-                <li>At least one numeric</li>
-                <li>Minimum 8 characters</li>
-            </ul>
-        </React.Fragment>
-    );
+
 
     return (
         <div className="form-demo">
