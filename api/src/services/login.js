@@ -14,15 +14,15 @@ async function hash(password){
 }
 
 async function create (email,hasheador,name, last_name, keeper){
-    let Creado = User.findOrCreate({
-        where:{
+    const Creado = await User.create(
+        {
             password: hasheador,
             email:email.toLowerCase(),
             name: name, 
             last_name: last_name,
             keeper: keeper
           }
-       })
+       )
        return Creado
 }
 

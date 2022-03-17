@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
-
+const cors = require('cors')
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 var session = require('express-session');
@@ -14,9 +14,9 @@ require("./db.js");
 const server = express();
 
 server.name = "API";
-
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-server.use(bodyParser.json({ limit: "50mb" }));
+// server.use(cors())
+server.use(express.urlencoded({ extended: true, limit: "50mb" }));
+server.use(express.json({ limit: "50mb" }));
 server.use("/uploads", express.static("uploadedImages")); //me genera una carpeta static(con acceso desde el navegador)
 server.use(cookieParser());
 server.use(morgan("dev"));

@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router';
 import queryString from 'query-string';
 
 
-export const DetailsPage=()=> {
+export const DetailsPage = ()=> {
 
     const { search } = useLocation();
     const {id, authorId, description, title, rating, bookings, date} = queryString.parse(search);

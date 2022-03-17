@@ -2,7 +2,7 @@ import axios from "axios";
 
 import ACTION_TYPES from "../actionTypes/actionTypes";
 
-const localhost = 'http://localhost:3001'
+export const localhost = 'http://localhost:3001'
 
 //mercadopago
 
