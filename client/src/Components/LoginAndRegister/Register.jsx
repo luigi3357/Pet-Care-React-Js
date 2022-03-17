@@ -28,7 +28,8 @@ export const Register = () => {
         last_name:'',        
         email: '',
         password: '',
-        keeper: false
+        repeatPassword:'',
+        keeper: false,               
     }
     const users = useSelector((state)=>state.users)    
 
@@ -43,13 +44,23 @@ export const Register = () => {
 
     const onSubmit = (data) => {
         const oneUser = users.filter(e=> e.email === data.email)
-        if(!oneUser.length){
-        dispatch(register(data));            
-        }
-        dispatch(getAllUsers());
-        setFormData(data);
-        setShowMessage(true);
-
+      
+        if(!oneUser.map(e=>e.email)){
+            console.log('entre al if')
+            if(data.password === data.repeatPassword){
+                console.log('compruebo las password')
+                dispatch(register(data));  
+                dispatch(getAllUsers());
+                setFormData(data);
+                setShowMessage(true);
+                console.log('hice todo bien')
+            }else{
+                console.log("las pass no coinciden")
+            }        
+        }else{
+            console.log('entre al else')
+            setShowMessage(false)
+        }        
         reset();                  
     };
 
@@ -74,6 +85,7 @@ export const Register = () => {
 
     return (
         <div className="form-demo">
+            
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex justify-content-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
@@ -130,6 +142,16 @@ export const Register = () => {
                                 <label htmlFor="password" className={classNames({ 'p-error': errors.password })}>Password*</label>
                             </span>
                             {getFormErrorMessage('password')}
+                        </div>
+
+                        <div className="field">
+                            <span className="p-float-label">
+                                <Controller name="repeatPassword" control={control} rules={{ required: 'repeatPassword is required.' }} render={({ field, fieldState }) => (
+                                    <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} header={passwordHeader} footer={passwordFooter} />
+                                )} />
+                                <label htmlFor="repeatPassword" className={classNames({ 'p-error': errors.repeatPassword })}>Repeat Password*</label>
+                            </span>
+                            {getFormErrorMessage('repeatPassword')}
                         </div>
                       
                         <div className="field-checkbox">

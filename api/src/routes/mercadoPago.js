@@ -8,7 +8,7 @@ const mercadopago = require("mercadopago");
 
 const router = Router();
 
-router.use(bodyParser.urlencoded({ extended: true}))
+//router.use(bodyParser.urlencoded({ extended: true}))
 
 // Agrega credenciales
 //aca vinculamos el usuario dueño de la empresa a la que legará el dinero
@@ -18,26 +18,25 @@ mercadopago.configure({
 
 //routes
 
-router.post("/checkout", (req, res) => {
+router.post("/checkout/", (req, res) => {
     // Crea un objeto de preferencia
     //
-    let preference = {
+    /* let preference = {
          items: [
-             {
-                 title: req.body.carer,
-                unit_price: parseInt(req.body.amount),
-                 quantity: 1,
-                 currency_id: 'ARS'
-             }
+          {
+            title: req.body.title,
+            unit_price: parseInt(req.body.unit_price),
+            quantity: 1,
+          }
          ],
          back_urls:{
-               "success": "http://localhost:3001/mercadoPago/feedback",
-              "pending": "http://localhost:3001/mercadoPago/feedback",   
-              "failure": "http://localhost:3001/mercadoPago/feedback"
-            },
-     };
+              "success": "https://localhost:3000/feedback",
+              "pending": "https://localhost:3000/feedback",   
+              "failure": "https://localhost:3000/feedback"
+            }, auto_return: "approved"
+     }; */
 
-     /* let preference = {
+     let preference = {
         items: [
             {
                 title: "Mi producto",
@@ -45,17 +44,19 @@ router.post("/checkout", (req, res) => {
                 quantity: 1,
             }
         ],
-    }; */
+    };
   
   mercadopago.preferences
     .create(preference)
-    .then(function (data) {
+    .then(function (response) {
       // Este valor reemplazará el string "<%= global.id %>" en tu HTML
       //global.id = response.body.id;
 
-      console.log(data.response);
-      res.redirect(data.response.init_point)
-      // res.send(JSON.stringify(data.response.init_point))
+      console.log(response.body);
+      res.redirect(response.body.init_point)
+      
+      
+      //res.send(JSON.stringify(data.response.init_point))
     })
     .catch(function (error) {
       console.log(error);

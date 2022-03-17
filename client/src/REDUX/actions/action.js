@@ -1,10 +1,18 @@
-import axios from "axios"
+import axios from "axios";
+
 import ACTION_TYPES from "../actionTypes/actionTypes";
-
-
 
 const localhost = 'http://localhost:3001'
 
+//mercadopago
+
+export function postPayment(payload){
+    return async function (dispatch) {
+        const json = await axios.post("http://localhost:3001/mercadoPago/checkout/", payload);
+        console.log(json)
+        return json;
+    }
+}
 
 //register
 
@@ -47,5 +55,17 @@ export default function register (payload){
               payload: response.data,
             });
           });
+      };   
+  };
+
+  //forgot password
+  
+  export const forgotPassword = (payload) => {    
+      return async (dispatch) => {
+        let json = await axios.put(
+          `http://${localhost}:3001/forgot-password`,
+          payload
+        );
+        return json;
       };   
   };
