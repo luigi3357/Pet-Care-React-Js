@@ -21,7 +21,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export const MailCode = () => {
+export const fa = () => {
     const navigate = useNavigate()
     const [showMessage, setShowMessage] = useState(false);
     const[showExist,setShowExist]=useState(false);

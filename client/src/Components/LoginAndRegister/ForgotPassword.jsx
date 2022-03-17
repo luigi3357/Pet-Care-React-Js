@@ -44,8 +44,7 @@ export const ForgotPassword = () => {
             dispatch(getLogin(data.email));
             setTimeout(() => {
                 navigate("/mailcode")
-              }, 2000);
-            
+              }, 2000);            
         }
 
         reset();

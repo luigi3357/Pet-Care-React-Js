@@ -46,7 +46,6 @@ export default function register (payload){
 
   export const getLogin = (email) => {    
       return async (dispatch) => {
-        console.log(email, "soy el action");
         await axios
           .get(`${localhost}/login/` + email)
           .then((response) => {

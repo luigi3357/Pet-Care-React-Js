@@ -34,25 +34,25 @@ export const MailCode = () => {
         dispatch(getLogin(users.email));
       }, [dispatch]);
 
-    console.log(users)
       
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
     
 
     const onSubmit = (data) => {
-        if (data.token) {
+        console.log(data.token,"soy datatoken")
 
-            dispatch(getLogin(users.email));
-            console.log(users.token, "soy el token guardado") 
-                 
-            const tokenVerify = users.token;
-      
-            if (tokenVerify === data.token) {
-             showMessage()
+        if (data.token) {
+        console.log(users.email,"soy el users email")
+            dispatch(getLogin(users.email)); 
+
+            if (users.token === data.token) {
+        console.log(users.token, "soy el token guardado") 
+
+            //  showMessage(true)
             } else {
             //  showExist()
-            console.log("hola")
+            console.log("llegue al else")           
             }
           }
     };

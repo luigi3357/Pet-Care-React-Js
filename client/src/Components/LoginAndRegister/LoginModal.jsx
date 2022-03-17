@@ -112,7 +112,7 @@ export const Login = () => {
                         <div className="field">
                             <span className="p-float-label">
                                 <Controller name="password" control={control} rules={{ required: 'Password is required.' }} render={({ field, fieldState }) => (
-                                    <Password id={field.name} {...field} className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                    <Password id={field.name} {...field} toggleMask className={classNames({ 'p-invalid': fieldState.invalid })} />
 
                                 )} />
                             </span>
@@ -120,7 +120,7 @@ export const Login = () => {
                             
                             {getFormErrorMessage('password')} 
                         </div>
-                        <Button type="submit" label="Submit" className="mt-2" />
+                        <Button type="submit" label="Submit"  />
                     </form>
 
                     <div>
