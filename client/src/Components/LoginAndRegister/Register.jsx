@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -6,6 +6,7 @@ import { Password } from "primereact/password";
 import { Checkbox } from "primereact/checkbox";
 import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
+import { Toast } from "primereact/toast";
 import { classNames } from "primereact/utils";
 import "./FormDemo.css";
 import "primeicons/primeicons.css";
@@ -15,10 +16,13 @@ import "primeflex/primeflex.css";
 import "../../index.css";
 import { useDispatch, useSelector } from "react-redux";
 import register, { getAllUsers } from "../../REDUX/actions/action";
+import { useNavigate } from "react-router-dom";
 import { NavBar } from "../NavBar";
 
 export const Register = () => {
+  const navigate = useNavigate();
   const [showMessage, setShowMessage] = useState(false);
+  const [showExist, setShowExist] = useState(false);
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const defaultValues = {
@@ -43,27 +47,50 @@ export const Register = () => {
     handleSubmit,
     reset,
   } = useForm({ defaultValues });
+  function handleNavigate() {
+    setShowMessage(false);
+    navigate("/login");
+  }
 
   const onSubmit = (data) => {
     const oneUser = users.filter((e) => e.email === data.email);
-
-    if (!oneUser.map((e) => e.email)) {
-      console.log("entre al if");
-      if (data.password === data.repeatPassword) {
-        console.log("compruebo las password");
+    if (oneUser.length) {
+      console.log("existe");
+      setShowExist(true);
+    } else {
+      setShowExist(false);
+      if (data.password !== data.repeatPassword) {
+        shownotmatch();
+      } else if (data.password.length < 8) {
+        showminpass();
+      } else {
         dispatch(register(data));
         dispatch(getAllUsers());
         setFormData(data);
         setShowMessage(true);
         console.log("hice todo bien");
-      } else {
         console.log("las pass no coinciden");
+        reset();
       }
-    } else {
-      console.log("entre al else");
-      setShowMessage(false);
     }
-    reset();
+  };
+  const notmatch = useRef(null);
+  const shownotmatch = () => {
+    notmatch.current.show({
+      severity: "error",
+      summary: "Error",
+      detail: "Las contanseñas no coinciden",
+      life: 3000,
+    });
+  };
+  const minpass = useRef(null);
+  const showminpass = () => {
+    minpass.current.show({
+      severity: "error",
+      summary: "Error",
+      detail: "La contraseña debe ser mayor a 8 caracteres",
+      life: 3000,
+    });
   };
 
   const getFormErrorMessage = (name) => {
@@ -78,7 +105,17 @@ export const Register = () => {
         label="OK"
         className="p-button-text"
         autoFocus
-        onClick={() => setShowMessage(false)}
+        onClick={() => handleNavigate()}
+      />
+    </div>
+  );
+  const dialogFooterExist = (
+    <div className="flex justify-content-center">
+      <Button
+        label="OK"
+        className="p-button-text"
+        autoFocus
+        onClick={() => setShowExist(false)}
       />
     </div>
   );
@@ -99,6 +136,8 @@ export const Register = () => {
   return (
     <div className="form-demo">
       <NavBar />
+      <Toast ref={notmatch} />
+      <Toast ref={minpass} />
       <Dialog
         visible={showMessage}
         onHide={() => setShowMessage(false)}
@@ -115,8 +154,28 @@ export const Register = () => {
           ></i>
           <h5>Registration Successful!</h5>
           <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-            Your account is registered under name <b>{formData.name}</b>, under
-            lastname <b>{formData.name}</b>, and email <b>{formData.email}</b>.
+            Bienvenido <b>{formData.name}</b>!
+          </p>
+        </div>
+      </Dialog>
+
+      <Dialog
+        visible={showExist}
+        onHide={() => setShowExist(false)}
+        position="top"
+        footer={dialogFooterExist}
+        showHeader={false}
+        breakpoints={{ "960px": "80vw" }}
+        style={{ width: "30vw" }}
+      >
+        <div className="flex justify-content-center flex-column pt-6 px-3">
+          <i
+            className="pi pi-times-circle"
+            style={{ fontSize: "5rem", color: "var(--orange-500)" }}
+          ></i>
+          <h5>Error</h5>
+          <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+            <b>El email ya tiene una cuenta creada. Logueate!</b>.
           </p>
         </div>
       </Dialog>

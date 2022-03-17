@@ -9,8 +9,9 @@ import { Register } from "./Components/LoginAndRegister/Register";
 import { Login } from "./Components/LoginAndRegister/LoginModal";
 import { RatingDemo } from "./Components/Review";
 import { DetailsPage } from "./Pages/DetailsPage";
-import { Profile } from "./Pages/Profile";
+// import { Profile } from "./Pages/Profile";
 import { Home } from "./Pages/Home";
+// import InputSearchB from "../src/Components/FormPost/";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/rating" element={<RatingDemo />} />
         <Route path="/DetailsPage" element={<DetailsPage />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
+        {/* <Route path="/formpublic" element={<Form/>}/>         */}
       </Routes>
     </Router>
   );

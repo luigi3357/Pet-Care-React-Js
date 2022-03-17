@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
@@ -13,19 +14,19 @@ import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
 import "../../index.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers } from "../../REDUX/actions/action";
+import { getAllUsers, getLogin } from "../../REDUX/actions/action";
+import bcrypt from "bcryptjs";
+import { Toast } from "primereact/toast";
 import { NavBar } from "../NavBar";
 
 export const Login = () => {
   const [showMessage, setShowMessage] = useState(false);
+  const [showExist, setShowExist] = useState(false);
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const defaultValues = {
-    name: "",
-    last_name: "",
     email: "",
     password: "",
-    keeper: false,
   };
 
   const users = useSelector((state) => state.users);
@@ -41,12 +42,31 @@ export const Login = () => {
     reset,
   } = useForm({ defaultValues });
 
-  const onSubmit = (data) => {
+  async function onSubmit(data) {
     const oneUser = users.filter((e) => e.email === data.email);
-    setFormData(data);
-    setShowMessage(true);
+    const passVerify = oneUser.map((e) => e.password).toString();
+    const verifyPassword = await bcrypt.compare(data.password, passVerify);
 
-    reset();
+    if (!oneUser.length) {
+      setShowExist(true);
+    } else {
+      if (verifyPassword === true) {
+        setShowMessage(true);
+        dispatch(getLogin(data.email));
+        reset();
+      } else {
+        shownotmatch();
+      }
+    }
+  }
+  const notmatch = useRef(null);
+  const shownotmatch = () => {
+    notmatch.current.show({
+      severity: "error",
+      summary: "Error",
+      detail: "Las contanseñas no coinciden",
+      life: 3000,
+    });
   };
 
   const getFormErrorMessage = (name) => {
@@ -65,23 +85,21 @@ export const Login = () => {
       />
     </div>
   );
-  const passwordHeader = <h6>Pick a password</h6>;
-  const passwordFooter = (
-    <React.Fragment>
-      <Divider />
-      <p className="mt-2">Suggestions</p>
-      <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: "1.5" }}>
-        <li>At least one lowercase</li>
-        <li>At least one uppercase</li>
-        <li>At least one numeric</li>
-        <li>Minimum 8 characters</li>
-      </ul>
-    </React.Fragment>
+  const dialogFooterExist = (
+    <div className="flex justify-content-center">
+      <Button
+        label="OK"
+        className="p-button-text"
+        autoFocus
+        onClick={() => setShowExist(false)}
+      />
+    </div>
   );
 
   return (
     <div className="form-demo">
       <NavBar />
+      <Toast ref={notmatch} />
       <Dialog
         visible={showMessage}
         onHide={() => setShowMessage(false)}
@@ -100,6 +118,26 @@ export const Login = () => {
           <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
             Your account is registered under name <b>{formData.name}</b>, under
             lastname <b>{formData.name}</b>, and email <b>{formData.email}</b>.
+          </p>
+        </div>
+      </Dialog>
+      <Dialog
+        visible={showExist}
+        onHide={() => setShowExist(false)}
+        position="top"
+        footer={dialogFooterExist}
+        showHeader={false}
+        breakpoints={{ "960px": "80vw" }}
+        style={{ width: "30vw" }}
+      >
+        <div className="flex justify-content-center flex-column pt-6 px-3">
+          <i
+            className="pi pi-times-circle"
+            style={{ fontSize: "5rem", color: "var(--orange-500)" }}
+          ></i>
+          <h5>Error</h5>
+          <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+            <b>El email no tiene una cuenta creada. Registrate!</b>.
           </p>
         </div>
       </Dialog>
@@ -155,23 +193,38 @@ export const Login = () => {
                       className={classNames({
                         "p-invalid": fieldState.invalid,
                       })}
-                      header={passwordHeader}
-                      footer={passwordFooter}
                     />
                   )}
                 />
-                <label
-                  htmlFor="password"
-                  className={classNames({ "p-error": errors.password })}
-                >
-                  Password*
-                </label>
               </span>
+              <label
+                htmlFor="password"
+                className={classNames({ "p-error": errors.password })}
+              >
+                Password*
+              </label>
+
               {getFormErrorMessage("password")}
             </div>
-
-            <Button type="submit" label="Submit" className="mt-2" />
+            <Button type="submit" label="Submit" />
           </form>
+
+          <div>
+            <Link to="/forgotPassword">Forgot Password?</Link>
+          </div>
+
+          <div>
+            <p>No tienes cuenta?</p>
+            <Link to="/register">
+              <p>REGISTRATE</p>
+            </Link>
+          </div>
+
+          <div>
+            <a href="http://localhost:3001/Auth/login/federated/google">
+              Google
+            </a>
+          </div>
         </div>
       </div>
     </div>
