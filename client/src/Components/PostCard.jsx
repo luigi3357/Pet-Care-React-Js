@@ -17,40 +17,6 @@ export default function PostCard({
 }) {
 
     const [showDetails, setShowDetails] = useState(false);
-
-    var reviews = [
-        {
-            id: "sdsdsdsd"
-            ,rate: 4
-            ,message: "dolor sit amet"
-            ,from_id:'lorem ipsum'
-        },
-        {
-            id: "tititutltuo"
-            ,rate: 5
-            ,message: "dolor sit amet"
-            ,from_id:'lorem ipsum'
-        },
-        {
-            id: "kjhkjhkhkhkjh"
-            ,rate: 3
-            ,message: "dolor sit amet"
-            ,from_id:'lorem ipsum'
-        },
-        {
-            id: "kjjjjjjjjjj"
-            ,rate: 2
-            ,message: "un año en la selva"
-            ,from_id:'hablandole a una camara apagada'
-        },
-        {
-            id: "oioioioi"
-            ,rate: 1
-            ,message: "como"
-            ,from_id:'dice'
-        }
-    ]
-
     function toggleDetails(){
         setShowDetails(!showDetails);
     }
