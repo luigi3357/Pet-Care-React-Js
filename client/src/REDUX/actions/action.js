@@ -68,4 +68,4 @@ export default function register (payload){
         );
         return json;
       };   
-  };  
+  };
