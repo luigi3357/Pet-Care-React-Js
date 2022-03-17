@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router';
 import queryString from 'query-string';
 
 
-export default function DetailsPage() {
+export function DetailsPage() {
 
     const { search } = useLocation();
     const {id, authorId, description, title, rating, bookings, date} = queryString.parse(search);
