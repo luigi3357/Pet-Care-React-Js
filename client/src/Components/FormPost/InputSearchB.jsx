@@ -15,7 +15,7 @@ export default function SearchInput (){
     function handleSubmit(e){
         // e.preventDefault(e)
         
-        // dispatch(getPokeName(name))
+        // dispatch((name))
         // setName("")
         console.log(`aqui esta el submit ${name}`)
     }
