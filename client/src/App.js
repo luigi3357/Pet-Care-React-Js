@@ -23,11 +23,13 @@ import FormServ from "./Components/FormPost/Form-post-reqserv-cuidador/Formreqse
 import ResetPassword from "./Components/FormPost/ResetPassword";
 // import InputSearchB from "../src/Components/FormPost/";
 import SearchBar from "./Components/SearchBar";
+import { Verification } from "./Components/LoginAndRegister/2fa";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/verificacion" element={<Verification />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/mailcode" element={<MailCode />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />

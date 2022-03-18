@@ -20,8 +20,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 export const ForgotPassword = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate() 
     const [showMessage, setShowMessage] = useState(false);
+    const [showExist, setShowExist] = useState(false);
     const [formData, setFormData] = useState({});
     const dispatch = useDispatch()
     const defaultValues = {          
@@ -45,6 +46,8 @@ export const ForgotPassword = () => {
             setTimeout(() => {
                 navigate("/mailcode")
               }, 2000);            
+        }else{
+           setShowExist(true)
         }
 
         reset();
@@ -53,12 +56,44 @@ export const ForgotPassword = () => {
     const getFormErrorMessage = (name) => {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
     };
-
+    function handleNavigate() {
+        setShowMessage(false);
+        navigate("/");
+      }
     const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
-
+    const dialogFooterExist = (
+        <div className="flex justify-content-center">
+          <Button
+            label="OK"
+            className="p-button-text"
+            autoFocus
+            onClick={() => handleNavigate()}
+          />
+        </div>
+    )
 
     return (
         <div className="form-demo">
+            <Dialog
+        visible={showExist}
+        onHide={() => setShowExist(false)}
+        position="top"
+        footer={dialogFooterExist}
+        showHeader={false}
+        breakpoints={{ "960px": "80vw" }}
+        style={{ width: "30vw" }}
+      >
+        <div className="flex justify-content-center flex-column pt-6 px-3">
+          <i
+            className="pi pi-times-circle"
+            style={{ fontSize: "5rem", color: "var(--orange-500)" }}
+          ></i>
+          <h5>Error</h5>
+          <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+            <b>El email no tiene una cuenta creada. Registrate!</b>.
+          </p>
+        </div>
+      </Dialog>
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex justify-content-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
