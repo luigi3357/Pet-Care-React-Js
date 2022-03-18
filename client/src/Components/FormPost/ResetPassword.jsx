@@ -1,8 +1,9 @@
-import React from 'react'
-
+import React,{useState} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function ResetPassword() {
-
+ const  idautor = useSelector((state)=> state.login)
+ const dispatch = useDispatch()
 return (
     <div>
             <div>
