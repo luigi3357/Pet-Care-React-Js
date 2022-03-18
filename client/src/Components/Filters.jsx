@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import {
   FaDog,
@@ -10,11 +10,29 @@ import {
 import { MdPestControlRodent } from "react-icons/md";
 import { AiOutlineColumnHeight } from "react-icons/ai";
 import { Card } from "primereact/card";
+import { useDispatch } from "react-redux";
+import { getFiltered } from "../REDUX/actions/action";
 
 export default function Filters() {
+  const dispatch = useDispatch();
+
   const [filter, setFilter] = useState("");
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
+  const [rating, setRating] = useState("");
+
+  useEffect(()=>{
+    dispatch(getFiltered(filter))
+  },[filter]);
+  useEffect(()=>{
+    dispatch(getFiltered(size))
+  },[size]);
+  useEffect(()=>{
+    dispatch(getFiltered(price))
+  },[price]);
+  useEffect(()=>{
+    dispatch(getFiltered(rating))
+  },[rating]);
 
   function handleFilterChange(e) {
     setFilter(e);
@@ -28,10 +46,16 @@ export default function Filters() {
     setPrice(e);
   }
 
+  function handleRatingChange(e){
+    setRating(e);
+  }
+
   function cleanFilters() {
     setFilter("");
     setPrice("");
     setSize("");
+    setRating("");
+    dispatch(getFiltered("all"));
   }
 
   return (
@@ -115,6 +139,20 @@ export default function Filters() {
               label="Limpiar filtros"
               onClick={() => cleanFilters()}
             />
+          </div>
+
+          <div className="m-2">
+            <p>POR RATING</p>
+            <div>
+              <Button
+              label="Rating menor"
+              onClick={()=> handleRatingChange("ratingAsc")}
+              />
+              <Button
+              label="Rating mayor"
+              onClick={()=> handleRatingChange("ratingDesc")}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -18,6 +18,7 @@ import FormCuidador from './Components/FormPost/Form-post-reqserv-cuidador/Form'
 import FormServ from './Components/FormPost/Form-post-reqserv-cuidador/Formreqserv'
 import ResetPassword from './Components/FormPost/ResetPassword'
 // import InputSearchB from "../src/Components/FormPost/";
+import SearchBar from "./Components/SearchBar";
 
 function App() {
   return (
