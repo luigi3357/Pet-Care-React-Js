@@ -14,7 +14,7 @@ import { Home } from "./Pages/Home";
 import { ForgotPassword } from './Components/LoginAndRegister/ForgotPassword';
 import { MailCode } from './Components/LoginAndRegister/mailCode';
 import { Reset } from './Components/LoginAndRegister/Reset';
-import FormCard from "../src/Components/FormPost/Form";
+// import FormCard from "../src/Components/FormPost/Form";
 import EditProfile from './Components/FormPost/EditProfile'
 import FormMercadoP from './Components/FormPost/FormsPay/FormPayMP'
 import FormPayBank from './Components/FormPost/FormsPay/FormPayData'
@@ -46,7 +46,7 @@ function App() {
                                 <Route path="/formpublicServ" element={<FormServ />} />
                                 <Route path="/resetPassword" element={<ResetPassword />} />
                                 {/* <Route path="/profile" element={<Profile />} /> */}
-                                <Route path="/formpublic" element={<FormCard />} />
+                                {/* <Route path="/formpublic" element={<FormCard />} /> */}
                         </Routes>
                 </Router>
         );
