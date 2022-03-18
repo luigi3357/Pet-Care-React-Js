@@ -7,6 +7,8 @@ import { Rating } from "primereact/rating";
 import { Button } from "primereact/button";
 import { FaPlus } from "react-icons/fa";
 import { Card } from "primereact/card";
+import style from "./../Pages/global.module.css";
+
 export default function PostCard({
   id,
   authorId,
@@ -25,10 +27,7 @@ export default function PostCard({
   }
 
   return (
-    <Card
-      style={{ maxWidth: "50rem" }}
-      className="flex align-items-center justify-content-center surface-500 text-white border-round m-3"
-    >
+    <div className={style.postCardContainer}>
       <div className="flex-column align-items-center justify-content-center  ">
         <img
           style={{ borderRadius: "100px" }}
@@ -102,6 +101,6 @@ export default function PostCard({
           </Link>
         </div>
       ) : null}
-    </Card>
+    </div>
   );
 }

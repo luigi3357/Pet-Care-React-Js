@@ -1,3 +1,15 @@
+/* PostCard */
+.postCardContainer {
+  border-radius: 10px;
+  max-width: 400px;
+  background-color: #c2c2c2;
+  margin: 5px;
+}
+
+/* Home */
+.postContainer {
+}
+
 /* DetailsPage */
 .container {
   width: 100%;
@@ -29,9 +41,19 @@
 
 /* NavBar */
 
+.logo {
+  max-width: 50px;
+}
+
 .navBarContainer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navBarSubContainer {
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 5px;
 }
