@@ -41,6 +41,12 @@
 
 /* NavBar */
 
+@media (max-width: 900px) {
+  .navBarContainer {
+    flex-direction: column;
+  }
+}
+
 .logo {
   max-width: 50px;
 }
@@ -56,6 +62,8 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .navBarName {
