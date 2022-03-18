@@ -88,6 +88,22 @@ function rootReducer(state = initialState, action) {
               if(b.price >= a.price) return 1;
             })
           }
+        case "ratingAsc":
+          return{
+            ...state,
+            filtered_posts: state.filtered_posts.sort((a,b)=>{
+              if(a.author.rating > b.author.rating) return -1; 
+              if(b.author.rating >= a.author.rating) return 1; 
+            })
+          }
+        case "ratingDesc":
+          return{
+            ...state,
+            filtered_posts: state.filtered_posts.sort((a,b)=>{
+              if(a.author.rating > b.author.rating) return 1; 
+              if(b.author.rating >= a.author.rating) return -1; 
+            })
+          }
         default:
           return {
             ...state

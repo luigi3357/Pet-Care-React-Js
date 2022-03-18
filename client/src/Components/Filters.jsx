@@ -19,6 +19,7 @@ export default function Filters() {
   const [filter, setFilter] = useState("");
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
+  const [rating, setRating] = useState("");
 
   useEffect(()=>{
     dispatch(getFiltered(filter))
@@ -29,6 +30,9 @@ export default function Filters() {
   useEffect(()=>{
     dispatch(getFiltered(price))
   },[price]);
+  useEffect(()=>{
+    dispatch(getFiltered(rating))
+  },[rating]);
 
   function handleFilterChange(e) {
     setFilter(e);
@@ -42,10 +46,15 @@ export default function Filters() {
     setPrice(e);
   }
 
+  function handleRatingChange(e){
+    setRating(e);
+  }
+
   function cleanFilters() {
     setFilter("");
     setPrice("");
     setSize("");
+    setRating("");
     dispatch(getFiltered("all"));
   }
 
@@ -130,6 +139,20 @@ export default function Filters() {
               label="Limpiar filtros"
               onClick={() => cleanFilters()}
             />
+          </div>
+
+          <div className="m-2">
+            <p>POR RATING</p>
+            <div>
+              <Button
+              label="Rating menor"
+              onClick={()=> handleRatingChange("ratingAsc")}
+              />
+              <Button
+              label="Rating mayor"
+              onClick={()=> handleRatingChange("ratingDesc")}
+              />
+            </div>
           </div>
         </div>
       </div>
