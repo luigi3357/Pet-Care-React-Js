@@ -3,7 +3,6 @@ import { useForm, Controller } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
-import { Checkbox } from "primereact/checkbox";
 import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
 import { Toast } from "primereact/toast";
@@ -18,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import register, { getAllUsers } from "../../REDUX/actions/action";
 import { useNavigate } from "react-router-dom";
 import { NavBar } from "../NavBar";
+
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -39,7 +39,6 @@ export const Register = () => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  console.log(users);
 
   const {
     control,
@@ -49,13 +48,13 @@ export const Register = () => {
   } = useForm({ defaultValues });
   function handleNavigate() {
     setShowMessage(false);
-    navigate("/login");
+    navigate("/");
   }
 
   const onSubmit = (data) => {
+    console.log(data)
     const oneUser = users.filter((e) => e.email === data.email);
     if (oneUser.length) {
-      console.log("existe");
       setShowExist(true);
     } else {
       setShowExist(false);
@@ -68,8 +67,6 @@ export const Register = () => {
         dispatch(getAllUsers());
         setFormData(data);
         setShowMessage(true);
-        console.log("hice todo bien");
-        console.log("las pass no coinciden");
         reset();
       }
     }
@@ -294,7 +291,7 @@ export const Register = () => {
                   htmlFor="password"
                   className={classNames({ "p-error": errors.password })}
                 >
-                  Password*
+                  Contraseña*
                 </label>
               </span>
               {getFormErrorMessage("password")}
@@ -323,54 +320,29 @@ export const Register = () => {
                   htmlFor="repeatPassword"
                   className={classNames({ "p-error": errors.repeatPassword })}
                 >
-                  Repeat Password*
+                  Repita la contraseña*
                 </label>
               </span>
               {getFormErrorMessage("repeatPassword")}
             </div>
 
-            <div className="field-checkbox">
-              <Controller
-                name="keeper"
-                control={control}
-                render={({ field, fieldState }) => (
-                  <Checkbox
-                    inputId={field.name}
-                    onChange={(e) => field.onChange(e.checked)}
-                    checked={field.value}
-                    className={classNames({ "p-invalid": fieldState.invalid })}
-                  />
-                )}
-              />
-              <label
-                htmlFor="accept"
-                className={classNames({ "p-error": errors.accept })}
-              >
-                Cuidador*
-              </label>
-            </div>
-
-            <div className="field-checkbox">
-              <Controller
-                name="accept"
-                control={control}
-                render={({ field, fieldState }) => (
-                  <Checkbox
-                    inputId={field.name}
-                    onChange={(e) => field.onChange(e.checked)}
-                    checked={field.value}
-                    className={classNames({ "p-invalid": fieldState.invalid })}
-                  />
-                )}
-              />
-              <label
-                htmlFor="accept"
-                className={classNames({ "p-error": errors.accept })}
-              >
-                Solicitante*
-              </label>
-            </div>
-
+            <Controller     
+            name="keeper"        
+             control={control}
+             rules={{ required: "repeatPassword is required." }}
+             render={({ field, fieldState }) => (
+              <select className="selectChild" defaultValue="disabled" onChange={e => field.onChange(e)}>
+              <option value="disabled" disabled>Selecciona que eres</option>
+              <option 
+                      {...field} 
+                      value={true}
+                      >
+                        Soy Cuidador
+                        </option>
+              <option 
+                      {...field} value={false}>Soy Solicitante</option>
+          </select>
+             )}/>
             <Button type="submit" label="Submit" className="mt-2" />
           </form>
         </div>

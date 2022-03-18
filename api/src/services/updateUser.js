@@ -2,7 +2,7 @@ const { User } = require("../db")
 const { search } = require("./login")
 
 async function Update(body){
-    let user = await search({email: body.email.toLowerCase()})
+    let user = await search({email: body.email})
     console.log(body)
     if(user){
         const result = await User.update(
