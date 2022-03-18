@@ -19,37 +19,37 @@ export default function PostCard({
   reviews,
 }) {
   const [showDetails, setShowDetails] = useState(false);
-
+  console.log(title);
   function toggleDetails() {
     setShowDetails(!showDetails);
   }
 
-  const styles = {
-    container: {
-      width: "50vw",
-      border: "2px solid black",
-    },
-    profileImg: {
-      width: "10vw",
-    },
-  };
-
   return (
-    <Card className="flex flex-column align-items-center text-center justify-content-center">
-      <div className="flex align-items-center text-center justify-content-center">
+    <Card
+      style={{ maxWidth: "50rem" }}
+      className="flex align-items-center justify-content-center surface-500 text-white border-round m-3"
+    >
+      <div className="flex-column align-items-center justify-content-center  ">
         <img
-          style={styles.profileImg}
+          style={{ borderRadius: "100px" }}
+          className="h-10rem max-w-max"
           src={image}
           alt={`imagen de perfil de ${title}`}
         />
-        <div>
-          <h4>{title}</h4>
-          <p>{description}</p>
-          <p>Rating </p>
-          <Rating value={rating} readOnly stars={5} cancel={false} />
+        <div className="">
+          <h4 className="">{title}</h4>
+          <p className="ml-3 mr-3">{description}</p>
+          <p className="">Rating </p>
+          <Rating
+            className="text-white"
+            value={rating}
+            readOnly
+            stars={5}
+            cancel={false}
+          />
 
-          <p>Contrataciones</p>
-          <p>{bookings}</p>
+          <p className="">Contrataciones</p>
+          <p className="">{bookings}</p>
           <Button
             className="p-button-rounded p-button-success p-button-lg "
             id="detailsBtn"
@@ -64,17 +64,8 @@ export default function PostCard({
 
       {/* Detalles */}
       {showDetails ? (
-        <div>
-          <h5>{description}</h5>
-          <div
-            style={{
-              width: "35vw",
-              overflowX: "scroll",
-              display: "flex",
-              flexDirection: "row",
-              WebkitScrollSnapType: "none",
-            }}
-          >
+        <div className="">
+          <div>
             {reviews ? (
               reviews.map((i) => {
                 return (
@@ -94,12 +85,20 @@ export default function PostCard({
           </div>
 
           <Link
+            className="p-button-rounded p-button-success p-button-text"
             to={{
               pathname: `/DetailsPage?description=${description}&title=${title}&id=${id}&authorId=${authorId}&date=${date}&rating=${rating}&bookings=${bookings}`,
             }}
             id="detailPageBtn"
           >
-            Más detalles
+            <Button
+              className="p-button-rounded p-button-success p-button-lg "
+              id="detailsBtn"
+              title="Detalles"
+              value="Detalles"
+            >
+              Mas info
+            </Button>
           </Link>
         </div>
       ) : null}

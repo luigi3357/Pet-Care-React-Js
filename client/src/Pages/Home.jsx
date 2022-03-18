@@ -13,6 +13,7 @@ export const Home = () => {
     dispatch(fetchAllPosts());
   }, []);
 
+  console.log(filtered_posts);
   return (
     <div>
       <NavBar />
@@ -32,6 +33,8 @@ export const Home = () => {
               }
               rating={post.author.rating}
               bookings={post.author.bookings}
+              type={post.type}
+              size={post.size}
             />
           );
         })}
