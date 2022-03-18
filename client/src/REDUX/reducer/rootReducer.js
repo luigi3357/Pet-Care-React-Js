@@ -92,8 +92,8 @@ function rootReducer(state = initialState, action) {
           return{
             ...state,
             filtered_posts: state.filtered_posts.sort((a,b)=>{
-              if(a.author.rating > b.author.rating) return -1; 
-              if(b.author.rating >= a.author.rating) return 1; 
+              if(Number(a.author.rating) > Number(b.author.rating)) return -1; 
+              if(Number(b.author.rating) >= Number(a.author.rating)) return 1; 
             })
           }
         case "ratingDesc":
