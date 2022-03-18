@@ -83,3 +83,12 @@ export function fetchAllPosts() {
       });
   };
 }
+
+export function getFiltered(payload){
+  return function(dispatch){
+    dispatch({
+      type: ACTION_TYPES.GET_FILTERED,
+      payload
+    })
+  }
+}

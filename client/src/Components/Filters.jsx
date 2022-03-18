@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import {
   FaDog,
@@ -10,11 +10,25 @@ import {
 import { MdPestControlRodent } from "react-icons/md";
 import { AiOutlineColumnHeight } from "react-icons/ai";
 import { Card } from "primereact/card";
+import { useDispatch } from "react-redux";
+import { getFiltered } from "../REDUX/actions";
 
 export default function Filters() {
+  const dispatch = useDispatch();
+
   const [filter, setFilter] = useState("");
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
+
+  useEffect(()=>{
+    dispatch(getFiltered(filter))
+  },[filter]);
+  useEffect(()=>{
+    dispatch(getFiltered(size))
+  },[size]);
+  useEffect(()=>{
+    dispatch(getFiltered(price))
+  },[price]);
 
   function handleFilterChange(e) {
     setFilter(e);
@@ -32,6 +46,7 @@ export default function Filters() {
     setFilter("");
     setPrice("");
     setSize("");
+    dispatch(getFiltered("all"));
   }
 
   return (
