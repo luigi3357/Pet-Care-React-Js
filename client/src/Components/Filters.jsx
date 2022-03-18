@@ -15,6 +15,7 @@ import { Card } from "primereact/card";
 import { useDispatch } from "react-redux";
 import { getFiltered } from "../REDUX/actions/action";
 import style from "./../Pages/global.module.css";
+import SearchBar from "./SearchBar";
 
 export default function Filters() {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ export default function Filters() {
 
   return (
     <Card className={style.filterContainer}>
+      <SearchBar />
       <div className={style.filterSubContainer}>
         <div>
           <div className={style.buttonTitleContainer}>

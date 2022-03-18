@@ -5,15 +5,13 @@ import { Avatar } from "primereact/avatar";
 import { Image } from "primereact/image";
 import style from "./../Pages/global.module.css";
 import logo from "./../assets/logoPetCare.svg";
-import SearchBar from "./SearchBar";
 
 export const NavBar = () => {
   return (
     <div className={style.navBarContainer}>
       <Image src={logo} alt="Image Text" imageStyle={{ width: " 50px" }} />
-      <div className={style.navBarSubContainer}>
-        <SearchBar />
 
+      <div className={style.navBarSubContainer}>
         <Link className={style.link} to="/">
           <Button
             label="Inicio"

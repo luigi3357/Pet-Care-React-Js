@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
 export default function SearchBar() {
   const dispatch = useDispatch();
 
@@ -18,14 +19,14 @@ export default function SearchBar() {
 
   return (
     <div>
-      <form onSubmit={(e) => handleSearch(e)}>
-        <input
+      <form onSubmit={(e) => handleSearch(e)} className="p-input-icon-right">
+        <i className="pi pi-search" />
+        <InputText
           type="text"
-          placeholder="Buscar"
           id="searchInput"
+          placeholder="Buscar..."
           onChange={(e) => handleSearchInput(e)}
-        ></input>{" "}
-        <input type="submit" value="Buscar"></input>
+        />
       </form>
     </div>
   );
