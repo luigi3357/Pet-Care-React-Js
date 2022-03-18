@@ -86,8 +86,18 @@ router.put("/edit", async (req, res) => {
   let user = await search({ email: email})
 
   if (user) {
-      let resetInfoUser = await User.update({ name: name, last_name: last_name, phone: phone, bio:bio, location: location},   
+      let resetInfoUser = await User.update({ name: name ? name:user.name, last_name: last_name ? last_name: user.last_name, phone: phone? phone: user.phone, bio:bio? bio:user.bio, location: location? location: user.location},   
           { where: { email:email }})
+          let asunto = "Edito su perfil correctamente"
+          let mensaje = `su perfil se edito correctamente con la siguiente informacion 
+          nombre : ${name? name: user.name}.
+          apellido: ${last_name? last_name: user.last_name}.
+          telefono: ${phone? phone: user.phone}.
+          biografia: ${bio? bio: user.bio}.
+          direccion: ${location? location: user.location}.          
+          Si algun dato esta mal modifiquelo en la siguiente ????`;
+          //envia el email
+          let send = sendEmail(email, mensaje, asunto)
       return res.send(resetInfoUser)
   }
   return res.status(404).send("Usuario no encontrado")

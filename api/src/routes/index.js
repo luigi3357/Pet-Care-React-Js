@@ -43,6 +43,14 @@ router.post("/register", async (req, res) => {
             if (verify === true && password.length >= 8) {
                 let hasheador = await hash(password)
                 let result = await create(email, hasheador, name, last_name, keeper)
+                  //armamos el mensaje
+        let asunto = "Registrado correctamente"
+        let mensaje = `hola,${name}:
+        Te damos la bienvenida a Pet-Care.
+        Con tu nueva cuenta, puedes comenzar a conectar con los cuidadores o las personas que soliciten servicios`;
+        //envia el email
+        let send = sendEmail(email, mensaje, asunto)
+       
                 return res.status(201).send(result)
             }
             if (verify === false) {
