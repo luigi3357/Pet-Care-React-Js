@@ -1,31 +1,14 @@
-import React from 'react'
-import goldStar from '../assets/Gold_Star.png';
+import React from "react";
+import { Rating } from "primereact/rating";
+import { Button } from "primereact/button";
+import { FaPlus } from "react-icons/fa";
+import { Card } from "primereact/card";
 
-export default function ReviewCard({
-    id,
-    key,
-    rating,
-    message,
-    from
-}) {
-
-
-  const styles={
-    container:{
-    border : "2px solid black",
-    margin : "10px"},
-    
-    starImg:{
-      height: ".8rem"
-    }
-  }
-
+export default function ReviewCard({ id, key, rating, message, from }) {
   return (
-    <div key={key} style={styles.container}>
-        <h3>{from}</h3>
-        <h5>Rating: {rating} <img style={styles.starImg} src={goldStar}/></h5>
-
-        <h5>{message}</h5>
-    </div>
-  )
+    <Card key={key} className="m-5">
+      <Rating value={rating} readOnly stars={5} cancel={false} />
+      <h5>{message}</h5>
+    </Card>
+  );
 }
