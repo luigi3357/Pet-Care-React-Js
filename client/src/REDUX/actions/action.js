@@ -7,13 +7,16 @@ export const localhost = 'http://localhost:3001'
 //mercadopago
 
 export function postPayment(payload) {
-  return async function (dispatch) {
-    const json = await axios.post(
+  return function (dispatch) {
+  axios.post(
       `${localhost}/mercadoPago/checkout/`,
       payload
-    );
-    console.log(json);
-    return json;
+    ).then((response)=>{
+      dispatch({
+        type: ACTION_TYPES.POST_PAYMENT,
+        payload:response.data
+      })
+    })
   };
 }
 

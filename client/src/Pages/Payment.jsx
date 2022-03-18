@@ -1,11 +1,30 @@
-import React, {useState, useSelect} from "react";
+import axios from "axios";
+import React, {useState, useSelect, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {postPayment} from "../REDUX/actions/action";
+import {fetchAllPosts, getAllUsers, localhost, postPayment} from "../REDUX/actions/action";
 
 
-export default function Payment (){
-
+export function Payment (){
+    const all_posts = useSelector(state=>state.all_posts)
+    const link = useSelector(state=>state.urlMP)
     const dispatch = useDispatch()
+    
+    useEffect(async ()=>{
+        dispatch(getAllUsers())
+        dispatch(fetchAllPosts())
+        await axios.get(`${localhost}/bookings/all`).then((r)=>{
+            localStorage.setItem('bookings', JSON.stringify(r.data))
+        })
+    },[])
+    useEffect(()=>{
+        localStorage.setItem('posts', JSON.stringify(all_posts))
+    },[all_posts])
+    useEffect(()=>{
+        if(link.length>0){
+            window.location.assign(link)
+        }
+    },[link])
+
 
     const [input, setInput] = useState({
         title: "",
@@ -23,13 +42,11 @@ export default function Payment (){
 
     function handleSubmit (e){
         e.preventDefault();
-        console.log(input)
         dispatch(postPayment(input))
         setInput({
             title: "",
             unit_price: 0,
         })
-        window.location.assign('https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=1083035041-ee8506c2-4ea9-477c-a401-4a77fcd7aa11')
         //history.push("/home")
     }
     return (
