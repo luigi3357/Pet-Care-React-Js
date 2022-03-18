@@ -11,22 +11,29 @@ import { RatingDemo } from "./Components/Review";
 import { DetailsPage } from "./Pages/DetailsPage";
 // import { Profile } from "./Pages/Profile";
 import { Home } from "./Pages/Home";
-import ResetPassWord from './Components/FormPost/EditProfile'
+import EditProfile from './Components/FormPost/EditProfile'
+import FormMercadoP from './Components/FormPost/FormsPay/FormPayMP'
+import FormPayBank from './Components/FormPost/FormsPay/FormPayData'
+import FormCuidador from './Components/FormPost/Form-post-reqserv-cuidador/Form'
+import FormServ from './Components/FormPost/Form-post-reqserv-cuidador/Formreqserv'
 // import InputSearchB from "../src/Components/FormPost/";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/formpaydata" element={<ResetPassWord />} />
-        
+     
         <Route path="/payment" element={<Payment />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/rating" element={<RatingDemo />} />
-        <Route path="/DetailsPage" element={<DetailsPage />} /> */}
+        <Route path="/DetailsPage" element={<DetailsPage />} /> 
+         <Route path="/editProfile" element={<EditProfile/>}/>        
+         <Route path="/formMercadoP" element={<FormMercadoP/>}/>      
+         <Route path="/formPayBank" element={<FormPayBank/>}/>     
+         <Route path="/formpublic" element={<FormCuidador/>}/>   
+         <Route path="/formpublicServ" element={<FormServ/>}/>     
         {/* <Route path="/profile" element={<Profile />} /> */}
-        {/* <Route path="/formpublic" element={<Form/>}/>        
       </Routes>
     </Router>
   );

@@ -61,7 +61,7 @@ export default function FormPayData () {
         phone:'',
         bio:'',
         email:'',
-        author_id:idautor.id,
+       
       })
       
       const disableSubmit = useMemo(() =>{
@@ -129,7 +129,7 @@ export default function FormPayData () {
     
         console.log(form)
       dispatch(editProfilePost(form))
-        alert('Paga enviada!')
+        alert('Su perfil a sido editado!')
         setForm({
             name:'',
             last_name:'',
@@ -137,7 +137,7 @@ export default function FormPayData () {
             phone:'',
             bio:'',
             email:'',
-            author_id:'idautor',
+           
           
         })
         console.log(form)
