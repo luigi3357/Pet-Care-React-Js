@@ -13,13 +13,13 @@ export default function SearchBar() {
 
     function handleSearch(e){
         e.preventDefault();
-
+        // redux;
     }
 
   return (
     <div>
         <form onSubmit={(e)=> handleSearch(e)}>
-        <input type="text" value="searchInput" placeholder="Buscar" id="searchInput" onChange={(e)=> handleSearchInput(e)}></input> <input type="submit" value="Buscar"></input>
+        <input type="text" placeholder="Buscar" id="searchInput" onChange={(e)=> handleSearchInput(e)}></input> <input type="submit" value="Buscar"></input>
         </form>
     </div>
   )

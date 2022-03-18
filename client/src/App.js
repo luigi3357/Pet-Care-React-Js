@@ -12,6 +12,7 @@ import { DetailsPage } from "./Pages/DetailsPage";
 // import { Profile } from "./Pages/Profile";
 import { Home } from "./Pages/Home";
 // import InputSearchB from "../src/Components/FormPost/";
+import SearchBar from "./Components/SearchBar";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/DetailsPage" element={<DetailsPage />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         {/* <Route path="/formpublic" element={<Form/>}/>         */}
+        <Route path="/searchBar" element={<SearchBar />}/>
       </Routes>
     </Router>
   );

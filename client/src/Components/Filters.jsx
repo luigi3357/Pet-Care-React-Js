@@ -11,7 +11,7 @@ import { MdPestControlRodent } from "react-icons/md";
 import { AiOutlineColumnHeight } from "react-icons/ai";
 import { Card } from "primereact/card";
 import { useDispatch } from "react-redux";
-import { getFiltered } from "../REDUX/actions";
+import { getFiltered } from "../REDUX/actions/action";
 
 export default function Filters() {
   const dispatch = useDispatch();

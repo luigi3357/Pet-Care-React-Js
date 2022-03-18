@@ -35,47 +35,47 @@ function rootReducer(state = initialState, action) {
         case "all":
           return{
             ...state,
-            filtered_posts: all_posts
+            filtered_posts: state.all_posts
           }
         case "perros":
           return{
             ...state,
-            filtered_posts: all_posts.filter(i => i.type === "perro")
+            filtered_posts: state.all_posts.filter(i => i.type === "perro")
           }
         case "aves":
           return{
             ...state,
-            filtered_posts: all_posts.filter(i => i.type === "aves")
+            filtered_posts: state.all_posts.filter(i => i.type === "aves")
           }
         case "roedores":
           return{
             ...state,
-            filtered_posts: all_posts.filter(i => i.type === "roedores")
+            filtered_posts: state.all_posts.filter(i => i.type === "roedores")
           }
         case "gatos":
           return{
             ...state,
-            filtered_posts: all_posts.filter(i => i.type === "gato")
+            filtered_posts: state.all_posts.filter(i => i.type === "gato")
           }
         case "pequeño":
           return{
             ...state,
-            filtered_posts: all_posts.filter(i => i.size === "pequeño")
+            filtered_posts: state.all_posts.filter(i => i.size === "pequeño")
           }
         case "mediano":
           return{
             ...state,
-            filtered_posts: all_posts.filter(i => i.size === "mediano")
+            filtered_posts: state.all_posts.filter(i => i.size === "mediano")
           }
         case "grande":
           return{
             ...state,
-            filtered_posts: all_posts.filter(i => i.size === "grande")
+            filtered_posts: state.all_posts.filter(i => i.size === "grande")
           }
         case "precioDesc":
           return{
             ...state,
-            filtered_posts: filtered_posts.sort((a,b)=>{
+            filtered_posts: state.filtered_posts.sort((a,b)=>{
               if(a.price > b.price) return 1;
               if(b.price >= a.price) return -1;
             })
@@ -83,7 +83,7 @@ function rootReducer(state = initialState, action) {
         case "precioAsc":
           return{
             ...state,
-            filtered_posts: filtered_posts.sort((a,b)=>{
+            filtered_posts: state.filtered_posts.sort((a,b)=>{
               if(a.price > b.price) return -1;
               if(b.price >= a.price) return 1;
             })
