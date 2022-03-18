@@ -1,13 +1,48 @@
 /* PostCard */
 .postCardContainer {
   border-radius: 10px;
-  max-width: 400px;
-  background-color: #c2c2c2;
+  width: 350px;
+  background-color: #dad5d5;
   margin: 5px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.postCardSubContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ratingCont {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  justify-items: center;
+}
+
+.description {
+  height: 150px;
+  padding: auto;
+  margin: 0px 5px;
+}
+
+.imgPerfil {
+  border-radius: 100px;
+  width: 100px;
+  margin-top: 5px;
 }
 
 /* Home */
 .postContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* DetailsPage */
