@@ -7,7 +7,7 @@ var db = require('../db');
 passport.use(new GoogleStrategy({
   clientID: process.env['GOOGLE_CLIENT_ID'],
   clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
-  callbackURL: '/oauth2/redirect/google',
+  callbackURL: 'http://localhost:3000/',
   scope: [ 'profile' ]
 },
 function(issuer, profile, cb) {
@@ -52,24 +52,26 @@ router.get('/login', function(req, res, next) {
 
 router.get('/login/federated/google', passport.authenticate('google'));
 
-router.get('/oauth2/redirect/google', passport.authenticate('google', {
+router.get('/', passport.authenticate('google', {
   successRedirect: '/',
   failureRedirect: '/login'
 }));
 
 passport.serializeUser(function(user, cb) {
+  console.log(user)
   process.nextTick(function() {
     cb(null, { id: user.id, username: user.username, name: user.name });
   });
 });
 
 passport.deserializeUser(function(user, cb) {
+  console.log(user)
   process.nextTick(function() {
     return cb(null, user);
   });
 });
 
-router.post('/logout', function(req, res, next) {
+router.post('/logout', function(req, res, next) {  
   req.logout();
   res.redirect('/');
 });
