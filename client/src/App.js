@@ -13,12 +13,15 @@ import { DetailsPage } from "./Pages/DetailsPage";
 import { Home } from "./Pages/Home";
 import { ForgotPassword } from './Components/LoginAndRegister/ForgotPassword';
 import { MailCode } from './Components/LoginAndRegister/mailCode';
-// import InputSearchB from "../src/Components/FormPost/";
+import { Reset } from './Components/LoginAndRegister/Reset';
+import FormCard from "../src/Components/FormPost/Form";
+
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/reset" element={<Reset/>}/>   
         <Route path="/mailcode" element={<MailCode/>}/>   
         <Route path ="/forgotPassword" element={<ForgotPassword/>}/>
         <Route path="/" element={<Home />} />
@@ -28,7 +31,7 @@ function App() {
         <Route path="/rating" element={<RatingDemo />} />
         <Route path="/DetailsPage" element={<DetailsPage />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
-        {/* <Route path="/formpublic" element={<Form/>}/>         */}
+        <Route path="/formpublic" element={<FormCard/>}/>        
       </Routes>
     </Router>
   );

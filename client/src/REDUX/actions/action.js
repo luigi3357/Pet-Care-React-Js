@@ -65,7 +65,22 @@ export const forgotPassword = (payload) => {
     return json;
   };
 };
+  //verification 2
+  export const secondaryVerification = (payload) => {
+    return async (dispatch) => {
+      let json = await axios.put(`${localhost}/mensaje/sms`, payload);
+      return json;
+    };
+  };
 
+    //reset
+    export const resetPassword = (payload) => {
+      return async (dispatch) => {
+        let json = await axios.put(`${localhost}/reset`, payload);
+        return json;
+      };
+    };
+  
 /*               HomeScreen             */
 
 export function fetchAllPosts() {

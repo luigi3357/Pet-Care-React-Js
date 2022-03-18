@@ -43,22 +43,20 @@ export const fa = () => {
     
 
     const onSubmit = (data) => {
-        navigate("/home")
-        if (data.token) {
-
-            dispatch(getLogin(users.email));
-            console.log(users.token, "soy el token guardado") 
-                 
-            const tokenVerify = users.token;
-      
-            if (tokenVerify === data.token) {
-             showMessage()
+        if (data.token_2fa) {
+            dispatch(getLogin(users.email)); 
+            if (users.token_2fa === data.token_2fa) {
+           setShowMessage(true)
+           navigate("/home")
             } else {
-            //  showExist()
-            console.log("hola")
+            setShowExist(true)
             }
           }
     };
+    function handleNavigate() {
+        setShowMessage(false)
+        navigate("/home")
+    }
     const notmatch = useRef(null);
     const shownotmatch = () => {
         notmatch.current.show({severity:'error', summary: 'Error', detail:'Las contanseñas no coinciden', life: 3000});
