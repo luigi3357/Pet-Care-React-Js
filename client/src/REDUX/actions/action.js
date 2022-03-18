@@ -96,5 +96,26 @@ export function fetchAllPosts() {
       .catch((e) => {
         throw new Error("No se pudo conectar al servidor");
       });
+    };
+  }
+  
+  
+  
+
+// cambiar informacion del perfil
+  export const editProfilePost = (payload) => {
+    return async (dispatch) => {
+      let json = await axios.put(`${localhost}/users/edit`, payload);
+      return json;
+    };
   };
+
+
+export function getFiltered(payload){
+  return function(dispatch){
+    dispatch({
+      type: ACTION_TYPES.GET_FILTERED,
+      payload
+    })
+  }
 }

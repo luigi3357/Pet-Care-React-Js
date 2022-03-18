@@ -15,26 +15,41 @@ import { ForgotPassword } from './Components/LoginAndRegister/ForgotPassword';
 import { MailCode } from './Components/LoginAndRegister/mailCode';
 import { Reset } from './Components/LoginAndRegister/Reset';
 import FormCard from "../src/Components/FormPost/Form";
+import EditProfile from './Components/FormPost/EditProfile'
+import FormMercadoP from './Components/FormPost/FormsPay/FormPayMP'
+import FormPayBank from './Components/FormPost/FormsPay/FormPayData'
+import FormCuidador from './Components/FormPost/Form-post-reqserv-cuidador/Form'
+import FormServ from './Components/FormPost/Form-post-reqserv-cuidador/Formreqserv'
+import ResetPassword from './Components/FormPost/ResetPassword'
+// import InputSearchB from "../src/Components/FormPost/";
+import SearchBar from "./Components/SearchBar";
 
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/reset" element={<Reset/>}/>   
-        <Route path="/mailcode" element={<MailCode/>}/>   
-        <Route path ="/forgotPassword" element={<ForgotPassword/>}/>
-        <Route path="/" element={<Home />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/rating" element={<RatingDemo />} />
-        <Route path="/DetailsPage" element={<DetailsPage />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
-        <Route path="/formpublic" element={<FormCard/>}/>        
-      </Routes>
-    </Router>
-  );
+        return (
+                <Router>
+                        <Routes>
+                                <Route path="/reset" element={<Reset />} />
+                                <Route path="/mailcode" element={<MailCode />} />
+                                <Route path="/forgotPassword" element={<ForgotPassword />} />
+                                <Route path="/" element={<Home />} />
+                                <Route path='/' element={<Home />} />
+                                <Route path="/payment" element={<Payment />} />
+                                <Route path="/Register" element={<Register />} />
+                                <Route path="/login" element={<Login />} />
+                                <Route path="/rating" element={<RatingDemo />} />
+                                <Route path="/DetailsPage" element={<DetailsPage />} />
+                                <Route path="/editProfile" element={<EditProfile />} />
+                                <Route path="/formMercadoP" element={<FormMercadoP />} />
+                                <Route path="/formPayBank" element={<FormPayBank />} />
+                                <Route path="/formpublic" element={<FormCuidador />} />
+                                <Route path="/formpublicServ" element={<FormServ />} />
+                                <Route path="/resetPassword" element={<ResetPassword />} />
+                                {/* <Route path="/profile" element={<Profile />} /> */}
+                                <Route path="/formpublic" element={<FormCard />} />
+                        </Routes>
+                </Router>
+        );
 }
 
 export default App;
