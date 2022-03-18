@@ -110,6 +110,16 @@ export function fetchAllPosts() {
     };
   };
 
+  // cambiar info de publicaciones
+  //deberia enviar si o si el id el resto de los cambios opcionales
+  //title, description, price, type, size, address, phone 
+  export const editPost = (id, payload) => {
+    return async (dispatch) => {
+      let json = await axios.put(`${localhost}/posts/edit/`+ id, payload);
+      return json;
+    };
+  };
+
 
 export function getFiltered(payload){
   return function(dispatch){
