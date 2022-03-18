@@ -54,6 +54,7 @@ export default function FormCard(){
     
     const [errors,setErrors]= useState({})
     const [disabled, setDisabled] = useState(true)
+
     const disableSubmit = useMemo(() =>{
         if(
             form.title.length > 0 &&
@@ -332,7 +333,7 @@ export default function FormCard(){
 
 
        <div> 
-                <button  type='submit' disabled={disableSubmit}>Crear Servicio!</button>
+                <button  type='submit' disabled={disableSubmit}  >Crear Servicio!</button>
        </div>
     
        </section>
