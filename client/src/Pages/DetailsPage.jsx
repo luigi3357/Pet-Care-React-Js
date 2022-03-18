@@ -4,12 +4,11 @@ import queryString from 'query-string';
 
 
 export const DetailsPage = ()=> {
-
-    const { search } = useLocation();
-    const {id, authorId, description, title, rating, bookings, date} = queryString.parse(search);
+    const {id} = useParams()
+    const location = useLocation();
+    const { authorId, description, title, rating, bookings, date} = location.state;
 
     useEffect(()=>{
-        console.log("description:", queryString.parse(search));
     }, [])
   return (
     <div>

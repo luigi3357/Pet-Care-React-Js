@@ -10,6 +10,7 @@ import { MailCode } from './Components/LoginAndRegister/mailCode';
 import { Register } from "./Components/LoginAndRegister/Register";
 import { RatingDemo } from "./Components/Review";
 import { DetailsPage } from "./Pages/DetailsPage";
+import { Home } from "./Pages/Home";
 import { ConfirmationMP } from "./Pages/MP_Confirmation";
 import { Payment } from "./Pages/Payment";
 import { Profile } from "./Pages/Profile";
@@ -21,13 +22,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Payment />} />
         <Route path="/mp_confirmation" element={<ConfirmationMP />} />
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/home" element={<Home />} />
         <Route path="/mailcode" element={<MailCode/>}/>           
         <Route path="/forgotPassword" element={<ForgotPassword/>}/>   
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/rating" element={<RatingDemo />} />
-        <Route path="/DetailsPage" element={<DetailsPage />} />
+        <Route path="/DetailsPage/:id" element={<DetailsPage />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         {/* <Route path="/formpublic" element={<Form/>}/>         */}
       </Routes>

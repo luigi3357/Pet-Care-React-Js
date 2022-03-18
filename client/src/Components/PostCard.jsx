@@ -94,15 +94,21 @@ export default function PostCard({
           </div>
 
           <Link
-            to={{
-              pathname: `/DetailsPage?description=${description}&title=${title}&id=${id}&authorId=${authorId}&date=${date}&rating=${rating}&bookings=${bookings}`,
-            }}
+            to={`/DetailsPage/${id}`}
+             state= {{
+                description: description,
+                title: title,
+                authorId: authorId,
+                date: date,
+                rating: rating,
+                bookings: bookings,
+              }}
             id="detailPageBtn"
-          >
+            >
             Más detalles
-          </Link>
-        </div>
-      ) : null}
-    </Card>
-  );
-}
+            </Link>
+            </div>
+            ) : null}
+            </Card>
+            );
+          }
