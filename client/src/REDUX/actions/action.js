@@ -119,3 +119,13 @@ export function getFiltered(payload){
     })
   }
 }
+
+export function getSearch(payload){
+  return async function(dispatch){
+    let result = await axios.get(`${localhost}/search`, { payload })
+    dispatch({
+      type: ACTION_TYPES.GET_SEARCH,
+      payload : result
+    })
+  }
+}

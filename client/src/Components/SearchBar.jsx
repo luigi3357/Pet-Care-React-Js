@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { getSearch } from '../REDUX/actions/action';
 
 export default function SearchBar() {
     const dispatch = useDispatch();
 
     const [search, setSearch] = useState("");
-    const [searchInput, setSearchInput] = useState("");
 
     function handleSearchInput(e){
         setSearch(e.target.value);
@@ -13,7 +13,7 @@ export default function SearchBar() {
 
     function handleSearch(e){
         e.preventDefault();
-        // redux;
+        dispatch(getSearch(search))
     }
 
   return (
