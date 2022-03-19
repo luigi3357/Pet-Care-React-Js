@@ -39,6 +39,25 @@ const user = [
     profileImgURL:
       "https://as2.ftcdn.net/v2/jpg/02/41/41/19/1000_F_241411954_4YTOaAtM4QrIMhOVLgglstw3PUGRvonq.jpg",
   },
+   {
+    email: "admin@gmail.com",
+    password: "admin123456",
+    name: "admin",
+    last_name: "admin",
+    phone: "911-23456781",
+    bio: "Pequeña bio generica contando lo terrible que es mi vida y que a nadie le interesa saber",
+    location: ["Quilmes", "Rodolfo López 81", "-34.720769, -58.264777"],
+    rating: 5.0,
+    bookings: 5,
+    profileImgURL:
+    "https://as2.ftcdn.net/v2/jpg/02/41/41/19/1000_F_241411954_4YTOaAtM4QrIMhOVLgglstw3PUGRvonq.jpg",
+    myImages: [
+      "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242165.jpg",
+      "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242042.jpg",
+      "https://imgar.zonapropcdn.com/avisos/resize/1/00/46/83/60/99/1200x1200/1743242122.jpg",
+    ],
+    Admin: true
+   },
   {
     email: "luiscataldo@gmail.com",
     password: "luiscataldo123",

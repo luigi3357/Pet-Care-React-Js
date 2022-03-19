@@ -53,10 +53,16 @@ const data2 = {
   name : oneUser.map(e=>e.name)
 }
 const validar = oneUser.map(e=>{return e.key_2fa})
-console.log(validar[0])
+
     if (!oneUser.length) {
       setShowExist(true);
     } else {
+      if(oneUser.map(e=> e.Admin)[0] === true){
+        dispatch(getAllUsers())
+        setTimeout(()=>{
+          navigate("/adminHome")
+        })
+      }
       if (verifyPassword === true) {
        if(validar[0] === true){
        dispatch(secondaryVerification(data2))
