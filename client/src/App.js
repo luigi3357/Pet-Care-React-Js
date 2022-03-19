@@ -24,12 +24,16 @@ import ResetPassword from "./Components/FormPost/ResetPassword";
 // import InputSearchB from "../src/Components/FormPost/";
 import SearchBar from "./Components/SearchBar";
 import { Verification } from "./Components/LoginAndRegister/2fa";
+import AdminHome from "./Components/Admin/AdminHome";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/verificacion" element={<Verification />} />
+     
+        <Route path="/adminHome" element={<AdminHome />} />
+         <Route path="/profile" element={<Profile />} /> 
+           <Route path="/verificacion" element={<Verification />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/mailcode" element={<MailCode />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
@@ -46,7 +50,6 @@ function App() {
         <Route path="/formpublic" element={<FormCuidador />} />
         <Route path="/formpublicServ" element={<FormServ />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
       </Routes>
     </Router>
   );
