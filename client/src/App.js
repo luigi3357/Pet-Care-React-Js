@@ -14,7 +14,6 @@ import { Home } from "./Pages/Home";
 import { ForgotPassword } from "./Components/LoginAndRegister/ForgotPassword";
 import { MailCode } from "./Components/LoginAndRegister/mailCode";
 import { Reset } from "./Components/LoginAndRegister/Reset";
-
 import EditProfile from "./Components/FormPost/EditProfile";
 import FormMercadoP from "./Components/FormPost/FormsPay/FormPayMP";
 import FormPayBank from "./Components/FormPost/FormsPay/FormPayData";
@@ -25,18 +24,16 @@ import ResetPassword from "./Components/FormPost/ResetPassword";
 import SearchBar from "./Components/SearchBar";
 import { Verification } from "./Components/LoginAndRegister/2fa";
 import AdminHome from "./Components/Admin/AdminHome";
-
-import  MapDetail  from "./Pages/MapDetail";
-import AddressAutocom from "./Components/AddressAutocom.jsx"
+import MapDetail from "./Pages/MapDetail";
+import AddressAutocom from "./Components/AddressAutocom.jsx";
 
 function App() {
   return (
     <Router>
       <Routes>
-     
         <Route path="/adminHome" element={<AdminHome />} />
-         {/* <Route path="/profile" element={<Profile />} />  */}
-           <Route path="/verificacion" element={<Verification />} />
+        {/* <Route path="/profile" element={<Profile />} />  */}
+        <Route path="/verificacion" element={<Verification />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/mailcode" element={<MailCode />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
@@ -53,8 +50,8 @@ function App() {
         <Route path="/formpublic" element={<FormCuidador />} />
         <Route path="/formpublicServ" element={<FormServ />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
-        <Route path="/Maps" element={<MapDetail/>}/>
-        <Route path="/AddressAutocom" element={<AddressAutocom/>}/>
+        <Route path="/Maps" element={<MapDetail />} />
+        <Route path="/AddressAutocom" element={<AddressAutocom />} />
       </Routes>
     </Router>
   );

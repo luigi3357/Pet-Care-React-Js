@@ -36,6 +36,8 @@ export const Home = () => {
                 bookings={post.author.bookings}
                 type={post.type}
                 size={post.size}
+                name={post.author.name}
+                last_name={post.author.last_name}
               />
             );
           })}
