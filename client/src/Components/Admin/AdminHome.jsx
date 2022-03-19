@@ -17,10 +17,10 @@ import { fetchAllPosts, getAllUsers } from '../../REDUX/actions/action';
     const [source, setSource] = useState([]);
     const [target, setTarget] = useState([]);
     const dispatch = useDispatch()
-    const users = useSelector((state) => state.filtered_posts);
+    const users = useSelector((state) => state.users);
     console.log(users)
     useEffect(()=>{
-        dispatch(fetchAllPosts())
+        dispatch(getAllUsers())
     },[dispatch])
       
     
