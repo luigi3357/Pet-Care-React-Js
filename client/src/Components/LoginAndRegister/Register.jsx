@@ -58,10 +58,10 @@ export const Register = () => {
       setShowExist(true);
     } else {
       setShowExist(false);
-      if (data.password !== data.repeatPassword) {
-        shownotmatch();
-      } else if (data.password.length < 8) {
-        showminpass();
+      if (data.password.length < 8) {
+        showminpass(true);
+      } else if (data.password !== data.repeatPassword) {
+        shownotmatch(true);
       } else {
         dispatch(register(data));
         dispatch(getAllUsers());
@@ -116,16 +116,19 @@ export const Register = () => {
       />
     </div>
   );
-  const passwordHeader = <h6>Pick a password</h6>;
+  const passwordHeader = <h6>Crea tu contraseña</h6>;
   const passwordFooter = (
     <React.Fragment>
       <Divider />
-      <p className="mt-2">Suggestions</p>
+      <p className="mt-2">Sugerencias</p>
       <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: "1.5" }}>
-        <li>At least one lowercase</li>
-        <li>At least one uppercase</li>
-        <li>At least one numeric</li>
-        <li>Minimum 8 characters</li>
+        <li>Al menos una minuscula</li>
+        <li>Al menos una mayuscula</li>
+        <li>Al menos un numero</li>
+      </ul>
+      <p className="mt-2">Condicion</p>
+      <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: "1.5" }}>
+        <li>Minimo 8 caracteres</li>
       </ul>
     </React.Fragment>
   );
@@ -186,11 +189,16 @@ export const Register = () => {
                 <Controller
                   name="name"
                   control={control}
-                  rules={{ required: "Name is required." }}
+                  rules={{ required: "Nombre es requerido." ,
+                  pattern: {
+                    value: /^.{2,20}$/i,
+                    message: "Minimo dos caracteres",
+                  },}}
                   render={({ field, fieldState }) => (
                     <InputText
                       id={field.name}
                       {...field}
+                      keyfilter="alpha"
                       autoFocus
                       className={classNames({
                         "p-invalid": fieldState.invalid,
@@ -202,7 +210,7 @@ export const Register = () => {
                   htmlFor="name"
                   className={classNames({ "p-error": errors.name })}
                 >
-                  Name*
+                  Nombre*
                 </label>
               </span>
               {getFormErrorMessage("name")}
@@ -213,12 +221,17 @@ export const Register = () => {
                 <Controller
                   name="last_name"
                   control={control}
-                  rules={{ required: "last_name is required." }}
+                  rules={{ required: "Apellido es requerido.",
+                  pattern: {
+                    value: /^.{2,20}$/i,
+                    message: "Minimo dos caracteres",
+                  }, }}
                   render={({ field, fieldState }) => (
                     <InputText
                       id={field.last_name}
                       {...field}
                       autoFocus
+                      keyfilter="alpha"
                       className={classNames({
                         "p-invalid": fieldState.invalid,
                       })}
@@ -229,7 +242,7 @@ export const Register = () => {
                   htmlFor="last_name"
                   className={classNames({ "p-error": errors.name })}
                 >
-                  last_name*
+                  Apellido*
                 </label>
               </span>
               {getFormErrorMessage("last_name")}
@@ -242,10 +255,10 @@ export const Register = () => {
                   name="email"
                   control={control}
                   rules={{
-                    required: "Email is required.",
+                    required: "Email es requerido.",
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                      message: "Invalid email address. E.g. example@email.com",
+                      message: "Direccion de email invalida. Ej: example@email.com",
                     },
                   }}
                   render={({ field, fieldState }) => (
@@ -272,13 +285,16 @@ export const Register = () => {
               <span className="p-float-label">
                 <Controller
                   name="password"
+                  
                   control={control}
-                  rules={{ required: "Password is required." }}
+                  rules={{ required: "Contraseña es requerida.", 
+                   }}
                   render={({ field, fieldState }) => (
                     <Password
                       id={field.name}
                       {...field}
                       toggleMask
+                      keyfilter={/^[^#<>*!-,._´ç+^{}~`¡°'?¿=()/&%$·"ªº|[+$]/}
                       className={classNames({
                         "p-invalid": fieldState.invalid,
                       })}
@@ -302,12 +318,14 @@ export const Register = () => {
                 <Controller
                   name="repeatPassword"
                   control={control}
-                  rules={{ required: "repeatPassword is required." }}
+                  rules={{ required: "Repetir la contraseña es requerido.", }}
                   render={({ field, fieldState }) => (
                     <Password
                       id={field.name}
                       {...field}
                       toggleMask
+                      keyfilter={/^[^#<>*!-,._´ç+^{}~`¡°'?¿=()/&%$·"ªº|[+$]/}
+                      
                       className={classNames({
                         "p-invalid": fieldState.invalid,
                       })}

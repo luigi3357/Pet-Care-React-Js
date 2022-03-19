@@ -7,6 +7,8 @@ import { Rating } from "primereact/rating";
 import { Button } from "primereact/button";
 import { FaPlus } from "react-icons/fa";
 import { Card } from "primereact/card";
+import style from "./../Pages/global.module.css";
+
 export default function PostCard({
   id,
   authorId,
@@ -25,40 +27,50 @@ export default function PostCard({
   }
 
   return (
-    <Card
-      style={{ maxWidth: "50rem" }}
-      className="flex align-items-center justify-content-center surface-500 text-white border-round m-3"
-    >
-      <div className="flex-column align-items-center justify-content-center  ">
+    <div className={style.postCardContainer}>
+      <div className={style.postCardSubContainer}>
         <img
-          style={{ borderRadius: "100px" }}
-          className="h-10rem max-w-max"
+          className={style.imgPerfil}
           src={image}
           alt={`imagen de perfil de ${title}`}
         />
-        <div className="">
+        <div>
           <h4 className="">{title}</h4>
-          <p className="ml-3 mr-3">{description}</p>
-          <p className="">Rating </p>
-          <Rating
-            className="text-white"
-            value={rating}
-            readOnly
-            stars={5}
-            cancel={false}
-          />
+          <p className={style.description}>{description}</p>
 
-          <p className="">Contrataciones</p>
-          <p className="">{bookings}</p>
-          <Button
-            className="p-button-rounded p-button-success p-button-lg "
-            id="detailsBtn"
-            onClick={() => toggleDetails()}
-            title="Detalles"
-            value="Detalles"
+          <div className={style.ratingCont}>
+            <div>
+              <p className={style.title}>Rating </p>
+              <Rating
+                className="text-white"
+                value={rating}
+                readOnly
+                stars={5}
+                cancel={false}
+              />
+            </div>
+            <div>
+              <p className={style.title}>Contrataciones</p>
+              <p className={style.title}>{bookings}</p>
+            </div>
+          </div>
+
+          <Link
+            className={style.link}
+            to={{
+              pathname: `/DetailsPage?description=${description}&title=${title}&id=${id}&authorId=${authorId}&date=${date}&rating=${rating}&bookings=${bookings}`,
+            }}
+            id="detailPageBtn"
           >
-            <FaPlus />
-          </Button>
+            <Button
+              className="p-button-rounded p-button-success p-button-lg mb-3"
+              id="detailsBtn"
+              title="Detalles"
+              value="Detalles"
+            >
+              Mas info
+            </Button>
+          </Link>
         </div>
       </div>
 
@@ -83,25 +95,8 @@ export default function PostCard({
               <h5>El usuario aún no posee reviews</h5>
             )}
           </div>
-
-          <Link
-            className="p-button-rounded p-button-success p-button-text"
-            to={{
-              pathname: `/DetailsPage?description=${description}&title=${title}&id=${id}&authorId=${authorId}&date=${date}&rating=${rating}&bookings=${bookings}`,
-            }}
-            id="detailPageBtn"
-          >
-            <Button
-              className="p-button-rounded p-button-success p-button-lg "
-              id="detailsBtn"
-              title="Detalles"
-              value="Detalles"
-            >
-              Mas info
-            </Button>
-          </Link>
         </div>
       ) : null}
-    </Card>
+    </div>
   );
 }

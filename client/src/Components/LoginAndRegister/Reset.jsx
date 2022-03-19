@@ -61,9 +61,19 @@ export const Reset = () => {
       email: oneUser.map(e=> e.email)[0],
       token: oneUser.map(e=>e.token)[0]
     }
+    if(data.password.length < 8 ){
+       showminpass(true)
+      reset()}
+      else if(data.password === data.repeatPassword){
     setShowExist(true)
     dispatch(resetPassword(data1))    
-  };
+    }else{
+      shownotmatch(true)
+      setShowExist(false)
+      reset()
+    }
+  }
+  
   const notmatch = useRef(null);
   const shownotmatch = () => {
     notmatch.current.show({
@@ -103,12 +113,15 @@ export const Reset = () => {
   const passwordFooter = (
     <React.Fragment>
       <Divider />
-      <p className="mt-2">Suggestions</p>
+      <p className="mt-2">Sugerencias</p>
       <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: "1.5" }}>
-        <li>At least one lowercase</li>
-        <li>At least one uppercase</li>
-        <li>At least one numeric</li>
-        <li>Minimum 8 characters</li>
+        <li>Al menos una minuscula</li>
+        <li>Al menos una mayuscula</li>
+        <li>Al menos un numero</li>
+      </ul>
+      <p className="mt-2">Condicion</p>
+      <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: "1.5" }}>
+        <li>Minimo 8 caracteres</li>
       </ul>
     </React.Fragment>
   );

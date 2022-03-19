@@ -53,10 +53,16 @@ const data2 = {
   name : oneUser.map(e=>e.name)
 }
 const validar = oneUser.map(e=>{return e.key_2fa})
-console.log(validar[0])
+
     if (!oneUser.length) {
       setShowExist(true);
     } else {
+      if(oneUser.map(e=> e.Admin)[0] === true){
+        dispatch(getAllUsers())
+        setTimeout(()=>{
+          navigate("/adminHome")
+        })
+      }
       if (verifyPassword === true) {
        if(validar[0] === true){
        dispatch(secondaryVerification(data2))
@@ -224,7 +230,7 @@ console.log(validar[0])
                 <Controller
                   name="password"
                   control={control}
-                  rules={{ required: "contraseña requerida." }}
+                  rules={{ required: "La contraseña es requerida." }}
                   render={({ field, fieldState }) => (
                     <Password
                       id={field.name}
@@ -236,19 +242,18 @@ console.log(validar[0])
                     />
                   )}
                 />
+                <label
+                  htmlFor="password"
+                  className={classNames({ "p-error": errors.password })}
+                >
+                  Contraseña*
+                </label>
               </span>
-              <label
-                htmlFor="password"
-                className={classNames({ "p-error": errors.password })}
-              >
-                Contraseña*
-              </label>
-
               {getFormErrorMessage("password")}
             </div>
             <Button type="submit" label="Enviar" />
           </form>
-
+          <div style={{textAlign:"center"}}>
           <div>
             <Link to="/forgotPassword">Olvidaste tu contraseña?</Link>
           </div>
@@ -264,6 +269,7 @@ console.log(validar[0])
             <a href="http://localhost:3001/Auth/login/federated/google">
               Google
             </a>
+          </div>
           </div>
         </div>
       </div>

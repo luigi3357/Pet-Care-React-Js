@@ -1,3 +1,50 @@
+/* PostCard */
+.postCardContainer {
+  border-radius: 10px;
+  width: 350px;
+  background-color: #dad5d5;
+  margin: 5px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.postCardSubContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ratingCont {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  justify-items: center;
+}
+
+.description {
+  height: 150px;
+  padding: auto;
+  margin: 0px 5px;
+}
+
+.imgPerfil {
+  border-radius: 100px;
+  width: 100px;
+  margin-top: 5px;
+}
+
+/* Home */
+.postContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /* DetailsPage */
 .container {
   width: 100%;
@@ -29,11 +76,29 @@
 
 /* NavBar */
 
+@media (max-width: 900px) {
+  .navBarContainer {
+    flex-direction: column;
+  }
+}
+
+.logo {
+  max-width: 50px;
+}
+
 .navBarContainer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navBarSubContainer {
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .navBarName {
