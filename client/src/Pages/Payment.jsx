@@ -13,6 +13,11 @@ export default function Payment (){
         
     })
 
+    const[state, setState] = useState({
+        longitude: 0,
+        latitude: 0
+    });
+
     function handleInputChange(e){
         e.preventDefault();
         setInput({
@@ -55,7 +60,16 @@ export default function Payment (){
                     </form>
                 </div>    
             </div>
-                       
+            <div>
+                    <h1>Geolocalizacion</h1>
+                    <p>longitude: {state.longitude}</p>
+                    <p>latitude: {state.latitude}</p>
+                    <Link to={{
+                        pathname: "/Maps",
+                        
+                    }}>localizacion</Link>
+
+                </div>      
         </div>
     );
 }

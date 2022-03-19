@@ -26,6 +26,9 @@ import SearchBar from "./Components/SearchBar";
 import { Verification } from "./Components/LoginAndRegister/2fa";
 import AdminHome from "./Components/Admin/AdminHome";
 
+import  MapDetail  from "./Pages/MapDetail";
+import AddressAutocom from "./Components/AddressAutocom.jsx"
+
 function App() {
   return (
     <Router>
@@ -50,6 +53,8 @@ function App() {
         <Route path="/formpublic" element={<FormCuidador />} />
         <Route path="/formpublicServ" element={<FormServ />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/Maps" element={<MapDetail/>}/>
+        <Route path="/AddressAutocom" element={<AddressAutocom/>}/>
       </Routes>
     </Router>
   );
