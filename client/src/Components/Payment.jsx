@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import ClientView from "../Components/ClientView";
-import KeeperView from "../Components/KeeperView";
+import ClientView from "./ClientView";
+import KeeperView from "./KeeperView";
 import { changeBookingStatus, fetchCheckOutDetails, postPayment } from "../REDUX/actions/action";
 
 export function Payment() {
