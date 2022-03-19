@@ -7,17 +7,22 @@ import { Rating } from "primereact/rating";
 import { Button } from "primereact/button";
 import { FaPlus } from "react-icons/fa";
 import { Card } from "primereact/card";
-export default function PostCard({
-  id,
-  authorId,
-  date,
-  title,
-  image = profileDefault,
-  rating,
-  bookings,
-  description,
-  reviews,
-}) {
+export default function PostCard({ post }) {
+  const {
+    id,
+    authorId,
+    date,
+    title,
+    image,
+    rating,
+    bookings,
+    description,
+    reviews,
+    type,
+    size,
+    address,
+    price,
+  } = post;
   const [showDetails, setShowDetails] = useState(false);
 
   function toggleDetails() {
@@ -39,7 +44,7 @@ export default function PostCard({
       <div className="flex align-items-center text-center justify-content-center">
         <img
           style={styles.profileImg}
-          src={image}
+          src={image ? image : profileDefault}
           alt={`imagen de perfil de ${title}`}
         />
         <div>
@@ -95,20 +100,24 @@ export default function PostCard({
 
           <Link
             to={`/DetailsPage/${id}`}
-             state= {{
-                description: description,
-                title: title,
-                authorId: authorId,
-                date: date,
-                rating: rating,
-                bookings: bookings,
-              }}
+            state={{
+              description: description,
+              title: title,
+              authorId: authorId,
+              date: date,
+              rating: rating,
+              bookings: bookings,
+              type: type,
+              size: size,
+              address: address,
+              price: price,
+            }}
             id="detailPageBtn"
-            >
+          >
             Más detalles
-            </Link>
-            </div>
-            ) : null}
-            </Card>
-            );
-          }
+          </Link>
+        </div>
+      ) : null}
+    </Card>
+  );
+}

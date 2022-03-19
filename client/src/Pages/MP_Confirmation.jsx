@@ -1,13 +1,16 @@
-import React, { useState, useSelect, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Skeleton } from "primereact/skeleton";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 // import {  } from "../REDUX/actions/action";
-import { Button } from 'primereact/button';
+import { Button } from "primereact/button";
+//import { useDispatch, useSelector } from "react-redux";
+import { Skeleton } from "primereact/skeleton";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { localhost } from "../REDUX/actions/action";
+
 function loader() {
   return (
     <>
-<h1>CONFIRMANDO EL PAGO</h1>
+      <h1>CONFIRMANDO EL PAGO</h1>
       <div className="grid formgrid"></div>
       <div className="field col-12 md:col-6 md:pr-6 pr-0">
         <div>
@@ -27,45 +30,68 @@ function loader() {
 }
 
 export function ConfirmationMP() {
-    const [loading, setLoading] = useState(true)
-    const navigate = useNavigate()
+  const [loading, setLoading] = useState(true);
+  const [serverCheck, setServerCheck] = useState(false);
+  const [details, setDetails] = useState({});
+  const navigate = useNavigate();
+  let params = new URL(document.location).searchParams;
+  const bookingID = params.get("external_reference");
+  const status = params.get("status");
+  const preferenceID = params.get("preference_id");
+  const paymentID = params.get("payment_id");
 
-    useEffect(()=>{
-        setTimeout(() => {
-            setLoading(false)
-        }, 2000);
-    },[])
-
+  useEffect(async () => {
+    await axios
+      .put(`${localhost}/bookings/payment_check`, {
+        preference_id: preferenceID,
+        status: status,
+        id: bookingID,
+        payment_id: paymentID,
+      })
+      .then((response) => {
+        if (response.data == "ok") {
+          setServerCheck(true);
+        }
+      });
+    await axios
+      .get(`${localhost}/bookings/details?id=${bookingID}`)
+      .then((response) => {
+        setDetails(response.data);
+      });
+    setLoading(false);
+  }, []);
 
   return (
     <div>
-        {loading
-        ? 
+      {/* {(!loading)&& <p>hubo un problema con el pago</p>} */}
+      {loading ? (
         loader()
-        :
-        
-        <div >
-            <h1>Nro Reserva</h1>
-            <h2>Cuidador</h2>
-            <p>Nombre del cuidador</p>
-            <p>telefono del cuidador</p>
-            <h2>Dueño</h2>
-            <p>Nombre del Dueño</p>
-            <p>telefono del Dueño</p>
-            <h2>Check-In</h2>
-            <p>fecha de inicio</p>
-            <h2>Check-Out</h2>
-            <p>fecha de retiro</p>
-            <h2>$MONTO</h2>
+      ) : (
+        <div style={{}}>
+          {serverCheck ? <h1>Pago Aprobado</h1> : <h1>Pago Rechazado</h1>}
+          <h1>#{bookingID.slice(24)}</h1>
+          <h2>Cuidador</h2>
+          <p>{details.keeper.name + " " + details.keeper.last_name}</p>
+          <p>{details.keeper.phone} </p>
+          <h2>Dueño</h2>
+          <p>{details.client.name + " " + details.client.last_name}</p>
+          <p>{details.client.phone} </p>
+          <h2>Registro</h2>
+          <p>{details.check_in}</p>
+          <h2>Salida</h2>
+          <p>{details.check_out}</p>
+          <h2>${details.price}</h2>
 
-            <h2>Comentarios</h2>
-            <Button label="Ver mis reservas" className="p-button-rounded p-button-success p-button-raised" onClick={()=>{navigate('/bookings')}} />
-            {/* <button onClick={()=>navigate('/myBookings')}>ver mis reservas</button> */}
+          {/* <h2>{details.comments}</h2> */}
+          <Button
+            label="Ir a mi perfil"
+            className="p-button-rounded p-button-success p-button-raised"
+            onClick={() => {
+              navigate("/profile");
+            }}
+          />
         </div>
-        }
-
-
-
+      )}
     </div>
   );
 }

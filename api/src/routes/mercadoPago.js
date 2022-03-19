@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const bodyParser = require("body-parser");
+const { Booking } = require("../db");
 // SDK de Mercado Pago
 const mercadopago = require("mercadopago");
 
@@ -18,22 +19,24 @@ mercadopago.configure({
 router.post("/checkout/", (req, res, next) => {
   // Crea un objeto de preferencia
   //
+  const { id, unit_price, bookRef } = req.body;
+
   let preference = {
     items: [
       {
-        title: "Probando el detalle",
-        description: "probando description",
-        unit_price: parseInt("2000"),
+        title: "Reserva PetCare - " + bookRef,
+        unit_price: parseInt(unit_price),
         quantity: 1,
         currency_id: "ARS",
       },
     ],
     back_urls: {
-      success: "http://localhost:3001/mercadoPago/feedback",
-      failure: "http://localhost:3001/mercadoPago/feedback",
+      success: "http://localhost:3000/mp_confirmation",
+      failure: "http://localhost:3000/mp_confirmation",
     },
     auto_return: "approved",
     binary_mode: true,
+    external_reference: id,
   };
 
   //  let preference = {
@@ -53,22 +56,19 @@ router.post("/checkout/", (req, res, next) => {
 
   mercadopago.preferences
     .create(preference)
-    .then((response) => {
+    .then(async (response) => {
       // Este valor reemplazará el string "<%= global.id %>" en tu HTML
       //global.id = response.body.id;
-
-      console.log(response);
+      await Booking.update(
+        { preference_id: response.body.id },
+        { where: { id: response.body.external_reference } }
+      );
+      console.log(response.body);
       res.json(response.body.init_point);
     })
     .catch(function (error) {
       next(error);
     });
-});
-
-router.get("/feedback", (req, res) => {
-  const data = req.query;
-  console.log(data);
-  res.redirect("http://localhost:3000/mp_confirmation");
 });
 
 module.exports = router;

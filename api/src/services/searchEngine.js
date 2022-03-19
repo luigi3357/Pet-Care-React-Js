@@ -89,10 +89,9 @@ function findPostsForHomeScreen() {
         order: [["createdAt", "DESC"]],
         attributes: ["id", "rate", "message", "from_id", "updatedAt"],
       },
-      attributes: ["name", "last_name", "rating", "bookings", "id", "profileImgURL" ],
+      attributes: ["name", "last_name", "rating", "bookings", "id", "profileImgURL", "location" ],
     },
     order: [["createdAt", "DESC"]],
-    attributes: ["id", "title", "description", "type", "size", "updatedAt"],
   });
 }
 

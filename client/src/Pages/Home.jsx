@@ -21,18 +21,7 @@ export const Home = () => {
 
         {filtered_posts.map((post) => {
           return (
-            <PostCard
-              authorId={post.author.id}
-              id={post.id}
-              key={post.id}
-              title={post.title}
-              description={post.description}
-              reviews={
-                post.author.reviews.length > 0 ? post.author.reviews : null
-              }
-              rating={post.author.rating}
-              bookings={post.author.bookings}
-            />
+            <PostCard post={post}/>
           );
         })}
       </div>

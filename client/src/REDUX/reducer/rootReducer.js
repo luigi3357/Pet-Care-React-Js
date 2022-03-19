@@ -5,7 +5,8 @@ const initialState = {
   login: [],
   all_posts: [],
   filtered_posts: [],
-  urlMP:''
+  urlMP:'',
+  checkout_details: ''
 };
 
 function rootReducer(state = initialState, action) {
@@ -31,6 +32,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         all_posts: action.payload,
         filtered_posts: action.payload,
+      };
+    case ACTION_TYPES.FETCH_CHECKOUTS_DETAILS:
+      console.log(action.payload)
+      return {
+        ...state,
+        checkout_details: action.payload
       };
     default:
       return state;

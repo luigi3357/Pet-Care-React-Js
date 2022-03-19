@@ -1,78 +1,77 @@
-import axios from "axios";
-import React, {useState, useSelect, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchAllPosts, getAllUsers, localhost, postPayment} from "../REDUX/actions/action";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import ClientView from "../Components/ClientView";
+import KeeperView from "../Components/KeeperView";
+import { changeBookingStatus, fetchCheckOutDetails, postPayment } from "../REDUX/actions/action";
 
+export function Payment() {
+  const statusClosed = ["completed", "approved", "rejected", "cancelled"];
+  const link = useSelector((state) => state.urlMP);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const checkout_details = useSelector((state) => state.checkout_details);
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const loginUser = { id: "f0c5ceb6-9e58-4bb8-bc69-d159aaf47a18" };
 
-export function Payment (){
-    const all_posts = useSelector(state=>state.all_posts)
-    const link = useSelector(state=>state.urlMP)
-    const dispatch = useDispatch()
-    
-    useEffect(async ()=>{
-        dispatch(getAllUsers())
-        dispatch(fetchAllPosts())
-        await axios.get(`${localhost}/bookings/all`).then((r)=>{
-            localStorage.setItem('bookings', JSON.stringify(r.data))
-        })
-    },[])
-    useEffect(()=>{
-        localStorage.setItem('posts', JSON.stringify(all_posts))
-    },[all_posts])
-    useEffect(()=>{
-        if(link.length>0){
-            window.location.assign(link)
-        }
-    },[link])
+  const payload = {
+    bookRef: id.slice(24),
+    id: id,
+    unit_price: checkout_details.price,
+  };
 
-
-    const [input, setInput] = useState({
-        title: "",
-        unit_price: 0,
-        
-    })
-
-    function handleInputChange(e){
-        e.preventDefault();
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        })
+  useEffect(() => {
+    dispatch(fetchCheckOutDetails(id));
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, [dispatch]);
+  useEffect(() => {
+    if (link.length > 0) {
+      window.location.assign(link);
     }
+  }, [link]);
 
-    function handleSubmit (e){
-        e.preventDefault();
-        dispatch(postPayment(input))
-        setInput({
-            title: "",
-            unit_price: 0,
-        })
-        //history.push("/home")
-    }
-    return (
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(postPayment(payload));
+  }
+  function changeStatus(status) {
+    let newStatus = {
+      status: status,
+      id: checkout_details.id,
+    };
+    dispatch(changeBookingStatus(newStatus));
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
+  }
+  
+
+  return (
+    <div>
+      {!loading && (
         <div>
-            <h1>BIENVENIDO A PAYMENT</h1>
-            <div>
-                <h4>Maria Camila Sarmiento</h4>
-            </div>
-            <div >
-                {/* <img src="pictures/Perfil sin fondo.jpeg" alt ="Foto Cuidador" style="width: 100%"/> */}
-                <hr/>
-                <h5>Descripcion</h5>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                </p>
-                <hr/>
-                <h4>valor: $200 USD</h4>
-                <div>
-                    <form onSubmit = {(e) => handleSubmit(e)}>
-                        <input type="text" name = "title" value={input.title} onChange={(e)=>handleInputChange(e)}/>
-                        <input type="text" name = "unit_price" value={input.unit_price} onChange={(e)=>handleInputChange(e)}/>
-                        <button type="submit"  >Paynow</button>
-                    </form>
-                </div>    
-            </div>
-                       
+          {checkout_details.client.id == loginUser.id ? (
+            <ClientView
+              checkout_details={checkout_details}
+              submit={handleSubmit}
+              cancelOrder={() => changeStatus(statusClosed[3])}
+              status={statusClosed}
+            />
+          ) : checkout_details.keeper.id == loginUser.id ? (
+            <KeeperView
+              checkout_details={checkout_details}
+              accept={() => changeStatus("accepted")}
+              cancelOrder={() => changeStatus(statusClosed[2])}
+              status={statusClosed}
+            />
+          ) : (
+            <p>no tienes acceso a esta informacion</p>
+          )}
         </div>
-    );
+      )}
+    </div>
+  );
 }

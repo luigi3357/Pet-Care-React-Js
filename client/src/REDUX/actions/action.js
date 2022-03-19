@@ -2,21 +2,39 @@ import axios from "axios";
 
 import ACTION_TYPES from "../actionTypes/actionTypes";
 
-export const localhost = 'http://localhost:3001'
+export const localhost = "http://localhost:3001";
 
 //mercadopago
 
 export function postPayment(payload) {
   return function (dispatch) {
-  axios.post(
-      `${localhost}/mercadoPago/checkout/`,
-      payload
-    ).then((response)=>{
+    axios
+      .post(`${localhost}/mercadoPago/checkout/`, payload)
+      .then((response) => {
+        dispatch({
+          type: ACTION_TYPES.POST_PAYMENT,
+          payload: response.data,
+        });
+      });
+  };
+}
+//CHECKOUT DETAILS
+export function fetchCheckOutDetails(id) {
+  return function (dispatch) {
+    axios.get(`${localhost}/bookings/details?id=` + id).then((response) => {
       dispatch({
-        type: ACTION_TYPES.POST_PAYMENT,
-        payload:response.data
-      })
-    })
+        type: ACTION_TYPES.FETCH_CHECKOUTS_DETAILS,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+//Changing status booking
+export function changeBookingStatus(payload) {
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/bookings/update`, payload);
+    return json;
   };
 }
 
@@ -86,3 +104,11 @@ export function fetchAllPosts() {
       });
   };
 }
+
+// cambiar informacion del perfil
+export const editProfilePost = (payload) => {
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/users/edit`, payload);
+    return json;
+  };
+};

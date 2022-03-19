@@ -4,36 +4,56 @@ import "primereact/resources/primereact.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { ForgotPassword } from './Components/LoginAndRegister/ForgotPassword';
+import EditProfile from "./Components/FormPost/EditProfile";
+import FormCuidador from "./Components/FormPost/Form-post-reqserv-cuidador/Form";
+import FormServ from "./Components/FormPost/Form-post-reqserv-cuidador/Formreqserv";
+import FormPayBank from "./Components/FormPost/FormsPay/FormPayData";
+import FormMercadoP from "./Components/FormPost/FormsPay/FormPayMP";
+import ResetPassword from "./Components/FormPost/ResetPassword";
+import { ForgotPassword } from "./Components/LoginAndRegister/ForgotPassword";
 import { Login } from "./Components/LoginAndRegister/LoginModal";
-import { MailCode } from './Components/LoginAndRegister/mailCode';
+import { MailCode } from "./Components/LoginAndRegister/mailCode";
 import { Register } from "./Components/LoginAndRegister/Register";
 import { RatingDemo } from "./Components/Review";
 import { DetailsPage } from "./Pages/DetailsPage";
 import { Home } from "./Pages/Home";
-import { ConfirmationMP } from "./Pages/MP_Confirmation";
-import { Payment } from "./Pages/Payment";
 import { Profile } from "./Pages/Profile";
-// import InputSearchB from "../src/Components/FormPost/";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Payment />} />
-        <Route path="/mp_confirmation" element={<ConfirmationMP />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/mailcode" element={<MailCode/>}/>           
-        <Route path="/forgotPassword" element={<ForgotPassword/>}/>   
+        <Route path="/" element={<Home />} />
+        <Route path="/mailcode" element={<MailCode />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/rating" element={<RatingDemo />} />
         <Route path="/DetailsPage/:id" element={<DetailsPage />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
-        {/* <Route path="/formpublic" element={<Form/>}/>         */}
+        <Route path="/editProfile" element={<EditProfile />} />
+        <Route path="/formMercadoP" element={<FormMercadoP />} />
+        <Route path="/formPayBank" element={<FormPayBank />} />
+        <Route path="/formpublic" element={<FormCuidador />} />
+        <Route path="/formpublicServ" element={<FormServ />} />
+        <Route path="/resetPassword" element={<ResetPassword />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+//////////////       mercadopago                //////////////
+//import { ConfirmationMP } from "./Pages/MP_Confirmation";
+//import { Payment } from "./Pages/Payment";
+//import { CreateBooking } from "./Components/CreateBooking";
+//import { BookingDatatables } from "./Components/BookingTable";
+
+{
+  /* <Route path="/" element={<CreateBooking />} />
+<Route path="/4534532" element={<BookingDatatables title={'Contrataciones'} data={infoUser.contrataciones} />}/>   
+<Route path="/booking/:id" element={<Payment />} />
+<Route path="/mp_confirmation" element={<ConfirmationMP />} />
+<Route path="/new_booking" element={<CreateBooking />} /> */
+}
