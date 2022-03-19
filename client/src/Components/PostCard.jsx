@@ -11,13 +11,10 @@ export default function PostCard({ post }) {
   const {
     id,
     authorId,
-    date,
+    updatedAt,
     title,
-    image,
-    rating,
-    bookings,
+    author,
     description,
-    reviews,
     type,
     size,
     address,
@@ -44,17 +41,17 @@ export default function PostCard({ post }) {
       <div className="flex align-items-center text-center justify-content-center">
         <img
           style={styles.profileImg}
-          src={image ? image : profileDefault}
+          src={author.image ? author.image : profileDefault}
           alt={`imagen de perfil de ${title}`}
         />
         <div>
           <h4>{title}</h4>
           <p>{description}</p>
           <p>Rating </p>
-          <Rating value={rating} readOnly stars={5} cancel={false} />
+          <Rating value={author.rating} readOnly stars={5} cancel={false} />
 
           <p>Contrataciones</p>
-          <p>{bookings}</p>
+          <p>{author.bookings}</p>
           <Button
             className="p-button-rounded p-button-success p-button-lg "
             id="detailsBtn"
@@ -80,8 +77,8 @@ export default function PostCard({ post }) {
               WebkitScrollSnapType: "none",
             }}
           >
-            {reviews ? (
-              reviews.map((i) => {
+            {author.reviews ? (
+              author.reviews.map((i) => {
                 return (
                   <div>
                     <ReviewCard
@@ -100,18 +97,7 @@ export default function PostCard({ post }) {
 
           <Link
             to={`/DetailsPage/${id}`}
-            state={{
-              description: description,
-              title: title,
-              authorId: authorId,
-              date: date,
-              rating: rating,
-              bookings: bookings,
-              type: type,
-              size: size,
-              address: address,
-              price: price,
-            }}
+            state={post}
             id="detailPageBtn"
           >
             Más detalles
