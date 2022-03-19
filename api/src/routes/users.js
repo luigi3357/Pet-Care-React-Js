@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { User, Post, Review, Booking } = require("../db");
 const { checkUUIDV } = require("../services/checkUUID");
-const { infoTotalDb } = require("../services/getDb");
+const { infoTotalDb } = require("../services/getDb.js");
 const { search, hash } = require("../services/login");
 const {
   searchUserIncludingReview,
@@ -44,10 +44,7 @@ router.get("/profile/:id", async (req, res, next) => {
   }
 });
 
-router.get("/", async (req, res) => {
-  const infoUser = await infoTotalDb();
-  res.send(infoUser);
-});
+
 
 /*         Update Rating          */
 router.put("/rate", async (req, res, next) => {
@@ -119,4 +116,8 @@ router.put("/security", async (req, res) => {
   return res.status(404).send("Usuario no encontrado")
 })
 
+router.get("/", async (req, res) => {
+  const infoUser = await infoTotalDb();
+  res.send(infoUser);
+});
 module.exports = router;
