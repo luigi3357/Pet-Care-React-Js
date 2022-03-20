@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { localhost } from "../REDUX/actions/action";
 
-export function CreateBooking({
+export default function CreateBooking({
   keeper = { name: "john", last_name: "rambo", id: "submachine" },
   client = { name: "john", last_name: "McClane", id: "Dualglock" },
   price = 100,
@@ -73,6 +73,7 @@ export function CreateBooking({
           label="CREAR SOLICITUD"
           className="p-button-rounded p-button-success p-button-raised"
           onClick={{ handleSubmit }}
+          // disabled={}
         />
         <Button
           label="CANCELAR"

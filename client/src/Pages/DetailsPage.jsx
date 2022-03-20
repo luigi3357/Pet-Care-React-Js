@@ -5,12 +5,15 @@ import { useLocation, useParams } from "react-router";
 import { NavBar } from "../Components/NavBar";
 import profileDefault from "./../assets/profile.jpg";
 import style from "./global.module.css";
+import CreateBooking from '../Components/CreateBooking'
+import { useSelector } from "react-redux";
 
 
 export const DetailsPage = ()=> {
     const {id} = useParams()
     const location = useLocation();
     const { description, title, author, updatedAt, type, size, address, price} = location.state;
+    const loginUser = useSelector(state=>state.login)
 
     useEffect(()=>{
     }, [])
@@ -34,7 +37,8 @@ export const DetailsPage = ()=> {
 
             <h3>Contrataciones: {author.bookings}</h3>
 
-            <h3>Rating: {author.rating}</h3>
+            <h3>Rating: {author.rating}</h3> 
+            <CreateBooking keeper={author} price={price} client={loginUser ? loginUser: null} />
           </Card>
         </div>
       </div>
