@@ -40,7 +40,7 @@ export function changeBookingStatus(payload) {
 
 //register
 
-export default function register(payload) {
+export  function register(payload) {
   return async (dispatch) => {
     let json = await axios.post(`${localhost}/register`, payload);
     return json;

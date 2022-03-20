@@ -5,9 +5,9 @@ import { editProfilePost } from '../../REDUX/actions/action';
 export default function FormPayData () {
 
     const dispatch = useDispatch()
-    const  idautor = useSelector((state)=> state.login)
-
-
+    
+    const users = useSelector((state)=>state.login)    
+   
     function validate(form){ 
         let errors = {};
         if(!form.name){
