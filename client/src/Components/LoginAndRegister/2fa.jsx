@@ -21,14 +21,14 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export const fa = () => {
+export const Verification = () => {
     const navigate = useNavigate()
     const [showMessage, setShowMessage] = useState(false);
     const[showExist,setShowExist]=useState(false);
     const [formData, setFormData] = useState({});
     const dispatch = useDispatch()
     const defaultValues = {
-       token: '',        
+       token_2fa: '',                     
     }
     const users = useSelector((state)=>state.login)    
 
@@ -36,29 +36,27 @@ export const fa = () => {
         dispatch(getLogin(users.email));
       }, [dispatch]);
 
-    console.log(users)
       
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
     
 
     const onSubmit = (data) => {
-        navigate("/home")
-        if (data.token) {
-
-            dispatch(getLogin(users.email));
-            console.log(users.token, "soy el token guardado") 
-                 
-            const tokenVerify = users.token;
-      
-            if (tokenVerify === data.token) {
-             showMessage()
+        if (data.token_2fa) {
+            dispatch(getLogin(users.email)); 
+            console.log(users.token_2FA,"token 2fa guardado")
+            console.log(data.token_2fa, "data")
+            if (users.token_2FA === data.token_2fa) {
+           setShowMessage(true)
             } else {
-            //  showExist()
-            console.log("hola")
+            setShowExist(true)
             }
           }
     };
+    function handleNavigate() {
+        setShowMessage(false)
+        navigate("/")
+    }
     const notmatch = useRef(null);
     const shownotmatch = () => {
         notmatch.current.show({severity:'error', summary: 'Error', detail:'Las contanseñas no coinciden', life: 3000});
@@ -72,32 +70,19 @@ export const fa = () => {
         return errors[name] && <small className="p-error">{errors[name].message}</small>
     };
 
-    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowMessage(false)} /></div>;
+    const dialogFooter = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => handleNavigate()} /></div>;
     const dialogFooterExist = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowExist(false)} /></div>;
-    const passwordHeader = <h6>Pick a password</h6>;
-    const passwordFooter = (
-        <React.Fragment>
-            <Divider />
-            <p className="mt-2">Suggestions</p>
-            <ul className="pl-2 ml-2 mt-0" style={{ lineHeight: '1.5' }}>
-                <li>At least one lowercase</li>
-                <li>At least one uppercase</li>
-                <li>At least one numeric</li>
-                <li>Minimum 8 characters</li>
-            </ul>
-        </React.Fragment>
-    );
 
     return (
         <div className="form-demo">
             <Toast ref={notmatch} />
             <Toast ref={minpass} />
-            <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
+            <Dialog visible={showMessage} onHide={() => handleNavigate()} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex justify-content-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
-                    <h5>Registration Successful!</h5>
+                    <h5>Bien</h5>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-                        Bienvenido <b>{formData.name}</b>! 
+                        Verificacion Correcta! <b>{formData.name}</b>! 
                     </p>
                 </div>
             </Dialog>
@@ -107,7 +92,7 @@ export const fa = () => {
                     <i className="pi pi-times-circle" style={{ fontSize: '5rem', color: 'var(--orange-500)' }}></i>
                     <h5>Error</h5>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-                       <b>El email ya tiene una cuenta creada. Logueate!</b>.
+                       <b>Verifique su token</b>.
                     </p>
                 </div>
             </Dialog>
@@ -119,10 +104,16 @@ export const fa = () => {
 
                         <div className="field">
                             <span className="p-float-label">
-                                <Controller name="token" control={control} rules={{ required: 'Token is required.' }} render={({ field, fieldState }) => (
-                                    <InputText id={field.token} {...field} autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} />
+                                <Controller name="token_2fa" control={control} rules={{ required: 'Token is required.' }} render={({ field, fieldState }) => (
+                                    <InputText 
+                                    id={field.token_2fa} 
+                                    {...field} 
+                                    autoFocus className={classNames({ 'p-invalid': fieldState.invalid })} 
+                                    />
                                 )} />
-                                <label htmlFor="token" className={classNames({ 'p-error': errors.token })}>Name*</label>
+                                <label 
+                                htmlFor="token" 
+                                className={classNames({ 'p-error': errors.token_2fa })}>Ingrese el token*</label>
                             </span>
                             {getFormErrorMessage('name')}
                         </div>

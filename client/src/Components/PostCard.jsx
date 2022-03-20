@@ -7,6 +7,18 @@ import { Rating } from "primereact/rating";
 import { Button } from "primereact/button";
 import { FaPlus } from "react-icons/fa";
 import { Card } from "primereact/card";
+import {
+  FaDog,
+  FaCrow,
+  FaCat,
+  FaSortNumericDown,
+  FaSortNumericUpAlt,
+  FaRegStar,
+  FaStar,
+} from "react-icons/fa";
+import { MdPestControlRodent } from "react-icons/md";
+import { AiOutlineColumnHeight } from "react-icons/ai";
+import style from "./../Pages/global.module.css";
 export default function PostCard({ post }) {
   const {
     id,
@@ -21,89 +33,91 @@ export default function PostCard({ post }) {
     price,
   } = post;
   const [showDetails, setShowDetails] = useState(false);
+  let petIcon;
+  let sizeText;
 
-  function toggleDetails() {
-    setShowDetails(!showDetails);
+  switch (type) {
+    case "gato":
+      petIcon = <FaCat className="text-5xl" />;
+      break;
+    case "perro":
+      petIcon = <FaDog className="text-6xl" />;
+      break;
+    case "roedores":
+      petIcon = <MdPestControlRodent className="text-6xl" />;
+      break;
+    case "aves":
+      petIcon = <FaCrow className="text-6xl" />;
+      break;
+    default:
+      break;
   }
 
-  const styles = {
-    container: {
-      width: "50vw",
-      border: "2px solid black",
-    },
-    profileImg: {
-      width: "10vw",
-    },
-  };
+  switch (size) {
+    case "pequeño":
+      sizeText = "0 a 25cm";
+      break;
+    case "mediano":
+      sizeText = "25 a 60cm";
+      break;
+    case "grande":
+      sizeText = "60 a 120cm";
+      break;
 
+    default:
+      break;
+  }
   return (
-    <Card className="flex flex-column align-items-center text-center justify-content-center">
-      <div className="flex align-items-center text-center justify-content-center">
+    <div className={style.postCardContainer}>
+      <div className={style.postCardSubContainer}>
         <img
-          style={styles.profileImg}
-          src={author.image ? author.image : profileDefault}
-          alt={`imagen de perfil de ${title}`}
-        />
-        <div>
-          <h4>{title}</h4>
-          <p>{description}</p>
-          <p>Rating </p>
-          <Rating value={author.rating} readOnly stars={5} cancel={false} />
-
-          <p>Contrataciones</p>
-          <p>{author.bookings}</p>
-          <Button
-            className="p-button-rounded p-button-success p-button-lg "
-            id="detailsBtn"
-            onClick={() => toggleDetails()}
-            title="Detalles"
-            value="Detalles"
-          >
-            <FaPlus />
-          </Button>
-        </div>
-      </div>
-
-      {/* Detalles */}
-      {showDetails ? (
-        <div>
-          <h5>{description}</h5>
-          <div
-            style={{
-              width: "35vw",
-              overflowX: "scroll",
-              display: "flex",
-              flexDirection: "row",
-              WebkitScrollSnapType: "none",
-            }}
-          >
-            {author.reviews ? (
-              author.reviews.map((i) => {
-                return (
-                  <div>
-                    <ReviewCard
-                      id={i.id}
-                      key={i.id}
-                      rating={i.rate}
-                      message={i.message}
+              className={style.imgPerfil}
+              src={author.profileImgURL?author.profileImgURL:profileDefault}
+              alt={`imagen de perfil de ${title}`}
+            />
+            <div>
+              <h4 className="capitalize">{`${author.name} ${author.last_name}`}</h4>
+    
+              <div className={style.ratingCont}>
+                <div>
+                  <p className={style.title}>Rating </p>
+                  <Rating
+                    className="text-white"
+                    value={author.rating}
+                    readOnly
+                    stars={5}
+                    cancel={false}
                     />
-                  </div>
-                );
-              })
-            ) : (
-              <h5>El usuario aún no posee reviews</h5>
-            )}
-          </div>
-
+                </div>
+                <div>
+                  <p className={style.title}>Contrataciones</p>
+                  <p className={style.title}>{author.bookings}</p>
+                </div>
+              </div>
+              <div className={style.ratingCont}>
+                <p cla>{petIcon}</p>
+                <div>
+                  <p className="capitalize">{size}</p>
+                  <p>{sizeText}</p>
+                </div>
+              </div>
           <Link
             to={`/DetailsPage/${id}`}
             state={post}
+            className={style.link}
             id="detailPageBtn"
           >
-            Más detalles
+            <Button
+              className="p-button-rounded p-button-success p-button-lg mb-3"
+              id="detailsBtn"
+              title="Detalles"
+              value="Detalles"
+            >
+              Mas info
+            </Button>
           </Link>
         </div>
-      ) : null}
-    </Card>
+      </div>
+    </div>
   );
 }

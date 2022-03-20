@@ -86,7 +86,22 @@ export const forgotPassword = (payload) => {
     return json;
   };
 };
+  //verification 2
+  export const secondaryVerification = (payload) => {
+    return async (dispatch) => {
+      let json = await axios.put(`${localhost}/mensaje/sms`, payload);
+      return json;
+    };
+  };
 
+    //reset
+    export const resetPassword = (payload) => {
+      return async (dispatch) => {
+        let json = await axios.put(`${localhost}/reset`, payload);
+        return json;
+      };
+    };
+  
 /*               HomeScreen             */
 
 export function fetchAllPosts() {
@@ -111,4 +126,43 @@ export const editProfilePost = (payload) => {
     let json = await axios.put(`${localhost}/users/edit`, payload);
     return json;
   };
-};
+}
+  //crear posteos
+  export const createPost = (payload) => {
+    return async (dispatch) => {
+      let json = await axios.post(`${localhost}/posts/create/`, payload);
+      return json;
+    };
+  };
+
+  // cambiar info de publicaciones
+  //deberia enviar si o si el id el resto de los cambios opcionales
+  //title, description, price, type, size, address, phone 
+  export const editPost = (id, payload) => {
+    return async (dispatch) => {
+      let json = await axios.put(`${localhost}/posts/edit/`+ id, payload);
+      return json;
+    };
+  };
+
+  
+
+
+export function getFiltered(payload){
+  return function(dispatch){
+    dispatch({
+      type: ACTION_TYPES.GET_FILTERED,
+      payload
+    })
+  }
+}
+
+export function getSearch(payload){
+  return async function(dispatch){
+    let result = await axios.get(`${localhost}/search`, { payload })
+    dispatch({
+      type: ACTION_TYPES.GET_SEARCH,
+      payload : result
+    })
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "primereact/button";
 import {
   FaDog,
@@ -6,15 +6,37 @@ import {
   FaCat,
   FaSortNumericDown,
   FaSortNumericUpAlt,
+  FaRegStar,
+  FaStar,
 } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
 import { AiOutlineColumnHeight } from "react-icons/ai";
 import { Card } from "primereact/card";
+import { useDispatch } from "react-redux";
+import { getFiltered } from "../REDUX/actions/action";
+import style from "./../Pages/global.module.css";
+import SearchBar from "./SearchBar";
 
 export default function Filters() {
+  const dispatch = useDispatch();
+
   const [filter, setFilter] = useState("");
   const [size, setSize] = useState("");
   const [price, setPrice] = useState("");
+  const [rating, setRating] = useState("");
+
+  useEffect(() => {
+    dispatch(getFiltered(filter));
+  }, [filter]);
+  useEffect(() => {
+    dispatch(getFiltered(size));
+  }, [size]);
+  useEffect(() => {
+    dispatch(getFiltered(price));
+  }, [price]);
+  useEffect(() => {
+    dispatch(getFiltered(rating));
+  }, [rating]);
 
   function handleFilterChange(e) {
     setFilter(e);
@@ -28,207 +50,132 @@ export default function Filters() {
     setPrice(e);
   }
 
+  function handleRatingChange(e) {
+    setRating(e);
+  }
+
   function cleanFilters() {
     setFilter("");
     setPrice("");
     setSize("");
+    setRating("");
+    dispatch(getFiltered("all"));
   }
 
   return (
-    <Card className="w-screen">
-      <p>FILTROS</p>
-      <div className="flex flex-column align-items-center text-center justify-content-center w-auto">
-        <div className="flex flex-column align-items-center text-center justify-content-center w-auto">
-          <div className="flex">
-            <div className=" m-2">
-              <p>POR ESPECIE</p>
-              <div className="flex">
-                <Button
-                  className="p-button-rounded p-button-info p-button-outlined m-1"
-                  onClick={() => handleFilterChange("perros")}
-                >
-                  <FaDog className="text-3xl" />
-                </Button>
-                <Button
-                  className="p-button-rounded p-button-info p-button-outlined  m-1"
-                  onClick={() => handleFilterChange("gatos")}
-                >
-                  <FaCat className="text-3xl" />
-                </Button>
-                <Button
-                  className="p-button-rounded p-button-info p-button-outlined  m-1"
-                  onClick={() => handleFilterChange("roedores")}
-                >
-                  <MdPestControlRodent className="text-3xl" />
-                </Button>
-                <Button
-                  className="p-button-rounded p-button-info p-button-outlined  m-1"
-                  onClick={() => handleFilterChange("aves")}
-                >
-                  <FaCrow className="text-3xl" />
-                </Button>
-              </div>
-            </div>
-
-            <div className=" m-2">
-              <p>POR PRECIO</p>
-              <div className="flex">
-                <Button
-                  className="p-button-outlined p-button-info  m-1"
-                  onClick={() => handlePriceChange("precioDesc")}
-                >
-                  <FaSortNumericDown className="text-3xl" />
-                </Button>
-                <Button
-                  className="p-button-outlined p-button-info  m-1"
-                  onClick={() => handlePriceChange("precioAsc")}
-                >
-                  <FaSortNumericUpAlt className="text-3xl" />
-                </Button>
-              </div>
+    <div className={style.filterContainer}>
+      <SearchBar />
+      <div className={style.filterSubContainer}>
+        <div>
+          <div className={style.buttonTitleContainer}>
+            <p className={style.title}>Especie</p>
+            <div className={style.buttonContainer}>
+              <Button
+                className="p-button-rounded p-button-info p-button-outlined"
+                onClick={() => handleFilterChange("perros")}
+              >
+                <FaDog className="text-3xl" />
+              </Button>
+              <Button
+                className="p-button-rounded p-button-info p-button-outlined"
+                onClick={() => handleFilterChange("gatos")}
+              >
+                <FaCat className="text-3xl" />
+              </Button>
+              <Button
+                className="p-button-rounded p-button-info p-button-outlined"
+                onClick={() => handleFilterChange("roedores")}
+              >
+                <MdPestControlRodent className="text-3xl" />
+              </Button>
+              <Button
+                className="p-button-rounded p-button-info p-button-outlined"
+                onClick={() => handleFilterChange("aves")}
+              >
+                <FaCrow className="text-3xl" />
+              </Button>
             </div>
           </div>
-          <div className=" m-2">
-            <p>POR TAMAÑO</p>
-            <div className="flex">
+
+          <div className={style.buttonTitleContainer}>
+            <p className={style.title}>Tamaño</p>
+            <div className={style.buttonContainer}>
               <Button
-                className="p-button-outlined p-button-info  m-1"
+                className="p-button-outlined p-button-info flex flex-column"
                 onClick={() => handleSizeChange("pequeño")}
               >
-                <AiOutlineColumnHeight className="text-1xl" />
+                {" "}
+                <p>Pequeño</p>
+                <p>0 a 25cm</p>
               </Button>
               <Button
-                className="p-button-outlined p-button-info  m-1"
+                className="p-button-outlined p-button-info flex flex-column "
                 onClick={() => handleSizeChange("mediano")}
               >
-                <AiOutlineColumnHeight className="text-3xl" />
+                {" "}
+                <p>Mediano</p>
+                <p>25 a 60cm</p>
               </Button>
               <Button
-                className="p-button-outlined p-button-info  m-1"
+                className="p-button-outlined p-button-info flex flex-column"
                 onClick={() => handleSizeChange("grande")}
               >
-                <AiOutlineColumnHeight className="text-6xl" />
+                {" "}
+                <p>Grande</p>
+                <p>60 a 120cm</p>
               </Button>
             </div>
+          </div>
+        </div>
+        <div>
+          <div className={style.buttonTitleContainer}>
+            <p className={style.title}>Precio</p>
+            <div className={style.buttonContainer}>
+              <Button
+                className="p-button-outlined p-button-info"
+                onClick={() => handlePriceChange("precioDesc")}
+              >
+                <FaSortNumericDown className="text-3xl" />
+              </Button>
+              <Button
+                className="p-button-outlined p-button-info"
+                onClick={() => handlePriceChange("precioAsc")}
+              >
+                <FaSortNumericUpAlt className="text-3xl" />
+              </Button>
+            </div>
+          </div>
+          <div className={style.buttonTitleContainer}>
+            <p className={style.title}>Rating</p>
+            <div className={style.buttonContainer}>
+              <Button
+                className="p-button-outlined p-button-info p-button-outlined"
+                onClick={() => handleRatingChange("ratingDesc")}
+              >
+                <FaStar className="text-1xl" />
+                <FaRegStar className="text-1xl" />
+                <FaRegStar className="text-1xl" />
+              </Button>
+              <Button
+                className="p-button-outlined p-button-info p-button-outlined"
+                onClick={() => handleRatingChange("ratingAsc")}
+              >
+                <FaStar className="text-1xl" />
+                <FaStar className="text-1xl" />
+                <FaStar className="text-1xl" />
+              </Button>
+            </div>
+          </div>
+
+          <div>
             <Button
-              className="p-button-raised p-button-info mt-2"
               label="Limpiar filtros"
+              className="p-button-raised p-button-info"
               onClick={() => cleanFilters()}
             />
           </div>
         </div>
       </div>
-    </Card>
-    // <div className="flex flex-column align-items-center justify-content-start min-w-full">
-
-    //   <Button
-    //     className="min-w-full p-button-raised p-button-info"
-    //     label="Filtros y ordenamiento"
-    //     onClick={() => handleShowFilters()}
-    //   />
-
-    //   {showFilters ? (
-    //     <div className="flex flex-column align-items-center justify-content-start min-w-full">
-    //       <Button
-    //         className="min-w-full p-button-raised p-button-info"
-    //         label="Limpiar filtros"
-    //         onClick={() => cleanFilters()}
-    //       />
-
-    //       <div className="flex flex-column align-items-center justify-content-start min-w-full">
-    //         <Button
-    //           className="min-w-full p-button-raised p-button-info"
-    //           label="Filtrar por especie"
-    //           onClick={() => handleShowSpecies()}
-    //         />
-
-    //         {showSpecies ? (
-    //           <div className="flex">
-    //             <Button
-    //               className="p-button-rounded p-button-info p-button-outlined"
-    //               onClick={() => handleFilterChange("perros")}
-    //             >
-    //               <FaDog className="text-3xl" />
-    //             </Button>
-    //             <Button
-    //               className="p-button-rounded p-button-info p-button-outlined"
-    //               onClick={() => handleFilterChange("gatos")}
-    //             >
-    //               <FaCat className="text-3xl" />
-    //             </Button>
-    //             <Button
-    //               className="p-button-rounded p-button-info p-button-outlined"
-    //               onClick={() => handleFilterChange("roedores")}
-    //             >
-    //               <MdPestControlRodent className="text-3xl" />
-    //             </Button>
-    //             <Button
-    //               className="p-button-rounded p-button-info p-button-outlined"
-    //               onClick={() => handleFilterChange("aves")}
-    //             >
-    //               <FaCrow className="text-3xl" />
-    //             </Button>
-    //           </div>
-    //         ) : null}
-    //       </div>
-
-    //       <div className="flex flex-column align-items-center justify-content-start min-w-full">
-    //         <Button
-    //           className="min-w-full p-button-raised p-button-info"
-    //           label="Filtrar por tamaño"
-    //           onClick={() => handleShowSizes()}
-    //         />
-
-    //         {showSizes ? (
-    //           <div className="flex">
-    //             <Button
-    //               className="p-button-outlined p-button-info"
-    //               onClick={() => handleSizeChange("pequeño")}
-    //             >
-    //               <AiOutlineColumnHeight className="text-1xl" />
-    //             </Button>
-    //             <Button
-    //               className="p-button-outlined p-button-info"
-    //               onClick={() => handleSizeChange("mediano")}
-    //             >
-    //               <AiOutlineColumnHeight className="text-3xl" />
-    //             </Button>
-    //             <Button
-    //               className="p-button-outlined p-button-info "
-    //               onClick={() => handleSizeChange("grande")}
-    //             >
-    //               <AiOutlineColumnHeight className="text-6xl" />
-    //             </Button>
-    //           </div>
-    //         ) : null}
-    //       </div>
-
-    //       <div className="flex flex-column align-items-center justify-content-start min-w-full">
-    //         <Button
-    //           className="min-w-full p-button-raised p-button-info"
-    //           label="Ordenar por precio"
-    //           onClick={() => handleShowPrices()}
-    //         />
-
-    //         {showPrices ? (
-    //           <div className="flex">
-    //             <Button
-    //               className="p-button-outlined p-button-info "
-    //               onClick={() => handlePriceChange("precioDesc")}
-    //             >
-    //               <FaSortNumericDown className="text-3xl" />
-    //             </Button>
-    //             <Button
-    //               className="p-button-outlined p-button-info "
-    //               onClick={() => handlePriceChange("precioAsc")}
-    //             >
-    //               <FaSortNumericUpAlt className="text-3xl" />
-    //             </Button>
-    //           </div>
-    //         ) : null}
-    //       </div>
-    //     </div>
-    //   ) : null}
-    // </div>
+    </div>
   );
 }

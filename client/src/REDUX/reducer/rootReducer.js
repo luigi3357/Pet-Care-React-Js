@@ -34,11 +34,94 @@ function rootReducer(state = initialState, action) {
         filtered_posts: action.payload,
       };
     case ACTION_TYPES.FETCH_CHECKOUTS_DETAILS:
-      console.log(action.payload)
       return {
         ...state,
         checkout_details: action.payload
       };
+    case ACTION_TYPES.GET_SEARCH:
+      return {
+        ...state,
+        filtered_posts: action.payload
+      }
+    case ACTION_TYPES.GET_FILTERED:
+      switch(action.payload){
+        case "all":
+          return{
+            ...state,
+            filtered_posts: state.all_posts
+          }
+        case "perros":
+          return{
+            ...state,
+            filtered_posts: state.all_posts.filter(i => i.type === "perro")
+          }
+        case "aves":
+          return{
+            ...state,
+            filtered_posts: state.all_posts.filter(i => i.type === "aves")
+          }
+        case "roedores":
+          return{
+            ...state,
+            filtered_posts: state.all_posts.filter(i => i.type === "roedores")
+          }
+        case "gatos":
+          return{
+            ...state,
+            filtered_posts: state.all_posts.filter(i => i.type === "gato")
+          }
+        case "pequeño":
+          return{
+            ...state,
+            filtered_posts: state.all_posts.filter(i => i.size === "pequeño")
+          }
+        case "mediano":
+          return{
+            ...state,
+            filtered_posts: state.all_posts.filter(i => i.size === "mediano")
+          }
+        case "grande":
+          return{
+            ...state,
+            filtered_posts: state.all_posts.filter(i => i.size === "grande")
+          }
+        case "precioDesc":
+          return{
+            ...state,
+            filtered_posts: state.filtered_posts.sort((a,b)=>{
+              if(a.price > b.price) return 1;
+              if(b.price >= a.price) return -1;
+            })
+          }
+        case "precioAsc":
+          return{
+            ...state,
+            filtered_posts: state.filtered_posts.sort((a,b)=>{
+              if(a.price > b.price) return -1;
+              if(b.price >= a.price) return 1;
+            })
+          }
+        case "ratingAsc":
+          return{
+            ...state,
+            filtered_posts: state.filtered_posts.sort((a,b)=>{
+              if(Number(a.author.rating) > Number(b.author.rating)) return -1; 
+              if(Number(b.author.rating) >= Number(a.author.rating)) return 1; 
+            })
+          }
+        case "ratingDesc":
+          return{
+            ...state,
+            filtered_posts: state.filtered_posts.sort((a,b)=>{
+              if(a.author.rating > b.author.rating) return 1; 
+              if(b.author.rating >= a.author.rating) return -1; 
+            })
+          }
+        default:
+          return {
+            ...state
+          }
+      }
     default:
       return state;
   }

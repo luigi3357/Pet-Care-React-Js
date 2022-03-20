@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
@@ -8,14 +8,16 @@ import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
 import { classNames } from "primereact/utils";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllUsers, getLogin } from "../../REDUX/actions/action";
+import { getAllUsers, getLogin, secondaryVerification } from "../../REDUX/actions/action";
 import bcrypt from "bcryptjs";
 import { Toast } from "primereact/toast";
 import { NavBar } from "../NavBar";
 
 export const Login = () => {
+  const navigate = useNavigate()
   const [showMessage, setShowMessage] = useState(false);
   const [showExist, setShowExist] = useState(false);
+  const [showVerify, setShowVerify] = useState(false);
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
   const defaultValues = {
@@ -40,14 +42,37 @@ export const Login = () => {
     const oneUser = users.filter((e) => e.email === data.email);
     const passVerify = oneUser.map((e) => e.password).toString();
     const verifyPassword = await bcrypt.compare(data.password, passVerify);
+const data2 = {
+  email: oneUser.map(e=>e.email),
+  name : oneUser.map(e=>e.name)
+}
+const validar = oneUser.map(e=>{return e.key_2fa})
 
     if (!oneUser.length) {
       setShowExist(true);
     } else {
+      if(oneUser.map(e=> e.Admin)[0] === true){
+        dispatch(getAllUsers())
+        setTimeout(()=>{
+          navigate("/adminHome")
+        })
+      }
       if (verifyPassword === true) {
+       if(validar[0] === true){
+       dispatch(secondaryVerification(data2))
+       setShowVerify(true)
+        dispatch(getLogin(data.email));       
+        reset();
+       setTimeout(() => {
+        navigate("/verificacion")
+      }, 2000);        
+       }else{
         setShowMessage(true);
         dispatch(getLogin(data.email));
+        navigate("/")
         reset();
+       }
+        
       } else {
         shownotmatch();
       }
@@ -108,13 +133,34 @@ export const Login = () => {
             className="pi pi-check-circle"
             style={{ fontSize: "5rem", color: "var(--green-500)" }}
           ></i>
-          <h5>Registration Successful!</h5>
+          <h5>Ingreso correctamente!</h5>
           <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-            Your account is registered under name <b>{formData.name}</b>, under
-            lastname <b>{formData.name}</b>, and email <b>{formData.email}</b>.
+           <b>Bienvenido a Pet-Care</b>.
           </p>
         </div>
       </Dialog>
+
+      <Dialog
+        visible={showMessage}
+        onHide={() => setShowVerify(false)}
+        position="top"
+        footer={dialogFooter}
+        showHeader={false}
+        breakpoints={{ "960px": "80vw" }}
+        style={{ width: "30vw" }}
+      >
+        <div className="flex justify-content-center flex-column pt-6 px-3">
+          <i
+            className="pi pi-check-circle"
+            style={{ fontSize: "5rem", color: "var(--green-500)" }}
+          ></i>
+          <h5>Redirigiendo !</h5>
+          <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+             <b>Debes validar tu codigo</b>.
+          </p>
+        </div>
+      </Dialog>
+
       <Dialog
         visible={showExist}
         onHide={() => setShowExist(false)}
@@ -138,7 +184,7 @@ export const Login = () => {
 
       <div className="flex justify-content-center">
         <div className="card">
-          <h5 className="text-center"> Login </h5>
+          <h5 className="text-center"> Iniciar Session </h5>
           <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
               <span className="p-float-label p-input-icon-right">
@@ -147,10 +193,10 @@ export const Login = () => {
                   name="email"
                   control={control}
                   rules={{
-                    required: "Email is required.",
+                    required: "Email es requerido.",
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                      message: "Invalid email address. E.g. example@email.com",
+                      message: "Email Invalido. E.g. example@email.com",
                     },
                   }}
                   render={({ field, fieldState }) => (
@@ -178,7 +224,7 @@ export const Login = () => {
                 <Controller
                   name="password"
                   control={control}
-                  rules={{ required: "Password is required." }}
+                  rules={{ required: "La contraseña es requerida." }}
                   render={({ field, fieldState }) => (
                     <Password
                       id={field.name}
@@ -190,21 +236,20 @@ export const Login = () => {
                     />
                   )}
                 />
+                <label
+                  htmlFor="password"
+                  className={classNames({ "p-error": errors.password })}
+                >
+                  Contraseña*
+                </label>
               </span>
-              <label
-                htmlFor="password"
-                className={classNames({ "p-error": errors.password })}
-              >
-                Password*
-              </label>
-
               {getFormErrorMessage("password")}
             </div>
-            <Button type="submit" label="Submit" />
+            <Button type="submit" label="Enviar" />
           </form>
-
+          <div style={{textAlign:"center"}}>
           <div>
-            <Link to="/forgotPassword">Forgot Password?</Link>
+            <Link to="/forgotPassword">Olvidaste tu contraseña?</Link>
           </div>
 
           <div>
@@ -218,6 +263,7 @@ export const Login = () => {
             <a href="http://localhost:3001/Auth/login/federated/google">
               Google
             </a>
+          </div>
           </div>
         </div>
       </div>

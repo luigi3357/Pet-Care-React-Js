@@ -4,20 +4,24 @@ import "primereact/resources/primereact.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
+import AddressAutocom from "./Components/AddressAutocom.jsx";
+import AdminHome from "./Components/Admin/AdminHome";
 import EditProfile from "./Components/FormPost/EditProfile";
 import FormCuidador from "./Components/FormPost/Form-post-reqserv-cuidador/Form";
 import FormServ from "./Components/FormPost/Form-post-reqserv-cuidador/Formreqserv";
 import FormPayBank from "./Components/FormPost/FormsPay/FormPayData";
 import FormMercadoP from "./Components/FormPost/FormsPay/FormPayMP";
 import ResetPassword from "./Components/FormPost/ResetPassword";
+import { Verification } from "./Components/LoginAndRegister/2fa";
 import { ForgotPassword } from "./Components/LoginAndRegister/ForgotPassword";
 import { Login } from "./Components/LoginAndRegister/LoginModal";
 import { MailCode } from "./Components/LoginAndRegister/mailCode";
 import { Register } from "./Components/LoginAndRegister/Register";
+import { Reset } from "./Components/LoginAndRegister/Reset";
 import { RatingDemo } from "./Components/Review";
 import { DetailsPage } from "./Pages/DetailsPage";
 import { Home } from "./Pages/Home";
-import { Profile } from "./Pages/Profile";
+import MapDetail from "./Pages/MapDetail";
 
 function App() {
   return (
@@ -30,13 +34,18 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/rating" element={<RatingDemo />} />
         <Route path="/DetailsPage/:id" element={<DetailsPage />} />
+        <Route path="/adminHome" element={<AdminHome />} />
+        {/* <Route path="/profile" element={<Profile />} />  */}
+        <Route path="/verificacion" element={<Verification />} />
+        <Route path="/reset" element={<Reset />} />
         <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/formMercadoP" element={<FormMercadoP />} />
         <Route path="/formPayBank" element={<FormPayBank />} />
         <Route path="/formpublic" element={<FormCuidador />} />
         <Route path="/formpublicServ" element={<FormServ />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/Maps" element={<MapDetail />} />
+        <Route path="/AddressAutocom" element={<AddressAutocom />} />
       </Routes>
     </Router>
   );
