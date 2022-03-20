@@ -37,6 +37,13 @@ export const NavBar = () => {
         <Avatar label="J" shape="circle" size="large" />
 
         <p className={style.navBarName}>Hola, Julio!</p>
+
+        <Link className={style.link} to="/Login">
+          <Button
+            icon="pi pi-times"
+            className="p-button-rounded p-button-danger "
+          />
+        </Link>
       </div>
     </div>
   );

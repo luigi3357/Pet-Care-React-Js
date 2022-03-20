@@ -21,6 +21,7 @@ import { Reset } from "./Components/LoginAndRegister/Reset";
 import { RatingDemo } from "./Components/Review";
 import { DetailsPage } from "./Pages/DetailsPage";
 import { Home } from "./Pages/Home";
+import { Profile } from "./Pages/Profile";
 import MapDetail from "./Pages/MapDetail";
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
         <Route path="/rating" element={<RatingDemo />} />
         <Route path="/DetailsPage/:id" element={<DetailsPage />} />
         <Route path="/adminHome" element={<AdminHome />} />
-        {/* <Route path="/profile" element={<Profile />} />  */}
+        <Route path="/profile/:id" element={<Profile />} />
         <Route path="/verificacion" element={<Verification />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/editProfile" element={<EditProfile />} />

@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import DetailsPage from "../Pages/DetailsPage";
-import ReviewCard from "./ReviewCard";
+
 import profileDefault from "../assets/profile.jpg";
 import { Rating } from "primereact/rating";
 import { Button } from "primereact/button";
-import { FaPlus } from "react-icons/fa";
-import { Card } from "primereact/card";
-import {
-  FaDog,
-  FaCrow,
-  FaCat,
-  FaSortNumericDown,
-  FaSortNumericUpAlt,
-  FaRegStar,
-  FaStar,
-} from "react-icons/fa";
+
+import { FaDog, FaCrow, FaCat } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
-import { AiOutlineColumnHeight } from "react-icons/ai";
+
 import style from "./../Pages/global.module.css";
 export default function PostCard({ post }) {
   const {
@@ -71,41 +61,41 @@ export default function PostCard({ post }) {
     <div className={style.postCardContainer}>
       <div className={style.postCardSubContainer}>
         <img
-              className={style.imgPerfil}
-              src={author.profileImgURL?author.profileImgURL:profileDefault}
-              alt={`imagen de perfil de ${title}`}
-            />
+          className={style.imgPerfil}
+          src={author.profileImgURL ? author.profileImgURL : profileDefault}
+          alt={`imagen de perfil de ${title}`}
+        />
+        <div>
+          <h4 className="capitalize">{`${author.name} ${author.last_name}`}</h4>
+
+          <div className={style.ratingCont}>
             <div>
-              <h4 className="capitalize">{`${author.name} ${author.last_name}`}</h4>
-    
-              <div className={style.ratingCont}>
-                <div>
-                  <p className={style.title}>Rating </p>
-                  <Rating
-                    className="text-white"
-                    value={author.rating}
-                    readOnly
-                    stars={5}
-                    cancel={false}
-                    />
-                </div>
-                <div>
-                  <p className={style.title}>Contrataciones</p>
-                  <p className={style.title}>{author.bookings}</p>
-                </div>
-              </div>
-              <div className={style.ratingCont}>
-                <p cla>{petIcon}</p>
-                <div>
-                  <p className="capitalize">{size}</p>
-                  <p>{sizeText}</p>
-                </div>
-              </div>
+              <p className={style.title}>Rating </p>
+              <Rating
+                className="text-white"
+                value={author.rating}
+                readOnly
+                stars={5}
+                cancel={false}
+              />
+            </div>
+            <div>
+              <p className={style.title}>Contrataciones</p>
+              <p className={style.title}>{author.bookings}</p>
+            </div>
+          </div>
+          <div className={style.ratingCont}>
+            <p cla>{petIcon}</p>
+            <div>
+              <p className="capitalize">{size}</p>
+              <p>{sizeText}</p>
+            </div>
+          </div>
           <Link
-            to={`/DetailsPage/${id}`}
+            to={`/Profile/${id}`}
             state={post}
             className={style.link}
-            id="detailPageBtn"
+            id="Profile"
           >
             <Button
               className="p-button-rounded p-button-success p-button-lg mb-3"
