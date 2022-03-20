@@ -4,6 +4,21 @@ import ACTION_TYPES from "../actionTypes/actionTypes";
 
 export const localhost = "http://localhost:3001";
 
+//usersCoordinates
+
+export function usersCoordinates(){
+  return async function (dispatch) {
+    
+      var json = await axios.get(`${localhost}/users/usersCoordinates`)
+      //console.log(json, "jsonuserCoordinates")
+      return dispatch({
+        type: ACTION_TYPES.GET_USERS_COORDINATES,
+        payload: json.data
+      })
+    
+  }
+}
+
 //mercadopago
 
 export function postPayment(payload) {

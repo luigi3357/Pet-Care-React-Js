@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     location: {
-      type: DataTypes.ARRAY(DataTypes.STRING)
+      type: DataTypes.ARRAY(DataTypes.JSON)
     },
     keeper: {
       type: DataTypes.BOOLEAN,
