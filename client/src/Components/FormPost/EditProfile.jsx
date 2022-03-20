@@ -61,7 +61,7 @@ export default function FormPayData () {
         phone:'',
         bio:'',
         email:'',
-       
+        myImages:"",
       })
       
       const disableSubmit = useMemo(() =>{
@@ -90,8 +90,26 @@ export default function FormPayData () {
       
        }, [errors, form]);
 
-      
-           
+      //hacemos lo de base64 para guardar la imagen que el usuario quiere de perfil
+      const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        });
+      };
+      const handleFileUpload = async (e) => {
+        const file = e.target.myImages[0];
+        const base64 = await convertToBase64(file);
+        dispatch(editProfilePost({ ...form, myImages: base64 }))
+        
+      };
+    
            
 
 
@@ -126,9 +144,7 @@ export default function FormPayData () {
         
     else  {
          e.preventDefault()
-    
-        console.log(form)
-      dispatch(editProfilePost(form))
+        dispatch(editProfilePost(form))
         alert('Su perfil a sido editado!')
         setForm({
             name:'',
@@ -137,7 +153,7 @@ export default function FormPayData () {
             phone:'',
             bio:'',
             email:'',
-           
+            myImages:'',
           
         })
         console.log(form)
@@ -156,6 +172,12 @@ export default function FormPayData () {
       <h1>Edita tu perfil!</h1>
       </div>    
         
+      <div >
+        <label>Foto de perfil</label>
+        <input   type='file' accept=".jpeg, .png, .jpg"  value={form.myImages} name='myImages' onChange={(e) => handleFileUpload(e)}/>
+         {/*   aca va el error que le quieran validar */}
+       
+        </div>    
     <div >
         <label>Nombre</label>
         <input   type='text'  value={form.name} name='name' onChange={(e) =>handleChange(e)}/>

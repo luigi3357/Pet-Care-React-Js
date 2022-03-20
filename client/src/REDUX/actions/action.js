@@ -127,6 +127,14 @@ export const editProfilePost = (payload) => {
     return json;
   };
 }
+// añade favoritos
+export const addFavoritos = (payload) => {
+  return async (dispatch) => {
+    console.log(payload);
+    let json = await axios.put(`${localhost}/users/fav`, payload);
+    return json;
+  };
+}
   //crear posteos
   export const createPost = (payload) => {
     return async (dispatch) => {

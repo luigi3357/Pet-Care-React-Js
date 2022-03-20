@@ -9,6 +9,7 @@ const {
   } = require("../services/ratingCalculation");
 const { Update } = require("../services/updateUser");
 const router = Router();
+const {sendEmail} = require("../services/sendEmail");
 
 router.get("/profile/:id", async (req, res, next) => {
   const { id } = req.params;
@@ -78,12 +79,11 @@ router.put("/delete/:id", async (req, res, next) => {
 //editamos la informacion del usuario
 
 router.put("/edit", async (req, res) => {
-  const { email, name, last_name, phone, password, bio, location} = req.body
+  const { email, name, last_name, phone, bio, location, myImages, profileImgURL} = req.body
 
   let user = await search({ email: email})
-
   if (user) {
-      let resetInfoUser = await User.update({ name: name ? name:user.name, last_name: last_name ? last_name: user.last_name, phone: phone? phone: user.phone, bio:bio? bio:user.bio, location: location? location: user.location},   
+      let resetInfoUser = await User.update({ name: name ? name:user.name, last_name: last_name ? last_name: user.last_name, phone: phone? phone: user.phone, bio:bio? bio:user.bio, location: location? location: user.location, myImages: myImages? myImages: user.myImages, profileImgURL: profileImgURL? profileImgURL: user.profileImgURL},   
           { where: { email:email }})
           let asunto = "Edito su perfil correctamente"
           let mensaje = `su perfil se edito correctamente con la siguiente informacion 
@@ -91,11 +91,13 @@ router.put("/edit", async (req, res) => {
           apellido: ${last_name? last_name: user.last_name}.
           telefono: ${phone? phone: user.phone}.
           biografia: ${bio? bio: user.bio}.
-          direccion: ${location? location: user.location}.          
+          direccion: ${location? location: user.location}.      
           Si algun dato esta mal modifiquelo en la siguiente ????`;
           //envia el email
-          let send = sendEmail(email, mensaje, asunto)
-      return res.send(resetInfoUser)
+        
+        let send = sendEmail(email, mensaje, asunto)
+        return res.send(resetInfoUser)
+
   }
   return res.status(404).send("Usuario no encontrado")
 })
@@ -107,13 +109,25 @@ router.put("/security", async (req, res) => {
 
   let user = await search({ email: email})
   let passwordHasheada= await hash(password)
-
   if (user) {
       let resetInfoUser = await User.update({ password: passwordHasheada, key_2fa:key_2fa  },   
           { where: { email:email }})
       return res.send(resetInfoUser)
   }
   return res.status(404).send("Usuario no encontrado")
+})
+// ruta para ir añadiendo favoritos al usuario.
+
+router.put("/fav", async (req, res) => {
+  const { favoritos, email } = req.body
+  console.log(req.body);
+  let user = await search({ email: email})
+    if (user) {
+      let TodosFavoritos = await User.update({ favoritos: favoritos},   
+          { where: { email:email }})
+        return res.send("TodosFavoritos")
+      }
+  return res.status(404).send("no se pudo añadir a favoritos")
 })
 
 router.get("/", async (req, res) => {
