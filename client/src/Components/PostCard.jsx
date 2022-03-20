@@ -7,10 +7,23 @@ import { Rating } from "primereact/rating";
 import { Button } from "primereact/button";
 import { FaPlus } from "react-icons/fa";
 import { Card } from "primereact/card";
+import {
+  FaDog,
+  FaCrow,
+  FaCat,
+  FaSortNumericDown,
+  FaSortNumericUpAlt,
+  FaRegStar,
+  FaStar,
+} from "react-icons/fa";
+import { MdPestControlRodent } from "react-icons/md";
+import { AiOutlineColumnHeight } from "react-icons/ai";
 import style from "./../Pages/global.module.css";
 
 export default function PostCard({
   id,
+  name,
+  last_name,
   authorId,
   date,
   title,
@@ -19,13 +32,43 @@ export default function PostCard({
   bookings,
   description,
   reviews,
+  type,
+  size,
 }) {
-  const [showDetails, setShowDetails] = useState(false);
-  console.log(title);
-  function toggleDetails() {
-    setShowDetails(!showDetails);
+  let petIcon;
+  let sizeText;
+
+  switch (type) {
+    case "gato":
+      petIcon = <FaCat className="text-5xl" />;
+      break;
+    case "perro":
+      petIcon = <FaDog className="text-6xl" />;
+      break;
+    case "roedores":
+      petIcon = <MdPestControlRodent className="text-6xl" />;
+      break;
+    case "aves":
+      petIcon = <FaCrow className="text-6xl" />;
+      break;
+    default:
+      break;
   }
 
+  switch (size) {
+    case "pequeño":
+      sizeText = "0 a 25cm";
+      break;
+    case "mediano":
+      sizeText = "25 a 60cm";
+      break;
+    case "grande":
+      sizeText = "60 a 120cm";
+      break;
+
+    default:
+      break;
+  }
   return (
     <div className={style.postCardContainer}>
       <div className={style.postCardSubContainer}>
@@ -35,8 +78,7 @@ export default function PostCard({
           alt={`imagen de perfil de ${title}`}
         />
         <div>
-          <h4 className="">{title}</h4>
-          <p className={style.description}>{description}</p>
+          <h4 className="capitalize">{`${name} ${last_name}`}</h4>
 
           <div className={style.ratingCont}>
             <div>
@@ -52,6 +94,13 @@ export default function PostCard({
             <div>
               <p className={style.title}>Contrataciones</p>
               <p className={style.title}>{bookings}</p>
+            </div>
+          </div>
+          <div className={style.ratingCont}>
+            <p cla>{petIcon}</p>
+            <div>
+              <p className="capitalize">{size}</p>
+              <p>{sizeText}</p>
             </div>
           </div>
 
@@ -73,30 +122,6 @@ export default function PostCard({
           </Link>
         </div>
       </div>
-
-      {/* Detalles */}
-      {showDetails ? (
-        <div className="">
-          <div>
-            {reviews ? (
-              reviews.map((i) => {
-                return (
-                  <div>
-                    <ReviewCard
-                      id={i.id}
-                      key={i.id}
-                      rating={i.rate}
-                      message={i.message}
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <h5>El usuario aún no posee reviews</h5>
-            )}
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }

@@ -14,7 +14,6 @@ import { Home } from "./Pages/Home";
 import { ForgotPassword } from "./Components/LoginAndRegister/ForgotPassword";
 import { MailCode } from "./Components/LoginAndRegister/mailCode";
 import { Reset } from "./Components/LoginAndRegister/Reset";
-
 import EditProfile from "./Components/FormPost/EditProfile";
 import FormMercadoP from "./Components/FormPost/FormsPay/FormPayMP";
 import FormPayBank from "./Components/FormPost/FormsPay/FormPayData";
@@ -24,11 +23,20 @@ import ResetPassword from "./Components/FormPost/ResetPassword";
 // import InputSearchB from "../src/Components/FormPost/";
 import SearchBar from "./Components/SearchBar";
 import { Verification } from "./Components/LoginAndRegister/2fa";
+<<<<<<< HEAD
 import EditForm from './Components/FormPost/Form-post-reqserv-cuidador/EditForm'
+=======
+import AdminHome from "./Components/Admin/AdminHome";
+import MapDetail from "./Pages/MapDetail";
+import AddressAutocom from "./Components/AddressAutocom.jsx";
+
+>>>>>>> 60b736bf4fa86a0405e326730d148552c5a7433b
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/adminHome" element={<AdminHome />} />
+        {/* <Route path="/profile" element={<Profile />} />  */}
         <Route path="/verificacion" element={<Verification />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/mailcode" element={<MailCode />} />
@@ -45,9 +53,10 @@ function App() {
         <Route path="/formPayBank" element={<FormPayBank />} />
         <Route path="/formpublic" element={<FormCuidador />} />
         <Route path="/formpublicServ" element={<FormServ />} />
+        <Route path="/editForm" element={<EditForm />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
-         <Route path="/editForm" element={<EditForm />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/Maps" element={<MapDetail />} />
+        <Route path="/AddressAutocom" element={<AddressAutocom />} />
       </Routes>
     </Router>
   );

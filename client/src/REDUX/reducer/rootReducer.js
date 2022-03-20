@@ -30,6 +30,11 @@ function rootReducer(state = initialState, action) {
         all_posts: action.payload,
         filtered_posts: action.payload,
       };
+    case ACTION_TYPES.GET_SEARCH:
+      return {
+        ...state,
+        filtered_posts: action.payload
+      }
     case ACTION_TYPES.GET_FILTERED:
       switch(action.payload){
         case "all":

@@ -63,7 +63,7 @@ export default function Filters() {
   }
 
   return (
-    <Card className={style.filterContainer}>
+    <div className={style.filterContainer}>
       <SearchBar />
       <div className={style.filterSubContainer}>
         <div>
@@ -101,22 +101,28 @@ export default function Filters() {
             <p className={style.title}>Tamaño</p>
             <div className={style.buttonContainer}>
               <Button
-                className="p-button-outlined p-button-info"
+                className="p-button-outlined p-button-info flex flex-column"
                 onClick={() => handleSizeChange("pequeño")}
               >
-                <AiOutlineColumnHeight className="text-2xl" />
+                {" "}
+                <p>Pequeño</p>
+                <p>0 a 25cm</p>
               </Button>
               <Button
-                className="p-button-outlined p-button-info "
+                className="p-button-outlined p-button-info flex flex-column "
                 onClick={() => handleSizeChange("mediano")}
               >
-                <AiOutlineColumnHeight className="text-3xl" />
+                {" "}
+                <p>Mediano</p>
+                <p>25 a 60cm</p>
               </Button>
               <Button
-                className="p-button-outlined p-button-info"
+                className="p-button-outlined p-button-info flex flex-column"
                 onClick={() => handleSizeChange("grande")}
               >
-                <AiOutlineColumnHeight className="text-4xl" />
+                {" "}
+                <p>Grande</p>
+                <p>60 a 120cm</p>
               </Button>
             </div>
           </div>
@@ -160,16 +166,16 @@ export default function Filters() {
               </Button>
             </div>
           </div>
+
+          <div>
+            <Button
+              label="Limpiar filtros"
+              className="p-button-raised p-button-info"
+              onClick={() => cleanFilters()}
+            />
+          </div>
         </div>
       </div>
-
-      <div>
-        <Button
-          label="Limpiar filtros"
-          className="p-button-raised p-button-info"
-          onClick={() => cleanFilters()}
-        />
-      </div>
-    </Card>
+    </div>
   );
 }

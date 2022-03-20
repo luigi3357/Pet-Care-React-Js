@@ -110,16 +110,13 @@ export function fetchAllPosts() {
     };
   };
 
-    
-//Formulario que hace la publicacion
-    //crear posteos
+  //crear posteos
   export const createPost = (payload) => {
     return async (dispatch) => {
       let json = await axios.post(`${localhost}/posts/create/`, payload);
       return json;
     };
   };
-
 
   // cambiar info de publicaciones
   //deberia enviar si o si el id el resto de los cambios opcionales
@@ -131,12 +128,24 @@ export function fetchAllPosts() {
     };
   };
 
+  
+
 
 export function getFiltered(payload){
   return function(dispatch){
     dispatch({
       type: ACTION_TYPES.GET_FILTERED,
       payload
+    })
+  }
+}
+
+export function getSearch(payload){
+  return async function(dispatch){
+    let result = await axios.get(`${localhost}/search`, { payload })
+    dispatch({
+      type: ACTION_TYPES.GET_SEARCH,
+      payload : result
     })
   }
 }

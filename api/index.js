@@ -18,6 +18,7 @@ conn.sync({ force: true }).then(async () => {
           bookings: element.bookings,
           profileImgURL: element.profileImgURL,
           myImages: element.myImages,
+          Admin: element.Admin? element.Admin: false,
         },
       });
     });

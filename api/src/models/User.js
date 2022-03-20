@@ -72,6 +72,10 @@ module.exports = (sequelize) => {
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    Admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
     },
   );
