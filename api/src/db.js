@@ -1,45 +1,56 @@
-require('dotenv').config();
-const { Sequelize, Op} = require('sequelize');
-const fs = require('fs');
-const path = require('path');
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,DATABASE,
-} = process.env;
+require("dotenv").config();
+const { Sequelize, Op } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
+const { DB_USER, DB_PASSWORD, DB_HOST, DATABASE } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DATABASE}`, {
-  logging: false, 
-  native: false, 
-});
+const sequelize = new Sequelize(
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DATABASE}`,
+  {
+    logging: false,
+    native: false,
+  }
+);
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
 
-
-fs.readdirSync(path.join(__dirname, '/models'))
-  .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
+fs.readdirSync(path.join(__dirname, "/models"))
+  .filter(
+    (file) =>
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+  )
   .forEach((file) => {
-    modelDefiners.push(require(path.join(__dirname, '/models', file)));
+    modelDefiners.push(require(path.join(__dirname, "/models", file)));
   });
-modelDefiners.forEach(model => model(sequelize));
+modelDefiners.forEach((model) => model(sequelize));
 
 let entries = Object.entries(sequelize.models);
-let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
+let capsEntries = entries.map((entry) => [
+  entry[0][0].toUpperCase() + entry[0].slice(1),
+  entry[1],
+]);
 sequelize.models = Object.fromEntries(capsEntries);
 
 const { User, Post, Review, Booking } = sequelize.models;
 
-User.hasMany(Post, {as: "posteos", foreignKey: {name:"author_id", allowNull: false}})
-Post.belongsTo(User,{as: "author", foreignKey: {name:"author_id", allowNull: false}})
-User.hasMany(Review, {as: "reviews", foreignKey: "reviewedUser_id" })
-Review.belongsTo(User, {as: 'reviwedUser', foreignKey: 'reviewedUser_id'})
-User.hasMany(Booking, {as: "reservaciones",foreignKey: "client" })
-User.hasMany(Booking, {as: "contrataciones",foreignKey: "keeper" })
-
-
-
+User.hasMany(Post, {
+  as: "posteos",
+  foreignKey: { name: "author_id", allowNull: false },
+});
+Post.belongsTo(User, {
+  as: "author",
+  foreignKey: { name: "author_id", allowNull: false },
+});
+User.hasMany(Review, { as: "reviews", foreignKey: "reviewedUser_id" });
+Review.belongsTo(User, { as: "reviwedUser", foreignKey: "reviewedUser_id" });
+User.hasMany(Booking, { as: "reservaciones", foreignKey: "client_id" });
+Booking.belongsTo(User, { as: "client", foreignKey: "client_id" });
+User.hasMany(Booking, { as: "contrataciones", foreignKey: "keeper_id" });
+Booking.belongsTo(User, { as: "keeper", foreignKey: "keeper_id" });
 
 module.exports = {
-  ...sequelize.models, 
+  ...sequelize.models,
   conn: sequelize,
-  Op,     
+  Op,
 };
