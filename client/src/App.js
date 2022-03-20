@@ -24,7 +24,7 @@ import ResetPassword from "./Components/FormPost/ResetPassword";
 // import InputSearchB from "../src/Components/FormPost/";
 import SearchBar from "./Components/SearchBar";
 import { Verification } from "./Components/LoginAndRegister/2fa";
-
+import EditForm from './Components/FormPost/Form-post-reqserv-cuidador/EditForm'
 function App() {
   return (
     <Router>
@@ -46,6 +46,7 @@ function App() {
         <Route path="/formpublic" element={<FormCuidador />} />
         <Route path="/formpublicServ" element={<FormServ />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
+         <Route path="/editForm" element={<EditForm />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
       </Routes>
     </Router>

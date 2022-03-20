@@ -1,27 +1,29 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
-import {createPost,getAllUsers} from '../../../REDUX/actions/action'
+import { editPost,getAllUsers } from '../../../REDUX/actions/action';
+import { useParams } from 'react-router-dom';
 export default function FormCard(){
    
-       const dispatch= useDispatch()
-       const  user = useSelector((state)=> state.users)
-       console.log(user)
+        const dispatch= useDispatch()
+       
     //   const typesState = useSelector((state)=> state.typePokemon)
         
-       
-    const  idautor = useSelector((state)=> state.login)
-      console.log(idautor.id, )
+       const {id} = useParams()
+        const  idautor = useSelector((state)=> state.login)
+
         const [form,setForm]= useState({
         title:'',
         description:'',
         price:'',
-       email:  user.email,
         type:[],
         size:[],
         address:'',
         phone:'',
+        id:id,
         author_id:idautor.id,
-      })
+        
+    })
+       
       function validate(form){ 
         let errors = {};
         if(!form.title){
@@ -52,7 +54,7 @@ export default function FormCard(){
          
       return errors;
     }
-    console.log(form.email)
+    
     const [errors,setErrors]= useState({})
     const [disabled, setDisabled] = useState(true)
 
@@ -81,7 +83,7 @@ export default function FormCard(){
        },[form]);
        useEffect(() => {
         dispatch(getAllUsers())
-      }, []);
+      }, [errors, form]);
 
 
 
@@ -181,22 +183,22 @@ export default function FormCard(){
          e.preventDefault()
     
         console.log(form)
-        dispatch(createPost(form))
+        dispatch(editPost(form))
         alert('Servicio creado!')
         setForm({
-          title:'',
-          description:'',
-          price:'',
-         email:  user.email,
-          type:[],
-          size:[],
-          address:'',
-          phone:'',
-          author_id:idautor.id,
+            title:'',
+            description:'',
+            price:'',
+            type:[],
+            size:[],
+            address:'',
+            phone:'',
+            author_id: idautor.id ,
+            
           
         })
     }
-  
+   
    }
 
     
@@ -210,7 +212,7 @@ export default function FormCard(){
     
        
       <div  className='entero'>
-      <h1>Formulario de Publicacion</h1>
+      <h1>Editar Publicacion</h1>
       </div> 
       
         <div  className='entero'>
@@ -254,7 +256,7 @@ export default function FormCard(){
         
         </div>
       
-    
+     
     
                    
              

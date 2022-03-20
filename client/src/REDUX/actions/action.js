@@ -19,7 +19,7 @@ export function postPayment(payload) {
 
 //register
 
-export default function register(payload) {
+export  function register(payload) {
   return async (dispatch) => {
     let json = await axios.post(`${localhost}/register`, payload);
     return json;
@@ -109,6 +109,17 @@ export function fetchAllPosts() {
       return json;
     };
   };
+
+    
+//Formulario que hace la publicacion
+    //crear posteos
+  export const createPost = (payload) => {
+    return async (dispatch) => {
+      let json = await axios.post(`${localhost}/posts/create/`, payload);
+      return json;
+    };
+  };
+
 
   // cambiar info de publicaciones
   //deberia enviar si o si el id el resto de los cambios opcionales
