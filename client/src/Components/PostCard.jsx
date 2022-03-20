@@ -93,7 +93,7 @@ export default function PostCard({ post }) {
             </div>
           </div>
           <Link
-            to={`/Profile/${id}`}
+            to={`/Profile/${author.id}`}
             state={post}
             className={style.link}
             id="Profile"

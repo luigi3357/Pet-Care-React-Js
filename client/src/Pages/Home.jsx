@@ -5,6 +5,7 @@ import PostCard from "../Components/PostCard";
 import Filters from "../Components/Filters";
 import { fetchAllPosts } from "../REDUX/actions/action";
 import style from "./global.module.css";
+import Footer from "../Components/Footer/Footer";
 
 export const Home = () => {
   const filtered_posts = useSelector((state) => state.filtered_posts);
@@ -27,6 +28,7 @@ export const Home = () => {
           })}
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -28,6 +28,7 @@ import { DetailsPage } from "./Pages/DetailsPage";
 import { Home } from "./Pages/Home";
 import { Profile } from "./Pages/Profile";
 import MapDetail from "./Pages/MapDetail";
+import About from "./Components/About/About";
 
 
 function App() {
@@ -54,6 +55,8 @@ function App() {
         <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/Maps" element={<MapDetail />} />
         <Route path="/AddressAutocom" element={<AddressAutocom />} />
+        <Route path="/about" element={<About />} />
+
       </Routes>
     </Router>
   );
