@@ -241,6 +241,150 @@ const post = [
     description:
       "Hola!! soy Juan Paraducha de Palermo BA, he sido cuidador desde hace varios meses, amo los animales en especial a los perros. Cuento con un jardín amplio donde las mascotas pueden divertirse, tomar el sol y jugar sin salir de casa",
   },
+  {
+    email: "juliohernandez@gmail.com",
+    type: "roedores",
+    size: "mediano",
+    title: "Acerca de Julio Hernandez",
+    price: 50,
+    description:
+      "Hola!! soy Julio Hernandez de Quilmes BA, soy psicólogo de profesión y estoy terminando mi segunda carrera en MV ,trabajo de apoyo en la clínica veterinaria de mi tío así que tengo conocimientos y experiencia necesaria para atender las necesidades de sus mascotas",
+  },
+  {
+    email: "francomiño@gmail.com",
+    type: "gato",
+    size: "grande",
+    price: 100,
+    title: "Acerca de Franco Miño",
+    description:
+      "Hola!! soy Franco Miño de Quilmes BA, Me dedico al adiestramiento canino, a la rehabilitación de perros con problemas de conducta. Me dedico al 100% a amar a los pequeños peludos que me dejan a cuidar como si estuvieran en su casa",
+  },
+  {
+    email: "luiscataldo@gmail.com",
+    type: "roedores",
+    size: "pequeño",
+    title: "Acerca de Luis Cataldo",
+    price:180,
+    description:
+      "Hola!! soy Luis Cataldo de Quilmes BA, soy profesor y también me encantan los animales. Se lo importante que es para ti tu mascota. Nos encantaría darle todo nuestro cariño mientras estás de viaje. Cuenta conmigo.",
+  },
+  {
+    email: "darianesquivel@gmail.com",
+    title: "Acerca de Darian Esquivel",
+    type: "roedores",
+    size: "grande",
+    price: 90,
+    description:
+      "Hola!! soy Darian Esquivel de morón BA, tus mascotas no sentirán el cambio de casa porque al quedar con nosotros entran en un ambiente de hogar y con la seguridad de un médico en casa.",
+  },
+  {
+    email: "pablomoyano@gmail.com",
+    title: "Acerca de Pablo Moyano",
+    type: "aves",
+    size: "grande",
+    price:70,
+    description:
+      "Hola!! soy Pablo Moyano de Morón BA, Desde pequeño me encantan los animales! Cerca de mi casa hay 2 parques donde tu perrito podrá pasear y divertirse, nosotros disfrutaremos de su linda compañía y él de una excelente atención!.",
+  },
+  {
+    email: "sebastianguerra@gmail.com",
+    title: "Acerca de Sebastian Guerra",
+    type: "gato",
+    size: "pequeño",
+    price:200,
+    description:
+      "Hola!! soy Sebastian Guerra de Lomas de Zamora BA, Me ofrezco a su cuidado porque amo la experiencia de incluir nuevos miembros a mi manada y hacerlos parte de mi rutina diaria, aunque sea de manera temporal",
+  },
+  {
+    email: "lucasduran@gmail.com",
+    title: "Acerca de Lucas Duran",
+    type: "gato",
+    size: "mediano",
+    price:50,
+    description:
+      "Hola!! soy Lucas Duran de Lomas de Zamora BA, rescatista de animales desde hace más de 3 años. Mi vida y mi pasión son los animales. Gracias a mi trabajo como voluntario rescatista he tenido la oportunidad de convivir con cientos de perros y gatos, lo que me ha ayudado a comprender su comportamiento, emociones y necesidades físicas.",
+  },
+  {
+    email: "juanparaducha@gmail.com",
+    title: "Acerca de Juan Paraducha",
+    type: "perro",
+    size: "grande",
+    price:350,
+    description:
+      "Hola!! soy Juan Paraducha de Palermo BA, he sido cuidador desde hace varios meses, amo los animales en especial a los perros. Cuento con un jardín amplio donde las mascotas pueden divertirse, tomar el sol y jugar sin salir de casa",
+  },
+  {
+    email: "juliohernandez@gmail.com",
+    type: "roedores",
+    size: "mediano",
+    title: "Acerca de Julio Hernandez",
+    price: 50,
+    description:
+      "Hola!! soy Julio Hernandez de Quilmes BA, soy psicólogo de profesión y estoy terminando mi segunda carrera en MV ,trabajo de apoyo en la clínica veterinaria de mi tío así que tengo conocimientos y experiencia necesaria para atender las necesidades de sus mascotas",
+  },
+  {
+    email: "francomiño@gmail.com",
+    type: "gato",
+    size: "grande",
+    price: 100,
+    title: "Acerca de Franco Miño",
+    description:
+      "Hola!! soy Franco Miño de Quilmes BA, Me dedico al adiestramiento canino, a la rehabilitación de perros con problemas de conducta. Me dedico al 100% a amar a los pequeños peludos que me dejan a cuidar como si estuvieran en su casa",
+  },
+  {
+    email: "luiscataldo@gmail.com",
+    type: "roedores",
+    size: "pequeño",
+    title: "Acerca de Luis Cataldo",
+    price:180,
+    description:
+      "Hola!! soy Luis Cataldo de Quilmes BA, soy profesor y también me encantan los animales. Se lo importante que es para ti tu mascota. Nos encantaría darle todo nuestro cariño mientras estás de viaje. Cuenta conmigo.",
+  },
+  {
+    email: "darianesquivel@gmail.com",
+    title: "Acerca de Darian Esquivel",
+    type: "roedores",
+    size: "grande",
+    price: 90,
+    description:
+      "Hola!! soy Darian Esquivel de morón BA, tus mascotas no sentirán el cambio de casa porque al quedar con nosotros entran en un ambiente de hogar y con la seguridad de un médico en casa.",
+  },
+  {
+    email: "pablomoyano@gmail.com",
+    title: "Acerca de Pablo Moyano",
+    type: "aves",
+    size: "grande",
+    price:70,
+    description:
+      "Hola!! soy Pablo Moyano de Morón BA, Desde pequeño me encantan los animales! Cerca de mi casa hay 2 parques donde tu perrito podrá pasear y divertirse, nosotros disfrutaremos de su linda compañía y él de una excelente atención!.",
+  },
+  {
+    email: "sebastianguerra@gmail.com",
+    title: "Acerca de Sebastian Guerra",
+    type: "gato",
+    size: "pequeño",
+    price:200,
+    description:
+      "Hola!! soy Sebastian Guerra de Lomas de Zamora BA, Me ofrezco a su cuidado porque amo la experiencia de incluir nuevos miembros a mi manada y hacerlos parte de mi rutina diaria, aunque sea de manera temporal",
+  },
+  {
+    email: "lucasduran@gmail.com",
+    title: "Acerca de Lucas Duran",
+    type: "gato",
+    size: "mediano",
+    price:50,
+    description:
+      "Hola!! soy Lucas Duran de Lomas de Zamora BA, rescatista de animales desde hace más de 3 años. Mi vida y mi pasión son los animales. Gracias a mi trabajo como voluntario rescatista he tenido la oportunidad de convivir con cientos de perros y gatos, lo que me ha ayudado a comprender su comportamiento, emociones y necesidades físicas.",
+  },
+  {
+    email: "juanparaducha@gmail.com",
+    title: "Acerca de Juan Paraducha",
+    type: "perro",
+    size: "grande",
+    price:350,
+    description:
+      "Hola!! soy Juan Paraducha de Palermo BA, he sido cuidador desde hace varios meses, amo los animales en especial a los perros. Cuento con un jardín amplio donde las mascotas pueden divertirse, tomar el sol y jugar sin salir de casa",
+  },
 ];
 
 const feedback = [
