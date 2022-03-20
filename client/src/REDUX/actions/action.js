@@ -2,17 +2,38 @@ import axios from "axios";
 
 import ACTION_TYPES from "../actionTypes/actionTypes";
 
-const localhost = "http://localhost:3001";
+export const localhost = "http://localhost:3001";
 
 //mercadopago
 
 export function postPayment(payload) {
-  return async function (dispatch) {
-    const json = await axios.post(
-      `${localhost}/mercadoPago/checkout/`,
-      payload
-    );
-    console.log(json);
+  return function (dispatch) {
+    axios
+      .post(`${localhost}/mercadoPago/checkout/`, payload)
+      .then((response) => {
+        dispatch({
+          type: ACTION_TYPES.POST_PAYMENT,
+          payload: response.data,
+        });
+      });
+  };
+}
+//CHECKOUT DETAILS
+export function fetchCheckOutDetails(id) {
+  return function (dispatch) {
+    axios.get(`${localhost}/bookings/details?id=` + id).then((response) => {
+      dispatch({
+        type: ACTION_TYPES.FETCH_CHECKOUTS_DETAILS,
+        payload: response.data,
+      });
+    });
+  };
+}
+
+//Changing status booking
+export function changeBookingStatus(payload) {
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/bookings/update`, payload);
     return json;
   };
 }
@@ -96,20 +117,16 @@ export function fetchAllPosts() {
       .catch((e) => {
         throw new Error("No se pudo conectar al servidor");
       });
-    };
-  }
-  
-  
-  
+  };
+}
 
 // cambiar informacion del perfil
-  export const editProfilePost = (payload) => {
-    return async (dispatch) => {
-      let json = await axios.put(`${localhost}/users/edit`, payload);
-      return json;
-    };
+export const editProfilePost = (payload) => {
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/users/edit`, payload);
+    return json;
   };
-
+}
   //crear posteos
   export const createPost = (payload) => {
     return async (dispatch) => {

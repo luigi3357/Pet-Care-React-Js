@@ -19,22 +19,20 @@ import {
 import { MdPestControlRodent } from "react-icons/md";
 import { AiOutlineColumnHeight } from "react-icons/ai";
 import style from "./../Pages/global.module.css";
-
-export default function PostCard({
-  id,
-  name,
-  last_name,
-  authorId,
-  date,
-  title,
-  image = profileDefault,
-  rating,
-  bookings,
-  description,
-  reviews,
-  type,
-  size,
-}) {
+export default function PostCard({ post }) {
+  const {
+    id,
+    authorId,
+    updatedAt,
+    title,
+    author,
+    description,
+    type,
+    size,
+    address,
+    price,
+  } = post;
+  const [showDetails, setShowDetails] = useState(false);
   let petIcon;
   let sizeText;
 
@@ -73,42 +71,40 @@ export default function PostCard({
     <div className={style.postCardContainer}>
       <div className={style.postCardSubContainer}>
         <img
-          className={style.imgPerfil}
-          src={image}
-          alt={`imagen de perfil de ${title}`}
-        />
-        <div>
-          <h4 className="capitalize">{`${name} ${last_name}`}</h4>
-
-          <div className={style.ratingCont}>
+              className={style.imgPerfil}
+              src={author.profileImgURL?author.profileImgURL:profileDefault}
+              alt={`imagen de perfil de ${title}`}
+            />
             <div>
-              <p className={style.title}>Rating </p>
-              <Rating
-                className="text-white"
-                value={rating}
-                readOnly
-                stars={5}
-                cancel={false}
-              />
-            </div>
-            <div>
-              <p className={style.title}>Contrataciones</p>
-              <p className={style.title}>{bookings}</p>
-            </div>
-          </div>
-          <div className={style.ratingCont}>
-            <p cla>{petIcon}</p>
-            <div>
-              <p className="capitalize">{size}</p>
-              <p>{sizeText}</p>
-            </div>
-          </div>
-
+              <h4 className="capitalize">{`${author.name} ${author.last_name}`}</h4>
+    
+              <div className={style.ratingCont}>
+                <div>
+                  <p className={style.title}>Rating </p>
+                  <Rating
+                    className="text-white"
+                    value={author.rating}
+                    readOnly
+                    stars={5}
+                    cancel={false}
+                    />
+                </div>
+                <div>
+                  <p className={style.title}>Contrataciones</p>
+                  <p className={style.title}>{author.bookings}</p>
+                </div>
+              </div>
+              <div className={style.ratingCont}>
+                <p cla>{petIcon}</p>
+                <div>
+                  <p className="capitalize">{size}</p>
+                  <p>{sizeText}</p>
+                </div>
+              </div>
           <Link
+            to={`/DetailsPage/${id}`}
+            state={post}
             className={style.link}
-            to={{
-              pathname: `/DetailsPage?description=${description}&title=${title}&id=${id}&authorId=${authorId}&date=${date}&rating=${rating}&bookings=${bookings}`,
-            }}
             id="detailPageBtn"
           >
             <Button

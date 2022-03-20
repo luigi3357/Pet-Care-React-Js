@@ -13,8 +13,8 @@ module.exports = (sequelize) => {
     },
     status: {
         type: DataTypes.STRING,
-        allowNull: false,
-    },
+        defaultValue: 'pending'
+      },
     reservation_date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
@@ -28,5 +28,11 @@ module.exports = (sequelize) => {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
+    preference_id: {
+      type: DataTypes.STRING
+    },
+    payment_id: {
+      type: DataTypes.STRING
+    }
   });
 };
