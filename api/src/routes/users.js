@@ -10,6 +10,8 @@ const {
 const { Update } = require("../services/updateUser");
 const router = Router();
 
+
+
 router.get("/profile/:id", async (req, res, next) => {
   const { id } = req.params;
   try {

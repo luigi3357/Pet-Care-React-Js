@@ -1,49 +1,79 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import DetailsPage from "../Pages/DetailsPage";
-import ReviewCard from "./ReviewCard";
+
 import profileDefault from "../assets/profile.jpg";
 import { Rating } from "primereact/rating";
 import { Button } from "primereact/button";
-import { FaPlus } from "react-icons/fa";
-import { Card } from "primereact/card";
-import style from "./../Pages/global.module.css";
 
-export default function PostCard({
-  id,
-  authorId,
-  date,
-  title,
-  image = profileDefault,
-  rating,
-  bookings,
-  description,
-  reviews,
-}) {
+import { FaDog, FaCrow, FaCat } from "react-icons/fa";
+import { MdPestControlRodent } from "react-icons/md";
+
+import style from "./../Pages/global.module.css";
+export default function PostCard({ post }) {
+  const {
+    id,
+    authorId,
+    updatedAt,
+    title,
+    author,
+    description,
+    type,
+    size,
+    address,
+    price,
+  } = post;
   const [showDetails, setShowDetails] = useState(false);
-  console.log(title);
-  function toggleDetails() {
-    setShowDetails(!showDetails);
+  let petIcon;
+  let sizeText;
+
+  switch (type) {
+    case "gato":
+      petIcon = <FaCat className="text-5xl" />;
+      break;
+    case "perro":
+      petIcon = <FaDog className="text-6xl" />;
+      break;
+    case "roedores":
+      petIcon = <MdPestControlRodent className="text-6xl" />;
+      break;
+    case "aves":
+      petIcon = <FaCrow className="text-6xl" />;
+      break;
+    default:
+      break;
   }
 
+  switch (size) {
+    case "pequeño":
+      sizeText = "0 a 25cm";
+      break;
+    case "mediano":
+      sizeText = "25 a 60cm";
+      break;
+    case "grande":
+      sizeText = "60 a 120cm";
+      break;
+
+    default:
+      break;
+  }
   return (
     <div className={style.postCardContainer}>
       <div className={style.postCardSubContainer}>
         <img
           className={style.imgPerfil}
-          src={image}
+          src={author.profileImgURL ? author.profileImgURL : profileDefault}
           alt={`imagen de perfil de ${title}`}
         />
         <div>
-          <h4 className="">{title}</h4>
-          <p className={style.description}>{description}</p>
+          <h4 className="capitalize">{`${author.name} ${author.last_name}`}</h4>
 
           <div className={style.ratingCont}>
             <div>
               <p className={style.title}>Rating </p>
               <Rating
                 className="text-white"
-                value={rating}
+                value={author.rating}
                 readOnly
                 stars={5}
                 cancel={false}
@@ -51,16 +81,21 @@ export default function PostCard({
             </div>
             <div>
               <p className={style.title}>Contrataciones</p>
-              <p className={style.title}>{bookings}</p>
+              <p className={style.title}>{author.bookings}</p>
             </div>
           </div>
-
+          <div className={style.ratingCont}>
+            <p cla>{petIcon}</p>
+            <div>
+              <p className="capitalize">{size}</p>
+              <p>{sizeText}</p>
+            </div>
+          </div>
           <Link
+            to={`/Profile/${id}`}
+            state={post}
             className={style.link}
-            to={{
-              pathname: `/DetailsPage?description=${description}&title=${title}&id=${id}&authorId=${authorId}&date=${date}&rating=${rating}&bookings=${bookings}`,
-            }}
-            id="detailPageBtn"
+            id="Profile"
           >
             <Button
               className="p-button-rounded p-button-success p-button-lg mb-3"
@@ -73,30 +108,6 @@ export default function PostCard({
           </Link>
         </div>
       </div>
-
-      {/* Detalles */}
-      {showDetails ? (
-        <div className="">
-          <div>
-            {reviews ? (
-              reviews.map((i) => {
-                return (
-                  <div>
-                    <ReviewCard
-                      id={i.id}
-                      key={i.id}
-                      rating={i.rate}
-                      message={i.message}
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <h5>El usuario aún no posee reviews</h5>
-            )}
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }
