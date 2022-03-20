@@ -20,17 +20,13 @@ import FormPayBank from "./Components/FormPost/FormsPay/FormPayData";
 import FormCuidador from "./Components/FormPost/Form-post-reqserv-cuidador/Form";
 import FormServ from "./Components/FormPost/Form-post-reqserv-cuidador/Formreqserv";
 import ResetPassword from "./Components/FormPost/ResetPassword";
+import EditForm from './Components/FormPost/Form-post-reqserv-cuidador/EditForm'
 // import InputSearchB from "../src/Components/FormPost/";
 import SearchBar from "./Components/SearchBar";
 import { Verification } from "./Components/LoginAndRegister/2fa";
-<<<<<<< HEAD
-import EditForm from './Components/FormPost/Form-post-reqserv-cuidador/EditForm'
-=======
 import AdminHome from "./Components/Admin/AdminHome";
 import MapDetail from "./Pages/MapDetail";
 import AddressAutocom from "./Components/AddressAutocom.jsx";
-
->>>>>>> 60b736bf4fa86a0405e326730d148552c5a7433b
 function App() {
   return (
     <Router>

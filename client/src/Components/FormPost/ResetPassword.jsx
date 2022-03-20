@@ -1,9 +1,14 @@
 import React,{useState,useMemo,useEffect} from 'react'
+import bcrypt from "bcryptjs";
 import { useSelector, useDispatch } from 'react-redux'
 import {getAllUsers, resetPassword} from '../../REDUX/actions/action'
 export default function ResetPassword() {
+    const  idautor = useSelector((state)=> state.login)
+    const  user = useSelector((state)=> state.users)
+    
+
     function validate (){}
- const  user = useSelector((state)=> state.users)
+
 console.log(user)
 console.log(user)
  const dispatch = useDispatch()
@@ -44,6 +49,15 @@ function validate(form){
 }
 
 const disableSubmit = useMemo(() =>{
+ 
+    
+ 
+ 
+
+  
+
+
+
     if(
         form.email.length >= 3 
         &&form.password.length >= 8 
@@ -51,7 +65,7 @@ const disableSubmit = useMemo(() =>{
         && form.repeatnewpassword.length >= 8 
         && form.password !==
         form.newpassword
-       
+      
         && form.newpassword.length ===
         form.repeatnewpassword.length 
         && form.newpassword ===
@@ -133,15 +147,24 @@ function handleChange (e) {
 
 }
 
+// const oneUser = user.filter(e => e.id === idautor.id)
+// const onePass =oneUser.map(e => e.password)
+// const  verifyPassword = await bcrypt.compare(onePass, form.password);
+// console.log(onePass)
 function resetSubmit (e) {
-  const oneUser = user.filter(e => e.email === form.email)
-  console.log(oneUser.map(e => e.email ),'soy oneUser')
- const onePass = oneUser.map(e => e.password )
- 
+    
+
     e.preventDefault()
     console.log(form)
     console.log(submit)
   dispatch(resetPassword(submit))
+
+   
+}
+  
+ 
+ 
+ 
 
 
        
@@ -149,7 +172,6 @@ function resetSubmit (e) {
    
     
  
-}
 return (
     <div>
         <form  onSubmit={(e)=> resetSubmit(e)}>
@@ -169,7 +191,7 @@ return (
             </div>
 
             <div>
-<h3>Contraseña anterior</h3>
+<h3>Contraseña Actual</h3>
 <input   type='text'  value={form.password} name='password' onChange={(e) =>handleChange(e)}/>
 {
              errors.password && (<p>{errors.password}</p>)

@@ -4,18 +4,24 @@ import {createPost,getAllUsers} from '../../../REDUX/actions/action'
 export default function FormCard(){
    
        const dispatch= useDispatch()
-       const  user = useSelector((state)=> state.users)
-       console.log(user)
-    //   const typesState = useSelector((state)=> state.typePokemon)
-        
+    
+       //   const typesState = useSelector((state)=> state.typePokemon)
        
-    const  idautor = useSelector((state)=> state.login)
+       
+       const  idautor = useSelector((state)=> state.login)
+       const  user = useSelector((state)=> state.users)
+       const oneUser = user.filter(e => e.id === idautor.id)
+       const oneEmail =oneUser.map(e => e.email)
+       console.log(oneEmail ,'soy oneEmail')
+
+
+      console.log(user)
       console.log(idautor.id, )
         const [form,setForm]= useState({
         title:'',
         description:'',
         price:'',
-       email:  user.email,
+       email:  oneEmail[0],
         type:[],
         size:[],
         address:'',
@@ -187,7 +193,7 @@ export default function FormCard(){
           title:'',
           description:'',
           price:'',
-         email:  user.email,
+         email:  oneEmail[0],
           type:[],
           size:[],
           address:'',
