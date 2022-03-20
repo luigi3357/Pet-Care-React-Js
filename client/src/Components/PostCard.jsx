@@ -60,6 +60,7 @@ export default function PostCard({ post }) {
   }
   return (
     <div className={style.postCardContainer}>
+      {/* <Fav id = {id} /> */}
       <div className={style.postCardSubContainer}>
       <DeletePost id={id}/>
 
@@ -109,6 +110,7 @@ export default function PostCard({ post }) {
               Mas info
             </Button>
           </Link>
+      
         </div>
       </div>
     </div>

@@ -40,7 +40,7 @@ export function changeBookingStatus(payload) {
 
 //register
 
-export default function register(payload) {
+export  function register(payload) {
   return async (dispatch) => {
     let json = await axios.post(`${localhost}/register`, payload);
     return json;
@@ -124,6 +124,14 @@ export function fetchAllPosts() {
 export const editProfilePost = (payload) => {
   return async (dispatch) => {
     let json = await axios.put(`${localhost}/users/edit`, payload);
+    return json;
+  };
+}
+// añade favoritos
+export const addFavoritos = (payload) => {
+  return async (dispatch) => {
+    console.log(payload);
+    let json = await axios.put(`${localhost}/users/fav`, payload);
     return json;
   };
 }
