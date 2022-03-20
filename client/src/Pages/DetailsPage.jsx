@@ -6,15 +6,14 @@ import { NavBar } from "../Components/NavBar";
 import profileDefault from "./../assets/profile.jpg";
 import style from "./global.module.css";
 
+export const DetailsPage = () => {
+  const { id } = useParams();
+  const location = useLocation();
+  const { description, title, author, updatedAt, type, size, address, price } =
+    location.state;
 
-export const DetailsPage = ()=> {
-    const {id} = useParams()
-    const location = useLocation();
-    const { description, title, author, updatedAt, type, size, address, price} = location.state;
+  useEffect(() => {}, []);
 
-    useEffect(()=>{
-    }, [])
-    
   return (
     <div className={style.container}>
       <NavBar />
@@ -30,7 +29,7 @@ export const DetailsPage = ()=> {
             <h1>{title}</h1>
 
             <h3>{description}</h3>
-            <h3>Fecha: {updatedAt.slice(0,10)}</h3>
+            <h3>Fecha: {updatedAt.slice(0, 10)}</h3>
 
             <h3>Contrataciones: {author.bookings}</h3>
 
