@@ -1,49 +1,44 @@
-import "./App.css";
-import "primeicons/primeicons.css";
 import "primeflex/primeflex.css";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primeicons/primeicons.css";
 import "primereact/resources/primereact.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Payment from "./Pages/Payment";
-import { Register } from "./Components/LoginAndRegister/Register";
-import { Login } from "./Components/LoginAndRegister/LoginModal";
-import { RatingDemo } from "./Components/Review";
-import { DetailsPage } from "./Pages/DetailsPage";
-// import { Profile } from "./Pages/Profile";
-import { Home } from "./Pages/Home";
-import { ForgotPassword } from "./Components/LoginAndRegister/ForgotPassword";
-import { MailCode } from "./Components/LoginAndRegister/mailCode";
-import { Reset } from "./Components/LoginAndRegister/Reset";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
+import AddressAutocom from "./Components/AddressAutocom.jsx";
+import AdminHome from "./Components/Admin/AdminHome";
 import EditProfile from "./Components/FormPost/EditProfile";
-import FormMercadoP from "./Components/FormPost/FormsPay/FormPayMP";
-import FormPayBank from "./Components/FormPost/FormsPay/FormPayData";
 import FormCuidador from "./Components/FormPost/Form-post-reqserv-cuidador/Form";
 import FormServ from "./Components/FormPost/Form-post-reqserv-cuidador/Formreqserv";
+import FormPayBank from "./Components/FormPost/FormsPay/FormPayData";
+import FormMercadoP from "./Components/FormPost/FormsPay/FormPayMP";
 import ResetPassword from "./Components/FormPost/ResetPassword";
-// import InputSearchB from "../src/Components/FormPost/";
-import SearchBar from "./Components/SearchBar";
 import { Verification } from "./Components/LoginAndRegister/2fa";
-import AdminHome from "./Components/Admin/AdminHome";
+import { ForgotPassword } from "./Components/LoginAndRegister/ForgotPassword";
+import { Login } from "./Components/LoginAndRegister/LoginModal";
+import { MailCode } from "./Components/LoginAndRegister/mailCode";
+import { Register } from "./Components/LoginAndRegister/Register";
+import { Reset } from "./Components/LoginAndRegister/Reset";
+import { RatingDemo } from "./Components/Review";
+import { DetailsPage } from "./Pages/DetailsPage";
+import { Home } from "./Pages/Home";
+import { Profile } from "./Pages/Profile";
 import MapDetail from "./Pages/MapDetail";
-import AddressAutocom from "./Components/AddressAutocom.jsx";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/adminHome" element={<AdminHome />} />
-      {/*   <Route path="/profile" element={<Profile />} />  */}
-        <Route path="/verificacion" element={<Verification />} />
-        <Route path="/reset" element={<Reset />} />
+        <Route path="/" element={<Home />} />
         <Route path="/mailcode" element={<MailCode />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/payment" element={<Payment />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/rating" element={<RatingDemo />} />
-        <Route path="/DetailsPage" element={<DetailsPage />} />
+        <Route path="/DetailsPage/:id" element={<DetailsPage />} />
+        <Route path="/adminHome" element={<AdminHome />} />
+        <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/verificacion" element={<Verification />} />
+        <Route path="/reset" element={<Reset />} />
         <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/formMercadoP" element={<FormMercadoP />} />
         <Route path="/formPayBank" element={<FormPayBank />} />
@@ -58,3 +53,17 @@ function App() {
 }
 
 export default App;
+
+//////////////       mercadopago                //////////////
+//import { ConfirmationMP } from "./Pages/MP_Confirmation";
+//import { Payment } from "./Pages/Payment";
+//import { CreateBooking } from "./Components/CreateBooking";
+//import { BookingDatatables } from "./Components/BookingTable";
+
+{
+  /* <Route path="/" element={<CreateBooking />} />
+<Route path="/4534532" element={<BookingDatatables title={'Contrataciones'} data={infoUser.contrataciones} />}/>   
+<Route path="/booking/:id" element={<Payment />} />
+<Route path="/mp_confirmation" element={<ConfirmationMP />} />
+<Route path="/new_booking" element={<CreateBooking />} /> */
+}

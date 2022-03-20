@@ -27,9 +27,8 @@
 }
 
 .description {
-  height: 150px;
-  padding: auto;
   margin: 0px 5px;
+  text-align: center;
 }
 
 .imgPerfil {
@@ -45,7 +44,7 @@
   justify-content: center;
 }
 
-/* DetailsPage */
+/* Profile */
 .container {
   width: 100%;
 }
@@ -53,13 +52,15 @@
 .subContainer {
   display: flex;
   gap: 10px;
+  border: 1px solid black;
 }
 
 .photoMap {
   max-width: 300px;
-  min-height: 90vh;
 }
+
 .map {
+  max-width: 300px;
 }
 
 .imageProfile {
@@ -67,8 +68,29 @@
 }
 
 .data {
+  display: flex;
+  flex-direction: column;
   width: 95%;
-  min-height: 90vh;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 10px;
+  margin: 5px 0px;
+}
+
+.subData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.profileCardContainer {
+  border-radius: 10px;
+  border: 1px solid rgb(206, 206, 206);
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 @media (max-width: 600px) {

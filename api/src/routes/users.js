@@ -82,7 +82,6 @@ router.put("/edit", async (req, res) => {
   const { email, name, last_name, phone, bio, location, myImages, profileImgURL} = req.body
 
   let user = await search({ email: email})
-
   if (user) {
       let resetInfoUser = await User.update({ name: name ? name:user.name, last_name: last_name ? last_name: user.last_name, phone: phone? phone: user.phone, bio:bio? bio:user.bio, location: location? location: user.location, myImages: myImages? myImages: user.myImages, profileImgURL: profileImgURL? profileImgURL: user.profileImgURL},   
           { where: { email:email }})
@@ -110,13 +109,25 @@ router.put("/security", async (req, res) => {
 
   let user = await search({ email: email})
   let passwordHasheada= await hash(password)
-
   if (user) {
       let resetInfoUser = await User.update({ password: passwordHasheada, key_2fa:key_2fa  },   
           { where: { email:email }})
       return res.send(resetInfoUser)
   }
   return res.status(404).send("Usuario no encontrado")
+})
+// ruta para ir añadiendo favoritos al usuario.
+
+router.put("/fav", async (req, res) => {
+  const { favoritos, email } = req.body
+  console.log(req.body);
+  let user = await search({ email: email})
+    if (user) {
+      let TodosFavoritos = await User.update({ favoritos: favoritos},   
+          { where: { email:email }})
+        return res.send("TodosFavoritos")
+      }
+  return res.status(404).send("no se pudo añadir a favoritos")
 })
 
 router.get("/", async (req, res) => {

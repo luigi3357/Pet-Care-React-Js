@@ -69,6 +69,9 @@ module.exports = (sequelize) => {
     myImages: {
       type: DataTypes.ARRAY(DataTypes.TEXT),
     },
+    favoritos: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+    },
     deleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
