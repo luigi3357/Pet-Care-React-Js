@@ -1,6 +1,7 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
 import {createPost,getAllUsers} from '../../../REDUX/actions/action'
+import './Form.css'
 export default function FormCard(){
    
        const dispatch= useDispatch()
@@ -70,9 +71,9 @@ export default function FormCard(){
             form.description.length > 0 &&
             form.description.length < 400 &&
             form.price.length  >= 1 &&
-            form.price.length <= 5000 &&
+            form.price.length <= 5&&
             form.phone.length  >= 1 &&
-            form.phone.length <= 50 &&
+            form.phone.length <= 15 &&
            form.type.length >= 1 &&
            form.type.length < 5 &&
            form.size.length >= 1 &&
@@ -208,54 +209,55 @@ export default function FormCard(){
     
    
     return (
+      <body>
         <div>
            
         <div>
-        <form  onSubmit={(e)=> handleSubmit(e)}>
-        <section >
+        <form className='formpublic' onSubmit={(e)=> handleSubmit(e)}>
+        <div className='form_container'>
     
        
-      <div  className='entero'>
-      <h1>Formulario de Publicacion</h1>
+      <div >
+      <h1  className='form_title'>Formulario de Publicacion</h1>
       </div> 
       
-        <div  className='entero'>
-        <label>Titulo</label>
-        <input   type='text'  value={form.title} name='title' onChange={(e) =>handleChange(e)}/>
+        <div  className='form_group'>
+        <label  className='form_label'>Titulo</label>
+        <input className='form_input'  type='text'  value={form.title} name='title' onChange={(e) =>handleChange(e)}/>
         {
-            errors.title && (<p>{errors.title}</p>)
+            errors.title && (<p  className='errortxt'>{errors.title}</p>)
         }
        
         </div>
      
        
-        <div>
-           <label>Description</label> 
-           <input type='text'  value={form.description} name='description' onChange={(e) =>handleChange(e)}/>
+        <div  className='form_group'>
+           <label className='form_label' >Description</label> 
+           <input className='form_input' type='text'  value={form.description} name='description' onChange={(e) =>handleChange(e)}/>
            {
-                errors.description && (<p>{errors.description}</p>)
+                errors.description && (<p  className='errortxt'>{errors.description}</p>)
             }
         </div>
-        <div>
-           <label>Direccion</label> 
-           <input type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/>
+        <div className='form_group'>
+           <label className='form_label'>Direccion</label> 
+           <input className='form_input'  type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/>
            {
-                errors.addres && (<p>{errors.address}</p>)
+                errors.addres && (<p className='errortxt'>{errors.address}</p>)
             }
         </div>
-        <div>
-           <label>Numero de telefono</label> 
-           <input type='number' value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
+        <div  className='form_group' >
+           <label  className='form_label' >Numero de telefono</label> 
+           <input   className='form_input'  type='number' value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
        {
-           errors.phone && (<p>{errors.phone}</p>)
+           errors.phone && (<p  className='errortxt'>{errors.phone}</p>)
        }
         </div>
       
-        <div>
-           <label>Costo del servicio</label> 
-          <input type='number' min="1" value={form.price} name='price' onChange={(e)=>handleChange(e)}/>
+        <div className='form_group'  >
+           <label className='form_label' >Costo del servicio</label> 
+          <input   className='form_input'   type='number' min="1" value={form.price} name='price' onChange={(e)=>handleChange(e)}/>
                 {
-                    errors.price && (<p>{errors.price}</p>)
+                    errors.price && (<p className='errortxt'>{errors.price}</p>)
                 } 
         
         </div>
@@ -266,22 +268,32 @@ export default function FormCard(){
              
         <div>
            
-            <h1>Tipo de mascota</h1>
-            
-          Perro  <input 
-          onChange={(e)=>{handleCheckType(e)
+            <h2>Tipo de mascota</h2>
+            <div>
+             <input  onChange={(e)=>{handleCheckType(e)
          }
-          } type="checkbox" name="perro" value='perro' />
+        } type="checkbox" name="perro" value='perro' />
+        <label> Perro</label>  
+         
+            </div>
+          <div>
+            <input   onChange={handleCheckType}type="checkbox"  name="gato" value='gato'/>
+          <label> Gato</label> 
+          </div>
                 
-            Gato<input   onChange={handleCheckType}type="checkbox"  name="gato" value='gato'/>
-                
-            Aves<input  onChange={handleCheckType} type="checkbox"  name="aves" value='aves' />
-                
-            Roedores<input  onChange={handleCheckType} type="checkbox"  name="roedores" value= 'roedores' />
+         <div>
+           <input  onChange={handleCheckType} type="checkbox"  name="aves" value='aves' />
+         <label> Aves</label> 
+         </div>
+           <div>
+            <input  onChange={handleCheckType} type="checkbox"  name="roedores" value= 'roedores' />
+           <label> Roedores</label>     
+           </div>
+          
             {
             errors.type && 
             (
-              <p>{errors.type}</p>
+              <p className='errortxt'>{errors.type}</p>
             ) 
             }
        
@@ -299,21 +311,31 @@ export default function FormCard(){
 
         <div>
            
-           <h1>Tamaño de mascota</h1>
-           
-         Pequeño  <input 
+           <h2>Tamaño de mascota</h2>
+       <div>
+           <input 
          onChange={(e)=>{handleSelectS(e)
-        }
-         } type="checkbox" name="pequeño" value='pequeño' />
-               
-           Mediano<input   onChange={handleSelectS}type="checkbox"  name="mediano" value='mediano'/>
-               
-           Grande<input  onChange={handleSelectS} type="checkbox"  name="grande" value='grande' />
+         }
+        } type="checkbox" name="pequeño" value='pequeño' />
+        <label>Pequeño</label>
+       </div>
+       
+       <div>
+              
+           
+           <input   onChange={handleSelectS}type="checkbox"  name="mediano" value='mediano'/>
+               <label>Mediano</label>
+           </div>   
+           <div>
+
+           <input  onChange={handleSelectS} type="checkbox"  name="grande" value='grande' />
+           <label>Grande</label>
+           </div>
                
            {
             errors.size && 
             (
-              <p>{errors.size}</p>
+              <p className='errortxt'>{errors.size}</p>
             ) 
             }
        
@@ -334,10 +356,10 @@ export default function FormCard(){
 
 
        <div> 
-                <button  type='submit' disabled={disableSubmit}  >Crear Servicio!</button>
+                <button className='form_submit' type='submit' disabled={disableSubmit}  >Crear Servicio!</button>
        </div>
     
-       </section>
+       </div>
        </form>
 
    
@@ -347,7 +369,7 @@ export default function FormCard(){
        </div>
      
     </div>
-
+    </body>
     )
     
    

@@ -9,6 +9,7 @@ import { FaDog, FaCrow, FaCat } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
 
 import style from "./../Pages/global.module.css";
+
 export default function PostCard({ post }) {
   const {
     id,
@@ -106,6 +107,7 @@ export default function PostCard({ post }) {
               Mas info
             </Button>
           </Link>
+      
         </div>
       </div>
     </div>

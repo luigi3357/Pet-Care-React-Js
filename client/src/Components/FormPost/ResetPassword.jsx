@@ -60,9 +60,13 @@ const disableSubmit = useMemo(() =>{
 
     if(
         form.email.length >= 3 
+        &&form.email.length < 30 
         &&form.password.length >= 8 
+        &&form.password.length < 30 
         && form.newpassword.length >= 8 
+        &&form.newpassword.length < 30 
         && form.repeatnewpassword.length >= 8 
+        &&form.repeatnewpassword.length < 30 
         && form.password !==
         form.newpassword
       
@@ -151,7 +155,11 @@ function handleChange (e) {
 async function  resetSubmit (e) {
     const oneUser = user.filter(e => e.id === idautor.id)
     const onePass =oneUser.map(e => e.password)
-    const  verifyPassword = await bcrypt.compare(onePass, form.password);   
+    const  verifyPassword = await bcrypt.compare(form.password,onePass[0] );   
+    console.log(onePass,'soyonepass')
+console.log(onePass[0],'soyonepass0')
+console.log(verifyPassword,'soyverifypass')
+console.log(form.password,'soyformpassword')
 if(verifyPassword === true){
     e.preventDefault()
     console.log(form)
@@ -162,14 +170,14 @@ if(verifyPassword === true){
     alert('Su contraseña actual no coincide')
 }
 
+
+
    
 }
     
   
  
  
- 
-
 
        
     
