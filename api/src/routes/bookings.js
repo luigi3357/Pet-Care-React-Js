@@ -20,7 +20,6 @@ router.post('/create', async (req,res,next)=>{
     } catch (error) {
         next(error)
     }
-
 })
 
 module.exports = router;
