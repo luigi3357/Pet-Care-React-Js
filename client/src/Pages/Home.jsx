@@ -5,7 +5,7 @@ import PostCard from "../Components/PostCard";
 import Filters from "../Components/Filters";
 import { fetchAllPosts } from "../REDUX/actions/action";
 import style from "./global.module.css";
-
+import { Link } from "react-router-dom";
 export const Home = () => {
   const filtered_posts = useSelector((state) => state.filtered_posts);
   const dispatch = useDispatch();
@@ -18,13 +18,31 @@ export const Home = () => {
   return (
     <div>
       <NavBar />
-     
+      <Link to="/resetPassword">
+      <button>Crear publicacion</button>
+      </Link>
       <div className="flex flex-column align-items-center text-center justify-content-center w-full">
         <Filters />
-
         <div className={style.postContainer}>
           {filtered_posts.map((post) => {
-            return <PostCard post={post} />;
+            return (
+              <PostCard
+                authorId={post.author.id}
+                id={post.id}
+                key={post.id}
+                title={post.title}
+                description={post.description}
+                reviews={
+                  post.author.reviews.length > 0 ? post.author.reviews : null
+                }
+                rating={post.author.rating}
+                bookings={post.author.bookings}
+                type={post.type}
+                size={post.size}
+                name={post.author.name}
+                last_name={post.author.last_name}
+              />
+            );
           })}
       
         </div>

@@ -1,6 +1,6 @@
 import { InputText } from "primereact/inputtext";
 import React, { useState } from 'react';
-//import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getSearch } from '../REDUX/actions/action';
 
 export default function SearchBar() {

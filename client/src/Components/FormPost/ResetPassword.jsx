@@ -147,20 +147,24 @@ function handleChange (e) {
 
 }
 
-// const oneUser = user.filter(e => e.id === idautor.id)
-// const onePass =oneUser.map(e => e.password)
-// const  verifyPassword = await bcrypt.compare(onePass, form.password);
-// console.log(onePass)
-function resetSubmit (e) {
-    
 
+async function  resetSubmit (e) {
+    const oneUser = user.filter(e => e.id === idautor.id)
+    const onePass =oneUser.map(e => e.password)
+    const  verifyPassword = await bcrypt.compare(onePass, form.password);   
+if(verifyPassword === true){
     e.preventDefault()
     console.log(form)
     console.log(submit)
   dispatch(resetPassword(submit))
+}else{
+    e.preventDefault()
+    alert('Su contraseña actual no coincide')
+}
 
    
 }
+    
   
  
  
