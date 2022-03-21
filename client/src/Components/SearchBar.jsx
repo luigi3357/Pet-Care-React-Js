@@ -1,5 +1,5 @@
 import { InputText } from "primereact/inputtext";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getSearch } from '../REDUX/actions/action';
 
@@ -8,7 +8,11 @@ export default function SearchBar() {
 
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
-
+useEffect(()=>{
+  setTimeout(() => {
+    dispatch(getSearch(search))
+  }, 3500);   
+},[dispatch])
   function handleSearchInput(e) {
     setSearch(e.target.value);
   }

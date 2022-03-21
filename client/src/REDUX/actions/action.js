@@ -152,7 +152,23 @@ export const addFavoritos = (payload) => {
       return json;
     };
   };
+// eliminar posteos
 
+export function deletePost(id) {
+  return async (dispatch) => {
+    let json = await axios.delete(`${localhost}/posts/delete/`+id);
+    return json;
+  };
+}
+
+//eliminar usuarios
+
+export function deleteUsers(id) {
+  return async (dispatch) => {
+    let json = await axios.delete(`${localhost}/users/delete/`+id);
+    return json;
+  };
+}
   
 
 
