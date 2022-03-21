@@ -9,14 +9,13 @@ import { Rating } from "primereact/rating";
 import { FaDog, FaCrow, FaCat } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
 import { Button } from "primereact/button";
-import MapDetail from "./MapDetail";
+import { DeletePost } from "./../Components/Botones/DeletePost";
+
 export const Profile = (post) => {
   const { id } = useParams();
   const location = useLocation();
   const { description, title, author, updatedAt, type, size, address, price } =
     location.state;
-
-  const { reviews } = post;
 
   useEffect(() => {}, []);
   console.log("author", author);
@@ -68,6 +67,7 @@ export const Profile = (post) => {
         </div>
         <div className={style.profileCardContainer}>
           <div className={style.data}>
+            <DeletePost id={id} />
             <div className={style.subData}>
               <h3>{title}</h3>
               <p className={style.description}>{description}</p>
