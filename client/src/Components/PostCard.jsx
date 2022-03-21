@@ -13,11 +13,8 @@ import { DeletePost } from "./Botones/DeletePost";
 export default function PostCard({ post }) {
   const {
     id,
-    authorId,
-    updatedAt,
     title,
     author,
-    description,
     type,
     size,
     address,
@@ -26,7 +23,7 @@ export default function PostCard({ post }) {
   const [showDetails, setShowDetails] = useState(false);
   let petIcon;
   let sizeText;
-
+console.log(id)
   switch (type) {
     case "gato":
       petIcon = <FaCat className="text-5xl" />;
@@ -96,7 +93,7 @@ export default function PostCard({ post }) {
             </div>
           </div>
           <Link
-            to={`/Profile/${id}`}
+            to={`/Profile/${author.id}`}
             state={post}
             className={style.link}
             id="Profile"

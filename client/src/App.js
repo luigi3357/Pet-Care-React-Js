@@ -16,6 +16,9 @@ import ResetPassword from "./Components/FormPost/ResetPassword";
 import EditForm from './Components/FormPost/Form-post-reqserv-cuidador/EditForm'
 // import InputSearchB from "../src/Components/FormPost/";
 import SearchBar from "./Components/SearchBar";
+import { ConfirmationMP } from "./Components/MP_Confirmation";
+import { Payment } from "./Components/Payment";
+import { BookingDatatables } from "./Components/BookingTable";
 
 import { Verification } from "./Components/LoginAndRegister/2fa";
 import { ForgotPassword } from "./Components/LoginAndRegister/ForgotPassword";
@@ -28,6 +31,8 @@ import { DetailsPage } from "./Pages/DetailsPage";
 import { Home } from "./Pages/Home";
 import { Profile } from "./Pages/Profile";
 import MapDetail from "./Pages/MapDetail";
+import About from "./Components/About/About";
+import Terms from "./Components/Terms/Terms";
 
 
 function App() {
@@ -35,6 +40,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="/mailcode" element={<MailCode />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/Register" element={<Register />} />
@@ -54,6 +60,8 @@ function App() {
         <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/Maps" element={<MapDetail />} />
         <Route path="/AddressAutocom" element={<AddressAutocom />} />
+        <Route path="/about" element={<About />} />
+
       </Routes>
     </Router>
   );
@@ -62,15 +70,6 @@ function App() {
 export default App;
 
 //////////////       mercadopago                //////////////
-//import { ConfirmationMP } from "./Pages/MP_Confirmation";
-//import { Payment } from "./Pages/Payment";
-//import { CreateBooking } from "./Components/CreateBooking";
-//import { BookingDatatables } from "./Components/BookingTable";
-
-{
-  /* <Route path="/" element={<CreateBooking />} />
-<Route path="/4534532" element={<BookingDatatables title={'Contrataciones'} data={infoUser.contrataciones} />}/>   
-<Route path="/booking/:id" element={<Payment />} />
-<Route path="/mp_confirmation" element={<ConfirmationMP />} />
-<Route path="/new_booking" element={<CreateBooking />} /> */
-}
+{/* <Route path="/" element={<BookingDatatables title={'Contrataciones'}  />}/>    */}/*data={infoUser.contrataciones}*/
+{/* <Route path="/booking/:id" element={<Payment />} />
+<Route path="/mp_confirmation" element={<ConfirmationMP />} /> */}

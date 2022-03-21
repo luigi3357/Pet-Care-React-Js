@@ -16,17 +16,20 @@ module.exports = (sequelize) => {
         defaultValue: 'pending'
       },
     reservation_date: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW()
     },
     check_in: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false,
     },
     check_out: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false
+    },
+    comment: {
+      type: DataTypes.STRING
     },
     preference_id: {
       type: DataTypes.STRING
