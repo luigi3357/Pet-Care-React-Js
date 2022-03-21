@@ -6,11 +6,17 @@ const initialState = {
   all_posts: [],
   filtered_posts: [],
   urlMP:'',
-  checkout_details: ''
+  checkout_details: '',
+  usersCoordinates:[]
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case ACTION_TYPES.GET_USERS_COORDINATES:
+      return {
+        ...state,
+        usersCoordinates: action.payload
+      };
     case ACTION_TYPES.POST_PAYMENT:
       return {
         ...state,
