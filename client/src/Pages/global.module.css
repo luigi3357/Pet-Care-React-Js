@@ -34,6 +34,7 @@
 .imgPerfil {
   border-radius: 100px;
   width: 100px;
+  height: 100px;
   margin-top: 5px;
 }
 
@@ -46,10 +47,11 @@
 
 /* Profile */
 .container {
-  width: 100%;
+  min-width: 100%;
 }
 
 .subContainer {
+  min-width: 100%;
   display: flex;
   gap: 10px;
   border: 1px solid black;

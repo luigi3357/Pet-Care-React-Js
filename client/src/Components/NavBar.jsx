@@ -12,29 +12,29 @@ import { AiOutlineLogout } from "react-icons/ai";
 export const NavBar = () => {
   const dispatch = useDispatch();
   let login = useSelector((state) => state.login);
-  const [logged, setLogged]= useState(null)
-useEffect(()=>{
-  const logStorage = window.localStorage.getItem('login')
-  
-  if(logStorage){
-    const loggedStorage = JSON.parse(logStorage)
-    setLogged(loggedStorage)
-  }
-},[login])
-console.log("soy login", logged);
-// useEffect(()=>{
-//   if(!logged){
-//     setLogged(login)
-//   }
-// },[])
+  const [logged, setLogged] = useState(null);
+  useEffect(() => {
+    const logStorage = window.localStorage.getItem("login");
+
+    if (logStorage) {
+      const loggedStorage = JSON.parse(logStorage);
+      setLogged(loggedStorage);
+    }
+  }, [login]);
+  console.log("soy login", logged);
+  // useEffect(()=>{
+  //   if(!logged){
+  //     setLogged(login)
+  //   }
+  // },[])
 
   function handleLogOut() {
     dispatch(getLogOut());
   }
-  
+
   return (
     <div className={style.navBarContainer}>
-       <Image src={logo} alt="Image Text" imageStyle={{ width: " 50px" }} />
+      <Image src={logo} alt="Image Text" imageStyle={{ width: " 50px" }} />
 
       <div className={style.navBarSubContainer}>
         <Link className={style.link} to="/">
@@ -42,14 +42,14 @@ console.log("soy login", logged);
             label="Inicio"
             icon="pi pi-fw pi-home"
             className="p-button-sm p-button-rounded p-button-info p-button-outlined"
-            />
+          />
         </Link>
         {logged ? null : (
           <Link className={style.link} to="/Register">
             <Button
               label="Registrarse"
               className="p-button-sm p-button-info p-button-rounded"
-              />
+            />
           </Link>
         )}
 
@@ -58,25 +58,30 @@ console.log("soy login", logged);
             <Button
               label="Iniciar Sesion"
               className="p-button-sm p-button-secondary p-button-rounded"
-              />
+            />
           </Link>
         )}
 
         {logged ? (
-          <Avatar
-          label={logged.name[0].toUpperCase()}
-          shape="circle"
-          size="large"
-          />
-          ) : null}
+          <Link
+            to={`/PersonalProfile/${logged.id}`}
+            state={logged}
+            className={style.link}
+            id="Profile"
+          >
+            <Avatar
+              label={logged.name[0].toUpperCase()}
+              shape="circle"
+              size="large"
+            />
+          </Link>
+        ) : null}
 
         {logged ? (
           <p className={style.navBarName}>Hola, {logged.name}!</p>
-          ) : null}
-          {/*
-      */}
+        ) : null}
 
-{console.log(logged)}
+        {console.log(logged)}
         {logged ? (
           <Link
             onClick={(e) => {
@@ -88,7 +93,7 @@ console.log("soy login", logged);
             <AiOutlineLogout className="text-2xl" color="red" />
           </Link>
         ) : null}
-      </div> 
+      </div>
     </div>
   );
 };
