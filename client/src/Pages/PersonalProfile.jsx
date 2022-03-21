@@ -16,33 +16,36 @@ import axios from "axios";
 import { localhost } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
 import { Link } from "react-router-dom";
-export const Profile = (post) => {
-  const { id } = useParams();
+
+export const PersonalProfile = () => {
+  const { id } = useParams(); // recibo el id por params para buscar la info con la ruta /users/profile/id
+
   const location = useLocation();
-  const { description, title, author, updatedAt, type, size, address, price } =
-    location.state;
-  const loginUser = useSelector((state) => state.login);
-  const [logged, setLogged] = useState(null);
+
+  const loginUser = useSelector((state) => state.login); // obtengo la info del estado login para saber si entro a un perfil estando logeado o no. se usa para botones de reserva y para saber si el logeado esta viendo su perfil, para renderizar los botones de editar perfil y seguridad
+
+  const [logged, setLogged] = useState(null); // estado local para guardar la info del logeado (usado para el localstorage)
+
+  const [fullInfo, setfullInfo] = useState(); // el estado para guardar toda la info del id con el que se entro al perfil
+
   useEffect(() => {
     const logStorage = window.localStorage.getItem("login");
-
     if (logStorage) {
       const loggedStorage = JSON.parse(logStorage);
       setLogged(loggedStorage);
     }
   }, [loginUser]);
-  const [fullInfo, setfullInfo] = useState();
-  console.log(fullInfo, "APENAS RENDERIZA");
+
   let petIcon;
   let sizeText;
 
   useEffect(() => {
     axios
-      .get(`${localhost}/users/profile/` + author.id)
+      .get(`${localhost}/users/profile/` + id)
       .then((r) => setfullInfo(r.data));
-  }, []);
+  }, [id]);
 
-  switch (type) {
+  switch (fullInfo ? fullInfo.type : null) {
     case "gato":
       petIcon = <FaCat className="text-5xl" />;
       break;
@@ -59,7 +62,7 @@ export const Profile = (post) => {
       break;
   }
 
-  switch (size) {
+  switch (fullInfo ? fullInfo.size : null) {
     case "pequeño":
       sizeText = "0 a 25cm";
       break;
@@ -69,11 +72,11 @@ export const Profile = (post) => {
     case "grande":
       sizeText = "60 a 120cm";
       break;
-
     default:
       break;
   }
 
+  console.log("soyfullInfo", fullInfo);
   return (
     <div className={style.container}>
       <NavBar />
@@ -81,33 +84,69 @@ export const Profile = (post) => {
         <div className={style.photoMap}>
           <div className={style.photoMap}>
             <Image
-              src={fullInfo ? fullInfo.profileImgURL : profileDefault}
+              src={
+                fullInfo
+                  ? fullInfo.profileImgURL
+                    ? fullInfo.profileImgURL
+                    : profileDefault
+                  : profileDefault
+              }
               alt="Image"
-              width="250"
+              width="200"
+              height="200"
               preview
             />
-            <div className={style.map}></div>
+            <div className={style.map}>
+              <Link to={`/editProfile`} className={style.link}>
+                <Button
+                  label="Editar perfil"
+                  className="p-button-sm p-button-info p-button-rounded"
+                />
+              </Link>
+              <Button
+                label="Verificacion en 2 pasos"
+                className="p-button-sm p-button-warning p-button-rounded"
+              />
+              <Button
+                label="Cambiar contraseña"
+                className="p-button-sm p-button-warning p-button-rounded"
+              />
+
+              <Link to={`/formpublic`} className={style.link}>
+                <Button
+                  label="Crear post"
+                  className="p-button-sm p-button-warning p-button-rounded"
+                />
+              </Link>
+
+              <Link to={`/editProfile`} className={style.link}>
+                <Button
+                  label="asd"
+                  className="p-button-sm p-button-warning p-button-rounded"
+                />
+              </Link>
+            </div>
           </div>
         </div>
         <div className={style.profileCardContainer}>
           <div className={style.data}>
             <div className={style.subData}>
-              <h3>{title}</h3>
+              <h3>{fullInfo ? fullInfo.title : null}</h3>
               <p className={style.description}>
                 {fullInfo ? fullInfo.bio : null}
               </p>
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
-              <p>Contrataciones: {author.bookings}</p>
+              <p>Contrataciones: {fullInfo ? fullInfo.bookings : null}</p>
               <p>Rating:</p>
               <Rating
                 className="text-white"
-                value={author.rating}
+                value={fullInfo ? fullInfo.rating : null}
                 readOnly
                 stars={5}
                 cancel={false}
               />
               {/* <p>Precio: ${price}</p> */}
-              <p>Direccion: {address}</p>
+              <p>Direccion: {fullInfo ? fullInfo.address : null}</p>
               <p>Tipo:</p> {petIcon}
               <p>Tamaño:</p> {sizeText}
             </div>
@@ -120,24 +159,6 @@ export const Profile = (post) => {
                     <p>Descripcion: {p.description}</p>
                     <p>Price: $ {p.price}</p>
 
-                    {logged ? (
-                      <CreateBooking
-                        keeper={author}
-                        price={price}
-                        client={loginUser}
-                        info={fullInfo}
-                      />
-                    ) : (
-                      <div>
-                        <Link className={style.link} to="/Register">
-                          <Button
-                            label="Registrarse para reservar"
-                            className="p-button-sm p-button-info p-button-rounded"
-                          />
-                        </Link>
-                      </div>
-                    )}
-
                     <p>Tamaño: {p.size}</p>
                     <p>Tipo: {p.type}</p>
                   </Card>
@@ -146,8 +167,8 @@ export const Profile = (post) => {
             : null}
 
           <h4>Comentarios</h4>
-          {author.reviews ? (
-            author.reviews.map((i) => {
+          {fullInfo ? (
+            fullInfo.reviews?.map((i) => {
               return (
                 <div>
                   <ReviewCard
