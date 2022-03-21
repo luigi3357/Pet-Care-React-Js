@@ -4,70 +4,87 @@ import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import '../../index.css';
 import ReactDOM from 'react-dom';
-
-import React, { useState, useEffect } from 'react';
+import { NavBar } from "../NavBar";
+import React, { useState, useEffect, useRef } from 'react';
 import { PickList } from 'primereact/picklist';
-
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 import './PickListDemo.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllPosts, getAllUsers } from '../../REDUX/actions/action';
+import { ListBox } from 'primereact/listbox';
+import { Button } from 'primereact/button';
+import { SpeedDial } from 'primereact/speeddial';
+import { Tooltip } from 'primereact/tooltip';
+import { Toast } from 'primereact/toast';
+
 
  function AdminHome(){
-     
-    const [source, setSource] = useState([]);
-    const [target, setTarget] = useState([]);
+    const [selectedReview, setSelectedReview] = useState(null);
+    const [selectedUsers, setSelectedUsers] = useState(null);
+    const [selectedPost, setSelectedPost]=useState(null);
     const dispatch = useDispatch()
-    const users = useSelector((state) => state.filtered_posts);
-    console.log(users)
+    const users = useSelector((state) => state.users);
+    const posts = useSelector((state) => state.filtered_posts)
+    const toast = useRef(null);
+    
+    
+   
     useEffect(()=>{
-        dispatch(fetchAllPosts())
-    },[dispatch])
+        dispatch(getAllUsers())   
+    },[dispatch]) 
+    
+    useEffect(()=>{
+        dispatch(fetchAllPosts())   
+    },[dispatch]) 
+    
+    const actionBodyTemplate = () => {
+       
       
-    
-    useEffect(()=>{
-        setSource(users)
-    },[setSource])
-    
-    const onChange = (event) => {
-        setSource(event.source);
-        setTarget(event.target);
+        return  <Button icon="pi pi-times" className="p-button-rounded p-button-danger p-button-outlined" />
+   
+        
     }
 
+    const items =[
+        {
+            label: 'Delete',
+            icon: 'pi pi-trash',
+            command: () => {
+                toast.current.show({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
+            }
+        }
+    ]
+  
+    return (
+        
+        
+        <div>
+            <Toast ref={toast} />
+            <NavBar/>
+            <DataTable value={users} selection={selectedUsers} onSelectionChange={e => setSelectedUsers(e.value)} dataKey="id" responsiveLayout="scroll">
+                    <Column selectionMode="multiple" headerStyle={{ width: '3em' }}></Column>
+                    <Column field="last_name" header="Apellido"></Column>
+                    <Column field="name" header="Nombre"></Column>
+                    <Column field="id" header="Id"></Column>
+                    <Column field="email" header="Email"></Column>
+                    <Column field="rating" header="Rating"></Column>
+                    <Column field="keeper" header="Rol"></Column>
+                    <Column headerStyle={{ width: '4rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }} body={actionBodyTemplate} />
+                </DataTable>
+        </div>
+       
 
-    function itemTemplate(item){
 
-    
-        return (
-   
-    
-            <div className="product-item">
-                <div className="image-container">
-                    <img onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'} alt={item.id} />
-                </div>
-                <div className="product-list-detail">
-                    <h5 className="mb-2">{item.id}</h5>
-                    <i className="pi pi-tag product-category-icon"></i>
-                    <span className="product-category">{item.size}</span>
-                </div>
-                <div className="product-list-action">
-                    <h6 className="mb-2">${item.price}</h6>
-                    <span className={`product-badge status-${item.id.toLowerCase()}`}>{item.size}</span>
-                </div>
-            </div>
         );
     }
 
-    return (
-        <div className="picklist-demo">
-            <div className="card">
-                <PickList source={source} target={target} itemTemplate={itemTemplate}
-                    sourceHeader="Available" targetHeader="Selected"
-                    sourceStyle={{ height: '342px' }} targetStyle={{ height: '342px' }}
-                    onChange={onChange}></PickList>
-            </div>
-        </div>
-    );
-
-}
                 
 export default  AdminHome
+
+
+
+
+
+
+
