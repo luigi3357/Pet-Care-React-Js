@@ -11,12 +11,8 @@ import { MdPestControlRodent } from "react-icons/md";
 import style from "./../Pages/global.module.css";
 export default function PostCard({ post }) {
   const {
-    id,
-    authorId,
-    updatedAt,
     title,
     author,
-    description,
     type,
     size,
     address,
