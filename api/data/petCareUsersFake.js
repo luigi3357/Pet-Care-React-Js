@@ -24,6 +24,30 @@ const user = [
       "https://images.unsplash.com/photo-1544502062-f82887f03d1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1559&q=80",
   },
   {
+    email: "admin@gmail.com",
+    password: "admin123456",
+    name: "admin",
+    last_name: "admin",
+    bio: "soy admin",
+    phone: "911-12345678",
+    location: [
+      {
+        direccion: "admin",
+        lat: -34.720407,
+        lng: -58.262576
+      }
+    ],
+    rating: 4.0,
+    bookings: 5,
+    myImages: [
+      "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242165.jpg",
+      "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242042.jpg",
+      "https://imgar.zonapropcdn.com/avisos/resize/1/00/46/83/60/99/1200x1200/1743242122.jpg",
+    ],
+    profileImgURL:
+      "https://images.unsplash.com/photo-1544502062-f82887f03d1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1559&q=80",
+  },
+  {
     email: "francomiño@gmail.com",
     password: "francomiño123",
     name: "franco",

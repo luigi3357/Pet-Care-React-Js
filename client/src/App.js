@@ -33,6 +33,16 @@ import MapDetail from "./Pages/MapDetail";
 import About from "./Components/About/About";
 import Terms from "./Components/Terms/Terms";
 
+import {store} from './REDUX/store/store'
+import {saveState} from '../src/REDUX/LocalStorage';
+  
+store.subscribe(() => {
+  saveState({
+   /* example state */
+    login : store.getState().login,   
+  });
+});
+
 function App() {
   return (
     <Router>

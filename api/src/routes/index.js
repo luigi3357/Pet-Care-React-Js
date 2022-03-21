@@ -17,10 +17,6 @@ const MercadoPagoRoutes = require("./mercadoPago")
 const BookingRoutes = require("./bookings")
 const AdminRoutes = require("./Admin")
 const { User, Post, Review, Booking } = require("../db");
-<<<<<<< HEAD
-=======
-
->>>>>>> ec9c2481476e7da08d72bbfb935ded3ac83a36c4
 
 
 const router = Router();
