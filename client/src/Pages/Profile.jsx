@@ -21,7 +21,7 @@ export const Profile = (post) => {
     location.state;
   const loginUser = useSelector((state) => state.login);
   const [fullInfo, setfullInfo] = useState(null);
-  console.log(fullInfo, "APENAS RENDERIZA");
+  console.log(loginUser, "APENAS RENDERIZA");
   let petIcon;
   let sizeText;
   useEffect(async () => {
@@ -87,11 +87,11 @@ export const Profile = (post) => {
                 cancel={false}
               />
               <p>Precio: ${price}</p>
-              {fullInfo && (
+              {fullInfo && loginUser && (
                 <CreateBooking
                   keeper={author}
                   price={price}
-                  client={loginUser ? loginUser : null}
+                  client={loginUser}
                   info={fullInfo}
                 />
               )}

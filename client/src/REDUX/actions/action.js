@@ -57,8 +57,15 @@ export function changeBookingStatus(payload) {
 
 export function register(payload) {
   return async (dispatch) => {
-    let json = await axios.post(`${localhost}/register`, payload);
-    return json;
+    let json = await axios.post(`${localhost}/register`, payload)
+    .then((response)=>{
+      console.log(response.data)
+      localStorage.setItem('login', JSON.stringify(response.data))
+      dispatch({
+        type: ACTION_TYPES.REGISTER_LOGIN,
+        payload: response.data[0]
+      })
+    });
   };
 }
 

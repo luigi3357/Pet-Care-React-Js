@@ -8,13 +8,14 @@ import { changeBookingStatus, fetchCheckOutDetails, postPayment } from "../REDUX
 export function Payment() {
   const statusClosed = ["completed", "approved", "rejected", "cancelled"];
   const link = useSelector((state) => state.urlMP);
+  const loginUser = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const checkout_details = useSelector((state) => state.checkout_details);
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   // const loginUser = { id: "795edace-30fa-49d1-b6f0-eea097f96836" };
-  const loginUser = { id: "a7c1b729-e78a-4013-be33-3114aa6d5e2b" };
+  // const loginUser = { id: "a7c1b729-e78a-4013-be33-3114aa6d5e2b" };
 
   const payload = {
     bookRef: id.slice(24),
@@ -65,6 +66,7 @@ export function Payment() {
             <KeeperView
               checkout_details={checkout_details}
               accept={() => changeStatus("accepted")}
+              complete={() => changeStatus("completed")}
               cancelOrder={() => changeStatus(statusClosed[2])}
               status={statusClosed}
             />
