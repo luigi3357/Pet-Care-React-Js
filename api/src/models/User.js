@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     location: {
-      type: DataTypes.ARRAY(DataTypes.STRING)
+      type: DataTypes.ARRAY(DataTypes.JSON)
     },
     keeper: {
       type: DataTypes.BOOLEAN,
@@ -64,10 +64,13 @@ module.exports = (sequelize) => {
       defaultValue: 0
     },
     profileImgURL: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     myImages: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+    },
+    favoritos: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
     },
     deleted: {
       type: DataTypes.BOOLEAN,

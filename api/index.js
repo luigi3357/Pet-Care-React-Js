@@ -13,6 +13,7 @@ conn.sync({ force: true }).then(async () => {
           name: element.name,
           last_name: element.last_name,
           bio: element.bio,
+          location: element.location,
           password: element.password,
           rating: element.rating,
           bookings: element.bookings,
