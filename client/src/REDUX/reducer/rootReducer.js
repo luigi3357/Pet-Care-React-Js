@@ -1,8 +1,4 @@
-import ACTION_TYPES from "../actionTypes/actionTypes";
-import { loadState } from '../LocalStorage';
-
-const persistedState = loadState();
-  
+import ACTION_TYPES from "../actionTypes/actionTypes";  
 
 
 const initialState = {
