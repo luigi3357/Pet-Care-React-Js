@@ -65,6 +65,14 @@ padding: .8em 6em;
 border:none;
 border-radius: .5em;
 }
+.form_submiterr{
+    background-color: red;
+    color: #fff;
+font-size: 1rem;
+padding: .8em 6em;
+border:none;
+border-radius: .5em;
+}
 
 .errortxt{
     text-align: center;
