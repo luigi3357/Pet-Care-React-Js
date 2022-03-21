@@ -148,5 +148,9 @@ router.put("/fav", async (req, res) => {
 router.get("/", async (req, res) => {
   const infoUser = await infoTotalDb();
   res.send(infoUser);
+  
 });
+
+
+
 module.exports = router;
