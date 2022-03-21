@@ -211,3 +211,25 @@ export function getLogOut() {
     });
   };
 }
+
+//delete usuario desde admin
+export function adminDeleteUsers(id){
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/admindelete` , id);
+    return json;
+  };
+}
+
+export function adminDeletePosts(id) {
+  return async (dispatch) => {
+    let json = await axios.delete(`${localhost}/Admin/delete/` + id);
+    return json;
+  };
+}
+
+export function adminDeleteReviews(id) {
+  return async (dispatch) => {
+    let json = await axios.delete(`${localhost}/Admin/delete/` + id);
+    return json;
+  };
+}

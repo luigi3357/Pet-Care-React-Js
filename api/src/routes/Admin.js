@@ -11,16 +11,16 @@ router.put("/delete/:id", async (req, res, next) => {
     const user = await User.findOne({where: {id}})
     console.log(user.email)
     if(user){
-      const deleted = await User.update({ deleted: true}, {where: {email: user.email}});
-  
-    //res.send(updated);
-    }
-    let asunto = "Su cuenta a sido baneada"
+      const deleted = await User.update({deleted: true}, {where: {email: user.email}});
+      let asunto = "Su cuenta a sido baneada"
     let mensaje = `Un administrador elimino su cuenta por inflinjir 
     las normas si cree que es un error comuniquese con PetCare3456789@gmail.com`;
     //envia el email
-    let send = sendEmail(email, mensaje, asunto)
+    let send = sendEmail(user.email, mensaje, asunto)
     res.send('Usuario eliminado con éxito');
+    //res.send(updated);
+    }
+    
   } catch (error) {
     res.status(400).send("No se pudo eliminar el usuario");
   }
