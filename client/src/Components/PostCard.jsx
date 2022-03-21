@@ -1,29 +1,19 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-
+import React from "react";
+import { Link } from "react-router-dom";
 import profileDefault from "../assets/profile.jpg";
 import { Rating } from "primereact/rating";
 import { Button } from "primereact/button";
-
 import { FaDog, FaCrow, FaCat } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
-
 import style from "./../Pages/global.module.css";
+<<<<<<< HEAD
 // import { DeletePost } from "./Botones/DeletePost";
+=======
+
+>>>>>>> ec9c2481476e7da08d72bbfb935ded3ac83a36c4
 export default function PostCard({ post }) {
-  const {
-    id,
-    authorId,
-    updatedAt,
-    title,
-    author,
-    description,
-    type,
-    size,
-    address,
-    price,
-  } = post;
-  const [showDetails, setShowDetails] = useState(false);
+  const { title, author, type, size } = post;
+
   let petIcon;
   let sizeText;
 
@@ -62,8 +52,11 @@ export default function PostCard({ post }) {
     <div className={style.postCardContainer}>
       {/* <Fav id = {id} /> */}
       <div className={style.postCardSubContainer}>
+<<<<<<< HEAD
       {/* <DeletePost id={id}/> */}
 
+=======
+>>>>>>> ec9c2481476e7da08d72bbfb935ded3ac83a36c4
         <img
           className={style.imgPerfil}
           src={author.profileImgURL ? author.profileImgURL : profileDefault}
@@ -110,7 +103,6 @@ export default function PostCard({ post }) {
               Mas info
             </Button>
           </Link>
-      
         </div>
       </div>
     </div>

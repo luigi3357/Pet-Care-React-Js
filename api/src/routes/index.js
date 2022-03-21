@@ -17,6 +17,10 @@ const MercadoPagoRoutes = require("./mercadoPago")
 const BookingRoutes = require("./bookings")
 const AdminRoutes = require("./Admin")
 const { User, Post, Review, Booking } = require("../db");
+<<<<<<< HEAD
+=======
+
+>>>>>>> ec9c2481476e7da08d72bbfb935ded3ac83a36c4
 
 
 const router = Router();
@@ -108,11 +112,13 @@ router.get("/login/:email", async (req, res) => {
     }
 })
 
+
 /*         Account Delete          */
 router.put("/admindelete", async (req, res) => {
     const { email, name, last_name, phone, bio, location, myImages, profileImgURL,id} = req.body
-  
-    let user = await search({ id: id})
+    const ids ={ id: req.body.toString()}
+     console.log(req.body)
+    let user = await search(ids)
     if (user) {
         let resetInfoUser = await User.update({ name: user.name,
            last_name: user.last_name,
@@ -125,10 +131,16 @@ router.put("/admindelete", async (req, res) => {
             
             },   
             { where: { email:user.email }})
-           
+            let asunto = "Su cuenta a sido baneada"
+            let mensaje = `Un administrador elimino su cuenta por inflinjir 
+            las normas si cree que es un error comuniquese con PetCare3456789@gmail.com`;
+            //envia el email
+            let send = sendEmail(user.email, mensaje, asunto)
           return res.send(resetInfoUser)
   
     }
     return res.status(404).send("Usuario no encontrado")
   })
+
+
 module.exports = router;

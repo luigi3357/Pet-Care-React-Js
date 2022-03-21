@@ -4,6 +4,21 @@ import ACTION_TYPES from "../actionTypes/actionTypes";
 
 export const localhost = "http://localhost:3001";
 
+//usersCoordinates
+
+export function usersCoordinates(){
+  return async function (dispatch) {
+    
+      var json = await axios.get(`${localhost}/users/usersCoordinates`)
+      //console.log(json, "jsonuserCoordinates")
+      return dispatch({
+        type: ACTION_TYPES.GET_USERS_COORDINATES,
+        payload: json.data
+      })
+    
+  }
+}
+
 //mercadopago
 
 export function postPayment(payload) {
@@ -40,10 +55,17 @@ export function changeBookingStatus(payload) {
 
 //register
 
-export  function register(payload) {
+export function register(payload) {
   return async (dispatch) => {
-    let json = await axios.post(`${localhost}/register`, payload);
-    return json;
+    let json = await axios.post(`${localhost}/register`, payload)
+    .then((response)=>{
+      console.log(response.data)
+      localStorage.setItem('login', JSON.stringify(response.data))
+      dispatch({
+        type: ACTION_TYPES.REGISTER_LOGIN,
+        payload: response.data[0]
+      })
+    });
   };
 }
 
@@ -86,22 +108,22 @@ export const forgotPassword = (payload) => {
     return json;
   };
 };
-  //verification 2
-  export const secondaryVerification = (payload) => {
-    return async (dispatch) => {
-      let json = await axios.put(`${localhost}/mensaje/sms`, payload);
-      return json;
-    };
+//verification 2
+export const secondaryVerification = (payload) => {
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/mensaje/sms`, payload);
+    return json;
   };
+};
 
-    //reset
-    export const resetPassword = (payload) => {
-      return async (dispatch) => {
-        let json = await axios.put(`${localhost}/reset`, payload);
-        return json;
-      };
-    };
-  
+//reset
+export const resetPassword = (payload) => {
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/reset`, payload);
+    return json;
+  };
+};
+
 /*               HomeScreen             */
 
 export function fetchAllPosts() {
@@ -126,7 +148,7 @@ export const editProfilePost = (payload) => {
     let json = await axios.put(`${localhost}/users/edit`, payload);
     return json;
   };
-}
+};
 // añade favoritos
 export const addFavoritos = (payload) => {
   return async (dispatch) => {
@@ -134,29 +156,29 @@ export const addFavoritos = (payload) => {
     let json = await axios.put(`${localhost}/users/fav`, payload);
     return json;
   };
-}
-  //crear posteos
-  export const createPost = (payload) => {
-    return async (dispatch) => {
-      let json = await axios.post(`${localhost}/posts/create/`, payload);
-      return json;
-    };
+};
+//crear posteos
+export const createPost = (payload) => {
+  return async (dispatch) => {
+    let json = await axios.post(`${localhost}/posts/create/`, payload);
+    return json;
   };
+};
 
-  // cambiar info de publicaciones
-  //deberia enviar si o si el id el resto de los cambios opcionales
-  //title, description, price, type, size, address, phone 
-  export const editPost = (id, payload) => {
-    return async (dispatch) => {
-      let json = await axios.put(`${localhost}/posts/edit/`+ id, payload);
-      return json;
-    };
+// cambiar info de publicaciones
+//deberia enviar si o si el id el resto de los cambios opcionales
+//title, description, price, type, size, address, phone
+export const editPost = (id, payload) => {
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/posts/edit/` + id, payload);
+    return json;
   };
+};
 // eliminar posteos
 
 export function deletePost(id) {
   return async (dispatch) => {
-    let json = await axios.delete(`${localhost}/posts/delete/`+id);
+    let json = await axios.delete(`${localhost}/posts/delete/` + id);
     return json;
   };
 }
@@ -165,28 +187,58 @@ export function deletePost(id) {
 
 export function deleteUsers(id) {
   return async (dispatch) => {
-    let json = await axios.delete(`${localhost}/users/delete/`+id);
+    let json = await axios.delete(`${localhost}/users/delete/` + id);
     return json;
   };
 }
-  
 
-
-export function getFiltered(payload){
-  return function(dispatch){
+export function getFiltered(payload) {
+  return function (dispatch) {
     dispatch({
       type: ACTION_TYPES.GET_FILTERED,
-      payload
-    })
-  }
+      payload,
+    });
+  };
 }
 
-export function getSearch(payload){
-  return async function(dispatch){
-    let result = await axios.get(`${localhost}/search`, { payload })
+export function getSearch(payload) {
+  return async function (dispatch) {
+    let result = await axios.get(`${localhost}/search`, { payload });
     dispatch({
       type: ACTION_TYPES.GET_SEARCH,
-      payload : result
-    })
-  }
+      payload: result,
+    });
+  };
+}
+
+export function getLogOut() {
+  return async function (dispatch) {
+    dispatch({
+      type: ACTION_TYPES.GET_LOGOUT,
+    });
+  };
+
+}
+
+//delete usuario desde admin
+export function adminDeleteUsers(id){
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/admindelete` , id);
+    return json;
+  };
+}
+
+export function adminDeletePosts(id) {
+  return async (dispatch) => {
+    let json = await axios.delete(`${localhost}/Admin/delete/` + id);
+    return json;
+  };
+}
+
+export function adminDeleteReviews(id) {
+  return async (dispatch) => {
+    let json = await axios.delete(`${localhost}/Admin/delete/` + id);
+    return json;
+  };
+
 }

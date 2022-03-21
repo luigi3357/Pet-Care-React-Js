@@ -12,7 +12,9 @@ import { getAllUsers, getLogin, secondaryVerification } from "../../REDUX/action
 import bcrypt from "bcryptjs";
 import { Toast } from "primereact/toast";
 import { NavBar } from "../NavBar";
-import '../Botones/ButtonDemo.css';
+import './FormDemo.css'
+import style from '../../Pages/global.module.css'
+
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -117,9 +119,12 @@ const validar = oneUser.map(e=>{return e.key_2fa})
   );
 
   return (
-    <div className="form-demo">
+    <div className={style.container}>
       <NavBar />
+    <div className="form-demo">
+      
       <Toast ref={notmatch} />
+      <div>
       <Dialog
         visible={showMessage}
         onHide={() => setShowMessage(false)}
@@ -185,7 +190,7 @@ const validar = oneUser.map(e=>{return e.key_2fa})
 
       <div className="flex justify-content-center">
         <div className="card">
-          <h5 className="text-center"> Iniciar Session </h5>
+          <h5 className="text-center"> Iniciar Sesion </h5>
           <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
               <span className="p-float-label p-input-icon-right">
@@ -275,15 +280,19 @@ const validar = oneUser.map(e=>{return e.key_2fa})
                             <a className="px-3" href="http://localhost:3001/Auth/login/federated/google">
               Google
             </a>
+<<<<<<< HEAD
                         </Button>
                        
                     </div>
                 </div>
+=======
+>>>>>>> ec9c2481476e7da08d72bbfb935ded3ac83a36c4
             </div>
           </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Image } from "primereact/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router";
 import { NavBar } from "../Components/NavBar";
 import profileDefault from "./../assets/profile.jpg";
@@ -9,20 +9,29 @@ import { Rating } from "primereact/rating";
 import { FaDog, FaCrow, FaCat } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
 import { Button } from "primereact/button";
+import { CreateBooking } from "../Components/CreateBooking";
 import MapDetail from "./MapDetail";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { localhost } from "../REDUX/actions/action";
+import { Card } from "primereact/card";
+import { Link } from "react-router-dom";
 export const Profile = (post) => {
   const { id } = useParams();
   const location = useLocation();
   const { description, title, author, updatedAt, type, size, address, price } =
     location.state;
-
-  const { reviews } = post;
-
-  useEffect(() => {}, []);
-  console.log("author", author);
-
+  const loginUser = useSelector((state) => state.login);
+  const [fullInfo, setfullInfo] = useState();
+  console.log(fullInfo, "APENAS RENDERIZA");
   let petIcon;
   let sizeText;
+
+  useEffect(() => {
+    axios
+      .get(`${localhost}/users/profile/` + author.id)
+      .then((r) => setfullInfo(r.data));
+  }, []);
 
   switch (type) {
     case "gato":
@@ -56,13 +65,20 @@ export const Profile = (post) => {
       break;
   }
 
+  console.log("soyloginuser del profile", loginUser);
+
   return (
     <div className={style.container}>
       <NavBar />
       <div className={style.subContainer}>
         <div className={style.photoMap}>
           <div className={style.photoMap}>
-            <Image src={profileDefault} alt="Image" width="250" preview />
+            <Image
+              src={fullInfo ? fullInfo.profileImgURL : profileDefault}
+              alt="Image"
+              width="250"
+              preview
+            />
             <div className={style.map}></div>
           </div>
         </div>
@@ -70,8 +86,10 @@ export const Profile = (post) => {
           <div className={style.data}>
             <div className={style.subData}>
               <h3>{title}</h3>
-              <p className={style.description}>{description}</p>
-              <p>Fecha: {updatedAt.slice(0, 10)}</p>
+              <p className={style.description}>
+                {fullInfo ? fullInfo.bio : null}
+              </p>
+              {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
               <p>Contrataciones: {author.bookings}</p>
               <p>Rating:</p>
               <Rating
@@ -81,13 +99,45 @@ export const Profile = (post) => {
                 stars={5}
                 cancel={false}
               />
-              <p>Precio: ${price}</p>
-              <Button>Reservar</Button>
+              {/* <p>Precio: ${price}</p> */}
               <p>Direccion: {address}</p>
               <p>Tipo:</p> {petIcon}
               <p>Tamaño:</p> {sizeText}
             </div>
           </div>
+          <h4>Posteos</h4>
+          {fullInfo
+            ? fullInfo.posteos.map((p) => {
+                return (
+                  <Card>
+                    <p>Descripcion: {p.description}</p>
+                    <p>Price: $ {p.price}</p>
+
+                    {loginUser.name ? (
+                      <CreateBooking
+                        keeper={author}
+                        price={price}
+                        client={loginUser}
+                        info={fullInfo}
+                      />
+                    ) : (
+                      <div>
+                        <Link className={style.link} to="/Register">
+                          <Button
+                            label="Registrarse para reservar"
+                            className="p-button-sm p-button-info p-button-rounded"
+                          />
+                        </Link>
+                      </div>
+                    )}
+
+                    <p>Tamaño: {p.size}</p>
+                    <p>Tipo: {p.type}</p>
+                  </Card>
+                );
+              })
+            : null}
+
           <h4>Comentarios</h4>
           {author.reviews ? (
             author.reviews.map((i) => {

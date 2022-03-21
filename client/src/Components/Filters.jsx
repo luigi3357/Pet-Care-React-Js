@@ -10,8 +10,6 @@ import {
   FaStar,
 } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
-import { AiOutlineColumnHeight } from "react-icons/ai";
-import { Card } from "primereact/card";
 import { useDispatch } from "react-redux";
 import { getFiltered } from "../REDUX/actions/action";
 import style from "./../Pages/global.module.css";

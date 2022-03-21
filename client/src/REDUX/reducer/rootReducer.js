@@ -5,16 +5,22 @@ const initialState = {
   login: [],
   all_posts: [],
   filtered_posts: [],
-  urlMP:'',
-  checkout_details: ''
+  urlMP: "",
+  checkout_details: "",
+  usersCoordinates: [],
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case ACTION_TYPES.GET_USERS_COORDINATES:
+      return {
+        ...state,
+        usersCoordinates: action.payload,
+      };
     case ACTION_TYPES.POST_PAYMENT:
       return {
         ...state,
-        urlMP: action.payload
+        urlMP: action.payload,
       };
     case ACTION_TYPES.GET_ALL_USERS:
       return {
@@ -23,10 +29,25 @@ function rootReducer(state = initialState, action) {
       };
     case ACTION_TYPES.GET_LOGIN:
       console.log(action.payload);
+      localStorage.setItem('login',JSON.stringify(action.payload))
       return {
         ...state,
         login: action.payload,
       };
+    case ACTION_TYPES.REGISTER_LOGIN:
+      console.log(action.payload);
+      localStorage.setItem('login',JSON.stringify(action.payload))
+      return {
+        ...state,
+        login: action.payload,
+      };
+    case ACTION_TYPES.GET_LOGOUT:
+      localStorage.setItem('login', JSON.stringify(null))
+      return {
+        ...state,
+        login: [],
+      };
+    
     case ACTION_TYPES.FETCH_ALL_POSTS:
       return {
         ...state,
@@ -36,91 +57,93 @@ function rootReducer(state = initialState, action) {
     case ACTION_TYPES.FETCH_CHECKOUTS_DETAILS:
       return {
         ...state,
-        checkout_details: action.payload
+        checkout_details: action.payload,
       };
     case ACTION_TYPES.GET_SEARCH:
       return {
         ...state,
-        filtered_posts: action.payload
-      }
+        filtered_posts: action.payload,
+      };
     case ACTION_TYPES.GET_FILTERED:
-      switch(action.payload){
+      switch (action.payload) {
         case "all":
-          return{
+          return {
             ...state,
-            filtered_posts: state.all_posts
-          }
+            filtered_posts: state.all_posts,
+          };
         case "perros":
-          return{
+          return {
             ...state,
-            filtered_posts: state.all_posts.filter(i => i.type === "perro")
-          }
+            filtered_posts: state.all_posts.filter((i) => i.type === "perro"),
+          };
         case "aves":
-          return{
+          return {
             ...state,
-            filtered_posts: state.all_posts.filter(i => i.type === "aves")
-          }
+            filtered_posts: state.all_posts.filter((i) => i.type === "aves"),
+          };
         case "roedores":
-          return{
+          return {
             ...state,
-            filtered_posts: state.all_posts.filter(i => i.type === "roedores")
-          }
+            filtered_posts: state.all_posts.filter(
+              (i) => i.type === "roedores"
+            ),
+          };
         case "gatos":
-          return{
+          return {
             ...state,
-            filtered_posts: state.all_posts.filter(i => i.type === "gato")
-          }
+            filtered_posts: state.all_posts.filter((i) => i.type === "gato"),
+          };
         case "pequeño":
-          return{
+          return {
             ...state,
-            filtered_posts: state.all_posts.filter(i => i.size === "pequeño")
-          }
+            filtered_posts: state.all_posts.filter((i) => i.size === "pequeño"),
+          };
         case "mediano":
-          return{
+          return {
             ...state,
-            filtered_posts: state.all_posts.filter(i => i.size === "mediano")
-          }
+            filtered_posts: state.all_posts.filter((i) => i.size === "mediano"),
+          };
         case "grande":
-          return{
+          return {
             ...state,
-            filtered_posts: state.all_posts.filter(i => i.size === "grande")
-          }
+            filtered_posts: state.all_posts.filter((i) => i.size === "grande"),
+          };
         case "precioDesc":
-          return{
+          return {
             ...state,
-            filtered_posts: state.filtered_posts.sort((a,b)=>{
-              if(a.price > b.price) return 1;
-              if(b.price >= a.price) return -1;
-            })
-          }
+            filtered_posts: state.filtered_posts.sort((a, b) => {
+              if (a.price > b.price) return 1;
+              if (b.price >= a.price) return -1;
+            }),
+          };
         case "precioAsc":
-          return{
+          return {
             ...state,
-            filtered_posts: state.filtered_posts.sort((a,b)=>{
-              if(a.price > b.price) return -1;
-              if(b.price >= a.price) return 1;
-            })
-          }
+            filtered_posts: state.filtered_posts.sort((a, b) => {
+              if (a.price > b.price) return -1;
+              if (b.price >= a.price) return 1;
+            }),
+          };
         case "ratingAsc":
-          return{
+          return {
             ...state,
-            filtered_posts: state.filtered_posts.sort((a,b)=>{
-              if(Number(a.author.rating) > Number(b.author.rating)) return -1; 
-              if(Number(b.author.rating) >= Number(a.author.rating)) return 1; 
-            })
-          }
+            filtered_posts: state.filtered_posts.sort((a, b) => {
+              if (Number(a.author.rating) > Number(b.author.rating)) return -1;
+              if (Number(b.author.rating) >= Number(a.author.rating)) return 1;
+            }),
+          };
         case "ratingDesc":
-          return{
+          return {
             ...state,
-            filtered_posts: state.filtered_posts.sort((a,b)=>{
-              if(a.author.rating > b.author.rating) return 1; 
-              if(b.author.rating >= a.author.rating) return -1; 
-            })
-          }
+            filtered_posts: state.filtered_posts.sort((a, b) => {
+              if (a.author.rating > b.author.rating) return 1;
+              if (b.author.rating >= a.author.rating) return -1;
+            }),
+          };
         default:
           return {
-            ...state
-          }
+            ...state,
+          };
       }
     default:
       return state;

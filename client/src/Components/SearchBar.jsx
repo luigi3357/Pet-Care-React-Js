@@ -13,9 +13,9 @@ useEffect(()=>{
     setTimeout(() => {
       dispatch(getSearch(search))
     }, 3500); 
-  }
-    
+  }    
 },[dispatch])
+
   function handleSearchInput(e) {
     setSearch(e.target.value);
   }
