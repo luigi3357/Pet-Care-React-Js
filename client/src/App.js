@@ -13,7 +13,7 @@ import FormPayBank from "./Components/FormPost/FormsPay/FormPayData";
 import FormMercadoP from "./Components/FormPost/FormsPay/FormPayMP";
 import ResetPassword from "./Components/FormPost/ResetPassword";
 
-import EditForm from './Components/FormPost/Form-post-reqserv-cuidador/EditForm'
+import EditForm from "./Components/FormPost/Form-post-reqserv-cuidador/EditForm";
 // import InputSearchB from "../src/Components/FormPost/";
 import SearchBar from "./Components/SearchBar";
 import { ConfirmationMP } from "./Components/MP_Confirmation";
@@ -27,13 +27,11 @@ import { MailCode } from "./Components/LoginAndRegister/mailCode";
 import { Register } from "./Components/LoginAndRegister/Register";
 import { Reset } from "./Components/LoginAndRegister/Reset";
 import { RatingDemo } from "./Components/Review";
-import { DetailsPage } from "./Pages/DetailsPage";
 import { Home } from "./Pages/Home";
 import { Profile } from "./Pages/Profile";
 import MapDetail from "./Pages/MapDetail";
 import About from "./Components/About/About";
 import Terms from "./Components/Terms/Terms";
-
 
 function App() {
   return (
@@ -46,7 +44,6 @@ function App() {
         <Route path="/Register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/rating" element={<RatingDemo />} />
-        <Route path="/DetailsPage/:id" element={<DetailsPage />} />
         <Route path="/adminHome" element={<AdminHome />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/verificacion" element={<Verification />} />
