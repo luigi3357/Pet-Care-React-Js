@@ -22,7 +22,12 @@ export const Home = () => {
       <div className="flex flex-column align-items-center text-center justify-content-center w-full">
         <Filters />
         <div className={style.postContainer}>
+        <div className={style.postContainer}>
           {filtered_posts.map((post) => {
+            return <PostCard post={post} />;
+          })}
+        </div>
+          {/* {filtered_posts.map((post) => {
             return (
               <PostCard
                 authorId={post.author.id}
@@ -41,7 +46,7 @@ export const Home = () => {
                 last_name={post.author.last_name}
               />
             );
-          })}
+          })} */}
       
         </div>
       </div>

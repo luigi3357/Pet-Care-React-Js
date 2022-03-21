@@ -1,30 +1,34 @@
 const { Router } = require("express");
 const { User, Post, Review, Booking } = require("../db");
+const { search, hash } = require("../services/login");
 
 const router = Router();
 
 
 /*         Account Delete          */
-router.put("/delete/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const user = await User.findOne({where: {id}})
-    console.log(user.email)
-    if(user){
-      const deleted = await User.update({ deleted: true}, {where: {email: user.email}});
-  
-    //res.send(updated);
-    }
-    let asunto = "Su cuenta a sido baneada"
-    let mensaje = `Un administrador elimino su cuenta por inflinjir 
-    las normas si cree que es un error comuniquese con PetCare3456789@gmail.com`;
-    //envia el email
-    let send = sendEmail(email, mensaje, asunto)
-    res.send('Usuario eliminado con éxito');
-  } catch (error) {
-    res.status(400).send("No se pudo eliminar el usuario");
+router.put("/delete", async (req, res) => {
+  const { email, name, last_name, phone, bio, location, myImages, profileImgURL,id} = req.body
+
+  let user = await search({ id: id})
+  if (user) {
+      let resetInfoUser = await User.update({ name: user.name,
+         last_name: user.last_name,
+          phone: user.phone,
+           bio:user.bio,
+            location: user.location, 
+            myImages: user.myImages, 
+            profileImgURL: user.profileImgURL,
+            deleted:true
+          
+          },   
+          { where: { email:user.email }})
+         
+        return res.send(resetInfoUser)
+
   }
-});
+  return res.status(404).send("Usuario no encontrado")
+})
+
 
 router.delete("/delete/:id", async (req, res, next) => {
     try {

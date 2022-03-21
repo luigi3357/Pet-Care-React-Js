@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { Component, useEffect, useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { InputText } from "primereact/inputtext";
@@ -12,6 +12,7 @@ import { getAllUsers, getLogin, secondaryVerification } from "../../REDUX/action
 import bcrypt from "bcryptjs";
 import { Toast } from "primereact/toast";
 import { NavBar } from "../NavBar";
+import '../Botones/ButtonDemo.css';
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -260,9 +261,25 @@ const validar = oneUser.map(e=>{return e.key_2fa})
           </div>
 
           <div>
-            <a href="http://localhost:3001/Auth/login/federated/google">
+            {/* <a href="http://localhost:3001/Auth/login/federated/google">
+              Google
+            </a> */}
+
+            <div className="button-demo">
+                <div className="card">
+
+                    <div className="template">
+                        <Button className="google p-0">
+                            <i className="pi pi-google px-2"></i>
+                            {/* <span className="px-3">Google</span> */}
+                            <a className="px-3" href="http://localhost:3001/Auth/login/federated/google">
               Google
             </a>
+                        </Button>
+                       
+                    </div>
+                </div>
+            </div>
           </div>
           </div>
         </div>

@@ -16,7 +16,7 @@ const Sms = require('./smsvalidacion')
 const MercadoPagoRoutes = require("./mercadoPago")
 const BookingRoutes = require("./bookings")
 const AdminRoutes = require("./Admin")
-
+const { User, Post, Review, Booking } = require("../db");
 
 
 const router = Router();
@@ -30,7 +30,7 @@ router.use("/mercadoPago", MercadoPagoRoutes)
 router.use("/filter", FilterRoutes)
 router.use('/Auth', AuthRouter);
 router.use('/bookings', BookingRoutes);
-router.use("/Admin", AdminRoutes)
+router.use("/admin", AdminRoutes)
 
 
 
@@ -108,5 +108,27 @@ router.get("/login/:email", async (req, res) => {
     }
 })
 
-
+/*         Account Delete          */
+router.put("/admindelete", async (req, res) => {
+    const { email, name, last_name, phone, bio, location, myImages, profileImgURL,id} = req.body
+  
+    let user = await search({ id: id})
+    if (user) {
+        let resetInfoUser = await User.update({ name: user.name,
+           last_name: user.last_name,
+            phone: user.phone,
+             bio:user.bio,
+              location: user.location, 
+              myImages: user.myImages, 
+              profileImgURL: user.profileImgURL,
+              deleted:true
+            
+            },   
+            { where: { email:user.email }})
+           
+          return res.send(resetInfoUser)
+  
+    }
+    return res.status(404).send("Usuario no encontrado")
+  })
 module.exports = router;

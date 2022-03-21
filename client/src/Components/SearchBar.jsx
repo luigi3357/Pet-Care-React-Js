@@ -9,9 +9,12 @@ export default function SearchBar() {
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
 useEffect(()=>{
-  setTimeout(() => {
-    dispatch(getSearch(search))
-  }, 3500);   
+  if(search>0){
+    setTimeout(() => {
+      dispatch(getSearch(search))
+    }, 3500); 
+  }
+    
 },[dispatch])
   function handleSearchInput(e) {
     setSearch(e.target.value);
