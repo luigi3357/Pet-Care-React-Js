@@ -1,6 +1,6 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
-import { editProfilePost } from '../../REDUX/actions/action';
+import { editProfilePost, getLogin } from '../../REDUX/actions/action';
 
 export default function FormPayData () {
 
@@ -145,7 +145,10 @@ export default function FormPayData () {
     else  {
          e.preventDefault()
         dispatch(editProfilePost(form))
-        alert('Su perfil a sido editado!')
+        setTimeout(() => {
+            dispatch(getLogin(form.email));       
+            alert('Su perfil a sido editado!')
+        }, 1000);
         setForm({
             name:'',
             last_name:'',

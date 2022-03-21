@@ -95,10 +95,18 @@ router.put("/delete/:id", async (req, res, next) => {
 
 router.put("/edit", async (req, res) => {
   const { email, name, last_name, phone, bio, location, myImages, profileImgURL} = req.body
-
+  console.log(req.body)
   let user = await search({ email: email})
   if (user) {
-      let resetInfoUser = await User.update({ name: name ? name:user.name, last_name: last_name ? last_name: user.last_name, phone: phone? phone: user.phone, bio:bio? bio:user.bio, location: location? location: user.location, myImages: myImages? myImages: user.myImages, profileImgURL: profileImgURL? profileImgURL: user.profileImgURL},   
+      let resetInfoUser = await User.update({
+         name: name ? name:user.name, 
+         last_name: last_name ? last_name: user.last_name, 
+         phone: phone? phone: user.phone, 
+         bio:bio? bio:user.bio, 
+        //  location: location? location: user.location, 
+        //  myImages: myImages? myImages: user.myImages,  
+         profileImgURL: profileImgURL? profileImgURL: user.profileImgURL
+        },   
           { where: { email:email }})
           let asunto = "Edito su perfil correctamente"
           let mensaje = `su perfil se edito correctamente con la siguiente informacion 
