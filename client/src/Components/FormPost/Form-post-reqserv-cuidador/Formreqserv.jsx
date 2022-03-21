@@ -1,20 +1,24 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
-
+import {createPost} from '../../../REDUX/actions/action'
+import './Form.css'
 export default function FormCard(){
-   
-      //  const dispatch= useDispatch()
-       
-    //   const typesState = useSelector((state)=> state.typePokemon)
+  const dispatch= useDispatch()
+    
+  const  idautor = useSelector((state)=> state.login)
+  const  user = useSelector((state)=> state.users)
+  const oneUser = user.filter(e => e.id === idautor.id)
+  const oneEmail =oneUser.map(e => e.email)
+  console.log(oneEmail ,'soy oneEmail')
         
        
-        const  idautor = useSelector((state)=> state.login)
+        
 
         const [form,setForm]= useState({
         title:'',
         description:'',
         price:'',
-        image:[],
+       email: oneEmail[0],
         type:[],
         size:[],
         address:'',
@@ -62,9 +66,9 @@ export default function FormCard(){
             form.description.length > 0 &&
             form.description.length < 400 &&
             form.price.length  >= 1 &&
-            form.price.length <= 5000 &&
+            form.price.length <= 5 &&
             form.phone.length  >= 1 &&
-            form.phone.length <= 50 &&
+            form.phone.length <= 15 &&
            form.type.length >= 1 &&
            form.type.length < 5 &&
            form.size.length >= 1 &&
@@ -179,173 +183,189 @@ export default function FormCard(){
          e.preventDefault()
     
         console.log(form)
-       // dispatch(postPublic(form))
+        dispatch(createPost(form))
         alert('Servicio creado!')
         setForm({
             title:'',
             description:'',
             price:'',
+            email:  oneEmail[0],
             image:[],
             type:[],
             size:[],
             address:'',
             phone:'',
-            author_id:'idautor.id',
+            author_id:idautor.id,
           
         })
     }
-   //     dispatch(fetchAllPosts())
+
    }
 
     
    
     return (
-        <div>
-           
-        <div>
-        <form  onSubmit={(e)=> handleSubmit(e)}>
-        <section >
-    
-       
-      <div  className='entero'>
-      <h1>Formulario de Publicacion</h1>
-      </div> 
-      
-        <div  className='entero'>
-        <label>Titulo de su publicacion</label>
-        <input   type='text'  value={form.title} name='title' onChange={(e) =>handleChange(e)}/>
-        {
-            errors.title && (<p>{errors.title}</p>)
-        }
-       
-        </div>
+      <body>
+      <div>
+         
+      <div>
+      <form className='formpublic' onSubmit={(e)=> handleSubmit(e)}>
+      <div className='form_container'>
+  
      
-       
-        <div>
-           <label>Describa lo que solicita</label> 
-           <input type='text'  value={form.description} name='description' onChange={(e) =>handleChange(e)}/>
-           {
-                errors.description && (<p>{errors.description}</p>)
-            }
-        </div>
-        <div>
-           <label>Direccion</label> 
-           <input type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/>
-           {
-                errors.addres && (<p>{errors.address}</p>)
-            }
-        </div>
-        <div>
-           <label>Numero de telefono</label> 
-           <input type='number' value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
-       {
-           errors.phone && (<p>{errors.phone}</p>)
-       }
-        </div>
-      
-        <div>
-           <label>Costo del servicio</label> 
-          <input type='number' min="1" value={form.price} name='price' onChange={(e)=>handleChange(e)}/>
-                {
-                    errors.price && (<p>{errors.price}</p>)
-                } 
-        
-        </div>
-      
-        <div  >
-            <label>Imagenes de su mascota</label>
-            <input type='text' value={form.image} name='image' onChange={(e)=>handleChange(e)} />
-            {
-                errors.image &&  (<p>{errors.image}</p>)
-            }
-        </div>
+    <div >
+    <h1  className='form_title'>Requiero un cuidador!</h1>
+    </div> 
     
-                   
-             
-        <div>
-           
-            <h1>¿Que tipo de mascota posee?</h1>
-            
-          Perro  <input 
-          onChange={(e)=>{handleCheckType(e)
-         }
-          } type="checkbox" name="perro" value='perro' />
-                
-            Gato<input   onChange={handleCheckType}type="checkbox"  name="gato" value='gato'/>
-                
-            Aves<input  onChange={handleCheckType} type="checkbox"  name="aves" value='aves' />
-                
-            Roedores<input  onChange={handleCheckType} type="checkbox"  name="roedores" value= 'roedores' />
-            {
-            errors.type && 
-            (
-              <p>{errors.type}</p>
-            ) 
-            }
-       
-
-        
-               
-        </div>
-              
-        
-    
-
-
-
-
-
-        <div>
-           
-           <h1>Defina el tamaño de su mascota</h1>
-           
-         Pequeño  <input 
-         onChange={(e)=>{handleSelectS(e)
-        }
-         } type="checkbox" name="pequeño" value='pequeño' />
-               
-           Mediano<input   onChange={handleSelectS}type="checkbox"  name="mediano" value='mediano'/>
-               
-           Grande<input  onChange={handleSelectS} type="checkbox"  name="grande" value='grande' />
-               
-           {
-            errors.size && 
-            (
-              <p>{errors.size}</p>
-            ) 
-            }
-       
-              
-             
-       
-          
-           </div>
-       <div>
-
-
-
-
-
-
-            </div>
-
-
-
-       <div> 
-                <button  type='submit' disabled={disableSubmit}>Crear Servicio!</button>
-       </div>
-    
-       </section>
-       </form>
-
+      <div  className='form_group'>
+      <label  className='form_label'>Titulo de lo que requiere</label>
+      <input className='form_input'  type='text'  value={form.title} name='title' onChange={(e) =>handleChange(e)}/>
+      {
+          errors.title && (<p  className='errortxt'>{errors.title}</p>)
+      }
+     
+      </div>
    
-
-
-
-       </div>
      
-    </div>
+      <div  className='form_group'>
+         <label className='form_label' >Describa sus requisitos de la mascota</label> 
+         <input className='form_input' type='text'  value={form.description} name='description' onChange={(e) =>handleChange(e)}/>
+         {
+              errors.description && (<p  className='errortxt'>{errors.description}</p>)
+          }
+      </div>
+      <div className='form_group'>
+         <label className='form_label'>Direccion donde vive con la mascota</label> 
+         <input className='form_input'  type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/>
+         {
+              errors.addres && (<p className='errortxt'>{errors.address}</p>)
+          }
+      </div>
+      <div  className='form_group' >
+         <label  className='form_label' >Numero de telefono</label> 
+         <input   className='form_input'  type='number' value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
+     {
+         errors.phone && (<p  className='errortxt'>{errors.phone}</p>)
+     }
+      </div>
+    
+      <div className='form_group'  >
+         <label className='form_label' >Costo estimado que pretende pagar</label> 
+        <input   className='form_input'   type='number' min="1" value={form.price} name='price' onChange={(e)=>handleChange(e)}/>
+              {
+                  errors.price && (<p className='errortxt'>{errors.price}</p>)
+              } 
+      
+      </div>
+    
+  
+  
+                 
+           
+      <div>
+         
+          <h2>¿Que tipo de mascota posee?</h2>
+          <div>
+           <input  onChange={(e)=>{handleCheckType(e)
+       }
+      } type="checkbox" name="perro" value='perro' />
+      <label> Perro</label>  
+       
+          </div>
+        <div>
+          <input   onChange={handleCheckType}type="checkbox"  name="gato" value='gato'/>
+        <label> Gato</label> 
+        </div>
+              
+       <div>
+         <input  onChange={handleCheckType} type="checkbox"  name="aves" value='aves' />
+       <label> Aves</label> 
+       </div>
+         <div>
+          <input  onChange={handleCheckType} type="checkbox"  name="roedores" value= 'roedores' />
+         <label> Roedores</label>     
+         </div>
+        
+          {
+          errors.type && 
+          (
+            <p className='errortxt'>{errors.type}</p>
+          ) 
+          }
+     
 
+      
+             
+      </div>
+            
+      
+  
+
+
+
+
+
+      <div>
+         
+         <h2>¿Tamaño de mascota que posee?</h2>
+     <div>
+         <input 
+       onChange={(e)=>{handleSelectS(e)
+       }
+      } type="checkbox" name="pequeño" value='pequeño' />
+      <label>Pequeño</label>
+     </div>
+     
+     <div>
+            
+         
+         <input   onChange={handleSelectS}type="checkbox"  name="mediano" value='mediano'/>
+             <label>Mediano</label>
+         </div>   
+         <div>
+
+         <input  onChange={handleSelectS} type="checkbox"  name="grande" value='grande' />
+         <label>Grande</label>
+         </div>
+             
+         {
+          errors.size && 
+          (
+            <p className='errortxt'>{errors.size}</p>
+          ) 
+          }
+     
+            
+           
+     
+        
+         </div>
+     <div>
+
+
+
+
+
+
+          </div>
+
+
+
+     <div> 
+              <button className={disableSubmit ?'form_submiterr' : 'form_submit'} type='submit' disabled={disableSubmit}  >Buscar servicio!</button>
+     </div>
+  
+     </div>
+     </form>
+
+ 
+
+
+
+     </div>
+   
+  </div>
+  </body>
     )
     
    
