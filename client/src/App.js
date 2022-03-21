@@ -34,6 +34,7 @@ import MapDetail from "./Pages/MapDetail";
 import About from "./Components/About/About";
 import Terms from "./Components/Terms/Terms";
 
+
 function App() {
   return (
     <Router>

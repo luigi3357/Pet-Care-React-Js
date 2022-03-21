@@ -19,7 +19,6 @@ const AdminRoutes = require("./Admin")
 const { User, Post, Review, Booking } = require("../db");
 
 
-
 const router = Router();
 router.use("/mensaje", Sms)
 router.use("/users", UserRoutes)
@@ -31,7 +30,7 @@ router.use("/mercadoPago", MercadoPagoRoutes)
 router.use("/filter", FilterRoutes)
 router.use('/Auth', AuthRouter);
 router.use('/bookings', BookingRoutes);
-router.use("/Admin", AdminRoutes)
+router.use("/admin", AdminRoutes)
 
 
 

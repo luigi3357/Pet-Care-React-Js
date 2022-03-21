@@ -9,21 +9,25 @@
     line-height: 2.25rem;
 }
 .button-demo .template .p-button.google {
-    background: linear-gradient(to left, var(--purple-600) 50%, var(--purple-700) 50%);
+    background: linear-gradient(to left, var(--orange-600) 50%, var(--purple-700) 50%);
     background-size: 200% 100%;
     background-position: right bottom;
     transition: background-position 0.5s ease-out;
     color: #fff;
     border-color: var(--purple-700);
 }
+.button-demo .template .p-button.google a{
+    color: #fff;
+
+}
 .button-demo .template .p-button.google:hover {
     background-position: left bottom;
 }
 .button-demo .template .p-button.google i {
-    background-color: var(--purple-700);
+    background-color: var(--orange-700);
 }
 .button-demo .template .p-button.google:focus {
-    box-shadow: 0 0 0 1px var(--purple-400);
+    box-shadow: 0 0 0 1px var(--orange-400);
 }
 .button-demo .template .p-button.youtube {
     background: linear-gradient(to left, var(--pink-600) 50%, var(--pink-700) 50%);

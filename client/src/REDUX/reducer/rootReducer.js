@@ -1,4 +1,5 @@
-import ACTION_TYPES from "../actionTypes/actionTypes";
+import ACTION_TYPES from "../actionTypes/actionTypes";  
+
 
 const initialState = {
   users: "",
@@ -27,6 +28,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         users: action.payload,
       };
+      case ACTION_TYPES.GET_ADMIN_ALL:
+        return {
+          ...state,
+          users: action.payload,
+        };
     case ACTION_TYPES.GET_LOGIN:
       console.log(action.payload);
       localStorage.setItem('login',JSON.stringify(action.payload))
