@@ -11,7 +11,20 @@ const { Update } = require("../services/updateUser");
 const router = Router();
 const {sendEmail} = require("../services/sendEmail");
 
+/*         get users coordinates          */
 
+router.get("/usersCoordinates", async (req, res ) => {
+  try{
+    const infoUsers = await infoTotalDb();
+    //console.log(infoUsers)
+    res.send(infoUsers);
+  } catch (error) {
+    res.send(error)
+  }
+  //res.send("hola usersCoordinates")
+});
+
+/*         ----------          */
 
 router.get("/profile/:id", async (req, res, next) => {
   const { id } = req.params;
