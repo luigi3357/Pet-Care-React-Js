@@ -32,13 +32,15 @@ import { Home } from "./Pages/Home";
 import { Profile } from "./Pages/Profile";
 import MapDetail from "./Pages/MapDetail";
 import About from "./Components/About/About";
+import Terms from "./Components/Terms/Terms";
 
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<Home />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="/mailcode" element={<MailCode />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/Register" element={<Register />} />

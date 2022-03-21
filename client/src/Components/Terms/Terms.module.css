@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .main {
+    width: 100vw;
+    padding: 5% 10%;
+    margin-bottom: 50px;
+    /* background-color: #eee; */
+  }
+  
+  .title,
+  p {
+    color: black;
+    text-align: left;
+  }
+  
+  .title {
+    margin-bottom: 40px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+  

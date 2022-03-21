@@ -12,6 +12,7 @@ import style from "./../Pages/global.module.css";
 import { DeletePost } from "./Botones/DeletePost";
 export default function PostCard({ post }) {
   const {
+    id,
     title,
     author,
     type,
@@ -22,7 +23,7 @@ export default function PostCard({ post }) {
   const [showDetails, setShowDetails] = useState(false);
   let petIcon;
   let sizeText;
-
+console.log(id)
   switch (type) {
     case "gato":
       petIcon = <FaCat className="text-5xl" />;

@@ -43,9 +43,6 @@ export default function Footer() {
             <span className={styles.text}>Términos y condiciones</span>
             </Link>
             <br />
-            <Link to="/sustainability">
-            <span className={styles.text}>Visión social</span>
-            </Link>
           </div>
           <div className={styles.column}>
             <span className={styles.titles}>Navegar</span>
