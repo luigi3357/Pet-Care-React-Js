@@ -6,6 +6,7 @@ import { Button } from "primereact/button";
 import { FaDog, FaCrow, FaCat } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
 import style from "./../Pages/global.module.css";
+// import { DeletePost } from "./Botones/DeletePost";
 
 export default function PostCard({ post }) {
   const { title, author, type, size } = post;
@@ -48,6 +49,8 @@ export default function PostCard({ post }) {
     <div className={style.postCardContainer}>
       {/* <Fav id = {id} /> */}
       <div className={style.postCardSubContainer}>
+      {/* <DeletePost id={id}/> */}
+
         <img
           className={style.imgPerfil}
           src={author.profileImgURL ? author.profileImgURL : profileDefault}
