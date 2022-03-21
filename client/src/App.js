@@ -29,6 +29,7 @@ import { Reset } from "./Components/LoginAndRegister/Reset";
 import { RatingDemo } from "./Components/Review";
 import { Home } from "./Pages/Home";
 import { Profile } from "./Pages/Profile";
+import { PersonalProfile } from "./Pages/PersonalProfile";
 import MapDetail from "./Pages/MapDetail";
 import About from "./Components/About/About";
 import Terms from "./Components/Terms/Terms";
@@ -47,6 +48,7 @@ function App() {
         <Route path="/rating" element={<RatingDemo />} />
         <Route path="/adminHome" element={<AdminHome />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/PersonalProfile/:id" element={<PersonalProfile />} />
         <Route path="/verificacion" element={<Verification />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/editProfile" element={<EditProfile />} />
@@ -67,6 +69,10 @@ function App() {
 export default App;
 
 //////////////       mercadopago                //////////////
-{/* <Route path="/" element={<BookingDatatables title={'Contrataciones'}  />}/>    */}/*data={infoUser.contrataciones}*/
-{/* <Route path="/booking/:id" element={<Payment />} />
-<Route path="/mp_confirmation" element={<ConfirmationMP />} /> */}
+{
+  /* <Route path="/" element={<BookingDatatables title={'Contrataciones'}  />}/>    */
+} /*data={infoUser.contrataciones}*/
+{
+  /* <Route path="/booking/:id" element={<Payment />} />
+<Route path="/mp_confirmation" element={<ConfirmationMP />} /> */
+}
