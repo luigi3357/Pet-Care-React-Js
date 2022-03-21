@@ -27,9 +27,9 @@ export default function ClientView({
         </p>
         <p>{checkout_details.client.phone} </p>
         <h2>Registro</h2>
-        <p>{checkout_details.check_in}</p>
+        <p>{checkout_details.check_in.slice(0,10)}</p>
         <h2>Salida</h2>
-        <p>{checkout_details.check_out}</p>
+        <p>{checkout_details.check_out.slice(0,10)}</p>
 
         <h2>TOTAL</h2>
         <h2>${checkout_details.price}</h2>

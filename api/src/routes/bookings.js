@@ -4,31 +4,42 @@ const { User, Review, Booking } = require("../db");
 const router = Router();
 
 router.post("/create", async (req, res, next) => {
-  const { client, keeper, price, check_in, check_out } = req.body;
+  const { client_id, keeper_id, price, check_in, check_out, comment } = req.body;
   try {
-    const reservation = await Booking.create({
-      client_id: client,
-      keeper_id: keeper,
-      price,
-      check_in,
-      check_out,
-    });
-    console.log(reservation);
-    res.status(201).send("Tu reserva se ha creado con éxito");
-  } catch (error) {
-    next(error);
+  if(client_id && keeper_id){
+    const foundClient = User.findOne({where: {id: client_id}});
+    const foundKeeper = User.findOne({where: {id: keeper_id}});
+    if(foundClient && foundKeeper){
+      const reservation = await Booking.create({
+        client_id: client_id,
+        keeper_id: keeper_id,
+        price,
+        check_in,
+        check_out,
+        comment
+      });
+      console.log(reservation);
+      return res.status(201).send("Tu reserva se ha creado con éxito");
+    }
+    return res.status(400).send('no se encontraron los usuarios')
   }
+  return res.status(400).send('no se reconocen los id´s')
+} catch (error) {
+  next(error);
+}
 });
 router.post("/mocks", async (req, res, next) => {
   try {
     const users = await User.findAll();
+    const today = new Date()
+    const futureDay = new Date()
 
     const reservation = await Booking.create({
       client_id: users[getRandomInt(0, users.length)].id,
       keeper_id: users[getRandomInt(0, users.length)].id,
       price: 50 * getRandomInt(1, 5),
-      check_in: "2022-01-1",
-      check_out: "2022-01-11",
+      check_in: today,
+      check_out: futureDay.setDate(futureDay.getDate()+5),
     });
     res.status(201).send(reservation);
   } catch (error) {

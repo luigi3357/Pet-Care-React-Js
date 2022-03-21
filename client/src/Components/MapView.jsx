@@ -5,18 +5,22 @@ import GoogleMapReact from "google-map-react";
 
 
 const Map = ({setCoordinates, coordinates, cards}) => {
+    const dispatch = useDispatch()
+    const showPointers = useSelector((state) => state.usersCoordinates)
     const coordinatesO = {lat:-34.61315, lng:-58.3772}
-    const showPointers = [{ lat:-34.61315, lng:-58.3772},{ lat:-44.61315, lng:-58.3772}]
+    //const showPointers = [{ lat:-34.61315, lng:-58.3772},{ lat:-44.61315, lng:-58.3772}]
     
     const [state, setState] = useState({
         currentLocation: {lat: -34.61315, lng: -58.3772},
         zoom: 10
     })
 
-   
+    useEffect (()=>{
+        dispatch(usersCoordinates())
+    },[dispatch])
 
     console.log(coordinates, "prueba+++++++++")
-    
+    //console.log(showPointers, "objetousers")
 
 
     return (
@@ -32,19 +36,19 @@ const Map = ({setCoordinates, coordinates, cards}) => {
                 
             >
                 <div lat={coordinates.lat} lng={coordinates.lng}>
+                <p>Ud está Aquí!!</p>
                     <img style={{height: '5vh', width: '5vh'}} src="https://cdn-icons-png.flaticon.com/512/17/17177.png" alt="Marker"></img>
                 </div> 
                 {
-                showPointers.map((pointers, index) => {
-                    
+                showPointers?.map((pointers) => {
                     return (
-                        
-                            <div lat={pointers.lat} lng={pointers.lng} key={index}>
+                            <div lat={pointers.location[0].lat} lng={pointers.location[0].lng} key={pointers.id}>
+                                <p>{pointers.name}</p>
                                 <img style={{height: '3vh', width: '3vh'}} src="https://cdn-icons-png.flaticon.com/512/17/17177.png" alt="Marker"></img>
                             </div>
                     )
                 })
-                }
+                } 
                 
             </GoogleMapReact>
             
