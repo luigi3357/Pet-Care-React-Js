@@ -166,7 +166,7 @@ router.get("/adminAll", async (req, res) => {
       bio: e.bio,
       phone: e.phone,
       location: e.location,
-      keeper: e.keeper,
+      keeper: e.keeper === true? "cuidador":"solcitante",
       key_2fa: e.key_2fa,
       rating: e.rating,
       bookings: e.bookings,
