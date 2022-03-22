@@ -103,7 +103,7 @@ router.put("/edit", async (req, res) => {
          last_name: last_name ? last_name: user.last_name, 
          phone: phone? phone: user.phone, 
          bio:bio? bio:user.bio, 
-        //  location: location? location: user.location, 
+         location: location? location: user.location, 
         //  myImages: myImages? myImages: user.myImages,  
          profileImgURL: profileImgURL? profileImgURL: user.profileImgURL
         },   
