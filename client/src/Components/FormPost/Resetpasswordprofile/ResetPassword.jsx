@@ -4,18 +4,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import {getAllUsers, resetPassword} from '../../../REDUX/actions/action'
 import './Resetpassword.css'
 export default function ResetPassword() {
-    const  idautor = useSelector((state)=> state.login)
-    const  user = useSelector((state)=> state.users)
-    
+    // const  idautor = useSelector((state)=> state.login)
+    // const  user = useSelector((state)=> state.users)
+    const author= JSON.parse(localStorage.getItem("login"))
+       console.log(author)
 
     function validate (){}
 
-console.log(user)
-console.log(user)
+
  const dispatch = useDispatch()
  const [errors,setErrors] = useState({})
 const [form,setForm] = useState({
-    email:'',
+    email:author.email,
     password:'',
     newpassword:'',
     repeatnewpassword:'',
@@ -154,13 +154,12 @@ function handleChange (e) {
 
 
 async function  resetSubmit (e) {
-    const oneUser = user.filter(e => e.id === idautor.id)
-    const onePass =oneUser.map(e => e.password)
-    const  verifyPassword = await bcrypt.compare(form.password,onePass[0] );   
-    console.log(onePass,'soyonepass')
-console.log(onePass[0],'soyonepass0')
-console.log(verifyPassword,'soyverifypass')
-console.log(form.password,'soyformpassword')
+    // const oneUser = user.filter(e => e.id === idautor.id)
+    // const onePass =oneUser.map(e => e.password)
+    console.log(author.id, 'estoy dentro de resetsubmit')
+    const  verifyPassword = await bcrypt.compare(form.password,author.password);   
+    
+
 if(verifyPassword === false){
     e.preventDefault()
     alert('Su contraseña actual no coincide')
@@ -198,16 +197,7 @@ return (
                 <h1 className='form_title'>Cambiar contraseña</h1>
             </div>
            
-            <div  className='form_group'>
-         <label className='form_label'>E-mail</label>
-         <input  className='form_input'  type='text'  value={form.email} name='email' onChange={(e) =>handleChange(e)}/>
-        
-           {
-             errors.email && (<p  className='errortxt'>{errors.email}</p>)
-
-           }
-           
-            </div>
+         
 
             <div className='form_group'>
 <label  className='form_label'>Contraseña Actual</label>

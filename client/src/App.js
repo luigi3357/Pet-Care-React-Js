@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 //import "./App.css";
 import AddressAutocom from "./Components/AddressAutocom.jsx";
 import AdminHome from "./Components/Admin/AdminHome";
-import EditProfile from "./Components/FormPost/EditProfileform/EditProfile";
+import EditProfile from "./Components/FormPost/EditProfileform/EditProfile.jsx";
 import FormCuidador from "./Components/FormPost/Form-post-reqserv-cuidador/Form";
 import FormServ from "./Components/FormPost/Form-post-reqserv-cuidador/Formreqserv";
 import FormPayBank from "./Components/FormPost/FormsPay/FormPayData";

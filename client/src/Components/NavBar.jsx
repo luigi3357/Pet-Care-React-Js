@@ -70,7 +70,7 @@ export const NavBar = () => {
             id="Profile"
           >
             <Avatar
-              label={logged.name[0].toUpperCase()}
+          //    label={logged.name[0].toUpperCase()}
               shape="circle"
               size="large"
             />
