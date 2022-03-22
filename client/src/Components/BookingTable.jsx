@@ -22,6 +22,7 @@ export const BookingDatatables = ({ title, data }) => {
       setDetails(response.data);
     });
     setTimeout(() => {
+      console.log(data);
       setLoading(false);
     }, 1000);
   }, []);

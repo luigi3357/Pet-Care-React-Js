@@ -193,5 +193,39 @@ router.get("/adminAll", async (req, res) => {
 });
 
 
+router.get("/adminAll", async (req, res) => {
+  const infoUser = await infoTotalDb();  
+  const InfoUser2 = infoUser.map((e)=>{
+   
+    return {
+      id: e.id,
+      email: e.email,
+      password: e.token,
+      token: e.token,
+      token_2FA: e.token_2FA,
+      name: e.name,
+      last_name: e.last_name,
+      bio: e.bio,
+      phone: e.phone,
+      location: e.location,
+      keeper: e.keeper,
+      key_2fa: e.key_2fa,
+      rating: e.rating,
+      bookings: e.bookings,
+      profileImgURL: e.profileImgURL,     
+      myImages: e.myImages,
+      favoritos: null,
+      deleted: e.deleted=== true ?"true":"false",
+      Admin: e.Admin,
+      createdAt: e.createdAt,
+      updatedAt: e.updatedAt,
+      posteos: e.posteos,
+      reviews: e.reviews    
+    }
+  })
+  
+  res.send(InfoUser2);  
+});
+
 
 module.exports = router;

@@ -8,34 +8,42 @@ module.exports = (sequelize) => {
       primaryKey: true,
     },
     price: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     status: {
-        type: DataTypes.STRING,
-        defaultValue: 'pending'
-      },
+      type: DataTypes.STRING,
+      defaultValue: "pending",
+    },
+    client_review: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    keeper_review: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
     reservation_date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW()
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW(),
     },
     check_in: {
-        type: DataTypes.DATE,
-        allowNull: false,
+      type: DataTypes.DATE,
+      allowNull: false,
     },
     check_out: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
     },
     comment: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     preference_id: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     payment_id: {
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+    },
   });
 };

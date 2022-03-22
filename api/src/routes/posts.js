@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { User, Post, Review } = require('../db');
 const { findPostsForHomeScreen } = require('../services/searchEngine');
+const { search} = require('../services/login')
 
 const router = Router();
 
@@ -28,8 +29,6 @@ router.post('/create', async (req, res, next) => {
       price: Number(price),
       type: type.toString().toLowerCase(),
       size: size.toString().toLowerCase(),
-      address,
-      phone: Number(phone),
       author_id,
     })
     //armamos el mensaje

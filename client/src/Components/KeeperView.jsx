@@ -36,9 +36,14 @@ export default function KeeperView({
           <div>
           
           <p>Esta reserva fue completada</p>
-          <Link to={"/"}>volver</Link>
+          {
+            !checkout_details.keeper_review ?
+            <>
+            <Link to={"/"}>volver</Link>
           <p >Dejanos tu opinión sobre {checkout_details.client.name}</p>
-          <RatingDemo  client_id={checkout_details.client_id} keeper_id={checkout_details.keeper_id}  />
+          <RatingDemo  client_id={checkout_details.client_id} keeper_id={checkout_details.keeper_id} booking_id={checkout_details.id}  />
+            </>
+          :null}
         </div>
       );
       case "pending":
@@ -62,17 +67,16 @@ export default function KeeperView({
                 <Link to={"/"}>volver</Link>
               </div>
             )}
-          if(checkout_details.status == 'approved' && salida.getTime()> today.getTime()){
+          // if(checkout_details.status == 'approved' && salida.getTime()> today.getTime()){
+          //   return (
+          //     <div>
+          //       <p>Reserva en curso</p>
+          //       <Link to={"/"}>volver</Link>
+          //     </div>
+          //   )}
+          if(checkout_details.status == 'approved'/* && salida.getTime()< today.getTime()*/){
             return (
               <div>
-                <p>Reserva en curso</p>
-                <Link to={"/"}>volver</Link>
-              </div>
-            )}
-          if(checkout_details.status == 'approved' && salida.getTime()< today.getTime()){
-            return (
-              <div>
-                <p>Marcar como completada</p>
                 <Link to={"/"}>volver</Link>
                 <Button
             label={"Completada"}
@@ -115,11 +119,13 @@ export default function KeeperView({
               </p>
               <p>{checkout_details.keeper.phone} </p>
               <h2>Dueño</h2>
+              <Link to={`/Profile/${checkout_details.client.id}`}>
               <p>
                 {checkout_details.client.name +
                   " " +
                   checkout_details.client.last_name}
               </p>
+                  </Link>
               <p>{checkout_details.client.phone} </p>
               <h2>Registro</h2>
               <p>{checkout_details.check_in.slice(0,10)}</p>
@@ -129,7 +135,8 @@ export default function KeeperView({
               <h2>TOTAL</h2>
               <h2>${checkout_details.price}</h2>
       
-              <h2>{checkout_details.comments}</h2>
+              <h2>Comentarios</h2>
+              <h2>{checkout_details.comment}</h2>
               {acceptButton(checkout_details.status, accept)}
               {!status.includes(checkout_details.status) &&
                 cancelButton(checkout_details.status, cancelOrder)}

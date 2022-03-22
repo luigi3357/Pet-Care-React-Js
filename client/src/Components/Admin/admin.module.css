@@ -1,0 +1,28 @@
+.containerAdmin{
+   align-items: center;
+   display: flex;
+   flex-direction: row;
+   margin-top: 3rem;
+   margin-left: 80px;
+   margin-right: 80px;
+   border: 2px solid black;
+}
+.posts{
+   align-items: center;
+   display: flex;
+   flex-direction: row;
+   margin-top: 3rem;
+   margin-left: 80px;
+   margin-right: 80px;
+   border: 2px solid black;
+   margin-bottom: 50px;
+}
+.container{
+   margin-left: auto;
+   margin-right: auto;
+   width: 100%;
+}
+
+.btn{
+   margin-left: 100px;
+}
