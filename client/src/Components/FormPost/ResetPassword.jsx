@@ -2,6 +2,7 @@ import React,{useState,useMemo,useEffect} from 'react'
 import bcrypt from "bcryptjs";
 import { useSelector, useDispatch } from 'react-redux'
 import {getAllUsers, resetPassword} from '../../REDUX/actions/action'
+import './Form-post-reqserv-cuidador/Form.css'
 export default function ResetPassword() {
     const  idautor = useSelector((state)=> state.login)
     const  user = useSelector((state)=> state.users)
@@ -185,53 +186,64 @@ if(verifyPassword === true){
     
  
 return (
+    <body>
     <div>
-        <form  onSubmit={(e)=> resetSubmit(e)}>
+    <div>
+        <form  className='formpublic'  onSubmit={(e)=> resetSubmit(e)}>
+      <div  className='form_container'> 
             <div>
-                <h1>Cambiar contraseña</h1>
+                <h1 className='form_title'>Cambiar contraseña</h1>
             </div>
             <section>
-            <div>
-         <h3>E-mail</h3>
-         <input   type='text'  value={form.email} name='email' onChange={(e) =>handleChange(e)}/>
+            <div  className='form_group'>
+         <h3 className='form_label'>E-mail</h3>
+         <input  className='form_input'  type='text'  value={form.email} name='email' onChange={(e) =>handleChange(e)}/>
         
            {
-             errors.email && (<p>{errors.email}</p>)
+             errors.email && (<p  className='errortxt'>{errors.email}</p>)
 
            }
            
             </div>
 
-            <div>
-<h3>Contraseña Actual</h3>
-<input   type='text'  value={form.password} name='password' onChange={(e) =>handleChange(e)}/>
+            <div className='form_group'>
+<h3  className='form_label'>Contraseña Actual</h3>
+<input  className='form_input' type='password'  value={form.password} name='password' onChange={(e) =>handleChange(e)}/>
 {
-             errors.password && (<p>{errors.password}</p>)
+             errors.password && (<p className='errortxt'>{errors.password}</p>)
 
            }
             </div>
 
-        <div>
-        <h3>Contraseña nueva</h3>
-        <input   type='text'  value={form.newpassword} name='newpassword' onChange={(e) =>handleChange(e)}/>
+        <div className='form_group'>
+        <h3  className='form_label'>Contraseña nueva</h3>
+        <input className='form_input'   type='password'  value={form.newpassword} name='newpassword' onChange={(e) =>handleChange(e)}/>
         {
-                 errors.newpassword && (<p>{errors.newpassword}</p>) 
+                 errors.newpassword && (<p className='errortxt'>{errors.newpassword}</p>) 
           }
         </div>
-        <div>
-            <h3>Repetir contraseña anterior</h3>
-            <input   type='text'  value={form.repeatnewpassword} name='repeatnewpassword' onChange={(e) =>handleChange(e)}/>
+        <div  className='form_group'>
+            <h3 className='form_label'>Repetir contraseña anterior</h3>
+            <input className='form_input'  type='password'  value={form.repeatnewpassword} name='repeatnewpassword' onChange={(e) =>handleChange(e)}/>
           {
-                 errors.repeatnewpassword && (<p>{errors.repeatnewpassword}</p>) 
+                 errors.repeatnewpassword && (<p  className='errortxt'> {errors.repeatnewpassword}</p>) 
           }
         </div>
+<div>
 
+</div>
+<div>
 
+        <button className={disableSubmit ?'form_submiterr' : 'form_submit'} type='submit' disabled={disableSubmit} >Confirmar</button>
+</div>
 
-        <button  type='submit' disabled={disableSubmit} >Confirmar</button>
         </section>
+        </div>
         </form>
     </div>
+</div>
+    </body>
+ 
 )
 
 }

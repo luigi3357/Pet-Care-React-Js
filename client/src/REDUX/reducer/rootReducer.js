@@ -115,35 +115,41 @@ function rootReducer(state = initialState, action) {
             filtered_posts: state.all_posts.filter((i) => i.size === "grande"),
           };
         case "precioDesc":
+          let filteredCopy = [...state.filtered_posts]
           return {
             ...state,
-            filtered_posts: state.filtered_posts.sort((a, b) => {
-              if (a.price > b.price) return 1;
-              if (b.price >= a.price) return -1;
-            }),
-          };
-        case "precioAsc":
-          return {
-            ...state,
-            filtered_posts: state.filtered_posts.sort((a, b) => {
+            filtered_posts: filteredCopy.sort((a, b) => {
               if (a.price > b.price) return -1;
-              if (b.price >= a.price) return 1;
+              if (a.price < b.price) return 1;
+              return 0;
             }),
           };
-        case "ratingAsc":
+          case "precioAsc":
+            let filteredCopy2 = [...state.filtered_posts]
+            return {
+              ...state,
+              filtered_posts: filteredCopy2.sort((a, b) => {
+                if (a.price > b.price) return 1;
+                if (a.price < b.price) return -1;
+                return 0;
+              }),
+            };
+            case "ratingAsc":
+          let filteredCopy3 = [...state.filtered_posts]
           return {
             ...state,
-            filtered_posts: state.filtered_posts.sort((a, b) => {
+            filtered_posts: filteredCopy3.sort((a, b) => {
               if (Number(a.author.rating) > Number(b.author.rating)) return -1;
-              if (Number(b.author.rating) >= Number(a.author.rating)) return 1;
+              if (Number(b.author.rating) > Number(a.author.rating)) return 1;
             }),
           };
-        case "ratingDesc":
-          return {
+          case "ratingDesc":
+            let filteredCopy4 = [...state.filtered_posts]
+            return {
             ...state,
-            filtered_posts: state.filtered_posts.sort((a, b) => {
+            filtered_posts: filteredCopy4.sort((a, b) => {
               if (a.author.rating > b.author.rating) return 1;
-              if (b.author.rating >= a.author.rating) return -1;
+              if (b.author.rating > a.author.rating) return -1;
             }),
           };
         default:

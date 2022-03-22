@@ -19,7 +19,7 @@ export const Home = () => {
   return (
     <div>
       <NavBar />
-
+    
       <div className="flex flex-column align-items-center text-center justify-content-center w-full">
         <Filters />
         <div className={style.postContainer}>
