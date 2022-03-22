@@ -19,16 +19,18 @@ export const Home = () => {
   return (
     <div>
       <NavBar />
-
+    
       <div className="flex flex-column align-items-center text-center justify-content-center w-full">
         <Filters />
         <div className={style.postContainer}>
-          {filtered_posts.map((post) => {
-            return <PostCard post={post} />;
-          })}
+          <div className={style.postContainer}>
+            {filtered_posts.map((post) => {
+              return <PostCard post={post} />;
+            })}
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer/>
     </div>
   );
 };

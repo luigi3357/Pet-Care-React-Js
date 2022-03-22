@@ -6,12 +6,12 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 //import "./App.css";
 import AddressAutocom from "./Components/AddressAutocom.jsx";
 import AdminHome from "./Components/Admin/AdminHome";
-import EditProfile from "./Components/FormPost/EditProfile";
+import EditProfile from "./Components/FormPost/EditProfileform/EditProfile.jsx";
 import FormCuidador from "./Components/FormPost/Form-post-reqserv-cuidador/Form";
 import FormServ from "./Components/FormPost/Form-post-reqserv-cuidador/Formreqserv";
 import FormPayBank from "./Components/FormPost/FormsPay/FormPayData";
 import FormMercadoP from "./Components/FormPost/FormsPay/FormPayMP";
-import ResetPassword from "./Components/FormPost/ResetPassword";
+import ResetPassword from "./Components/FormPost/Resetpasswordprofile/ResetPassword";
 
 import EditForm from "./Components/FormPost/Form-post-reqserv-cuidador/EditForm";
 // import InputSearchB from "../src/Components/FormPost/";
@@ -29,9 +29,11 @@ import { Reset } from "./Components/LoginAndRegister/Reset";
 import { RatingDemo } from "./Components/Review";
 import { Home } from "./Pages/Home";
 import { Profile } from "./Pages/Profile";
+import { PersonalProfile } from "./Pages/PersonalProfile";
 import MapDetail from "./Pages/MapDetail";
 import About from "./Components/About/About";
 import Terms from "./Components/Terms/Terms";
+
 
 function App() {
   return (
@@ -46,6 +48,7 @@ function App() {
         <Route path="/rating" element={<RatingDemo />} />
         <Route path="/adminHome" element={<AdminHome />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/PersonalProfile/:id" element={<PersonalProfile />} />
         <Route path="/verificacion" element={<Verification />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/editProfile" element={<EditProfile />} />
@@ -56,9 +59,10 @@ function App() {
         <Route path="/editForm" element={<EditForm />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/Maps" element={<MapDetail />} />
+        <Route path="/booking/:id" element={<Payment />} />
         <Route path="/AddressAutocom" element={<AddressAutocom />} />
         <Route path="/about" element={<About />} />
-
+        <Route path="/mp_confirmation" element={<ConfirmationMP />} />
       </Routes>
     </Router>
   );
@@ -67,6 +71,10 @@ function App() {
 export default App;
 
 //////////////       mercadopago                //////////////
-{/* <Route path="/" element={<BookingDatatables title={'Contrataciones'}  />}/>    */}/*data={infoUser.contrataciones}*/
-{/* <Route path="/booking/:id" element={<Payment />} />
-<Route path="/mp_confirmation" element={<ConfirmationMP />} /> */}
+{
+  /* <Route path="/" element={<BookingDatatables title={'Contrataciones'}  />}/>    */
+} /*data={infoUser.contrataciones}*/
+{
+  /* <Route path="/booking/:id" element={<Payment />} />
+<Route path="/mp_confirmation" element={<ConfirmationMP />} /> */
+}

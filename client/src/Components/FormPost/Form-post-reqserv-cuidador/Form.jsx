@@ -9,53 +9,61 @@ export default function FormCard(){
        //   const typesState = useSelector((state)=> state.typePokemon)
        
        
-       const  idautor = useSelector((state)=> state.login)
-       const  user = useSelector((state)=> state.users)
-       const oneUser = user.filter(e => e.id === idautor.id)
-       const oneEmail =oneUser.map(e => e.email)
-       console.log(oneEmail ,'soy oneEmail')
+      //  const  idautor = useSelector((state)=> state.login)
+      //  const  user = useSelector((state)=> state.users)
+      //  const oneUser = user.filter(e => e.id === idautor.id)
+      //  const oneEmail =oneUser.map(e => e.email)
+      //  console.log(oneEmail ,'soy oneEmail')
+      // console.log(user)
+      const author= JSON.parse(localStorage.getItem("login"))
+      console.log(author)
 
-
-      console.log(user)
-      console.log(idautor.id, )
+      console.log(author.id, )
+      console.log(author.email)
         const [form,setForm]= useState({
         title:'',
         description:'',
         price:'',
-       email:  oneEmail[0],
+       email: author.email,
         type:[],
         size:[],
         address:'',
         phone:'',
-        author_id:idautor.id,
+        author_id:author.id,
       })
       function validate(form){ 
         let errors = {};
         if(!form.title){
-            errors.title = 'Se requiere un titulo'
-      
-        } 
-         if (!form.description  ){
-            errors.description = 'Se requiere una descripcion'
-        } 
-         if (!form.price){
-            errors.price = 'Introduzca el precio de su servicio'
-        }
-         if (form.price <= 0 ){
-            errors.price = 'El precio no puede ser 0 o menor'
-        } if (form.type.length <= 0 ){
-            errors.type = 'Se solicita el tipo de mascota'
-        } if (form.type.length > 5 ){
-            errors.type = 'No puede seleccionar 2 veces el mismo'
-        } if (form.size.length <= 0  ){
-          errors.size = 'Se solicita el tamaño de mascota'
-      } if (form.size.length > 3 ){
-          errors.size = 'No puede seleccionar 2 veces el mismo'
-      } if(!form.address){
-        errors.address = 'Se requiere su direccion'
-      } if(!form.phone){
-        errors.phone = 'Se requiere su numero de telefono'
+          errors.title = 'Se requiere un titulo'
+    
+      } 
+       if (!form.description  ){
+          errors.description = 'Se requiere una descripcion'
+      } 
+       if (!form.price){
+          errors.price = 'Introduzca el precio de su servicio'
       }
+       if (form.price.length <= 0 ){
+          errors.price = 'El precio no puede ser 0 o menor'
+      }  if (form.price.length > 6 ){
+        errors.price = 'El precio no puede ser mayor a 6 digitos'
+    }
+       if (form.type.length < 1 ){
+          errors.type = 'Se solicita el tipo de mascota'
+      } if (form.type.length > 5 ){
+          errors.type = 'No puede seleccionar 2 veces el mismo'
+      } if (form.size.length < 1  ){
+        errors.size = 'Se solicita el tamaño de mascota'
+    } if (form.size.length > 3 ){
+        errors.size = 'No puede seleccionar 2 veces el mismo'
+    } if(!form.address){
+      errors.address = 'Se requiere su direccion'
+    } if(!form.phone){
+      errors.phone = 'Se requiere su numero de telefono'
+    }
+    if(!form.phone.length > 13){
+      errors.phone = 'Su numero contiene demasiado digitos'
+    }
          
       return errors;
     }
@@ -194,12 +202,12 @@ export default function FormCard(){
           title:'',
           description:'',
           price:'',
-         email:  oneEmail[0],
+         email:  author.email,
           type:[],
           size:[],
           address:'',
           phone:'',
-          author_id:idautor.id,
+          author_id:author.id,
           
         })
     }
@@ -242,7 +250,7 @@ export default function FormCard(){
            <label className='form_label'>Direccion</label> 
            <input className='form_input'  type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/>
            {
-                errors.addres && (<p className='errortxt'>{errors.address}</p>)
+                errors.address && (<p className='errortxt'>{errors.address}</p>)
             }
         </div>
         <div  className='form_group' >
@@ -291,9 +299,9 @@ export default function FormCard(){
            </div>
           
             {
-            errors.type && 
+            form.type ? null : 
             (
-              <p className='errortxt'>{errors.type}</p>
+              <p className='errortxt'>Se requiere un tipo de mascota</p>
             ) 
             }
        
@@ -331,13 +339,10 @@ export default function FormCard(){
            <input  onChange={handleSelectS} type="checkbox"  name="grande" value='grande' />
            <label>Grande</label>
            </div>
-               
            {
-            errors.size && 
-            (
-              <p className='errortxt'>{errors.size}</p>
-            ) 
-            }
+               form.size.length >= 1 ? null : (<p className='errorarray'>(Campos obligatorios)</p>) 
+              } 
+           
        
               
              
@@ -356,7 +361,7 @@ export default function FormCard(){
 
 
        <div> 
-                <button className='form_submit' type='submit' disabled={disableSubmit}  >Crear Servicio!</button>
+                <button className={disableSubmit ?'form_submiterr' : 'form_submit'}  type='submit' disabled={disableSubmit}  >Crear Servicio!</button>
        </div>
     
        </div>

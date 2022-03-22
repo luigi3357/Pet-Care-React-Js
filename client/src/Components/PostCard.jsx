@@ -6,6 +6,7 @@ import { Button } from "primereact/button";
 import { FaDog, FaCrow, FaCat } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
 import style from "./../Pages/global.module.css";
+// import { DeletePost } from "./Botones/DeletePost";
 
 export default function PostCard({ post }) {
   const { title, author, type, size } = post;
@@ -44,10 +45,22 @@ export default function PostCard({ post }) {
     default:
       break;
   }
+  function ratingCalculation(){
+    let lowerInt = Math.floor(author.rating)
+    let diffRating = author.rating - lowerInt
+    if(diffRating<0.75){
+      return lowerInt
+    }
+    return Math.ceil(author.rating)
+  }
+
+
   return (
     <div className={style.postCardContainer}>
       {/* <Fav id = {id} /> */}
       <div className={style.postCardSubContainer}>
+      {/* <DeletePost id={id}/> */}
+
         <img
           className={style.imgPerfil}
           src={author.profileImgURL ? author.profileImgURL : profileDefault}
@@ -61,7 +74,7 @@ export default function PostCard({ post }) {
               <p className={style.title}>Rating </p>
               <Rating
                 className="text-white"
-                value={author.rating}
+                value={ratingCalculation}
                 readOnly
                 stars={5}
                 cancel={false}

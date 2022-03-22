@@ -87,6 +87,22 @@ export function getAllUsers() {
   };
 }
 
+export function getAdminAll() {
+  return function (dispatch) {
+    axios
+      .get(`${localhost}/users/adminAll`)
+      .then((response) => {
+        dispatch({
+          type: ACTION_TYPES.GET_ADMIN_ALL,
+          payload: response.data,
+        });
+      })
+      .catch((e) => {
+        throw new Error("No se pudo conectar al servidor");
+      });
+  };
+}
+
 // Login
 
 export const getLogin = (email) => {
@@ -217,6 +233,10 @@ export function getLogOut() {
       type: ACTION_TYPES.GET_LOGOUT,
     });
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> d86d3ae383486319404b83fa8d49e46d30c221c3
 }
 
 //delete usuario desde admin
@@ -239,6 +259,7 @@ export function adminDeleteReviews(id) {
     let json = await axios.delete(`${localhost}/Admin/delete/` + id);
     return json;
   };
+<<<<<<< HEAD
 }
 export function getAdminAll() {
   return function (dispatch) {
@@ -254,4 +275,7 @@ export function getAdminAll() {
         throw new Error("No se pudo conectar al servidor");
       });
   };
+=======
+
+>>>>>>> d86d3ae383486319404b83fa8d49e46d30c221c3
 }

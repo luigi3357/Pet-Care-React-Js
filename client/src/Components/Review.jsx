@@ -7,26 +7,29 @@ import { Button } from "primereact/button";
 import { localhost } from "../REDUX/actions/action";
 import { Dialog } from "primereact/dialog";
 
-export const RatingDemo = ({client_id, keeper_id}) => {
+export const RatingDemo = ({client_id, keeper_id, booking_id}) => {
   const [rate, setRate] = useState(null);
   const [value, setValue] = useState("");
   const [display, setDisplay] = useState(false);
-  let login = useSelector((state) => state.login);
+  const [buttonSend, setButtonSend] = useState(true);
+  // let logedUser = useSelector((state) => state.login);
 
   
   const dispatch = useDispatch()
-  // const logedUser = JSON.parse(localStorage.getItem("login"));
+  const logedUser = JSON.parse(localStorage.getItem("login"));
   // const reviewedUser = JSON.parse(localStorage.getItem("profile_id"));
   const payload = {
-    from_id: login.id,//logedUser.id,
+    booking_id: booking_id,
+    from_id: logedUser.id,//logedUser.id,
     message: value,
     rate: rate,
-    reviewedUser_id:  login.id == client_id ? keeper_id : client_id // reviewedUser,
+    reviewedUser_id:  logedUser.id == client_id ? keeper_id : client_id // reviewedUser,
   };
 
   function submitHandler(e){
     console.log(payload)
-      axios.post(`${localhost}/reviews/create`,payload).then((response)=>console.log(response.data))
+      axios.post(`${localhost}/reviews/create`,payload).then((response)=>console.log(response.data).then(()=>{setButtonSend(false)}))
+      setDisplay(false)
   }
   function reviewButton(){
     return(
@@ -44,7 +47,7 @@ export const RatingDemo = ({client_id, keeper_id}) => {
       header={<h1>Déjanos tu opinión</h1>}
       draggable={false}
       visible={display}
-        footer={<Button label="Enviar" onClick={()=>submitHandler()}/>}
+        footer={<Button label="Enviar" disabled={!buttonSend} onClick={()=>submitHandler()}/>}
         onHide={() => setDisplay(false)} >
       <div className="card">
         <h5>Calificación</h5>

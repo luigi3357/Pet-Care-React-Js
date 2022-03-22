@@ -84,11 +84,17 @@ router.put("/payment_check", async (req, res, next) => {
 });
 
 router.put("/update", async (req, res, next) => {
+  // estados son 'pending', 'accepted', 'rejected', 'approved', 'completed'
   try {
     const { id, status } = req.body;
-    const booking = await Booking.findOne({ where: { id } });
+    const booking = await Booking.findOne({ where: { id } },{include: ['client','keeper'] });
     if (booking) {
       await Booking.update({ status: status }, { where: { id } });
+      if(status=='completed'){
+        const keeper = await User.findOne({where: {id: booking.keeper_id}})
+        let newAmount = keeper.bookings + 1
+       await  User.update({bookings: newAmount}, {where: {id: keeper.id}})
+      }
       return res.send("orden modificada con exito");
     }
     return res.send("Tu orden no existe");
