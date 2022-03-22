@@ -1,3 +1,5 @@
+
+
 const user = [
   {
     email: "juliohernandez@gmail.com",
@@ -20,8 +22,7 @@ const user = [
       "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242042.jpg",
       "https://imgar.zonapropcdn.com/avisos/resize/1/00/46/83/60/99/1200x1200/1743242122.jpg",
     ],
-    profileImgURL:
-      require("../../client/src/assets/imagenesDefaultPerfil/img1.png"),
+    profileImgURL: "https://as2.ftcdn.net/v2/jpg/02/41/41/19/1000_F_241411954_4YTOaAtM4QrIMhOVLgglstw3PUGRvonq.jpg",
   },
   {
     email: "francomiño@gmail.com",
@@ -229,8 +230,8 @@ const post = [
   },
   {
     email: "juliohernandez@gmail.com",
-    type: "perros",
-    size: "pequeños",
+    type: "perro",
+    size: "pequeño",
     title: "Acerca de Julio Hernandez",
     price: 80,
     description:
@@ -247,7 +248,7 @@ const post = [
   },
   {
     email: "luiscataldo@gmail.com",
-    type: "perros",
+    type: "perro",
     size: "pequeño",
     title: "Acerca de Luis Cataldo",
     price:120,
@@ -256,8 +257,8 @@ const post = [
   },
   {
     email: "luiscataldo@gmail.com",
-    type: "perros",
-    size: "grandes",
+    type: "perro",
+    size: "grande",
     title: "Acerca de Luis Cataldo",
     price: 170,
     description:
@@ -267,7 +268,7 @@ const post = [
     email: "darianesquivel@gmail.com",
     title: "Acerca de Darian Esquivel",
     type: "aves",
-    size: "medianas",
+    size: "mediano",
     price: 90,
     description:
       "Hola!! soy Darian Esquivel cuido aves, de Lunes a Viernes desde las 12:00 m, si recoges tu mascota después de las 14:00 hrs se cobrará día completo, precio 90 USD",
