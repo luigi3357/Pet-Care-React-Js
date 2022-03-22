@@ -82,11 +82,14 @@ export default function ClientView({
       <h1>#{checkout_details.id.slice(24)}</h1>
       <div>
         <h2>Cuidador</h2>
+        <Link to={`/Profile/${checkout_details.keeper.id}`}>
+
         <p>
           {checkout_details.keeper.name +
             " " +
             checkout_details.keeper.last_name}
         </p>
+        </Link>
         <p>{checkout_details.keeper.phone} </p>
         <h2>Dueño</h2>
         <p>

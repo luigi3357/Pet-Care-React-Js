@@ -19,9 +19,10 @@ import { Link } from "react-router-dom";
 export const Profile = (post) => {
   const { id } = useParams();
   const location = useLocation();
-  const { description, title, author, updatedAt, type, size, address, price } =
-    location.state;
+  // const { description, title, author, updatedAt, type, size, address, price } =
+  //   location.state;
   const loginUser = useSelector((state) => state.login);
+  const loginUser2 = JSON.parse(localStorage.login)
   const [logged, setLogged] = useState(null);
   useEffect(() => {
     const logStorage = window.localStorage.getItem("login");
@@ -38,46 +39,46 @@ export const Profile = (post) => {
 
   useEffect(() => {
     axios
-      .get(`${localhost}/users/profile/` + author.id)
+      .get(`${localhost}/users/profile/` + id)
       .then((r) => setfullInfo(r.data));
   }, []);
+  
+  // switch () {
+  //   case "gato":
+  //     petIcon = <FaCat className="text-5xl" />;
+  //     break;
+  //   case "perro":
+  //     petIcon = <FaDog className="text-6xl" />;
+  //     break;
+  //   case "roedores":
+  //     petIcon = <MdPestControlRodent className="text-6xl" />;
+  //     break;
+  //   case "aves":
+  //     petIcon = <FaCrow className="text-6xl" />;
+  //     break;
+  //   default:
+  //     break;
+  // }
 
-  switch (type) {
-    case "gato":
-      petIcon = <FaCat className="text-5xl" />;
-      break;
-    case "perro":
-      petIcon = <FaDog className="text-6xl" />;
-      break;
-    case "roedores":
-      petIcon = <MdPestControlRodent className="text-6xl" />;
-      break;
-    case "aves":
-      petIcon = <FaCrow className="text-6xl" />;
-      break;
-    default:
-      break;
-  }
+  // switch (size) {
+  //   case "pequeño":
+  //     sizeText = "0 a 25cm";
+  //     break;
+  //   case "mediano":
+  //     sizeText = "25 a 60cm";
+  //     break;
+  //   case "grande":
+  //     sizeText = "60 a 120cm";
+  //     break;
 
-  switch (size) {
-    case "pequeño":
-      sizeText = "0 a 25cm";
-      break;
-    case "mediano":
-      sizeText = "25 a 60cm";
-      break;
-    case "grande":
-      sizeText = "60 a 120cm";
-      break;
-
-    default:
-      break;
-  }
+  //   default:
+  //     break;
+  // }
 
   return (
     <div className={style.container}>
       <NavBar />
-      <div className={style.subContainer}>
+      {fullInfo? <div className={style.subContainer}>
         <div className={style.photoMap}>
           <div className={style.photoMap}>
             <Image
@@ -92,24 +93,22 @@ export const Profile = (post) => {
         <div className={style.profileCardContainer}>
           <div className={style.data}>
             <div className={style.subData}>
-              <h3>{title}</h3>
+              <h3>{fullInfo.name.toUpperCase() +' '+ fullInfo.last_name.toUpperCase()}</h3>
               <p className={style.description}>
-                {fullInfo ? fullInfo.bio : null}
+                {fullInfo.bio}
               </p>
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
-              <p>Contrataciones: {author.bookings}</p>
+              <p>Contrataciones: {fullInfo.bookings}</p>
               <p>Rating:</p>
               <Rating
                 className="text-white"
-                value={author.rating}
+                value={fullInfo.rating}
                 readOnly
                 stars={5}
                 cancel={false}
               />
               {/* <p>Precio: ${price}</p> */}
-              <p>Direccion: {address}</p>
-              <p>Tipo:</p> {petIcon}
-              <p>Tamaño:</p> {sizeText}
+              <p>Direccion: {fullInfo.location? fullInfo.location[0].address: null}</p>
             </div>
           </div>
           <h4>Posteos</h4>
@@ -122,9 +121,9 @@ export const Profile = (post) => {
 
                     {logged ? (
                       <CreateBooking
-                        keeper={author}
-                        price={price}
-                        client={loginUser}
+                        keeper={fullInfo}
+                        price={p.price}
+                        client={loginUser2}
                         info={fullInfo}
                       />
                     ) : (
@@ -146,8 +145,8 @@ export const Profile = (post) => {
             : null}
 
           <h4>Comentarios</h4>
-          {author.reviews ? (
-            author.reviews.map((i) => {
+          {fullInfo.reviews ? (
+            fullInfo.reviews.map((i) => {
               return (
                 <div>
                   <ReviewCard
@@ -164,6 +163,7 @@ export const Profile = (post) => {
           )}
         </div>
       </div>
+      :null}
     </div>
   );
 };

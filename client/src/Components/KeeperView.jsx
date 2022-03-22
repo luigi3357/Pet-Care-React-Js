@@ -119,11 +119,13 @@ export default function KeeperView({
               </p>
               <p>{checkout_details.keeper.phone} </p>
               <h2>Dueño</h2>
+              <Link to={`/Profile/${checkout_details.client.id}`}>
               <p>
                 {checkout_details.client.name +
                   " " +
                   checkout_details.client.last_name}
               </p>
+                  </Link>
               <p>{checkout_details.client.phone} </p>
               <h2>Registro</h2>
               <p>{checkout_details.check_in.slice(0,10)}</p>
