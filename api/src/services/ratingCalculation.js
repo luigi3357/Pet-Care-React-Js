@@ -1,9 +1,10 @@
 const { User, Review } = require("../db");
 
-async function searchUserIncludingReview(email) {
+async function searchUserIncludingReview(id) {
+  console.log(id)
   return User.findOne({
     include: { model: Review, as: "reviews" },
-    where: {email}
+    where: {id: id}
   });
 }
 

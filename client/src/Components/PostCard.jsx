@@ -45,6 +45,16 @@ export default function PostCard({ post }) {
     default:
       break;
   }
+  function ratingCalculation(){
+    let lowerInt = Math.floor(author.rating)
+    let diffRating = author.rating - lowerInt
+    if(diffRating<0.75){
+      return lowerInt
+    }
+    return Math.ceil(author.rating)
+  }
+
+
   return (
     <div className={style.postCardContainer}>
       {/* <Fav id = {id} /> */}
@@ -64,7 +74,7 @@ export default function PostCard({ post }) {
               <p className={style.title}>Rating </p>
               <Rating
                 className="text-white"
-                value={author.rating}
+                value={ratingCalculation}
                 readOnly
                 stars={5}
                 cancel={false}

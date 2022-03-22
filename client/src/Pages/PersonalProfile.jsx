@@ -16,6 +16,8 @@ import axios from "axios";
 import { localhost } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
 import { Link } from "react-router-dom";
+import { BookingDatatables } from "../Components/BookingTable";
+
 
 export const PersonalProfile = () => {
   const { id } = useParams(); // recibo el id por params para buscar la info con la ruta /users/profile/id
@@ -27,7 +29,7 @@ export const PersonalProfile = () => {
   const [logged, setLogged] = useState(null); // estado local para guardar la info del logeado (usado para el localstorage)
 
   const [fullInfo, setfullInfo] = useState(); // el estado para guardar toda la info del id con el que se entro al perfil
-
+  const userData = JSON.parse(localStorage.login) 
   useEffect(() => {
     const logStorage = window.localStorage.getItem("login");
     if (logStorage) {
@@ -35,14 +37,14 @@ export const PersonalProfile = () => {
       setLogged(loggedStorage);
     }
   }, [loginUser]);
-
+  
   let petIcon;
   let sizeText;
-
+  
   useEffect(() => {
     axios
-      .get(`${localhost}/users/profile/` + id)
-      .then((r) => setfullInfo(r.data));
+    .get(`${localhost}/users/profile/` + id)
+    .then((r) => setfullInfo(r.data));
   }, [id]);
 
   switch (fullInfo ? fullInfo.type : null) {
@@ -76,7 +78,6 @@ export const PersonalProfile = () => {
       break;
   }
 
-  console.log("soyfullInfo", fullInfo);
   return (
     <div className={style.container}>
       <NavBar />
@@ -86,44 +87,44 @@ export const PersonalProfile = () => {
             <Image
               src={
                 fullInfo
-                  ? fullInfo.profileImgURL
-                    ? fullInfo.profileImgURL
-                    : profileDefault
-                  : profileDefault
+                ? fullInfo.profileImgURL
+                ? fullInfo.profileImgURL
+                : profileDefault
+                : profileDefault
               }
               alt="Image"
               width="200"
               height="200"
               preview
-            />
+              />
             <div className={style.map}>
               <Link to={`/editProfile`} className={style.link}>
                 <Button
                   label="Editar perfil"
                   className="p-button-sm p-button-info p-button-rounded"
-                />
+                  />
               </Link>
               <Button
                 label="Verificacion en 2 pasos"
                 className="p-button-sm p-button-warning p-button-rounded"
-              />
+                />
               <Button
                 label="Cambiar contraseña"
                 className="p-button-sm p-button-warning p-button-rounded"
-              />
+                />
 
               <Link to={`/formpublic`} className={style.link}>
                 <Button
                   label="Crear post"
                   className="p-button-sm p-button-warning p-button-rounded"
-                />
+                  />
               </Link>
 
               <Link to={`/editProfile`} className={style.link}>
                 <Button
                   label="asd"
                   className="p-button-sm p-button-warning p-button-rounded"
-                />
+                  />
               </Link>
             </div>
           </div>
@@ -136,7 +137,15 @@ export const PersonalProfile = () => {
                 {fullInfo ? fullInfo.bio : null}
               </p>
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
-              <p>Contrataciones: {fullInfo ? fullInfo.bookings : null}</p>
+              {fullInfo?
+                <>
+                {fullInfo.keeper?
+                  <p>Contrataciones: {fullInfo.bookings}</p>
+                  :
+                  <p>Reservaciones: {fullInfo.reservaciones.filter((v)=>{return (v.status=='approved' || v.status=='completed')}).length}</p>
+                } 
+                </>
+              :null}
               <p>Rating:</p>
               <Rating
                 className="text-white"
@@ -144,7 +153,7 @@ export const PersonalProfile = () => {
                 readOnly
                 stars={5}
                 cancel={false}
-              />
+                />
               {/* <p>Precio: ${price}</p> */}
               <p>Direccion: {fullInfo ? fullInfo.address : null}</p>
               <p>Tipo:</p> {petIcon}
@@ -154,8 +163,8 @@ export const PersonalProfile = () => {
           <h4>Posteos</h4>
           {fullInfo
             ? fullInfo.posteos.map((p) => {
-                return (
-                  <Card>
+              return (
+                <Card>
                     <p>Descripcion: {p.description}</p>
                     <p>Price: $ {p.price}</p>
 
@@ -164,7 +173,7 @@ export const PersonalProfile = () => {
                   </Card>
                 );
               })
-            : null}
+              : null}
 
           <h4>Comentarios</h4>
           {fullInfo ? (
@@ -176,14 +185,21 @@ export const PersonalProfile = () => {
                     key={i.id}
                     rating={i.rate}
                     message={i.message}
-                  />
+                    />
                 </div>
               );
             })
           ) : (
             <h5>El usuario aún no posee reviews</h5>
-          )}
+            )}
         </div>
+<div >{
+  fullInfo? 
+fullInfo.keeper ? <BookingDatatables title={'Contrataciones'} /*data={fullInfo?fullInfo.contrataciones:null}*/ /> :
+<BookingDatatables title={'Reservaciones'}  /*data={fullInfo?fullInfo.reservaciones:null}*/  />
+
+  :null}
+</div>
       </div>
     </div>
   );

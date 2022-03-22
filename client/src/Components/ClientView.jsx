@@ -48,9 +48,14 @@ export default function ClientView({
           <div>
           
           <p>Esta reserva fue completada</p>
-          <Link to={"/"}>volver</Link>
-          <p >Dejanos tu opinión sobre {checkout_details.client.name}</p>
-          <RatingDemo  client_id={checkout_details.client_id} keeper_id={checkout_details.keeper_id}  />
+          {
+            !checkout_details.client_review ?
+            <>
+            <Link to={"/"}>volver</Link>
+          <p >Dejanos tu opinión sobre {checkout_details.keeper.name}</p>
+          <RatingDemo  client_id={checkout_details.client_id} keeper_id={checkout_details.keeper_id} booking_id={checkout_details.id}  />
+            </>
+          :null}
         </div>
       );
   
@@ -77,11 +82,14 @@ export default function ClientView({
       <h1>#{checkout_details.id.slice(24)}</h1>
       <div>
         <h2>Cuidador</h2>
+        <Link to={`/Profile/${checkout_details.keeper.id}`}>
+
         <p>
           {checkout_details.keeper.name +
             " " +
             checkout_details.keeper.last_name}
         </p>
+        </Link>
         <p>{checkout_details.keeper.phone} </p>
         <h2>Dueño</h2>
         <p>
@@ -98,7 +106,7 @@ export default function ClientView({
         <h2>TOTAL</h2>
         <h2>${checkout_details.price}</h2>
 
-        <h2>{checkout_details.comments}</h2>
+        <h2>{checkout_details.comment}</h2>
         {payButton(checkout_details.status, submit)}
         {!status.includes(checkout_details.status) && cancelButton(cancelOrder)}
       </div>
