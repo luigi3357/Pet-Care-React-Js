@@ -1,7 +1,7 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
-import { editProfilePost } from '../../REDUX/actions/action';
-
+import { editProfilePost } from '../../../REDUX/actions/action'
+import './EditProfile.css'
 export default function FormPayData () {
 
     const dispatch = useDispatch()
@@ -181,28 +181,31 @@ export default function FormPayData () {
 
 
     return (
+        <body> 
         <div>
-<form  onSubmit={(e)=> handleSubmit(e)}>
-    <section>
+            <div>
+<form className='formpublic' onSubmit={(e)=> handleSubmit(e)}>
+    <div className='form_container'>
+
     <div  className='entero'>
-      <h1>Edita tu perfil!</h1>
+      <h1  className='form_title'>Edita tu perfil!</h1>
       </div>    
         
       
 
 
       
-    <div >
-        <label>Nombre</label>
-        <input   type='text'  value={form.name} name='name' onChange={(e) =>handleChange(e)}/>
+    <div className='form_group' >
+        <label className='form_label'>Nombre</label>
+        <input  className='form_input' type='text'  value={form.name} name='name' onChange={(e) =>handleChange(e)}/>
         {
                 errors.name && (<p>{errors.name}</p>)
             }    
        
         </div>
-        <div >
-        <label>Apellido</label>
-        <input   type='text'  value={form.last_name} name='last_name' onChange={(e) =>handleChange(e)}/>
+        <div className='form_group' >
+        <label className='form_label'>Apellido</label>
+        <input  className='form_input' type='text'  value={form.last_name} name='last_name' onChange={(e) =>handleChange(e)}/>
         {
                 errors.last_name && (<p>{errors.last_name}</p>)
             }    
@@ -213,9 +216,9 @@ export default function FormPayData () {
 
 
       
-        <div >
-        <label>Tu direccion</label>
-        <input   type='text'   value={form.location} name='location' onChange={(e) =>handleChange(e)}/>
+        <div className='form_group' >
+        <label className='form_label'>Tu direccion</label>
+        <input  className='form_input' type='text'   value={form.location} name='location' onChange={(e) =>handleChange(e)}/>
         {
                 errors.location && (<p>{errors.location}</p>)
             }    
@@ -223,9 +226,9 @@ export default function FormPayData () {
         </div>
 
 
-        <div >
-        <label>Telefono</label>
-        <input   type='text'  value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
+        <div className='form_group' >
+        <label  className='form_label'>Telefono</label>
+        <input className='form_input' type='text'  value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
         {
                 errors.phone && (<p>{errors.phone}</p>)
             }    
@@ -233,42 +236,49 @@ export default function FormPayData () {
         </div>
 
 
-        <div >
-        <label>Biografia</label>
-        <input   type='text'  value={form.bio} name='bio' onChange={(e) =>handleChange(e)}/>
+        <div className='form_group'>
+        <label  className='form_label'>Biografia</label>
+        <input  className='form_input' type='text'  value={form.bio} name='bio' onChange={(e) =>handleChange(e)}/>
         {
                 errors.bio && (<p>{errors.bio}</p>)
             }    
        
         </div>
 
-        <div >
-        <label>Fotos de su hogar </label>
-        <input   type='file' accept=".jpeg, .png, .jpg" multiple  name='myImages' onChange={(e) => convertToBase64(e.target.files)}/>
+        <div className='form_group' >
+        <label className='form_label'>Fotos de su hogar </label>
+        <input  className='form_input' type='file' accept=".jpeg, .png, .jpg" multiple  name='myImages' onChange={(e) => convertToBase64(e.target.files)}/>
          {
                    errors.myImages && (<p>{errors.myImages}</p>)
          }
              <div >
+                 <div className='imgcontent'>
          {
             form.myImages.map(el => {
                 return(
-            <img src={el} alt="Myimage" width="50" height="60"/>
+
+            <img className='imageselect' src={el} alt="Myimage" width="100" height="100"/>
 
                     )
                 })
             }
             </div>
+            </div>
         </div>   
      
-         <div>
-         <label>Foto de Perfil</label>
-        <input   type='file' accept=".jpeg, .png, .jpg"   name='profileImgURL' onChange={(e) => convertToBase64Profile(e.target.files)}/>
+         <div  className='form_group'>
+         <label className='form_label'>Foto de Perfil</label>
+        <input   className='form_input' type='file' accept=".jpeg, .png, .jpg"   name='profileImgURL' onChange={(e) => convertToBase64Profile(e.target.files)}/>
          {
                    errors.profileImgURL && (<p>{errors.profileImgURL}</p>)
          }
          <div>
          {
-            form.myImages ? (<img src={form.profileImgURL} alt="Profilep" width="50" height="60"/>) : null
+             form.myImages ? (
+                <div className='imgcontent'>
+                <img className='imageselect' src={form.profileImgURL} alt="Profilep" width="100" height="100"/>
+                 </div>
+                ) : null
             }
          </div>
            
@@ -277,12 +287,11 @@ export default function FormPayData () {
 
 
 
+
         <div> 
-                <button  type='submit' disabled={disableSubmit}>Confirmar</button>
+                <button className={disableSubmit ?'form_submiterr' : 'form_submit'} type='submit' disabled={disableSubmit}>Confirmar</button>
        </div>
-       <div> 
-                <button  type='submit' >Cancelar</button>
-       </div>
+      
 
 
 
@@ -293,10 +302,12 @@ export default function FormPayData () {
 
 
 
-    </section>
+
+    </div>
 </form>
+</div>
         </div>
-
+        </body>
 
     )
 }

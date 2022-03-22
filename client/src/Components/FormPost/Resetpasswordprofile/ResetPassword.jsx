@@ -1,8 +1,8 @@
 import React,{useState,useMemo,useEffect} from 'react'
 import bcrypt from "bcryptjs";
 import { useSelector, useDispatch } from 'react-redux'
-import {getAllUsers, resetPassword} from '../../REDUX/actions/action'
-import './Form-post-reqserv-cuidador/Form.css'
+import {getAllUsers, resetPassword} from '../../../REDUX/actions/action'
+import './Resetpassword.css'
 export default function ResetPassword() {
     const  idautor = useSelector((state)=> state.login)
     const  user = useSelector((state)=> state.users)
@@ -161,15 +161,18 @@ async function  resetSubmit (e) {
 console.log(onePass[0],'soyonepass0')
 console.log(verifyPassword,'soyverifypass')
 console.log(form.password,'soyformpassword')
-if(verifyPassword === true){
+if(verifyPassword === false){
+    e.preventDefault()
+    alert('Su contraseña actual no coincide')
+}else{
     e.preventDefault()
     console.log(form)
     console.log(submit)
   dispatch(resetPassword(submit))
-}else{
-    e.preventDefault()
-    alert('Su contraseña actual no coincide')
 }
+  
+
+
 
 
 
@@ -194,9 +197,9 @@ return (
             <div>
                 <h1 className='form_title'>Cambiar contraseña</h1>
             </div>
-            <section>
+           
             <div  className='form_group'>
-         <h3 className='form_label'>E-mail</h3>
+         <label className='form_label'>E-mail</label>
          <input  className='form_input'  type='text'  value={form.email} name='email' onChange={(e) =>handleChange(e)}/>
         
            {
@@ -207,7 +210,7 @@ return (
             </div>
 
             <div className='form_group'>
-<h3  className='form_label'>Contraseña Actual</h3>
+<label  className='form_label'>Contraseña Actual</label>
 <input  className='form_input' type='password'  value={form.password} name='password' onChange={(e) =>handleChange(e)}/>
 {
              errors.password && (<p className='errortxt'>{errors.password}</p>)
@@ -216,14 +219,14 @@ return (
             </div>
 
         <div className='form_group'>
-        <h3  className='form_label'>Contraseña nueva</h3>
+        <label  className='form_label'>Contraseña nueva</label>
         <input className='form_input'   type='password'  value={form.newpassword} name='newpassword' onChange={(e) =>handleChange(e)}/>
         {
                  errors.newpassword && (<p className='errortxt'>{errors.newpassword}</p>) 
           }
         </div>
         <div  className='form_group'>
-            <h3 className='form_label'>Repetir contraseña anterior</h3>
+            <label className='form_label'>Repetir contraseña anterior</label>
             <input className='form_input'  type='password'  value={form.repeatnewpassword} name='repeatnewpassword' onChange={(e) =>handleChange(e)}/>
           {
                  errors.repeatnewpassword && (<p  className='errortxt'> {errors.repeatnewpassword}</p>) 
@@ -237,7 +240,7 @@ return (
         <button className={disableSubmit ?'form_submiterr' : 'form_submit'} type='submit' disabled={disableSubmit} >Confirmar</button>
 </div>
 
-        </section>
+       
         </div>
         </form>
     </div>
