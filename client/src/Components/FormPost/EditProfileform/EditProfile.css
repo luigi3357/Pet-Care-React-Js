@@ -49,9 +49,23 @@ border: 1px solid #3866f2;;
 border-radius: 3px;
 }
 
-.errorarray{
-    opacity: 0.5;
-    font-size: 18px;
+.form_input:focus + .form_label,
+.form_input:not(:placeholder-shown) + .form_label{
+    transform: translateY(-12px) scale(.7);
+    transform-origin: left top;
+    color:#3666f2;
+}
+.form_inputdes{
+    width:100%;
+    height:90%;
+    background:none;
+    color: black;
+    font-size:1rem;
+    padding: .6em .3em;
+    border:none;
+    outline:none;
+    border: 1px solid #3866f2;;
+    border-radius: 3px;
 }
 
 .form_submit{
@@ -61,9 +75,26 @@ font-size: 1rem;
 padding: .8em 6em;
 border:none;
 border-radius: .5em;
+width:100%;
+position: absolute;
+left:0px;
+
 }
 .form_submiterr{
     background-color: red;
+    color: #fff;
+font-size: 1rem;
+padding: .8em 6em;
+border:none;
+border-radius: .5em;
+
+}
+.form_cancell{
+    margin-top: 30px;
+    text-align: center;
+    width: 7px;
+    height: 10px;
+    background-color: rgba(255, 0, 0, 0.514);
     color: #fff;
 font-size: 1rem;
 padding: .8em 6em;
@@ -76,7 +107,26 @@ border-radius: .5em;
     color:red;
     font-weight: bold;
 }
-
+.imgcontent{
+    border: 1px solid #3866f2;;
+    border-radius: 3px;
+    margin-top: 10%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.imageselect{
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    margin: 3%;
+    border: 1px, solid blue
+}
+.btncontainerpr{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 @media(max-width:425px){
     

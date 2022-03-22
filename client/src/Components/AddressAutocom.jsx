@@ -4,7 +4,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-
+import  './FormPost/EditProfileform/EditProfile.css'
 export default function AddressAutocom (){
     const[address, setAddress] = useState("")
     const[coordinates, setCoordinates] = useState({
@@ -37,10 +37,11 @@ export default function AddressAutocom (){
             >
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                 <div>
-                    <input
+                    <input 
+                     
                     {...getInputProps({
                         placeholder: (placeholder && placeholder.length>0) ? placeholder[0].address : 'Ingresa tu dirección',
-                        className: 'location-search-input',
+                        className: 'form_input',
                     })}
                     />
                     <div className="autocomplete-dropdown-container">
