@@ -7,6 +7,10 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
+    googleId:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,8 +21,8 @@ module.exports = (sequelize) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
+      
+    },    
     token: {
       type: DataTypes.STRING,
 

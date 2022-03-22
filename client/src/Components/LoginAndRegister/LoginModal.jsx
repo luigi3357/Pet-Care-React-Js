@@ -14,7 +14,7 @@ import { Toast } from "primereact/toast";
 import { NavBar } from "../NavBar";
 import './FormDemo.css'
 import style from '../../Pages/global.module.css'
-
+import {Google} from './google'
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -320,6 +320,9 @@ export const Login = () => {
                               Google
                             </a>
                           </Button>
+                          <div>
+                            <Google/>
+                          </div>
                         </div>
                       </div>
                     </div>

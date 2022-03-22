@@ -140,4 +140,36 @@ router.put("/admindelete", async (req, res) => {
   })
 
 
+  router.post("/registerGoogle", async (req, res) => {
+    let { email, givenName, familyName, googleId, imageUrl  } = req.body   
+    
+    let user = await search({ email: email.toLowerCase() })  
+    
+    if (!user) {
+        try {
+                                  
+                let result = await User.create({                    
+                        googleId: true,
+                        email: email,
+                        name: givenName,
+                        last_name:familyName,
+                        profileImgURL: imageUrl                    
+                })
+                  //armamos el mensaje
+        let asunto = "Registrado correctamente"
+        let mensaje = `hola,${givenName}:
+        Te damos la bienvenida a Pet-Care.
+        Con tu nueva cuenta, puedes comenzar a conectar con los cuidadores o las personas que soliciten servicios`;
+        //envia el email
+        let send = sendEmail(email, mensaje, asunto)
+        console.log(result)
+       
+                return res.status(201).json(result)
+                     
+        } catch (error) {
+            return res.status(404).send(error)
+        }
+    }
+})
+
 module.exports = router;

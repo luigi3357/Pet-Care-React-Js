@@ -68,7 +68,20 @@ export function register(payload) {
     });
   };
 }
-
+//register google
+export function registerGoogle(payload) {
+  return async (dispatch) => {
+    let json = await axios.post(`${localhost}/registerGoogle`, payload)
+    .then((response)=>{
+      console.log(response.data,"soy el response")
+      // localStorage.setItem('login', JSON.stringify(response.data))
+      // dispatch({
+      //   type: ACTION_TYPES.REGISTER_LOGIN,
+      //   payload: response.data[0]
+      // })
+    });
+  };
+}
 // Login and AllUsers
 
 export function getAllUsers() {

@@ -31,7 +31,7 @@ export const NavBar = () => {
   function handleLogOut() {
     dispatch(getLogOut());
   }
-
+console.log(logged,"algo")
   return (
     <div className={style.navBarContainer}>
       <Image src={logo} alt="Image Text" imageStyle={{ width: " 50px" }} />
@@ -69,11 +69,11 @@ export const NavBar = () => {
             className={style.link}
             id="Profile"
           >
-            <Avatar
+            {/* <Avatar
               label={logged.name[0].toUpperCase()}
               shape="circle"
               size="large"
-            />
+            /> */}
           </Link>
         ) : null}
 
