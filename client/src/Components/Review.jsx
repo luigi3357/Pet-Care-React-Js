@@ -11,6 +11,7 @@ export const RatingDemo = ({client_id, keeper_id, booking_id}) => {
   const [rate, setRate] = useState(null);
   const [value, setValue] = useState("");
   const [display, setDisplay] = useState(false);
+  const [buttonSend, setButtonSend] = useState(true);
   // let logedUser = useSelector((state) => state.login);
 
   
@@ -27,7 +28,8 @@ export const RatingDemo = ({client_id, keeper_id, booking_id}) => {
 
   function submitHandler(e){
     console.log(payload)
-      axios.post(`${localhost}/reviews/create`,payload).then((response)=>console.log(response.data))
+      axios.post(`${localhost}/reviews/create`,payload).then((response)=>console.log(response.data).then(()=>{setButtonSend(false)}))
+      setDisplay(false)
   }
   function reviewButton(){
     return(
@@ -45,7 +47,7 @@ export const RatingDemo = ({client_id, keeper_id, booking_id}) => {
       header={<h1>Déjanos tu opinión</h1>}
       draggable={false}
       visible={display}
-        footer={<Button label="Enviar" onClick={()=>submitHandler()}/>}
+        footer={<Button label="Enviar" disabled={!buttonSend} onClick={()=>submitHandler()}/>}
         onHide={() => setDisplay(false)} >
       <div className="card">
         <h5>Calificación</h5>

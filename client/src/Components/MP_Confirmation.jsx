@@ -4,7 +4,7 @@ import { Button } from "primereact/button";
 //import { useDispatch, useSelector } from "react-redux";
 import { Skeleton } from "primereact/skeleton";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { localhost } from "../REDUX/actions/action";
 
 function loader() {
@@ -39,7 +39,7 @@ export function ConfirmationMP() {
   const status = params.get("status");
   const preferenceID = params.get("preference_id");
   const paymentID = params.get("payment_id");
-
+  const logged = JSON.parse(localStorage.login)
   useEffect(async () => {
     await axios
       .put(`${localhost}/bookings/payment_check`, {
@@ -83,13 +83,12 @@ export function ConfirmationMP() {
           <h2>${details.price}</h2>
 
           {/* <h2>{details.comments}</h2> */}
-          <Button
-            label="Ir a mi perfil"
-            className="p-button-rounded p-button-success p-button-raised"
-            onClick={() => {
-              navigate("/profile");
-            }}
-          />
+          <Link
+            to={`/PersonalProfile/${details.client.id}`}
+            id="Personal Profile"
+          >
+            ir a mi perfil
+            </Link>
         </div>
       )}
     </div>
