@@ -112,9 +112,10 @@ router.get("/login/:email", async (req, res) => {
 /*         Account Delete          */
 router.put("/admindelete", async (req, res) => {
     const { email, name, last_name, phone, bio, location, myImages, profileImgURL,id} = req.body
-    const ids ={ id: req.body.toString()}
-     console.log(req.body)
+    const ids ={ id}
+     console.log(ids)
     let user = await search(ids)
+    console.log(user)
     if (user) {
         let resetInfoUser = await User.update({ name: user.name,
            last_name: user.last_name,
