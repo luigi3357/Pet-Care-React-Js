@@ -1,21 +1,21 @@
 import React,{useState,useMemo,useEffect} from 'react'
 import bcrypt from "bcryptjs";
 import { useSelector, useDispatch } from 'react-redux'
-import {getAllUsers, resetPassword} from '../../REDUX/actions/action'
-import './Form-post-reqserv-cuidador/Form.css'
+import {getAllUsers, resetPassword} from '../../../REDUX/actions/action'
+import './Resetpassword.css'
 export default function ResetPassword() {
-    const  idautor = useSelector((state)=> state.login)
-    const  user = useSelector((state)=> state.users)
-    
+    // const  idautor = useSelector((state)=> state.login)
+    // const  user = useSelector((state)=> state.users)
+    const author= JSON.parse(localStorage.getItem("login"))
+       console.log(author)
 
     function validate (){}
 
-console.log(user)
-console.log(user)
+
  const dispatch = useDispatch()
  const [errors,setErrors] = useState({})
 const [form,setForm] = useState({
-    email:'',
+    email:author.email,
     password:'',
     newpassword:'',
     repeatnewpassword:'',
@@ -154,22 +154,24 @@ function handleChange (e) {
 
 
 async function  resetSubmit (e) {
-    const oneUser = user.filter(e => e.id === idautor.id)
-    const onePass =oneUser.map(e => e.password)
-    const  verifyPassword = await bcrypt.compare(form.password,onePass[0] );   
-    console.log(onePass,'soyonepass')
-console.log(onePass[0],'soyonepass0')
-console.log(verifyPassword,'soyverifypass')
-console.log(form.password,'soyformpassword')
-if(verifyPassword === true){
+    // const oneUser = user.filter(e => e.id === idautor.id)
+    // const onePass =oneUser.map(e => e.password)
+    console.log(author.id, 'estoy dentro de resetsubmit')
+    const  verifyPassword = await bcrypt.compare(form.password,author.password);   
+    
+
+if(verifyPassword === false){
+    e.preventDefault()
+    alert('Su contraseña actual no coincide')
+}else{
     e.preventDefault()
     console.log(form)
     console.log(submit)
   dispatch(resetPassword(submit))
-}else{
-    e.preventDefault()
-    alert('Su contraseña actual no coincide')
 }
+  
+
+
 
 
 
@@ -194,20 +196,11 @@ return (
             <div>
                 <h1 className='form_title'>Cambiar contraseña</h1>
             </div>
-            <section>
-            <div  className='form_group'>
-         <h3 className='form_label'>E-mail</h3>
-         <input  className='form_input'  type='text'  value={form.email} name='email' onChange={(e) =>handleChange(e)}/>
-        
-           {
-             errors.email && (<p  className='errortxt'>{errors.email}</p>)
-
-           }
            
-            </div>
+         
 
             <div className='form_group'>
-<h3  className='form_label'>Contraseña Actual</h3>
+<label  className='form_label'>Contraseña Actual</label>
 <input  className='form_input' type='password'  value={form.password} name='password' onChange={(e) =>handleChange(e)}/>
 {
              errors.password && (<p className='errortxt'>{errors.password}</p>)
@@ -216,14 +209,14 @@ return (
             </div>
 
         <div className='form_group'>
-        <h3  className='form_label'>Contraseña nueva</h3>
+        <label  className='form_label'>Contraseña nueva</label>
         <input className='form_input'   type='password'  value={form.newpassword} name='newpassword' onChange={(e) =>handleChange(e)}/>
         {
                  errors.newpassword && (<p className='errortxt'>{errors.newpassword}</p>) 
           }
         </div>
         <div  className='form_group'>
-            <h3 className='form_label'>Repetir contraseña anterior</h3>
+            <label className='form_label'>Repetir contraseña anterior</label>
             <input className='form_input'  type='password'  value={form.repeatnewpassword} name='repeatnewpassword' onChange={(e) =>handleChange(e)}/>
           {
                  errors.repeatnewpassword && (<p  className='errortxt'> {errors.repeatnewpassword}</p>) 
@@ -237,7 +230,7 @@ return (
         <button className={disableSubmit ?'form_submiterr' : 'form_submit'} type='submit' disabled={disableSubmit} >Confirmar</button>
 </div>
 
-        </section>
+       
         </div>
         </form>
     </div>
