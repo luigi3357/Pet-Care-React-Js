@@ -233,7 +233,6 @@ export function getLogOut() {
       type: ACTION_TYPES.GET_LOGOUT,
     });
   };
-
 }
 
 //delete usuario desde admin
@@ -256,5 +255,4 @@ export function adminDeleteReviews(id) {
     let json = await axios.delete(`${localhost}/Admin/delete/` + id);
     return json;
   };
-
 }
