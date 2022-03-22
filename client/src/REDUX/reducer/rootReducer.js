@@ -29,15 +29,30 @@ function rootReducer(state = initialState, action) {
       };
     case ACTION_TYPES.GET_LOGIN:
       console.log(action.payload);
+      localStorage.setItem('login',JSON.stringify(action.payload))
+      return {
+        ...state,
+        login: action.payload,
+      };
+    case ACTION_TYPES.REGISTER_LOGIN:
+      console.log(action.payload);
+      localStorage.setItem('login',JSON.stringify(action.payload))
       return {
         ...state,
         login: action.payload,
       };
     case ACTION_TYPES.GET_LOGOUT:
+      localStorage.setItem('login', JSON.stringify(null))
       return {
         ...state,
         login: [],
       };
+      case ACTION_TYPES.GET_ADMIN_ALL:
+        return {
+          ...state,
+          users: action.payload,
+        };
+    
     case ACTION_TYPES.FETCH_ALL_POSTS:
       return {
         ...state,

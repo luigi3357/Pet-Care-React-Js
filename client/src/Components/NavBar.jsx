@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "primereact/button";
@@ -12,16 +12,29 @@ import { AiOutlineLogout } from "react-icons/ai";
 export const NavBar = () => {
   const dispatch = useDispatch();
   let login = useSelector((state) => state.login);
-
-  console.log("soy login", login.name);
+  const [logged, setLogged]= useState(null)
+useEffect(()=>{
+  const logStorage = window.localStorage.getItem('login')
+  
+  if(logStorage){
+    const loggedStorage = JSON.parse(logStorage)
+    setLogged(loggedStorage)
+  }
+},[login])
+console.log("soy login", logged);
+// useEffect(()=>{
+//   if(!logged){
+//     setLogged(login)
+//   }
+// },[])
 
   function handleLogOut() {
     dispatch(getLogOut());
   }
-
+  
   return (
     <div className={style.navBarContainer}>
-      <Image src={logo} alt="Image Text" imageStyle={{ width: " 50px" }} />
+       <Image src={logo} alt="Image Text" imageStyle={{ width: " 50px" }} />
 
       <div className={style.navBarSubContainer}>
         <Link className={style.link} to="/">
@@ -29,40 +42,42 @@ export const NavBar = () => {
             label="Inicio"
             icon="pi pi-fw pi-home"
             className="p-button-sm p-button-rounded p-button-info p-button-outlined"
-          />
+            />
         </Link>
-
-        {login.name ? null : (
+        {logged ? null : (
           <Link className={style.link} to="/Register">
             <Button
               label="Registrarse"
               className="p-button-sm p-button-info p-button-rounded"
-            />
+              />
           </Link>
         )}
 
-        {login.name ? null : (
+        {logged ? null : (
           <Link className={style.link} to="/Login">
             <Button
               label="Iniciar Sesion"
               className="p-button-sm p-button-secondary p-button-rounded"
-            />
+              />
           </Link>
         )}
 
-        {login.name ? (
+        {logged ? (
           <Avatar
-            label={login.name[0].toUpperCase()}
-            shape="circle"
-            size="large"
+          label={logged.name[0].toUpperCase()}
+          shape="circle"
+          size="large"
           />
-        ) : null}
+          ) : null}
 
-        {login.name ? (
-          <p className={style.navBarName}>Hola, {login.name}!</p>
-        ) : null}
+        {logged ? (
+          <p className={style.navBarName}>Hola, {logged.name}!</p>
+          ) : null}
+          {/*
+      */}
 
-        {login.name ? (
+{console.log(logged)}
+        {logged ? (
           <Link
             onClick={(e) => {
               handleLogOut();
@@ -73,7 +88,7 @@ export const NavBar = () => {
             <AiOutlineLogout className="text-2xl" color="red" />
           </Link>
         ) : null}
-      </div>
+      </div> 
     </div>
   );
 };

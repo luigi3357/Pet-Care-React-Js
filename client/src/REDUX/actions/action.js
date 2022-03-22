@@ -57,8 +57,15 @@ export function changeBookingStatus(payload) {
 
 export function register(payload) {
   return async (dispatch) => {
-    let json = await axios.post(`${localhost}/register`, payload);
-    return json;
+    let json = await axios.post(`${localhost}/register`, payload)
+    .then((response)=>{
+      console.log(response.data)
+      localStorage.setItem('login', JSON.stringify(response.data))
+      dispatch({
+        type: ACTION_TYPES.REGISTER_LOGIN,
+        payload: response.data[0]
+      })
+    });
   };
 }
 
@@ -231,5 +238,20 @@ export function adminDeleteReviews(id) {
   return async (dispatch) => {
     let json = await axios.delete(`${localhost}/Admin/delete/` + id);
     return json;
+  };
+}
+export function getAdminAll() {
+  return function (dispatch) {
+    axios
+      .get(`${localhost}/users/adminAll`)
+      .then((response) => {
+        dispatch({
+          type: ACTION_TYPES.GET_ADMIN_ALL,
+          payload: response.data,
+        });
+      })
+      .catch((e) => {
+        throw new Error("No se pudo conectar al servidor");
+      });
   };
 }
