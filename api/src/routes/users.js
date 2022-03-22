@@ -155,7 +155,6 @@ router.put("/fav", async (req, res) => {
 
 router.get("/", async (req, res) => {
   const infoUser = await infoTotalDb();  
-  console.log(infoUser[0])
   res.send(infoUser);  
 });
 
