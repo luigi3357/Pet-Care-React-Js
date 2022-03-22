@@ -2,6 +2,7 @@ import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
 import { editPost,getAllUsers } from '../../../REDUX/actions/action';
 import { useParams } from 'react-router-dom';
+import './Form.css'
 export default function FormCard(){
    
         const dispatch= useDispatch()
@@ -9,7 +10,8 @@ export default function FormCard(){
     //   const typesState = useSelector((state)=> state.typePokemon)
         
        const {id} = useParams()
-        const  idautor = useSelector((state)=> state.login)
+       const author= JSON.parse(localStorage.getItem("login"))
+       console.log(author)
 
         const [form,setForm]= useState({
         title:'',
@@ -20,37 +22,43 @@ export default function FormCard(){
         address:'',
         phone:'',
         id:id,
-        author_id:idautor.id,
+        author_id:author.id,
         
     })
        
-      function validate(form){ 
-        let errors = {};
-        if(!form.title){
-            errors.title = 'Se requiere un titulo'
-      
-        } 
-         if (!form.description  ){
-            errors.description = 'Se requiere una descripcion'
-        } 
-         if (!form.price){
-            errors.price = 'Introduzca el precio de su servicio'
-        }
-         if (form.price <= 0 ){
-            errors.price = 'El precio no puede ser 0 o menor'
-        } if (form.type.length <= 0 ){
-            errors.type = 'Se solicita el tipo de mascota'
-        } if (form.type.length > 5 ){
-            errors.type = 'No puede seleccionar 2 veces el mismo'
-        } if (form.size.length <= 0  ){
-          errors.size = 'Se solicita el tamaño de mascota'
-      } if (form.size.length > 3 ){
-          errors.size = 'No puede seleccionar 2 veces el mismo'
-      } if(!form.address){
-        errors.address = 'Se requiere su direccion'
-      } if(!form.phone){
-        errors.phone = 'Se requiere su numero de telefono'
-      }
+    function validate(form){ 
+      let errors = {};
+      if(!form.title){
+        errors.title = 'Se requiere un titulo'
+  
+    } 
+     if (!form.description  ){
+        errors.description = 'Se requiere una descripcion'
+    } 
+     if (!form.price){
+        errors.price = 'Introduzca el precio de su servicio'
+    }
+     if (form.price.length <= 0 ){
+        errors.price = 'El precio no puede ser 0 o menor'
+    }  if (form.price.length > 6 ){
+      errors.price = 'El precio no puede ser mayor a 6 digitos'
+  }
+     if (form.type.length < 1 ){
+        errors.type = 'Se solicita el tipo de mascota'
+    } if (form.type.length > 5 ){
+        errors.type = 'No puede seleccionar 2 veces el mismo'
+    } if (form.size.length < 1  ){
+      errors.size = 'Se solicita el tamaño de mascota'
+  } if (form.size.length > 3 ){
+      errors.size = 'No puede seleccionar 2 veces el mismo'
+  } if(!form.address){
+    errors.address = 'Se requiere su direccion'
+  } if(!form.phone){
+    errors.phone = 'Se requiere su numero de telefono'
+  }
+  if(!form.phone.length > 13){
+    errors.phone = 'Su numero contiene demasiado digitos'
+  }
          
       return errors;
     }
@@ -60,21 +68,21 @@ export default function FormCard(){
 
     const disableSubmit = useMemo(() =>{
         if(
-            form.title.length > 0 &&
-            form.title.length < 50 &&
-           
-            form.description.length > 0 &&
-            form.description.length < 400 &&
-            form.price.length  >= 1 &&
-            form.price.length <= 5000 &&
-            form.phone.length  >= 1 &&
-            form.phone.length <= 50 &&
-           form.type.length >= 1 &&
-           form.type.length < 5 &&
-           form.size.length >= 1 &&
-           form.size.length < 4 &&
-           form.address.length > 0 &&
-           form.address.length < 150 
+          form.title.length > 0 &&
+          form.title.length < 50 &&
+         
+          form.description.length > 0 &&
+          form.description.length < 400 &&
+          form.price.length  >= 1 &&
+          form.price.length <= 5&&
+          form.phone.length  >= 1 &&
+          form.phone.length <= 15 &&
+         form.type.length >= 1 &&
+         form.type.length < 5 &&
+         form.size.length >= 1 &&
+         form.size.length < 4 &&
+         form.address.length > 0 &&
+         form.address.length < 150 
            ){
               return false;
            }else{
@@ -193,7 +201,7 @@ export default function FormCard(){
             size:[],
             address:'',
             phone:'',
-            author_id: idautor.id ,
+            author_id: author.id ,
             
           
         })
@@ -204,54 +212,56 @@ export default function FormCard(){
     
    
     return (
+      <body>
+      <div>
         <div>
            
         <div>
-        <form  onSubmit={(e)=> handleSubmit(e)}>
-        <section >
+        <form  className='formpublic' onSubmit={(e)=> handleSubmit(e)}>
+        <div className='form_container' >
     
        
       <div  className='entero'>
-      <h1>Editar Publicacion</h1>
+      <h1  className='form_title'>Edita tu  Publicacion</h1>
       </div> 
       
-        <div  className='entero'>
-        <label>Titulo</label>
-        <input   type='text'  value={form.title} name='title' onChange={(e) =>handleChange(e)}/>
+        <div className='form_group' >
+        <label  className='form_label'>Titulo</label>
+        <input className='form_input'  type='text'  value={form.title} name='title' onChange={(e) =>handleChange(e)}/>
         {
-            errors.title && (<p>{errors.title}</p>)
+            errors.title && (<p  className='errortxt'>{errors.title}</p>)
         }
        
         </div>
      
        
-        <div>
-           <label>Description</label> 
-           <input type='text'  value={form.description} name='description' onChange={(e) =>handleChange(e)}/>
+        <div className='form_group'>
+           <label  className='form_label'>Description</label> 
+           <input   className='form_input' type='text'  value={form.description} name='description' onChange={(e) =>handleChange(e)}/>
            {
-                errors.description && (<p>{errors.description}</p>)
+                errors.description && (<p  className='errortxt'>{errors.description}</p>)
             }
         </div>
-        <div>
-           <label>Direccion</label> 
-           <input type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/>
+        <div  className='form_group'>
+           <label className='form_label' >Direccion</label> 
+           <input  className='form_input'  type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/>
            {
-                errors.addres && (<p>{errors.address}</p>)
+                errors.address && (<p className='errortxt'>{errors.address}</p>)
             }
         </div>
-        <div>
-           <label>Numero de telefono</label> 
-           <input type='number' value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
+        <div className='form_group'>
+           <label  className='form_label'>Numero de telefono</label> 
+           <input className='form_input' type='number' value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
        {
-           errors.phone && (<p>{errors.phone}</p>)
+           errors.phone && (<p className='errortxt'> {errors.phone}</p>)
        }
         </div>
       
-        <div>
-           <label>Costo del servicio</label> 
-          <input type='number' min="1" value={form.price} name='price' onChange={(e)=>handleChange(e)}/>
+        <div  className='form_group'>
+           <label  className='form_label'>Costo del servicio</label> 
+          <input className='form_input' type='number' min="1" value={form.price} name='price' onChange={(e)=>handleChange(e)}/>
                 {
-                    errors.price && (<p>{errors.price}</p>)
+                    errors.price && (<p className='errortxt'>{errors.price}</p>)
                 } 
         
         </div>
@@ -262,29 +272,70 @@ export default function FormCard(){
              
         <div>
            
-            <h1>Tipo de mascota</h1>
-            
-          Perro  <input 
-          onChange={(e)=>{handleCheckType(e)
-         }
-          } type="checkbox" name="perro" value='perro' />
-                
-            Gato<input   onChange={handleCheckType}type="checkbox"  name="gato" value='gato'/>
-                
-            Aves<input  onChange={handleCheckType} type="checkbox"  name="aves" value='aves' />
-                
-            Roedores<input  onChange={handleCheckType} type="checkbox"  name="roedores" value= 'roedores' />
-            {
-            errors.type && 
-            (
-              <p>{errors.type}</p>
-            ) 
-            }
-       
-
+           <h2>Tipo de mascota</h2>
+           <div>
+            <input  onChange={(e)=>{handleCheckType(e)
+        }
+       } type="checkbox" name="perro" value='perro' />
+       <label> Perro</label>  
         
+           </div>
+         <div>
+           <input   onChange={handleCheckType}type="checkbox"  name="gato" value='gato'/>
+         <label> Gato</label> 
+         </div>
                
+        <div>
+          <input  onChange={handleCheckType} type="checkbox"  name="aves" value='aves' />
+        <label> Aves</label> 
         </div>
+          <div>
+           <input  onChange={handleCheckType} type="checkbox"  name="roedores" value= 'roedores' />
+          <label> Roedores</label>     
+          </div>
+         
+          
+      
+      <div>
+           
+           <h2>Tamaño de mascota</h2>
+       <div>
+           <input 
+         onChange={(e)=>{handleSelectS(e)
+         }
+        } type="checkbox" name="pequeño" value='pequeño' />
+        <label>Pequeño</label>
+       </div>
+       
+       <div>
+              
+           
+           <input   onChange={handleSelectS}type="checkbox"  name="mediano" value='mediano'/>
+               <label>Mediano</label>
+           </div>   
+           <div>
+
+           <input  onChange={handleSelectS} type="checkbox"  name="grande" value='grande' />
+           <label>Grande</label>
+           </div>
+               
+           </div>
+              {
+               form.size.length >= 1 ? null : (<p className='errorarray'>(Campos obligatorios)</p>) 
+              }
+       
+              
+             
+       
+          
+       
+              
+       </div>
+             
+       
+   
+
+
               
         
     
@@ -293,31 +344,7 @@ export default function FormCard(){
 
 
 
-        <div>
-           
-           <h1>Tamaño de mascota</h1>
-           
-         Pequeño  <input 
-         onChange={(e)=>{handleSelectS(e)
-        }
-         } type="checkbox" name="pequeño" value='pequeño' />
-               
-           Mediano<input   onChange={handleSelectS}type="checkbox"  name="mediano" value='mediano'/>
-               
-           Grande<input  onChange={handleSelectS} type="checkbox"  name="grande" value='grande' />
-               
-           {
-            errors.size && 
-            (
-              <p>{errors.size}</p>
-            ) 
-            }
        
-              
-             
-       
-          
-           </div>
        <div>
 
 
@@ -330,10 +357,10 @@ export default function FormCard(){
 
 
        <div> 
-                <button  type='submit' disabled={disableSubmit}  >Crear Servicio!</button>
+                <button  type='submit' className={disableSubmit ?'form_submiterr' : 'form_submit'} disabled={disableSubmit}  >Crear Servicio!</button>
        </div>
     
-       </section>
+       </div>
        </form>
 
    
@@ -343,7 +370,8 @@ export default function FormCard(){
        </div>
      
     </div>
-
+    </div>
+    </body>
     )
     
    

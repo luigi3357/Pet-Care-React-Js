@@ -1,10 +1,12 @@
+
+
 const user = [
   {
     email: "juliohernandez@gmail.com",
     password: "juliohernandez123",
     name: "julio",
     last_name: "hernandez",
-    bio: "Pequeña bio generica contando lo terrible que es mi vida y que a nadie le interesa saber",
+    bio: "Hola!! soy Julio Hernandez de Quilmes BA, soy psicólogo de profesión y estoy terminando mi segunda carrera en MV ,trabajo de apoyo en la clínica veterinaria de mi tío así que tengo conocimientos y experiencia necesaria para atender las necesidades de sus mascotas con precio",
     phone: "911-12345678",
     location: [
       {
@@ -20,32 +22,7 @@ const user = [
       "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242042.jpg",
       "https://imgar.zonapropcdn.com/avisos/resize/1/00/46/83/60/99/1200x1200/1743242122.jpg",
     ],
-    profileImgURL:
-      "https://images.unsplash.com/photo-1544502062-f82887f03d1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1559&q=80",
-  },
-  {
-    email: "admin@gmail.com",
-    password: "admin123456",
-    name: "admin",
-    last_name: "admin",
-    bio: "soy admin",
-    phone: "911-12345678",
-    location: [
-      {
-        direccion: "admin",
-        lat: -34.720407,
-        lng: -58.262576
-      }
-    ],
-    rating: 4.0,
-    bookings: 5,
-    myImages: [
-      "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242165.jpg",
-      "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242042.jpg",
-      "https://imgar.zonapropcdn.com/avisos/resize/1/00/46/83/60/99/1200x1200/1743242122.jpg",
-    ],
-    profileImgURL:
-      "https://images.unsplash.com/photo-1544502062-f82887f03d1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1559&q=80",
+    profileImgURL: "https://as2.ftcdn.net/v2/jpg/02/41/41/19/1000_F_241411954_4YTOaAtM4QrIMhOVLgglstw3PUGRvonq.jpg",
   },
   {
     email: "francomiño@gmail.com",
@@ -53,7 +30,7 @@ const user = [
     name: "franco",
     last_name: "miño",
     phone: "911-23456781",
-    bio: "Pequeña bio generica contando lo terrible que es mi vida y que a nadie le interesa saber",
+    bio: "Hola!! soy Franco Miño de Quilmes BA, Me dedico al adiestramiento canino, a la rehabilitación de perros con problemas de conducta. Me dedico al 100% a amar a los pequeños peludos que me dejan a cuidar como si estuvieran en su casa",
     location: [
       {
         direccion: "Rodolfo López 81",
@@ -84,7 +61,7 @@ const user = [
         lng: -58.267015
       }
     ],
-    bio: "Pequeña bio generica contando lo terrible que es mi vida y que a nadie le interesa saber",
+    bio: "Hola!! soy Luis Cataldo de Quilmes BA, soy profesor y también me encantan los animales. Se lo importante que es para ti tu mascota. Nos encantaría darle todo nuestro cariño mientras estás de viaje. Cuenta conmigo.",
     rating: 4.0,
     bookings: 4,
     myImages: [
@@ -101,7 +78,7 @@ const user = [
     name: "darian",
     last_name: "esquivel",
     phone: "911-45678123",
-    bio: "Pequeña bio generica contando lo terrible que es mi vida y que a nadie le interesa saber",
+    bio: "Hola!! soy Darian Esquivel de morón BA, tus mascotas no sentirán el cambio de casa porque al quedar con nosotros entran en un ambiente de hogar y con la seguridad de un médico en casa.",
     location: [
       {
         direccion: "Sta. Fe 620",
@@ -139,7 +116,7 @@ const user = [
       "https://imgar.zonapropcdn.com/avisos/resize/1/00/46/83/60/99/1200x1200/1743242122.jpg",
     ],
     bookings: 3,
-    bio: "Pequeña bio generica contando lo terrible que es mi vida y que a nadie le interesa saber",
+    bio: "Hola!! soy Pablo Moyano de Morón BA, Desde pequeño me encantan los animales! Cerca de mi casa hay 2 parques donde tu perrito podrá pasear y divertirse, nosotros disfrutaremos de su linda compañía y él de una excelente atención!.",
     profileImgURL:
       "https://as2.ftcdn.net/v2/jpg/02/41/41/19/1000_F_241411954_4YTOaAtM4QrIMhOVLgglstw3PUGRvonq.jpg",
   },
@@ -162,7 +139,7 @@ const user = [
       "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242042.jpg",
       "https://imgar.zonapropcdn.com/avisos/resize/1/00/46/83/60/99/1200x1200/1743242122.jpg",
     ],
-    bio: "Pequeña bio generica contando lo terrible que es mi vida y que a nadie le interesa saber",
+    bio: "Hola!! soy Sebastian Guerra de Lomas de Zamora BA, Me ofrezco a su cuidado porque amo la experiencia de incluir nuevos miembros a mi manada y hacerlos parte de mi rutina diaria, aunque sea de manera temporal",
     bookings: 3,
     profileImgURL:
       "https://as2.ftcdn.net/v2/jpg/02/41/41/19/1000_F_241411954_4YTOaAtM4QrIMhOVLgglstw3PUGRvonq.jpg",
@@ -171,7 +148,7 @@ const user = [
     email: "lucasduran@gmail.com",
     password: "lucasduran123",
     name: "lucas",
-    bio: "Pequeña bio generica contando lo terrible que es mi vida y que a nadie le interesa saber",
+    bio: "Hola!! soy Lucas Duran de Lomas de Zamora BA, rescatista de animales desde hace más de 3 años. Mi vida y mi pasión son los animales. Gracias a mi trabajo como voluntario rescatista he tenido la oportunidad de convivir con cientos de perros y gatos, lo que me ha ayudado a comprender su comportamiento, emociones y necesidades físicas.",
     last_name: "duran",
     phone: "911-78123456",
     location: [
@@ -194,7 +171,7 @@ const user = [
   {
     email: "juanparaducha@gmail.com",
     password: "juanparaducha123",
-    bio: "Pequeña bio generica contando lo terrible que es mi vida y que a nadie le interesa saber",
+    bio: "Hola!! soy Juan Paraducha de Palermo BA, he sido cuidador desde hace varios meses, amo los animales en especial a los perros. Cuento con un jardín amplio donde las mascotas pueden divertirse, tomar el sol y jugar sin salir de casa",
     name: "juan",
     last_name: "paraducha",
     phone: "911-81234567",
@@ -215,6 +192,30 @@ const user = [
     profileImgURL:
       "https://as2.ftcdn.net/v2/jpg/02/41/41/19/1000_F_241411954_4YTOaAtM4QrIMhOVLgglstw3PUGRvonq.jpg",
   },
+  {
+    email: "admin@gmail.com",
+    password: "admin123456",
+    name: "admin",
+    last_name: "admin",
+    bio: "soy admin",
+    phone: "911-12345678",
+    location: [
+      {
+        direccion: "admin",
+        lat: -34.720407,
+        lng: -58.262576
+      }
+    ],
+    rating: 5.0,
+    bookings: 5,
+    myImages: [
+      "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242165.jpg",
+      "https://imgar.zonapropcdn.com/avisos/1/00/46/83/60/99/1200x1200/1743242042.jpg",
+      "https://imgar.zonapropcdn.com/avisos/resize/1/00/46/83/60/99/1200x1200/1743242122.jpg",
+    ],
+    profileImgURL:
+      "https://images.unsplash.com/photo-1544502062-f82887f03d1c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1559&q=80",
+  },
 ];
 
 const post = [
@@ -225,79 +226,16 @@ const post = [
     title: "Acerca de Julio Hernandez",
     price: 50,
     description:
-      "Hola!! soy Julio Hernandez de Quilmes BA, soy psicólogo de profesión y estoy terminando mi segunda carrera en MV ,trabajo de apoyo en la clínica veterinaria de mi tío así que tengo conocimientos y experiencia necesaria para atender las necesidades de sus mascotas",
-  },
-  {
-    email: "francomiño@gmail.com",
-    type: "gato",
-    size: "grande",
-    price: 100,
-    title: "Acerca de Franco Miño",
-    description:
-      "Hola!! soy Franco Miño de Quilmes BA, Me dedico al adiestramiento canino, a la rehabilitación de perros con problemas de conducta. Me dedico al 100% a amar a los pequeños peludos que me dejan a cuidar como si estuvieran en su casa",
-  },
-  {
-    email: "luiscataldo@gmail.com",
-    type: "roedores",
-    size: "pequeño",
-    title: "Acerca de Luis Cataldo",
-    price:180,
-    description:
-      "Hola!! soy Luis Cataldo de Quilmes BA, soy profesor y también me encantan los animales. Se lo importante que es para ti tu mascota. Nos encantaría darle todo nuestro cariño mientras estás de viaje. Cuenta conmigo.",
-  },
-  {
-    email: "darianesquivel@gmail.com",
-    title: "Acerca de Darian Esquivel",
-    type: "roedores",
-    size: "grande",
-    price: 90,
-    description:
-      "Hola!! soy Darian Esquivel de morón BA, tus mascotas no sentirán el cambio de casa porque al quedar con nosotros entran en un ambiente de hogar y con la seguridad de un médico en casa.",
-  },
-  {
-    email: "pablomoyano@gmail.com",
-    title: "Acerca de Pablo Moyano",
-    type: "aves",
-    size: "grande",
-    price:70,
-    description:
-      "Hola!! soy Pablo Moyano de Morón BA, Desde pequeño me encantan los animales! Cerca de mi casa hay 2 parques donde tu perrito podrá pasear y divertirse, nosotros disfrutaremos de su linda compañía y él de una excelente atención!.",
-  },
-  {
-    email: "sebastianguerra@gmail.com",
-    title: "Acerca de Sebastian Guerra",
-    type: "gato",
-    size: "pequeño",
-    price:200,
-    description:
-      "Hola!! soy Sebastian Guerra de Lomas de Zamora BA, Me ofrezco a su cuidado porque amo la experiencia de incluir nuevos miembros a mi manada y hacerlos parte de mi rutina diaria, aunque sea de manera temporal",
-  },
-  {
-    email: "lucasduran@gmail.com",
-    title: "Acerca de Lucas Duran",
-    type: "gato",
-    size: "mediano",
-    price:50,
-    description:
-      "Hola!! soy Lucas Duran de Lomas de Zamora BA, rescatista de animales desde hace más de 3 años. Mi vida y mi pasión son los animales. Gracias a mi trabajo como voluntario rescatista he tenido la oportunidad de convivir con cientos de perros y gatos, lo que me ha ayudado a comprender su comportamiento, emociones y necesidades físicas.",
-  },
-  {
-    email: "juanparaducha@gmail.com",
-    title: "Acerca de Juan Paraducha",
-    type: "perro",
-    size: "grande",
-    price:350,
-    description:
-      "Hola!! soy Juan Paraducha de Palermo BA, he sido cuidador desde hace varios meses, amo los animales en especial a los perros. Cuento con un jardín amplio donde las mascotas pueden divertirse, tomar el sol y jugar sin salir de casa",
+      "Hola!! soy Julio Hernandez, cuido roedores, de Jueves a Domingo desde las 7:00 am, si recoges tu mascota después de las 15:00 hrs se cobrará día completo, precio 50 USD",
   },
   {
     email: "juliohernandez@gmail.com",
-    type: "roedores",
-    size: "mediano",
+    type: "perro",
+    size: "pequeño",
     title: "Acerca de Julio Hernandez",
-    price: 50,
+    price: 80,
     description:
-      "Hola!! soy Julio Hernandez de Quilmes BA, soy psicólogo de profesión y estoy terminando mi segunda carrera en MV ,trabajo de apoyo en la clínica veterinaria de mi tío así que tengo conocimientos y experiencia necesaria para atender las necesidades de sus mascotas",
+      "Hola!! soy Julio Hernandez, cuido perros peuqeños, de Lunes a Miercoles desde las 7:00 am, si recoges tu mascota después de las 15:00 hrs se cobrará día completo, precio 80 USD",
   },
   {
     email: "francomiño@gmail.com",
@@ -306,25 +244,34 @@ const post = [
     price: 100,
     title: "Acerca de Franco Miño",
     description:
-      "Hola!! soy Franco Miño de Quilmes BA, Me dedico al adiestramiento canino, a la rehabilitación de perros con problemas de conducta. Me dedico al 100% a amar a los pequeños peludos que me dejan a cuidar como si estuvieran en su casa",
+      "Hola!! soy Franco Miño, amo los gatos así que me dedico a ellos 100%, no importa si son grandes, medianos o pequeños. Los cuido de Lunes a Domingo en cualquier horario. Es importante que no olvides tener su esquema de vacunación, precio 100 USD",
   },
   {
     email: "luiscataldo@gmail.com",
-    type: "roedores",
+    type: "perro",
     size: "pequeño",
     title: "Acerca de Luis Cataldo",
-    price:180,
+    price:120,
     description:
-      "Hola!! soy Luis Cataldo de Quilmes BA, soy profesor y también me encantan los animales. Se lo importante que es para ti tu mascota. Nos encantaría darle todo nuestro cariño mientras estás de viaje. Cuenta conmigo.",
+      "Hola!! soy Luis Cataldo, Cuido perros pequeños. Para que tu peludo este mas comodo, es importante: Alimento para todos los días, Plato de comida, Cartilla de vacunación completa y al día, libre de parásitos, así todos están protegidos !!Solo cuido mascotas esterilizadas, precio 120 USD",
+  },
+  {
+    email: "luiscataldo@gmail.com",
+    type: "perro",
+    size: "grande",
+    title: "Acerca de Luis Cataldo",
+    price: 170,
+    description:
+      "Hola!! soy Luis Cataldo, Cuido perros grandes. Para que tu peludo este mas comodo, es importante: Alimento para todos los días, Plato de comida, Cartilla de vacunación completa y al día, libre de parásitos, así todos están protegidos !!Solo cuido mascotas esterilizadas, precio 170 USD",
   },
   {
     email: "darianesquivel@gmail.com",
     title: "Acerca de Darian Esquivel",
-    type: "roedores",
-    size: "grande",
+    type: "aves",
+    size: "mediano",
     price: 90,
     description:
-      "Hola!! soy Darian Esquivel de morón BA, tus mascotas no sentirán el cambio de casa porque al quedar con nosotros entran en un ambiente de hogar y con la seguridad de un médico en casa.",
+      "Hola!! soy Darian Esquivel cuido aves, de Lunes a Viernes desde las 12:00 m, si recoges tu mascota después de las 14:00 hrs se cobrará día completo, precio 90 USD",
   },
   {
     email: "pablomoyano@gmail.com",
@@ -333,7 +280,7 @@ const post = [
     size: "grande",
     price:70,
     description:
-      "Hola!! soy Pablo Moyano de Morón BA, Desde pequeño me encantan los animales! Cerca de mi casa hay 2 parques donde tu perrito podrá pasear y divertirse, nosotros disfrutaremos de su linda compañía y él de una excelente atención!.",
+      "Hola!! soy Pablo Moyano, Me encantan las aves! Las cuido fines de semana. Lo que requerimos para poder cuidar de tu pequeñín es necesario que traiga su comida, precio 70 USD",
   },
   {
     email: "sebastianguerra@gmail.com",
@@ -342,7 +289,7 @@ const post = [
     size: "pequeño",
     price:200,
     description:
-      "Hola!! soy Sebastian Guerra de Lomas de Zamora BA, Me ofrezco a su cuidado porque amo la experiencia de incluir nuevos miembros a mi manada y hacerlos parte de mi rutina diaria, aunque sea de manera temporal",
+      "Hola!! soy Sebastian Guerra, Me ofrezco al cuidado porque crecí con 3 de ellos. Cuido de Lunes a Viernes, precio 200 USD",
   },
   {
     email: "lucasduran@gmail.com",
@@ -351,79 +298,16 @@ const post = [
     size: "mediano",
     price:50,
     description:
-      "Hola!! soy Lucas Duran de Lomas de Zamora BA, rescatista de animales desde hace más de 3 años. Mi vida y mi pasión son los animales. Gracias a mi trabajo como voluntario rescatista he tenido la oportunidad de convivir con cientos de perros y gatos, lo que me ha ayudado a comprender su comportamiento, emociones y necesidades físicas.",
-  },
-  {
-    email: "juanparaducha@gmail.com",
-    title: "Acerca de Juan Paraducha",
-    type: "perro",
-    size: "grande",
-    price:350,
-    description:
-      "Hola!! soy Juan Paraducha de Palermo BA, he sido cuidador desde hace varios meses, amo los animales en especial a los perros. Cuento con un jardín amplio donde las mascotas pueden divertirse, tomar el sol y jugar sin salir de casa",
-  },
-  {
-    email: "juliohernandez@gmail.com",
-    type: "roedores",
-    size: "mediano",
-    title: "Acerca de Julio Hernandez",
-    price: 50,
-    description:
-      "Hola!! soy Julio Hernandez de Quilmes BA, soy psicólogo de profesión y estoy terminando mi segunda carrera en MV ,trabajo de apoyo en la clínica veterinaria de mi tío así que tengo conocimientos y experiencia necesaria para atender las necesidades de sus mascotas",
-  },
-  {
-    email: "francomiño@gmail.com",
-    type: "gato",
-    size: "grande",
-    price: 100,
-    title: "Acerca de Franco Miño",
-    description:
-      "Hola!! soy Franco Miño de Quilmes BA, Me dedico al adiestramiento canino, a la rehabilitación de perros con problemas de conducta. Me dedico al 100% a amar a los pequeños peludos que me dejan a cuidar como si estuvieran en su casa",
-  },
-  {
-    email: "luiscataldo@gmail.com",
-    type: "roedores",
-    size: "pequeño",
-    title: "Acerca de Luis Cataldo",
-    price:180,
-    description:
-      "Hola!! soy Luis Cataldo de Quilmes BA, soy profesor y también me encantan los animales. Se lo importante que es para ti tu mascota. Nos encantaría darle todo nuestro cariño mientras estás de viaje. Cuenta conmigo.",
-  },
-  {
-    email: "darianesquivel@gmail.com",
-    title: "Acerca de Darian Esquivel",
-    type: "roedores",
-    size: "grande",
-    price: 90,
-    description:
-      "Hola!! soy Darian Esquivel de morón BA, tus mascotas no sentirán el cambio de casa porque al quedar con nosotros entran en un ambiente de hogar y con la seguridad de un médico en casa.",
-  },
-  {
-    email: "pablomoyano@gmail.com",
-    title: "Acerca de Pablo Moyano",
-    type: "aves",
-    size: "grande",
-    price:70,
-    description:
-      "Hola!! soy Pablo Moyano de Morón BA, Desde pequeño me encantan los animales! Cerca de mi casa hay 2 parques donde tu perrito podrá pasear y divertirse, nosotros disfrutaremos de su linda compañía y él de una excelente atención!.",
-  },
-  {
-    email: "sebastianguerra@gmail.com",
-    title: "Acerca de Sebastian Guerra",
-    type: "gato",
-    size: "pequeño",
-    price:200,
-    description:
-      "Hola!! soy Sebastian Guerra de Lomas de Zamora BA, Me ofrezco a su cuidado porque amo la experiencia de incluir nuevos miembros a mi manada y hacerlos parte de mi rutina diaria, aunque sea de manera temporal",
+      "Hola!! soy Lucas Duran, rescatista de animales. Cuido tus gatos de Sabado a Lunes, desde las 8:00 am hasta las 22:00, precio 50 USD",
   },
   {
     email: "lucasduran@gmail.com",
     title: "Acerca de Lucas Duran",
-    type: "gato",
+    type: "perro",
     size: "mediano",
-    price:50,
+    price: 150,
     description:
-      "Hola!! soy Lucas Duran de Lomas de Zamora BA, rescatista de animales desde hace más de 3 años. Mi vida y mi pasión son los animales. Gracias a mi trabajo como voluntario rescatista he tenido la oportunidad de convivir con cientos de perros y gatos, lo que me ha ayudado a comprender su comportamiento, emociones y necesidades físicas.",
+      "Hola!! soy Lucas Duran, rescatista de animales. Cuido tus perros de Sabado a Lunes, desde las 8:00 am hasta las 22:00, precio 150 USD",
   },
   {
     email: "juanparaducha@gmail.com",
@@ -432,10 +316,17 @@ const post = [
     size: "grande",
     price:350,
     description:
-      "Hola!! soy Juan Paraducha de Palermo BA, he sido cuidador desde hace varios meses, amo los animales en especial a los perros. Cuento con un jardín amplio donde las mascotas pueden divertirse, tomar el sol y jugar sin salir de casa",
+      "Hola!! soy Juan Paraducha, he sido cuidador de perros toda mi vida, es importante que tengan su esquema de vacunación al día. Cuido tus canes de Lunes a Viernes las 24 horas del día. precio 350 USD",
+  },{
+    email: "juanparaducha@gmail.com",
+    title: "Acerca de Juan Paraducha",
+    type: "perro",
+    size: "pequeño",
+    price: 300,
+    description:
+      "Hola!! soy Juan Paraducha, he sido cuidador de perros toda mi vida, es importante que tengan su esquema de vacunación al día. Cuido tus canes de Lunes a Viernes las 24 horas del día. precio 300 USD",
   },
 ];
-
 const feedback = [
   {
     email1: "juliohernandez@gmail.com",
