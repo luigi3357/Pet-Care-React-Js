@@ -8,7 +8,7 @@ import { changeBookingStatus, fetchCheckOutDetails, postPayment } from "../REDUX
 export function Payment() {
   const statusClosed = ["completed", "approved", "rejected", "cancelled"];
   const link = useSelector((state) => state.urlMP);
-  const loginUser = useSelector((state) => state.login);
+  const loginUser = JSON.parse(localStorage.login)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const checkout_details = useSelector((state) => state.checkout_details);

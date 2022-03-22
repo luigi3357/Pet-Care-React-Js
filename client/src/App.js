@@ -59,8 +59,10 @@ function App() {
         <Route path="/editForm" element={<EditForm />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/Maps" element={<MapDetail />} />
+        <Route path="/booking/:id" element={<Payment />} />
         <Route path="/AddressAutocom" element={<AddressAutocom />} />
         <Route path="/about" element={<About />} />
+        <Route path="/mp_confirmation" element={<ConfirmationMP />} />
       </Routes>
     </Router>
   );
