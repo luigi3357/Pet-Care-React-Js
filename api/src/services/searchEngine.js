@@ -4,6 +4,7 @@ const types = ["perro", "gato", "aves", "roedores"];
 const sizes = ["pequeño", "mediano", "grande"];
 
 function queryToKeywordArray(queryString) {
+  console.log(queryString,"soy query")
   return queryString.keyword.split(" ");
 }
 
@@ -34,8 +35,7 @@ async function searchingMachine(keywords) {
             attributes: ["id", "rate", "message", "from_id", "updatedAt"],
           },
           attributes: ["name", "last_name", "rating", "bookings"],
-        },
-        attributes: ["id", "title", "description", "updatedAt"],
+        },      
       });
       foundPosts.push(keywordSearch);
     }

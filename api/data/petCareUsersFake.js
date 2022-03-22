@@ -199,6 +199,7 @@ const user = [
     last_name: "admin",
     bio: "soy admin",
     phone: "911-12345678",
+    Admin:true,
     location: [
       {
         direccion: "admin",

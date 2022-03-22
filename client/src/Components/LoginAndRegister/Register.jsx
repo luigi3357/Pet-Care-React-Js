@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register, getAllUsers } from "../../REDUX/actions/action";
 import { useNavigate } from "react-router-dom";
 import { NavBar } from "../NavBar";
+import { RegisterGoogle } from "./registerGoogle";
 
 
 export const Register = () => {
@@ -138,6 +139,7 @@ export const Register = () => {
       <NavBar />
       <Toast ref={notmatch} />
       <Toast ref={minpass} />
+      
       <Dialog
         visible={showMessage}
         onHide={() => setShowMessage(false)}
