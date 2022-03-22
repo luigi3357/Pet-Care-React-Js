@@ -365,7 +365,6 @@ export const Register = () => {
              )}/>
             <Button type="submit" label="Submit" className="mt-2" />
           </form>
-          <RegisterGoogle />
         </div>
       </div>
     </div>

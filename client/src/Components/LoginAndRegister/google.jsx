@@ -12,21 +12,26 @@ export function Google() {
       ? JSON.parse(localStorage.getItem('loginData'))
       : null
   );
-const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const handleFailure = (result) => {
     alert(result);
   };
-useEffect(() => {
-  dispatch(getAllUsers())
-},[])
-const users = useSelector((state) => state.users)
+  useEffect(() => {
+    dispatch(getAllUsers())
+  }, [])
+  const users = useSelector((state) => state.users)
   const handleLogin = async (googleData) => {
-    const oneUser = users.filter(e=>e.email === googleData.profileObj.email)
-    if(oneUser.length){
+    const oneUser = users.filter(e => e.email === googleData.profileObj.email)
+    if (oneUser.length) {
       dispatch(getLogin(googleData.profileObj.email))
       navigate("/")
-    }  
-  };
+    } else {
+      if (!oneUser.length) {
+        dispatch(registerGoogle(googleData.profileObj))
+        navigate("/")
+      }
+    };
+  }
   const handleLogout = () => {
     localStorage.removeItem('loginData');
     setLoginData(null);

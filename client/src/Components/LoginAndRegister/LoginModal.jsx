@@ -54,18 +54,19 @@ export const Login = () => {
 
     if (!oneUser.length) {
       setShowExist(true);
-    } else {
-      if (oneUser.map(e => e.Admin)[0] === true) {
-        dispatch(getAllUsers())
-        setTimeout(() => {
-          navigate("/adminHome")
-        })
-      }
+    } else {     
       if (oneUser.map(e => e.deleted)[0] === true) {
         setShowBan(true)
         return
       }
       if (verifyPassword === true) {
+        if (oneUser.map(e => e.Admin)[0] === true) {
+          dispatch(getAllUsers())
+          dispatch(getLogin(data.email));
+          setTimeout(() => {
+            navigate("/adminHome")
+          })
+        }
         if (validar[0] === true) {
           dispatch(secondaryVerification(data2))
           setShowVerify(true)

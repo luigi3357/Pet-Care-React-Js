@@ -8,15 +8,14 @@ export default function SearchBar() {
 
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
-useEffect(()=>{
-  if(search>0){
+useEffect(()=>{ 
     setTimeout(() => {
       dispatch(getSearch(search))
-    }, 3500); 
-  }    
+    }, 3500);       
 },[dispatch])
 
   function handleSearchInput(e) {
+    console.log(e)
     setSearch(e.target.value);
   }
 
@@ -29,7 +28,7 @@ useEffect(()=>{
     <div>
       <form onSubmit={(e) => handleSearch(e)} className="p-input-icon-right">
         <i className="pi pi-search" />
-        <InputText
+        <input
           type="text"
           id="searchInput"
           placeholder="Buscar..."

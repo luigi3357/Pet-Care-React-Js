@@ -69,11 +69,11 @@ console.log(logged,"algo")
             className={style.link}
             id="Profile"
           >
-            {/* <Avatar
+            <Avatar
               label={logged.name[0].toUpperCase()}
               shape="circle"
               size="large"
-            /> */}
+            />
           </Link>
         ) : null}
 

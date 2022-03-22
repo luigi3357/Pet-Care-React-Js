@@ -74,11 +74,11 @@ export function registerGoogle(payload) {
     let json = await axios.post(`${localhost}/registerGoogle`, payload)
     .then((response)=>{
       console.log(response.data,"soy el response")
-      // localStorage.setItem('login', JSON.stringify(response.data))
-      // dispatch({
-      //   type: ACTION_TYPES.REGISTER_LOGIN,
-      //   payload: response.data[0]
-      // })
+      localStorage.setItem('login', JSON.stringify(response.data))
+      dispatch({
+        type: ACTION_TYPES.REGISTER_LOGIN,
+        payload: response.data
+      })
     });
   };
 }
@@ -230,12 +230,13 @@ export function getFiltered(payload) {
   };
 }
 
-export function getSearch(payload) {
+export function getSearch(keywords) {
   return async function (dispatch) {
-    let result = await axios.get(`${localhost}/search`, { payload });
+    let result = await axios.get(`${localhost}/search?keyword=` + keywords.replace(" ", "+") );
+    console.log(result.data)
     dispatch({
       type: ACTION_TYPES.GET_SEARCH,
-      payload: result,
+      payload: result.data,
     });
   };
 }
