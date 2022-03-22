@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router";
 import { NavBar } from "../Components/NavBar";
 import profileDefault from "./../assets/profile.jpg";
-import style from "./global.module.css";
 import ReviewCard from "../Components/ReviewCard";
 import { Rating } from "primereact/rating";
 import { FaDog, FaCrow, FaCat } from "react-icons/fa";
@@ -17,7 +16,7 @@ import { localhost } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
 import { Link } from "react-router-dom";
 import { BookingDatatables } from "../Components/BookingTable";
-
+import "./stylesPerfil.css"
 
 export const PersonalProfile = () => {
   const { id } = useParams(); // recibo el id por params para buscar la info con la ruta /users/profile/id
@@ -38,6 +37,25 @@ export const PersonalProfile = () => {
     }
   }, [loginUser]);
   
+  const [comentarios, setComentarios] = useState(true);
+  const [posteos, setPosteos] = useState(false);
+  const [contrataciones, setContrataciones] = useState(false);
+
+  function handlePost(){
+    setPosteos(!posteos);
+    setComentarios(false)
+    setContrataciones(false)
+  }
+  function handleComent(){
+    setPosteos(false);
+    setComentarios(!comentarios)
+    setContrataciones(false)
+  }
+  function handleContrataciones(){
+    setPosteos(false);
+    setComentarios(false)
+    setContrataciones(!contrataciones);
+  }
   let petIcon;
   let sizeText;
   
@@ -79,12 +97,15 @@ export const PersonalProfile = () => {
   }
 
   return (
-    <div className={style.container}>
-      <NavBar />
-      <div className={style.subContainer}>
-        <div className={style.photoMap}>
-          <div className={style.photoMap}>
-            <Image
+    <div className="containerPrincipal">
+       <NavBar />
+    <div className="container">
+      <div className="containerAuxiliar">
+      <div className="photoMap">
+     
+          <div className="photoMap">
+            <div className="photoMap2">
+              <Image
               src={
                 fullInfo
                 ? fullInfo.profileImgURL
@@ -93,12 +114,13 @@ export const PersonalProfile = () => {
                 : profileDefault
               }
               alt="Image"
-              width="200"
-              height="200"
+              width="230px"
+              height="250px"
               preview
               />
-            <div className={style.map}>
-              <Link to={`/editProfile`} className={style.link}>
+            </div>
+            <div className="map">
+              <Link to={`/editProfile`} className="link">
                 <Button
                   label="Editar perfil"
                   className="p-button-sm p-button-info p-button-rounded"
@@ -113,14 +135,14 @@ export const PersonalProfile = () => {
                 className="p-button-sm p-button-warning p-button-rounded"
                 />
 
-              <Link to={`/formpublic`} className={style.link}>
+              <Link to={`/formpublic`} className="link">
                 <Button
                   label="Crear post"
                   className="p-button-sm p-button-warning p-button-rounded"
                   />
               </Link>
 
-              <Link to={`/editProfile`} className={style.link}>
+              <Link to={`/editProfile`} className="link">
                 <Button
                   label="asd"
                   className="p-button-sm p-button-warning p-button-rounded"
@@ -128,12 +150,9 @@ export const PersonalProfile = () => {
               </Link>
             </div>
           </div>
-        </div>
-        <div className={style.profileCardContainer}>
-          <div className={style.data}>
-            <div className={style.subData}>
+          <div className="subData">
               <h3>{fullInfo ? fullInfo.title : null}</h3>
-              <p className={style.description}>
+              <p className="description">
                 {fullInfo ? fullInfo.bio : null}
               </p>
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
@@ -156,11 +175,19 @@ export const PersonalProfile = () => {
                 />
               {/* <p>Precio: ${price}</p> */}
               <p>Direccion: {fullInfo ? fullInfo.address : null}</p>
-              <p>Tipo:</p> {petIcon}
-              <p>Tamaño:</p> {sizeText}
+              {/* <p>Tipo:</p> {petIcon}
+              <p>Tamaño:</p> {sizeText} */}
             </div>
-          </div>
-          <h4>Posteos</h4>
+        </div>
+
+      <div>
+      <div className="contrainerTitelh4">
+      <h4 onClick={(e) => {handleComent()}}>Comentarios</h4>
+      <h4 onClick={(e) => {handlePost()}}>Posteos</h4>
+      <h4 onClick={(e) => {handleContrataciones()}}>Contrataciones</h4>
+      </div>
+        <div >
+          <div className={posteos === true ? 'notDisabled' : 'Disabled'}>
           {fullInfo
             ? fullInfo.posteos.map((p) => {
               return (
@@ -174,8 +201,10 @@ export const PersonalProfile = () => {
                 );
               })
               : null}
-
-          <h4>Comentarios</h4>
+          </div>    
+        </div>      
+        <div className="containerComentarios">
+          <div className={comentarios === true ? 'notDisabled' : 'Disabled'}>
           {fullInfo ? (
             fullInfo.reviews?.map((i) => {
               return (
@@ -192,15 +221,22 @@ export const PersonalProfile = () => {
           ) : (
             <h5>El usuario aún no posee reviews</h5>
             )}
+          </div>
         </div>
-<div >{
+  <div >
+  
+  <div className={contrataciones === true ? 'notDisabled' : 'Disabled'}>
+  {
   fullInfo? 
-fullInfo.keeper ? <BookingDatatables title={'Contrataciones'} /*data={fullInfo?fullInfo.contrataciones:null}*/ /> :
-<BookingDatatables title={'Reservaciones'}  /*data={fullInfo?fullInfo.reservaciones:null}*/  />
-
+  fullInfo.keeper ? <BookingDatatables title={'Información'} /*data={fullInfo?fullInfo.contrataciones:null}*/ /> :
+  <BookingDatatables title={'Reservaciones'}  /*data={fullInfo?fullInfo.reservaciones:null}*/  />
   :null}
-</div>
+  </div>
+  </div>
       </div>
     </div>
+  </div>
+</div>
   );
+  
 };

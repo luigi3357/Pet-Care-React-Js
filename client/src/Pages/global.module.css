@@ -68,7 +68,11 @@
 .imageProfile {
   border-radius: 100px;
 }
-
+.imgProfilePersonal{
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+}
 .data {
   display: flex;
   flex-direction: column;
