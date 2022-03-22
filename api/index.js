@@ -4,7 +4,7 @@ const { conn } = require("./src/db.js");
 const { User } = require("./src/db");
 const { createPost, createReview } = require("./data/funcionesPreCarga.js");
 
-conn.sync({ force: false }).then(async () => {
+conn.sync({ force: true }).then(async () => {
   try {
     const users = user.forEach((element) => {
       User.findOrCreate({
