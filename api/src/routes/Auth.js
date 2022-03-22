@@ -7,16 +7,17 @@ var db = require('../db');
 passport.use(new GoogleStrategy({
   clientID: process.env['GOOGLE_CLIENT_ID'],
   clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
-  callbackURL: 'http://localhost:3000/',
-  scope: [ 'profile' ]
+  callbackURL: 'http://localhost:3000/'
 },
 function(issuer, profile, cb) {
   db.get('SELECT * FROM federated_credentials WHERE provider = ? AND subject = ?', [
     issuer,
     profile.id
-  ], function(err, row) {
+  ], function(err, cred) {
     if (err) { return cb(err); }
-    if (!row) {
+    if (!cred) {
+      // The Google account has not logged in to this app before.  Create a
+      // new user record and link it to the Google account.
       db.run('INSERT INTO users (name) VALUES (?)', [
         profile.displayName
       ], function(err) {
@@ -30,33 +31,37 @@ function(issuer, profile, cb) {
         ], function(err) {
           if (err) { return cb(err); }
           var user = {
-            id: id,
+            id: id.toString(),
             name: profile.displayName
           };
           return cb(null, user);
         });
       });
     } else {
-      db.get('SELECT rowid AS id, * FROM users WHERE rowid = ?', [ row.user_id ], function(err, row) {
+      // The Google account has previously logged in to the app.  Get the
+      // user record linked to the Google account and log the user in.
+      db.get('SELECT * FROM users WHERE id = ?', [ cred.user_id ], function(err, user) {
         if (err) { return cb(err); }
-        if (!row) { return cb(null, false); }
-        return cb(null, row);
+        if (!user) { return cb(null, false); }
+        return cb(null, user);
       });
     }
   });
-}));
-
+}
+));
 router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
-router.get('/login/federated/google', passport.authenticate('google'));
-
-router.get('/', passport.authenticate('google', {
-  successRedirect: '/',
-  failureRedirect: '/login'
+router.get('/login/federated/google', passport.authenticate('google',{
+  scope:["profile"]
 }));
 
+router.get('/',
+  passport.authenticate('google', { failureRedirect: '/login', failureMessage: true }),
+  function(req, res) {
+    res.redirect('/');
+  });
 passport.serializeUser(function(user, cb) {
   console.log(user)
   process.nextTick(function() {

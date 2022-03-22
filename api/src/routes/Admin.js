@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { User, Post, Review, Booking } = require("../db");
+const { search, hash } = require("../services/login");
 
 const router = Router();
 
@@ -24,7 +25,9 @@ router.put("/delete/:id", async (req, res, next) => {
   } catch (error) {
     res.status(400).send("No se pudo eliminar el usuario");
   }
-});
+  return res.status(404).send("Usuario no encontrado")
+})
+
 
 router.delete("/delete/:id", async (req, res, next) => {
     try {

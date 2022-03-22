@@ -87,6 +87,22 @@ export function getAllUsers() {
   };
 }
 
+export function getAdminAll() {
+  return function (dispatch) {
+    axios
+      .get(`${localhost}/users/adminAll`)
+      .then((response) => {
+        dispatch({
+          type: ACTION_TYPES.GET_ADMIN_ALL,
+          payload: response.data,
+        });
+      })
+      .catch((e) => {
+        throw new Error("No se pudo conectar al servidor");
+      });
+  };
+}
+
 // Login
 
 export const getLogin = (email) => {
