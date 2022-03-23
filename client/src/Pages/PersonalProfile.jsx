@@ -186,11 +186,11 @@ dispatch(verification2fa(data))
                   />
               </Link>
             </div>
-            <div style={{ height: '50vh', width: '50vh' }}>
+            {/* <div style={{ height: '50vh', width: '50vh' }}>
                 <MapView 
                     coordinates={coordinates}
                 />
-            </div>
+            </div> */}
           </div>
           <div className="subData">
               <h3>{fullInfo ? fullInfo.title : null}</h3>

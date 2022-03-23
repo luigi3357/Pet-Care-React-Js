@@ -1,9 +1,10 @@
-/* body{
+ .bodyforms{
     display:flex;
     min-height:100vh;
-
-} */
+    background-color: #23282e;
+} 
 .formpublic {
+  
   background-color: white;
   margin: auto;
   width: 90%;
@@ -51,8 +52,11 @@
   opacity: 0.5;
   font-size: 18px;
 }
-
-.form_submit {
+.errorarray2{
+  opacity: 0.0;
+  font-size: 18px;
+}
+.form_submitone {
   background-color: #3866f2;
   color: #fff;
   font-size: 1rem;
