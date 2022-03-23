@@ -56,7 +56,7 @@ function App() {
         <Route path="/formPayBank" element={<FormPayBank />} />
         <Route path="/formpublic" element={<FormCuidador />} />
         <Route path="/formpublicServ" element={<FormServ />} />
-        <Route path="/editForm" element={<EditForm />} />
+        <Route path="/editForm/:id" element={<EditForm />} />
         <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/Maps" element={<MapDetail />} />
         <Route path="/booking/:id" element={<Payment />} />

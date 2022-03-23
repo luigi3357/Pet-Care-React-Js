@@ -105,7 +105,7 @@ export default function FormPayData() {
       }
       dispatch(editProfilePost(form));
       setTimeout(() => {
-        dispatch(getLogin(form.email));
+      dispatch(getLogin(form.email));
         alert("Su perfil a sido editado!");
          navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
       }, 1000);
