@@ -61,8 +61,13 @@ export default function Filters() {
 
   return (
     <div className={style.filterContainer}>
-      <SearchBar />
       <div className={style.filterSubContainer}>
+        <div className={style.titleAndButton2}>
+          <SearchBar />
+          <button className={style.filterButton} onClick={() => cleanFilters()}>
+            <p className={style.textButton}>Limpier Filtros</p>
+          </button>
+        </div>
         <div className={style.titleAndButton}>
           <p className={style.textButton}>Especie</p>
           <div className={style.buttonGroup}>
@@ -89,33 +94,6 @@ export default function Filters() {
               onClick={() => handleFilterChange("aves")}
             >
               <FaCrow className="text-3xl" />
-            </button>
-          </div>
-        </div>
-
-        <div className={style.titleAndButton}>
-          <p className={style.textButton}>Tamaño</p>
-          <div className={style.buttonGroup}>
-            <button
-              className={style.filterButton}
-              onClick={() => handleSizeChange("pequeño")}
-            >
-              <p className={style.textButton}>Pequeño</p>
-              <p className={style.textButton}>0 a 25cm</p>
-            </button>
-            <button
-              className={style.filterButton}
-              onClick={() => handleSizeChange("mediano")}
-            >
-              <p className={style.textButton}>Mediano</p>
-              <p className={style.textButton}>25 a 60cm</p>
-            </button>
-            <button
-              className={style.filterButton}
-              onClick={() => handleSizeChange("grande")}
-            >
-              <p className={style.textButton}>Grande</p>
-              <p className={style.textButton}>60 a 120cm</p>
             </button>
           </div>
         </div>
@@ -159,10 +137,34 @@ export default function Filters() {
             </button>
           </div>
         </div>
+
+        <div className={style.titleAndButton}>
+          <p className={style.textButton}>Tamaño</p>
+          <div className={style.buttonGroup}>
+            <button
+              className={style.filterButton}
+              onClick={() => handleSizeChange("pequeño")}
+            >
+              <p className={style.textButton}>Pequeño</p>
+              <p className={style.textButton}>0 a 25cm</p>
+            </button>
+            <button
+              className={style.filterButton}
+              onClick={() => handleSizeChange("mediano")}
+            >
+              <p className={style.textButton}>Mediano</p>
+              <p className={style.textButton}>25 a 60cm</p>
+            </button>
+            <button
+              className={style.filterButton}
+              onClick={() => handleSizeChange("grande")}
+            >
+              <p className={style.textButton}>Grande</p>
+              <p className={style.textButton}>60 a 120cm</p>
+            </button>
+          </div>
+        </div>
       </div>
-      <button className={style.filterButton} onClick={() => cleanFilters()}>
-        <p className={style.textButton}>Limpier Filtros</p>
-      </button>
     </div>
   );
 }

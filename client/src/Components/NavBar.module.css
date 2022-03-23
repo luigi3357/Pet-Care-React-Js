@@ -1,106 +1,109 @@
-body{
-    padding: 100px 0px
+.navBarContainer {
+  width: 100%;
 }
 
-.navBarContainer{
-    background-color: #2D333B;
-    height: 100px;
-    position: fixed;
-    width: 100%;
-    top:0;
-    left:0;
-    z-index: 1200;
+.nav {
+  background-color: #2d333b;
+  display: Flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  text-align: center;
 }
 
-.nav{
-    display: Flex;
-    justify-Content: space-between;
-    /* max-width: 992px;
-    margin:0 auto */
-}
-
-.logo{
-    padding: 0 40px;
-    line-height: 150px;
+.logo {
+  width: 100px;
+  margin-top: 20px;
+  padding-left: 40px;
 }
 
 .navMenu {
-    display: flex;
-    margin-right: 40px;
-    list-style: none;
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
 }
 
 .navMenuItem {
-    margin: 0 10px;
-    line-height: 70px;
-    
+  margin: 0px 5px;
 }
 
 .navMenuItemAvatar {
-    /* line-height: 300px; */
-    
-    align-items: center;
 }
 
 .navMenuItemInput {
-    line-height: 300px;
-    
 }
 .name {
-    color:white;
-    line-height: 100px;
-     /* bold; */
+  color: white;
+
+  /* bold; */
 }
 
 .navMenuItemLogout {
-    line-height: 115px;
+  margin: 0px 10px;
 }
 
-.navHam{
-    color: white;
-    background: none;
-    border: none;
-    font-size: 30px;
-    padding: 0 20px;
-    /* line-height: 30px; */
-    height: 110px;
-    display: none;
+.singleButtonContainer {
+  margin: 0.9rem;
+  background: #00cfc3;
+  color: white;
+  font-weight: bold;
+  border-radius: 0.6rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.9rem;
+  min-width: 10em;
+  min-height: 2em;
+  position: relative;
+  transition: all 0.4s;
+}
+
+.singleButtonContainer2 {
+  margin: 0.9rem;
+  background: none;
+  color: #00cfc3;
+  font-weight: bold;
+  border-radius: 0.6rem;
+  border: 1px solid #00cfc3;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.9rem;
+  min-width: 10em;
+  min-height: 2em;
+  position: relative;
+  transition: all 0.4s;
+}
+
+.singleButtonContainer3 {
+  margin: 0.9rem;
+  background: #ffffff;
+  color: #00cfc3;
+  font-weight: bold;
+  border-radius: 0.6rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.9rem;
+  min-width: 10em;
+  min-height: 2em;
+  position: relative;
+  transition: all 0.4s;
 }
 
 @media (max-width: 768px) {
-    body{
-        padding: 350px 0px
-    }
-    
-    
-    .navMenu {
-        flex-direction: column;
-        align-items: center;
-        margin-right: 20px;
-        background-color: #00cfc3;
-        position: fixed;
-        left: 0;
-        top: 100px;
-        width: 100%;
-        padding: 20px 0;
-        overflow-y: auto;
-        /* left: 100%; */
-        transition: 0.4seg
+  .nav {
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+  }
 
-    }
-    
-    .navMenuItem {
-        margin: 0 10px;
-        line-height: 70px;
-        
-    }
-    
-    .navHam{
-        display: block;
-    }
+  .navMenu {
+    flex-direction: column;
+  }
 
-    .navMenuVisible {
-        left: 0;
-    }
-
+  .logo {
+    padding-left: 0px;
+  }
 }
