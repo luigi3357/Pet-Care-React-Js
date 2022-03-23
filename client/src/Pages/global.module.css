@@ -1,9 +1,8 @@
 /* PostCard */
 .postCardContainer {
-  background-color: #ffffffad;
+  background-color: #ffffff;
   border-radius: 10px;
   width: 350px;
-  border: 1px solid #3866f2;
 
   margin: 12px;
   display: flex;
@@ -74,6 +73,22 @@
   margin-top: 5px;
 }
 
+.singleButtonContainer {
+  margin: 0.9rem;
+  background: #00cfc3;
+  color: white;
+  font-weight: bold;
+  border-radius: 0.6rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  padding: 0.9rem;
+  min-width: 10em;
+  min-height: 2em;
+  position: relative;
+  transition: all 0.4s;
+}
+
 /* Home */
 
 .homeContainer {
@@ -81,6 +96,7 @@
 }
 
 .postContainer {
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -140,7 +156,10 @@
   align-items: center;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
+  .postContainer {
+    width: 100%;
+  }
 }
 
 /* NavBar */
@@ -222,7 +241,7 @@
 }
 
 .searchBar {
-  width: 300px;
+  width: 250px;
   border: none;
   background-color: #3d3f42;
   padding: 15px 10px;
