@@ -293,12 +293,7 @@ export default function FormCard(){
          <label> Roedores</label>     
          </div>
         
-          {
-          errors.type && 
-          (
-            <p className='errortxt'>{errors.type}</p>
-          ) 
-          }
+         
      
 
       
@@ -356,7 +351,7 @@ export default function FormCard(){
 
 
      <div> 
-              <button className={disableSubmit ?'form_submiterr' : 'form_submit'} type='submit' disabled={disableSubmit}  >Buscar servicio!</button>
+              <button className={disableSubmit ?'form_submiterr' : 'form_submitone'} type='submit' disabled={disableSubmit}  >Buscar servicio!</button>
      </div>
   
      </div>

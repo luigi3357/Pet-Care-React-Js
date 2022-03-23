@@ -357,7 +357,7 @@ export default function FormCard(){
 
 
        <div> 
-                <button  type='submit' className={disableSubmit ?'form_submiterr' : 'form_submit'} disabled={disableSubmit}  >Crear Servicio!</button>
+                <button  type='submit' className={disableSubmit ?'form_submiterr' : 'form_submitone'} disabled={disableSubmit}  >Editar publicacion</button>
        </div>
     
        </div>

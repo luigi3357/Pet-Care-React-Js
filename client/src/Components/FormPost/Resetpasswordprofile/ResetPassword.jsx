@@ -217,7 +217,7 @@ return (
 </div>
 <div>
 
-        <button className={disableSubmit ?'form_submiterr' : 'form_submit'} type='submit' disabled={disableSubmit} >Confirmar</button>
+        <button className={disableSubmit ?'form_submiterr' : 'form_submitone'} type='submit' disabled={disableSubmit} >Confirmar</button>
 </div>
 
        

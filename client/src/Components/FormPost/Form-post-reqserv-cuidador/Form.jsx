@@ -79,7 +79,7 @@ export default function FormCard(){
             form.description.length > 0 &&
             form.description.length < 400 &&
             form.price.length  >= 1 &&
-            form.price.length <= 5&&
+            form.price.length <= 6&&
             form.phone.length  >= 1 &&
             form.phone.length <= 15 &&
            form.type.length >= 1 &&
@@ -298,12 +298,7 @@ export default function FormCard(){
            <label> Roedores</label>     
            </div>
           
-            {
-            form.type ? null : 
-            (
-              <p className='errortxt'>Se requiere un tipo de mascota</p>
-            ) 
-            }
+           
        
 
         
@@ -340,7 +335,7 @@ export default function FormCard(){
            <label>Grande</label>
            </div>
            {
-               form.size.length >= 1 ? null : (<p className='errorarray'>(Campos obligatorios)</p>) 
+               form.size.length >= 1 ?  (<p className='errorarray2'>(Campos obligatorios)</p>)  : (<p className='errorarray'>(Campos obligatorios)</p>) 
               } 
            
        
@@ -361,7 +356,7 @@ export default function FormCard(){
 
 
        <div> 
-                <button className={disableSubmit ?'form_submiterr' : 'form_submit'}  type='submit' disabled={disableSubmit}  >Crear Servicio!</button>
+                <button className={disableSubmit ?'form_submiterr':'form_submitone'}   type='submit' disabled={disableSubmit}  >Crear Servicio!</button>
        </div>
     
        </div>
