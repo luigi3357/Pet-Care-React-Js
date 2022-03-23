@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { localhost } from "../REDUX/actions/action";
-
+import "./Bookingstyle.css"
 
 
 //La tabla recibe title 'Reservaciones' o 'Contrataciones'
@@ -78,7 +78,7 @@ export const BookingDatatables = ({ title, data }) => {
   };
 
   return (
-    <div style={{ width: 600 }}>
+    <div className="containerPrincipal">
       <div className="card">
         <DataTable
           value={loading ? null : details}
