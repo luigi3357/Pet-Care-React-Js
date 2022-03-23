@@ -3,6 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { RatingDemo } from "./Review";
 import styles from'../Components/createBooking.module.css'
+import { NavBar } from "../Components/NavBar";
+
 
 
 export default function KeeperView({
@@ -110,21 +112,23 @@ export default function KeeperView({
         
         return (
           <div className={styles.clientView}>
+      <NavBar />
+
             <div className={styles.clientView2}>
             <h1>#{checkout_details.id.slice(24)}</h1>
               <h2>Cuidador</h2>
               <p>
-                {checkout_details.keeper.name +
+                {checkout_details.keeper.name.toUpperCase() +
                   " " +
-                  checkout_details.keeper.last_name}
+                  checkout_details.keeper.last_name.toUpperCase()}
               </p>
               <p>{checkout_details.keeper.phone} </p>
               <h2>Dueño</h2>
               <Link to={`/Profile/${checkout_details.client.id}`}>
               <p>
-                {checkout_details.client.name +
+                {checkout_details.client.name.toUpperCase() +
                   " " +
-                  checkout_details.client.last_name}
+                  checkout_details.client.last_name.toUpperCase()}
               </p>
                   </Link>
               <p>{checkout_details.client.phone} </p>

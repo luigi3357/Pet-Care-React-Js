@@ -19,7 +19,7 @@ const Map = ({ setCoordinates, coordinates, cards }) => {
   }, [dispatch]);
 
   console.log(coordinates, "prueba+++++++++");
-  //console.log(showPointers, "objetousers")
+  console.log(showPointers, "objetousers")
 
   return (
     <div style={{ height: "80vh", width: "80vh" }}>
@@ -40,8 +40,9 @@ const Map = ({ setCoordinates, coordinates, cards }) => {
             alt="Marker"
           ></img>
         </div>
-        {showPointers?.map((pointers) => {
-          return (
+        {showPointers.map((pointers) => {
+          if(!pointers.location)return null
+                    return (
             <div
               lat={pointers.location[0].lat}
               lng={pointers.location[0].lng}
