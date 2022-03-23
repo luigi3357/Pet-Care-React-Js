@@ -125,8 +125,9 @@ dispatch(verification2fa(data))
                 : profileDefault
               }
               alt="Image"
-              width="230px"
-              height="290px"
+              width="300px"
+              height="300px"
+              
               preview
               />
             </div>

@@ -1,12 +1,16 @@
 .container{
     min-width: 100%;
-    background-color: #0D1117;
+    background-color: #2D333B;
     color: white;
+
 }
+body{
+    background-color:#2D333B;
+  }
 .containerAuxiliar{
     display: grid;
-    grid-template-columns: 300px 1040px;
-}
+    grid-template-columns: 30% 60%;
+}/* 1040px */
 .profileCardContainer{
     border-radius: 10px;
     border: 1px solid rgb(206, 206, 206);
@@ -40,13 +44,14 @@
     min-width: 100%;
     display: flex;
     gap: 10px;
-    border: 1px solid black;
+    border: 1px solid #CECECE;
 }
 
 .photoMap {
     width: 100%;
     text-align: center;
 }
+
 
 .photoMap2{
     margin-bottom:10px;
@@ -85,11 +90,15 @@
 
 .pDePerfilPosteos{
     color: white;
-    background-color:#0D1117;
+    background-color:#2D333B;
 }
 .pDePerfilPosteosContainer{
-    border:solid white 2px;
+    border:solid white 1px;
     border-radius:5px;
     margin-bottom: 15px;
     margin-right: 2%;
+}
+
+img{
+    object-fit:cover;
 }
