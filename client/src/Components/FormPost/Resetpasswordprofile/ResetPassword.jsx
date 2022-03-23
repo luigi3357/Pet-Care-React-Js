@@ -160,7 +160,7 @@ if(verifyPassword === false){
   alert('Contraseña cambiada')
 }
   
-
+navigate(`/`)
 
 
 
