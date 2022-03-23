@@ -22,7 +22,7 @@ const [form,setForm] = useState({
 })
 const [submit,setSubmit] = useState({
     password:'',
-    email:''
+    email:author.email
 })
 function validate(form){ 
     let errors = {};
