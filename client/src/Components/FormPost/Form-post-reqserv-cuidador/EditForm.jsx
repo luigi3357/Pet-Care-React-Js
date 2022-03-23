@@ -70,13 +70,14 @@ export default function FormCard(){
         if(
           form.title.length > 0 &&
           form.title.length < 50 &&
-         
+          form.price > 0&&
           form.description.length > 0 &&
           form.description.length < 400 &&
           form.price.length  >= 1 &&
           form.price.length <= 5&&
           form.phone.length  >= 1 &&
           form.phone.length <= 15 &&
+          form.phone > 0&&
          form.type.length >= 1 &&
          form.type.length < 5 &&
          form.size.length >= 1 &&
@@ -212,7 +213,7 @@ export default function FormCard(){
     
    
     return (
-      <body>
+      <body className='bodyforms'>
       <div>
         <div>
            
@@ -357,7 +358,7 @@ export default function FormCard(){
 
 
        <div> 
-                <button  type='submit' className={disableSubmit ?'form_submiterr' : 'form_submit'} disabled={disableSubmit}  >Crear Servicio!</button>
+                <button  type='submit' className={disableSubmit ?'form_submiterr' : 'form_submitone'} disabled={disableSubmit}  >Editar publicacion</button>
        </div>
     
        </div>

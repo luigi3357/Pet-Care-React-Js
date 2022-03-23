@@ -74,8 +74,10 @@ export default function FormCard(){
             form.description.length < 400 &&
             form.price.length  >= 1 &&
             form.price.length <= 6 &&
+            form.price > 0&&
             form.phone.length  >= 1 &&
             form.phone.length <= 15 &&
+            form.phone > 0&&
            form.type.length >= 1 &&
            form.type.length < 5 &&
            form.size.length >= 1 &&
@@ -212,7 +214,7 @@ export default function FormCard(){
     
    
     return (
-      <body>
+      <body className='bodyforms'>
       <div>
          
       <div>
@@ -293,12 +295,7 @@ export default function FormCard(){
          <label> Roedores</label>     
          </div>
         
-          {
-          errors.type && 
-          (
-            <p className='errortxt'>{errors.type}</p>
-          ) 
-          }
+         
      
 
       
@@ -356,7 +353,7 @@ export default function FormCard(){
 
 
      <div> 
-              <button className={disableSubmit ?'form_submiterr' : 'form_submit'} type='submit' disabled={disableSubmit}  >Buscar servicio!</button>
+              <button className={disableSubmit ?'form_submiterr' : 'form_submitone'} type='submit' disabled={disableSubmit}  >Buscar servicio!</button>
      </div>
   
      </div>

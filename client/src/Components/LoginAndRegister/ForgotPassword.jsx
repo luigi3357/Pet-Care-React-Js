@@ -9,7 +9,8 @@ import { classNames } from 'primereact/utils';
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword, getAllUsers, getLoginForgot } from '../../REDUX/actions/action';
 import { useNavigate } from 'react-router-dom';
-
+import { NavBar } from '../NavBar';
+import  s from './stylelogin.module.css'
 
 export const ForgotPassword = () => {
     const navigate = useNavigate() 
@@ -66,6 +67,17 @@ export const ForgotPassword = () => {
     )
 
     return (
+        <div >
+        <div style={{ display:"flex", flexDirection:'column', alignItems:"center"}}>
+            <i
+            className="pi pi-lock"
+            style={{ fontSize: "5rem", color: "var(--green-500)",}}>
+            </i>
+            <h3>¿Tienes problemas para entrar?</h3>
+            <h7>Introduce tu correo electrónico y 
+                te enviaremos un codigo al mismo para que 
+                puedas restaurar tu cuenta.</h7>
+        </div>
         <div className="form-demo">
             <Dialog
         visible={showExist}
@@ -99,7 +111,6 @@ export const ForgotPassword = () => {
 
             <div className="flex justify-content-center">
                 <div className="card">
-                    <h5 className="text-center">Forgot Password</h5>
                     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
 
                         <div className="field">
@@ -115,10 +126,11 @@ export const ForgotPassword = () => {
                             {getFormErrorMessage('email')}
                         </div>
 
-                        <Button type="submit" label="Submit" className="mt-2" />
+                        <Button type="submit" label="Enviar" className="mt-2" />
                     </form>
                 </div>
             </div>
         </div>
+    </div>
     );
 }

@@ -1,9 +1,11 @@
 /* PostCard */
 .postCardContainer {
+ background-color: #ffffffad;
   border-radius: 10px;
   width: 350px;
-  border: 1px solid rgb(206, 206, 206);
-  margin: 5px;
+  border: 1px solid #3866f2;
+  
+  margin: 12px;
   display: flex;
   text-align: center;
   flex-direction: column;
@@ -11,19 +13,64 @@
   align-items: center;
   justify-items: center;
 }
-
+.titlecards{
+  font-weight: 600;
+ color: black;
+ 
+}
 .postCardSubContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
+.postCardContainer:hover{
+  transform: translateY(-15px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.658);
+  transition: all 0.35s;
+}
+.petsize{
 
-.ratingCont {
+margin-left: 0px;
   display: flex;
-  justify-content: space-around;
-  align-items: stretch;
-  justify-items: center;
+  justify-content: space-between;
+  
+}
+.petsizecont{
+  display: flex;
+  
+  border-radius: 25%;
+  margin-left: 45px;
+  margin-top: 3px;
+  justify-content: center;
+  color: black;
+ 
+}
+.peticon{
+  margin-bottom: 30px;
+flex-direction:initial;
+
+
+}
+.contratacionn{
+  display:flex;
+}
+.ratingCont {
+  height:15%;
+  display: flex;
+  justify-content: space-between;
+  
+ 
+  
+}
+.sizeTxt{
+  opacity: 0.5;
+  margin-top:26px;
+}
+.ratingrat{
+  margin-top: 29px;
+  margin-right:19px;
 }
 
 .description {
@@ -33,8 +80,8 @@
 
 .imgPerfil {
   border-radius: 100px;
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   margin-top: 5px;
 }
 
