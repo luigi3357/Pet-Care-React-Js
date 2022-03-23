@@ -2,7 +2,7 @@ import axios from "axios";
 
 import ACTION_TYPES from "../actionTypes/actionTypes";
 
-export const localhost = "http://localhost:3001";
+export const localhost = "https://petcare2000.herokuapp.com/";
 
 //usersCoordinates
 
