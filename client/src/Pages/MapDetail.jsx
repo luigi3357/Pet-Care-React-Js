@@ -25,23 +25,12 @@ export default function MapDetail (){
 
     return (
         <div>
-            <div>
-                <h1>Mapa Detallado</h1>
-                <h1>Mapa Detallado</h1>
-                <h1>Mapa Detallado</h1>
-                <h1>Mapa Detallado</h1>
-                <h1>Mapa Detallado</h1>
-                <h1>Mapa Detallado</h1>
-                <h1>Mapa Detallado</h1>
-            </div>
-            <h1>CARD</h1>
-            
+            <h1>MAP</h1>
             <div style={{ height: '80vh', width: '80vh' }}>
                 <MapView 
                     coordinates={coordinates}
                 />
             </div>
-            
         </div>
     )
 }
