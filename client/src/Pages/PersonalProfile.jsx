@@ -237,10 +237,14 @@ dispatch(verification2fa(data))
               return (
                 <div className="pDePerfilPosteosContainer">
                 <Card className="pDePerfilPosteos">
+
                     <h4 className="pDePerfilPosteos">Descripcion:</h4><p className="pDePerfilPosteos"> {p.description}</p>
                     <h4 className="pDePerfilPosteos">Price: $</h4><p className="pDePerfilPosteos">{p.price}</p>
                     <h4 className="pDePerfilPosteos">Tamaño:</h4><p className="pDePerfilPosteos">{p.size}</p>
                     <h4 className="pDePerfilPosteos">Tipo:</h4><p className="pDePerfilPosteos">{p.type}</p>
+                    <Link to={`/editForm/${p.id}`}>
+              <button >Editar Publicacion</button>
+            </Link>
                   </Card>
                 </div>  
                 );

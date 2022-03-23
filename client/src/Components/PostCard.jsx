@@ -10,7 +10,7 @@ import style from "./../Pages/global.module.css";
 
 export default function PostCard({ post }) {
   const { title, author, type, size } = post;
-
+  const loggedUser = JSON.parse(localStorage.login)
   let petIcon;
   let sizeText;
 
@@ -99,21 +99,39 @@ export default function PostCard({ post }) {
           <div>
             <h5>Desde ${post.price}ARS</h5>
           </div>
+          {loggedUser ?
           <Link
-            to={`/Profile/${author.id}`}
+            to={loggedUser.id !== author.id ? `/Profile/${author.id}` : `/PersonalProfile/${loggedUser.id}`}
             state={post}
             className={style.link}
             id="Profile"
-          >
+          > 
             <Button
               className="p-button-rounded p-button-success p-button-lg mb-3"
               id="detailsBtn"
               title="Detalles"
               value="Detalles"
-            >
+              >
               Mas info
             </Button>
           </Link>
+              : 
+          <Link
+            to={`/Profile/${author.id}`}
+            state={post}
+            className={style.link}
+            id="Profile"
+          > 
+            <Button
+              className="p-button-rounded p-button-success p-button-lg mb-3"
+              id="detailsBtn"
+              title="Detalles"
+              value="Detalles"
+              >
+              Mas info
+            </Button>
+          </Link>
+          }
         </div>
       </div>
     </div>

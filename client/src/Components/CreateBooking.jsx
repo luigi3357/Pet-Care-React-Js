@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { localhost } from "../REDUX/actions/action";
 
-export function CreateBooking({ keeper, client, price, info }) {
+export function CreateBooking({ keeper, client, price, info, post_id }) {
   const navigate = useNavigate();
   const [total, setTotal] = useState("");
   const [dates2, setDates2] = useState(null);
@@ -17,6 +17,8 @@ export function CreateBooking({ keeper, client, price, info }) {
   const [comment, setComment] = useState("");
   const [restricted, setRestricted] = useState([]);
   const [daysAmount, setdaysAmount] = useState(1);
+  const [display, setDisplay] = useState(false);
+
   const [form, setForm] = useState({
     client_id: client.id,
     keeper_id: keeper.id,
@@ -82,14 +84,25 @@ export function CreateBooking({ keeper, client, price, info }) {
     })
     return restricteDays;
   }
+  const postulacion ={owner: keeper.id, keeper: client.id, post: post_id }
 
-
-
+  async function contactClient(){
+    await axios.post((`${localhost}/bookings/postular`, postulacion)).then((response)=>{
+      alert('Postulación enviada a '+ keeper.name)
+    })
+    console.log({owner: keeper.id, keeper: client.id, post: post_id })
+  }
 
   async function handleSubmit() {
     await axios.post(`${localhost}/bookings/create`, form).then((response) => {
       if(response.status==201){
         setDisplay(false)
+        setComment("");
+            setDates2(null);
+            setDates3(null);
+            setTotal("");
+            setdaysAmount(1);
+            navigate(`/`)
         return alert('Reserva creada con éxito')
       }}).catch((e)=>{
         console.log(e)
@@ -98,7 +111,6 @@ export function CreateBooking({ keeper, client, price, info }) {
       })
     };
   
-  const [display, setDisplay] = useState(false);
   function footerButton() {
     return (
       <div>
@@ -128,12 +140,11 @@ export function CreateBooking({ keeper, client, price, info }) {
   return (
     <div className="field col-12 md:col-4">
       <Button
-        label="RESERVAR"
+        label={keeper.keeper? "RESERVAR" : "POSTULARME"}
         className="p-button-rounded p-button-success p-button-raised"
-        onClick={() => {
-          console.log(restricted)
+        onClick={keeper.keeper ? () => {
           setDisplay(true);
-        }}
+        }: ()=>contactClient()}
       />
       <Dialog
         visible={display}

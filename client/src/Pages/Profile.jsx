@@ -129,6 +129,7 @@ export const Profile = (post) => {
                         price={p.price}
                         client={loginUser2}
                         info={fullInfo}
+                        post_id={p.id}
                       />
                     ) : (
                       <div>
@@ -140,14 +141,9 @@ export const Profile = (post) => {
                         </Link>
                       </div>
                     )}
-
                     <p>Tamaño: {p.size}</p>
                     <p>Tipo: {p.type}</p>
-                    <div>
-            <Link to={`/editForm/${id}`}>
-              <button onClick={(e)=> editPublic(e)}>Editar Publicacion</button>
-            </Link>
-            </div>
+             
                   </Card>
                 );
               })
