@@ -39,6 +39,11 @@
 }
 
 /* Home */
+
+.homeContainer {
+  background-color: #2d333b;
+}
+
 .postContainer {
   display: flex;
   flex-wrap: wrap;
@@ -149,40 +154,51 @@
   align-items: center;
   margin: 5px 0px;
   padding: 5px 0px;
-  border: 1px solid rgb(206, 206, 206);
   border-radius: 10px;
+  color: white;
 }
 
 .filterSubContainer {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  max-width: 800px;
-}
-
-.filterSubContainer div {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.title {
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.buttonContainer {
-  display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  margin: 0px 10px;
 }
 
-.buttonTitleContainer {
-  border: 1px solid #3b82f6;
-  padding: 5px;
-  margin: 5px 20px;
+.titleAndButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px;
+  background-color: #23282e;
   border-radius: 10px;
+  margin: 5px 5px;
+}
+
+.filterButton {
+  border: none;
+  background-color: #3d3f42;
+  border-radius: 100px;
+  padding: 15px;
+  margin: 2px 2px;
+  color: white;
+  transition: 0.4s;
+}
+
+.filterButton:hover {
+  background-color: #444e5a;
+  transition: 0.4s;
+}
+
+.buttonGroup {
+  display: flex;
+}
+
+.textButton {
+  color: White;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 @media (max-width: 600px) {
