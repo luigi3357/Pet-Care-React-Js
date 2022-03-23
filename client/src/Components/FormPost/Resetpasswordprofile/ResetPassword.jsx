@@ -151,13 +151,16 @@ if(verifyPassword === false){
     e.preventDefault()
     alert('Su contraseña actual no coincide')
 }else{
+  
     e.preventDefault()
     console.log(form)
     console.log(submit)
     dispatch(resetPassword(submit))
-    navigate(`/`)
+        alert('Contraseña cambiada')
+         navigate(`/`)
+      
  
-  alert('Contraseña cambiada')
+  
 }
   
 

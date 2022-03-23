@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { User, Post, Review } = require('../db');
 const { findPostsForHomeScreen } = require('../services/searchEngine');
 const { search} = require('../services/login')
-
+const {sendEmail} = require('../services/SendEmail')
 const router = Router();
 
 
@@ -74,26 +74,30 @@ router.delete("/delete/:id", async (req, res, next) => {
   }
 });
 
-router.put("/edit/:id", async (req, res, next) => {
-  const { title, description, price, type, size, address, phone } = req.body
-  const { id } = req.params
-  const post = await Post.findOne({ where: id });
+router.put("/edit", async (req, res, next) => {
+  const { title, description, price, type, size, address, phone, id, author_id } = req.body
+  console.log(req.body)
+  console.log(id,' soy el id' )
+  const post = await Post.findOne({ where:{id:id}  });
 
+  console.log(post)
   if (post) {
+    console.log('entre al post')
     try {
-      let user = await search({ id: post.author_id })
+      let user = await search({ id:author_id })
+      console.log(user)
       const editPost = await Post.update(
         {
           title: title ? title : post.title,
           description: description ? description : post.description,
           price: price ? price : post.price,
-          type: type ? type : post.type,
-          size: size ? size : post.size,
+          type: type ? type.toString() : post.type,
+          size: size ? size.toString() : post.size,
           address: address ? address : post.address,
           phone: phone ? phone : post.phone,
         },
         {
-          where: { id },
+          where: { id:id },
         });
       //armamos el mensaje
       let asunto = "su publicacion se edito correctamente"
@@ -108,9 +112,11 @@ router.put("/edit/:id", async (req, res, next) => {
       //envia el email
       let email = user.email
       let send = sendEmail(email, mensaje, asunto)
-      res.send('editado correctamente');
+      return res.send('editado correctamente');
     } catch (error) {
-      res.status(400).send("No se pudo eliminar el usuario");
+      console.error(error)
+      return res.status(400).send("No se pudo eliminar el usuario");
+
     }
   }
 
