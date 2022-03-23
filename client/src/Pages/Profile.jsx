@@ -143,11 +143,7 @@ export const Profile = (post) => {
 
                     <p>Tamaño: {p.size}</p>
                     <p>Tipo: {p.type}</p>
-                    <div>
-            <Link to={`/editForm/${id}`}>
-              <button onClick={(e)=> editPublic(e)}>Editar Publicacion</button>
-            </Link>
-            </div>
+           
                   </Card>
                 );
               })

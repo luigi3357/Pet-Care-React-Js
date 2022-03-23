@@ -27,8 +27,8 @@ router.post('/create', async (req, res, next) => {
       title,
       description,
       price: Number(price),
-      type: type.toString().toLowerCase(),
-      size: size.toString().toLowerCase(),
+      type: type.toLowerCase(),
+      size: size.toLowerCase(),
       author_id,
     })
     //armamos el mensaje
@@ -91,8 +91,8 @@ router.put("/edit", async (req, res, next) => {
           title: title ? title : post.title,
           description: description ? description : post.description,
           price: price ? price : post.price,
-          type: type ? type.toString() : post.type,
-          size: size ? size.toString() : post.size,
+          type: type ? type : post.type,
+          size: size ? size : post.size,
           address: address ? address : post.address,
           phone: phone ? phone : post.phone,
         },

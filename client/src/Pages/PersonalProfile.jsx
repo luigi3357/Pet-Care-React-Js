@@ -239,6 +239,7 @@ dispatch(verification2fa(data))
 
                     <p>Tamaño: {p.size}</p>
                     <p>Tipo: {p.type}</p>
+                  
                   </Card>
                 );
               })

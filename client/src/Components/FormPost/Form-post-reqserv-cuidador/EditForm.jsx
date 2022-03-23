@@ -21,8 +21,8 @@ export default function FormCard(){
         title:'',
         description:'',
         price:'',
-        type:[],
-        size:[],
+        type:'',
+        size:'',
         address:'',
         phone:'',
         id:filterpostt.map(e => e.id).toString(),
@@ -74,21 +74,23 @@ export default function FormCard(){
     const disableSubmit = useMemo(() =>{
         if(
           
+          form.title.length > 0 &&
           form.title.length < 50 &&
-          form.price > 0&&
-      
-          form.description.length < 400 &&
-          
-          form.price.length <= 5&&
          
+          form.description.length > 0 &&
+          form.description.length < 400 &&
+          form.price.length  >= 1 &&
+          form.price.length <= 6&&
+          form.price > 0&&
+          form.phone.length  >= 1 &&
           form.phone.length <= 15 &&
           form.phone > 0&&
-      
-         form.type.length < 5 &&
-    
-         form.size.length < 4 &&
-      
+         form.type.length  >0 &&
+         form.size.length > 0&&
+         form.address.length > 0 &&
          form.address.length < 150 
+        
+        
            ){
               return false;
            }else{
@@ -143,32 +145,18 @@ export default function FormCard(){
        }
    
        function handleCheckType(e){
-        if(!form.type.includes(e.target.value)){
-            setForm({
-                ...form,
-                type:[...form.type, e.target.value]
-            })
-           }
-           if (e.target.checked) {
-             //cuando este es seleccionado guarda el tipo en un arreglo
-             setForm({
-               ...form,
-               type: [...form.type, e.target.value],
-             });
-           }
-           if (!e.target.checked) {
-             //cuando el tipo es deselecconado, lo saca del array de tipos
-             form.type.splice(form.type.indexOf(e.target.value), 1);
-             setForm({
-               ...form,
-             });
-             console.log(form.type)
-           }
-           setErrors(validate({
-            ...form,
-            [e.target.name]: e.target.value,
-        }))
-            console.log(form.type)
+           
+        setForm({
+          ...form,
+          type: e.target.value
+        });
+      
+      
+      setErrors(validate({
+       ...form,
+        type: e.target.value,
+   }))
+       console.log(form.type)
           }
  
       
@@ -179,32 +167,17 @@ export default function FormCard(){
         
         
        function handleSelectS(e){
-        if(!form.size.includes(e.target.value)){
-            setForm({
-                ...form,
-                size:[...form.size, e.target.value]
-            })
-           }
-           if (e.target.checked) {
-             //cuando este es seleccionado guarda el tipo en un arreglo
-             setForm({
-               ...form,
-               size: [...form.size, e.target.value],
-             });
-           }
-           if (!e.target.checked) {
-             //cuando el tipo es deselecconado, lo saca del array de tipos
-             form.size.splice(form.size.indexOf(e.target.value), 1);
-             setForm({
-               ...form,
-             });
-             console.log(form.size)
-           }
-           setErrors(validate({
-            ...form,
-            [e.target.name]: e.target.value,
-        }))
-            console.log(form.size)
+        setForm({
+          ...form,
+          size: e.target.value
+        });
+      
+      
+      setErrors(validate({
+       ...form,
+        size: e.target.value,
+   }))
+       console.log(form.size)
        }
 
    
@@ -231,8 +204,8 @@ export default function FormCard(){
             title:'',
             description:'',
             price:'',
-            type:[],
-            size:[],
+            type:'',
+            size:'',
             address:'',
             phone:'',
             id:filterpostt.map(e => e.id).toString(),
@@ -311,21 +284,21 @@ export default function FormCard(){
            <div>
             <input  onChange={(e)=>{handleCheckType(e)
         }
-       } type="checkbox" name="perro" value='perro' />
+       } type="radio" name="tipo" value='perro' />
        <label> Perro</label>  
         
            </div>
          <div>
-           <input   onChange={handleCheckType}type="checkbox"  name="gato" value='gato'/>
+           <input   onChange={handleCheckType}type="radio"  name="tipo" value='gato'/>
          <label> Gato</label> 
          </div>
                
         <div>
-          <input  onChange={handleCheckType} type="checkbox"  name="aves" value='aves' />
+          <input  onChange={handleCheckType} type="radio"  name="tipo" value='aves' />
         <label> Aves</label> 
         </div>
           <div>
-           <input  onChange={handleCheckType} type="checkbox"  name="roedores" value= 'roedores' />
+           <input  onChange={handleCheckType} type="radio"  name="tipo" value= 'roedores' />
           <label> Roedores</label>     
           </div>
          
@@ -338,19 +311,19 @@ export default function FormCard(){
            <input 
          onChange={(e)=>{handleSelectS(e)
          }
-        } type="checkbox" name="pequeño" value='pequeño' />
+        } type="radio" name="tamaño" value='pequeño' />
         <label>Pequeño</label>
        </div>
        
        <div>
               
            
-           <input   onChange={handleSelectS}type="checkbox"  name="mediano" value='mediano'/>
+           <input   onChange={handleSelectS}type="radio"  name="tamaño" value='mediano'/>
                <label>Mediano</label>
            </div>   
            <div>
 
-           <input  onChange={handleSelectS} type="checkbox"  name="grande" value='grande' />
+           <input  onChange={handleSelectS} type="radio"  name="tamaño" value='grande' />
            <label>Grande</label>
            </div>
                
