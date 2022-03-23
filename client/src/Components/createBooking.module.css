@@ -1,0 +1,46 @@
+.labelreserva{
+}
+.labelbr{
+    height: px;
+}
+.singleButtonContainer {
+    margin: 0.9rem;
+    background: #00cfc3;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    border-radius: 0.6rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0.9rem;
+    min-width: 10em;
+    min-height: 2em;
+    position: relative;
+    transition: all 0.4s;
+  }
+.singleButtonContainerCancel {
+    margin: 0.9rem;
+    background: #ffffff;
+    color: #00cfc3;
+    font-weight: bold;
+    border-radius: 0.6rem;
+    border: 1px solid #00cfc3;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 0.9rem;
+    min-width: 10em;
+    min-height: 2em;
+    position: relative;
+    transition: all 0.4s;
+  }
+
+  .bookingContainer{
+      background-color: rgb(209, 129, 31);
+  }
+  .comments{
+      font-size: 20px;
+      font-weight: 500;
+  }
+  .textArea{
+      resize: none;
+  }
