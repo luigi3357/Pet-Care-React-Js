@@ -11,14 +11,16 @@ import { MdPestControlRodent } from "react-icons/md";
 import { Button } from "primereact/button";
 import { CreateBooking } from "../Components/CreateBooking";
 import MapDetail from "./MapDetail";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import axios from "axios";
 import { localhost } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
 import { Link } from "react-router-dom";
+import {fetchAllPosts} from '../REDUX/actions/action'
 export const Profile = (post) => {
   const { id } = useParams();
   const location = useLocation();
+  const dispatch = useDispatch()
   // const { description, title, author, updatedAt, type, size, address, price } =
   //   location.state;
   const loginUser = useSelector((state) => state.login);
@@ -74,7 +76,9 @@ export const Profile = (post) => {
   //   default:
   //     break;
   // }
-
+  function editPublic (e){
+    dispatch(fetchAllPosts())
+  }
   return (
     <div className={style.container}>
       <NavBar />
@@ -139,10 +143,16 @@ export const Profile = (post) => {
 
                     <p>Tamaño: {p.size}</p>
                     <p>Tipo: {p.type}</p>
+                    <div>
+            <Link to={`/editForm/${id}`}>
+              <button onClick={(e)=> editPublic(e)}>Editar Publicacion</button>
+            </Link>
+            </div>
                   </Card>
                 );
               })
             : null}
+           
 
           <h4>Comentarios</h4>
           {fullInfo.reviews ? (

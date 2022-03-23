@@ -1,11 +1,12 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import {createPost,getAllUsers} from '../../../REDUX/actions/action'
 import './Form.css'
 export default function FormCard(){
    
        const dispatch= useDispatch()
-    
+       const navigate = useNavigate()
        //   const typesState = useSelector((state)=> state.typePokemon)
        
        
@@ -200,6 +201,7 @@ export default function FormCard(){
         console.log(form)
         dispatch(createPost(form))
         alert('Servicio creado!')
+        navigate(`/`)
         setForm({
           title:'',
           description:'',

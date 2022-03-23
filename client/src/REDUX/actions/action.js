@@ -205,9 +205,9 @@ export const createPost = (payload) => {
 // cambiar info de publicaciones
 //deberia enviar si o si el id el resto de los cambios opcionales
 //title, description, price, type, size, address, phone
-export const editPost = (id, payload) => {
+export const editPost = (payload) => {
   return async (dispatch) => {
-    let json = await axios.put(`${localhost}/posts/edit/` + id, payload);
+    let json = await axios.put(`${localhost}/posts/edit` ,  payload);
     return json;
   };
 };

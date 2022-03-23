@@ -1,10 +1,11 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import {createPost} from '../../../REDUX/actions/action'
 import './Form.css'
 export default function FormCard(){
   const dispatch= useDispatch()
-    
+  const navigate = useNavigate()
   // const  idautor = useSelector((state)=> state.login)
   // const  user = useSelector((state)=> state.users)
   // const oneUser = user.filter(e => e.id === idautor.id)
@@ -194,6 +195,7 @@ export default function FormCard(){
         console.log(form)
         dispatch(createPost(form))
         alert('Servicio creado!')
+        navigate(`/`)
         setForm({
             title:'',
             description:'',

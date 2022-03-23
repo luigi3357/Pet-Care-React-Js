@@ -2,17 +2,21 @@ import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
 import { editPost,getAllUsers } from '../../../REDUX/actions/action';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import './Form.css'
 export default function FormCard(){
    
         const dispatch= useDispatch()
-       
+        const navigate = useNavigate()
     //   const typesState = useSelector((state)=> state.typePokemon)
         
        const {id} = useParams()
        const author= JSON.parse(localStorage.getItem("login"))
-       console.log(author)
+       const post = useSelector((state) => state.filtered_posts)
+        const filterpostt = post.filter(e => e.author_id === author.id)
 
+    console.log(filterpostt.map(e => e.id).toString(), 'soyfilterpost')
+    
         const [form,setForm]= useState({
         title:'',
         description:'',
@@ -21,8 +25,9 @@ export default function FormCard(){
         size:[],
         address:'',
         phone:'',
-        id:id,
+        id:filterpostt.map(e => e.id).toString(),
         author_id:author.id,
+        
         
     })
        
@@ -68,21 +73,21 @@ export default function FormCard(){
 
     const disableSubmit = useMemo(() =>{
         if(
-          form.title.length > 0 &&
+          
           form.title.length < 50 &&
           form.price > 0&&
-          form.description.length > 0 &&
+      
           form.description.length < 400 &&
-          form.price.length  >= 1 &&
+          
           form.price.length <= 5&&
-          form.phone.length  >= 1 &&
+         
           form.phone.length <= 15 &&
           form.phone > 0&&
-         form.type.length >= 1 &&
+      
          form.type.length < 5 &&
-         form.size.length >= 1 &&
+    
          form.size.length < 4 &&
-         form.address.length > 0 &&
+      
          form.address.length < 150 
            ){
               return false;
@@ -94,6 +99,33 @@ export default function FormCard(){
         dispatch(getAllUsers())
       }, [errors, form]);
 
+      // const disableSubmit = useMemo(() =>{
+      //   if(
+      //     form.title.length > 0 &&
+      //     form.title.length < 50 &&
+      //     form.price > 0&&
+      //     form.description.length > 0 &&
+      //     form.description.length < 400 &&
+      //     form.price.length  >= 1 &&
+      //     form.price.length <= 5&&
+      //     form.phone.length  >= 1 &&
+      //     form.phone.length <= 15 &&
+      //     form.phone > 0&&
+      //    form.type.length >= 1 &&
+      //    form.type.length < 5 &&
+      //    form.size.length >= 1 &&
+      //    form.size.length < 4 &&
+      //    form.address.length > 0 &&
+      //    form.address.length < 150 
+      //      ){
+      //         return false;
+      //      }else{
+      //          return true;
+      //      }
+      //  },[form]);
+      //  useEffect(() => {
+      //   dispatch(getAllUsers())
+      // }, [errors, form]);
 
 
 
@@ -193,7 +225,8 @@ export default function FormCard(){
     
         console.log(form)
         dispatch(editPost(form))
-        alert('Servicio creado!')
+        navigate(`/`)
+        alert('Servicio editado!')
         setForm({
             title:'',
             description:'',
@@ -202,13 +235,14 @@ export default function FormCard(){
             size:[],
             address:'',
             phone:'',
+            id:filterpostt.map(e => e.id).toString(),
             author_id: author.id ,
             
           
         })
     }
    
-   }
+  }
 
     
    

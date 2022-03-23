@@ -68,7 +68,7 @@ export default function PostCard({ post }) {
         />
         <div className={style.titlecards}>
           <h4 className="capitalize">{`${author.name} ${author.last_name}`}</h4>
-
+       
           <div className={style.ratingCont}>
             <div>
               <h4 className={style.titlecards}>Rating: </h4>
