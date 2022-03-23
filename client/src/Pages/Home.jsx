@@ -27,8 +27,8 @@ export const Home = () => {
         <Filters />
         <div className={style.postContainer}>
           <div className={style.postContainer}>
-            {filtered_posts.map((post) => {
-              return <PostCard post={post} />;
+            {filtered_posts.map((post,idx) => {
+              return <PostCard post={post} key={idx}/>;
             })}
           </div>
         </div>

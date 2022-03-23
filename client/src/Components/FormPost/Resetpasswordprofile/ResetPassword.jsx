@@ -3,7 +3,9 @@ import bcrypt from "bcryptjs";
 import { useSelector, useDispatch } from 'react-redux'
 import {getAllUsers, resetPassword} from '../../../REDUX/actions/action'
 import './Resetpassword.css'
+import { useNavigate } from "react-router-dom";
 export default function ResetPassword() {
+    const navigate = useNavigate()
     // const  idautor = useSelector((state)=> state.login)
     // const  user = useSelector((state)=> state.users)
     const author= JSON.parse(localStorage.getItem("login"))
@@ -22,7 +24,7 @@ const [form,setForm] = useState({
 })
 const [submit,setSubmit] = useState({
     password:'',
-    email:''
+    email:author.email,
 })
 function validate(form){ 
     let errors = {};
@@ -112,21 +114,6 @@ function handleChange (e) {
             ...form,
             [e.target.name]: e.target.value
         }))
-    }if( e.target.name === 'email'){
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        })
-        setSubmit({
-            ...submit,
-            [e.target.name]: e.target.value
-        })
-        setErrors(validate({
-            ...form,
-            [e.target.name]: e.target.value
-        }))
-
-
     }else {
         setForm({
             ...form,
@@ -167,7 +154,10 @@ if(verifyPassword === false){
     e.preventDefault()
     console.log(form)
     console.log(submit)
-  dispatch(resetPassword(submit))
+    dispatch(resetPassword(submit))
+    navigate(`/`)
+ 
+  alert('Contraseña cambiada')
 }
   
 
@@ -188,7 +178,7 @@ if(verifyPassword === false){
     
  
 return (
-    <body>
+    <body className='bodyforms'>
     <div>
     <div>
         <form  className='formpublic'  onSubmit={(e)=> resetSubmit(e)}>

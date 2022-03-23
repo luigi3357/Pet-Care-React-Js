@@ -217,7 +217,7 @@ export default function FormCard(){
     
    
     return (
-      <body>
+      <body className='bodyforms'>
         <div>
            
         <div>

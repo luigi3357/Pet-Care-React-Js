@@ -71,7 +71,7 @@ export default function PostCard({ post }) {
 
           <div className={style.ratingCont}>
             <div>
-              <p className={style.titlecards}>Rating </p>
+              <h4 className={style.titlecards}>Rating: </h4>
               </div>
 <div className={style.ratingrat}>
 
@@ -89,7 +89,7 @@ export default function PostCard({ post }) {
             <p className={style.peticon}>{petIcon}</p>
             <div className={style.petsizecont}>
               <h4 className="capitalize">{size}</h4>
-              <h4  className={style.sizeTxt}>(De {sizeText})</h4>
+              <h5  className={style.sizeTxt}>(De {sizeText})</h5>
             </div>
           </div>
           <div className={style.contratacionn}>

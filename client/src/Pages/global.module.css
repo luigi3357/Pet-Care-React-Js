@@ -1,9 +1,10 @@
 /* PostCard */
 .postCardContainer {
- 
+ background-color: #ffffffad;
   border-radius: 10px;
   width: 350px;
-  border: 1px solid rgb(206, 206, 206);
+  border: 1px solid #3866f2;
+  
   margin: 12px;
   display: flex;
   text-align: center;
@@ -31,7 +32,7 @@
 }
 .petsize{
 
-
+margin-left: 0px;
   display: flex;
   justify-content: space-between;
   
@@ -41,14 +42,15 @@
   
   border-radius: 25%;
   margin-left: 45px;
-  margin-top: 9px;
+  margin-top: 3px;
   justify-content: center;
   color: black;
  
 }
 .peticon{
-  margin-bottom: 55px;
+  margin-bottom: 30px;
 flex-direction:initial;
+
 
 }
 .contratacionn{
@@ -64,9 +66,11 @@ flex-direction:initial;
 }
 .sizeTxt{
   opacity: 0.5;
+  margin-top:26px;
 }
 .ratingrat{
-  margin-top: 9px;
+  margin-top: 29px;
+  margin-right:19px;
 }
 
 .description {

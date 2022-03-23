@@ -1,9 +1,10 @@
-/* body{
+ .bodyforms{
     display:flex;
     min-height:100vh;
-
-} */
+    background-color: #23282e;
+} 
 .formpublic {
+  
   background-color: white;
   margin: auto;
   width: 90%;

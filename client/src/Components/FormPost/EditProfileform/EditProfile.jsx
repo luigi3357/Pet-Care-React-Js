@@ -107,7 +107,7 @@ export default function FormPayData() {
       setTimeout(() => {
         dispatch(getLogin(form.email));
         alert("Su perfil a sido editado!");
-        // navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
+         navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
       }, 1000);
 
       setForm({
@@ -123,7 +123,7 @@ export default function FormPayData() {
   
 
   return (
-      <body>
+      <body className="bodyforms">
       <div>
     <div>
       <form  className='formpublic' onSubmit={(e) => handleSubmit(e)}>
