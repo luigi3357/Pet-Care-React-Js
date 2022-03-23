@@ -74,8 +74,10 @@ export default function FormCard(){
             form.description.length < 400 &&
             form.price.length  >= 1 &&
             form.price.length <= 6 &&
+            form.price > 0&&
             form.phone.length  >= 1 &&
             form.phone.length <= 15 &&
+            form.phone > 0&&
            form.type.length >= 1 &&
            form.type.length < 5 &&
            form.size.length >= 1 &&

@@ -80,8 +80,10 @@ export default function FormCard(){
             form.description.length < 400 &&
             form.price.length  >= 1 &&
             form.price.length <= 6&&
+            form.price > 0&&
             form.phone.length  >= 1 &&
             form.phone.length <= 15 &&
+            form.phone > 0&&
            form.type.length >= 1 &&
            form.type.length < 5 &&
            form.size.length >= 1 &&
@@ -255,7 +257,7 @@ export default function FormCard(){
         </div>
         <div  className='form_group' >
            <label  className='form_label' >Numero de telefono</label> 
-           <input   className='form_input'  type='number' value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
+           <input  min="1"  className='form_input'  type='number' value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
        {
            errors.phone && (<p  className='errortxt'>{errors.phone}</p>)
        }
@@ -263,7 +265,7 @@ export default function FormCard(){
       
         <div className='form_group'  >
            <label className='form_label' >Costo del servicio</label> 
-          <input   className='form_input'   type='number' min="1" value={form.price} name='price' onChange={(e)=>handleChange(e)}/>
+          <input    className='form_input'   type='number' min="1" value={form.price} name='price' onChange={(e)=>handleChange(e)}/>
                 {
                     errors.price && (<p className='errortxt'>{errors.price}</p>)
                 } 
