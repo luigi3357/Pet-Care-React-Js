@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "primereact/button";
 import {
   FaDog,
   FaCrow,
@@ -64,116 +63,106 @@ export default function Filters() {
     <div className={style.filterContainer}>
       <SearchBar />
       <div className={style.filterSubContainer}>
-        <div>
-          <div className={style.buttonTitleContainer}>
-            <p className={style.title}>Especie</p>
-            <div className={style.buttonContainer}>
-              <Button
-                className="p-button-rounded p-button-info p-button-outlined"
-                onClick={() => handleFilterChange("perros")}
-              >
-                <FaDog className="text-3xl" />
-              </Button>
-              <Button
-                className="p-button-rounded p-button-info p-button-outlined"
-                onClick={() => handleFilterChange("gatos")}
-              >
-                <FaCat className="text-3xl" />
-              </Button>
-              <Button
-                className="p-button-rounded p-button-info p-button-outlined"
-                onClick={() => handleFilterChange("roedores")}
-              >
-                <MdPestControlRodent className="text-3xl" />
-              </Button>
-              <Button
-                className="p-button-rounded p-button-info p-button-outlined"
-                onClick={() => handleFilterChange("aves")}
-              >
-                <FaCrow className="text-3xl" />
-              </Button>
-            </div>
-          </div>
-
-          <div className={style.buttonTitleContainer}>
-            <p className={style.title}>Tamaño</p>
-            <div className={style.buttonContainer}>
-              <Button
-                className="p-button-outlined p-button-info flex flex-column"
-                onClick={() => handleSizeChange("pequeño")}
-              >
-                {" "}
-                <p>Pequeño</p>
-                <p>0 a 25cm</p>
-              </Button>
-              <Button
-                className="p-button-outlined p-button-info flex flex-column "
-                onClick={() => handleSizeChange("mediano")}
-              >
-                {" "}
-                <p>Mediano</p>
-                <p>25 a 60cm</p>
-              </Button>
-              <Button
-                className="p-button-outlined p-button-info flex flex-column"
-                onClick={() => handleSizeChange("grande")}
-              >
-                {" "}
-                <p>Grande</p>
-                <p>60 a 120cm</p>
-              </Button>
-            </div>
+        <div className={style.titleAndButton}>
+          <p className={style.textButton}>Especie</p>
+          <div className={style.buttonGroup}>
+            <button
+              className={style.filterButton}
+              onClick={() => handleFilterChange("perros")}
+            >
+              <FaDog className="text-3xl" />
+            </button>
+            <button
+              className={style.filterButton}
+              onClick={() => handleFilterChange("gatos")}
+            >
+              <FaCat className="text-3xl" />
+            </button>
+            <button
+              className={style.filterButton}
+              onClick={() => handleFilterChange("roedores")}
+            >
+              <MdPestControlRodent className="text-3xl" />
+            </button>
+            <button
+              className={style.filterButton}
+              onClick={() => handleFilterChange("aves")}
+            >
+              <FaCrow className="text-3xl" />
+            </button>
           </div>
         </div>
-        <div>
-          <div className={style.buttonTitleContainer}>
-            <p className={style.title}>Precio</p>
-            <div className={style.buttonContainer}>
-              <Button
-                className="p-button-outlined p-button-info"
-                onClick={() => handlePriceChange("precioDesc")}
-              >
-                <FaSortNumericDown className="text-3xl" />
-              </Button>
-              <Button
-                className="p-button-outlined p-button-info"
-                onClick={() => handlePriceChange("precioAsc")}
-              >
-                <FaSortNumericUpAlt className="text-3xl" />
-              </Button>
-            </div>
-          </div>
-          <div className={style.buttonTitleContainer}>
-            <p className={style.title}>Rating</p>
-            <div className={style.buttonContainer}>
-              <Button
-                className="p-button-outlined p-button-info p-button-outlined"
-                onClick={() => handleRatingChange("ratingDesc")}
-              >
-                <FaStar className="text-1xl" />
-                <FaRegStar className="text-1xl" />
-                <FaRegStar className="text-1xl" />
-              </Button>
-              <Button
-                className="p-button-outlined p-button-info p-button-outlined"
-                onClick={() => handleRatingChange("ratingAsc")}
-              >
-                <FaStar className="text-1xl" />
-                <FaStar className="text-1xl" />
-                <FaStar className="text-1xl" />
-              </Button>
-            </div>
-          </div>
 
-          <div>
-            <Button
-              label="Limpiar filtros"
-              className="p-button-raised p-button-info"
-              onClick={() => cleanFilters()}
-            />
+        <div className={style.titleAndButton}>
+          <p className={style.textButton}>Tamaño</p>
+          <div className={style.buttonGroup}>
+            <button
+              className={style.filterButton}
+              onClick={() => handleSizeChange("pequeño")}
+            >
+              <p className={style.textButton}>Pequeño</p>
+              <p className={style.textButton}>0 a 25cm</p>
+            </button>
+            <button
+              className={style.filterButton}
+              onClick={() => handleSizeChange("mediano")}
+            >
+              <p className={style.textButton}>Mediano</p>
+              <p className={style.textButton}>25 a 60cm</p>
+            </button>
+            <button
+              className={style.filterButton}
+              onClick={() => handleSizeChange("grande")}
+            >
+              <p className={style.textButton}>Grande</p>
+              <p className={style.textButton}>60 a 120cm</p>
+            </button>
+          </div>
+        </div>
+
+        <div className={style.titleAndButton}>
+          <p className={style.textButton}>Precio</p>
+          <div className={style.buttonGroup}>
+            <button
+              className={style.filterButton}
+              onClick={() => handlePriceChange("precioDesc")}
+            >
+              <FaSortNumericDown className="text-3xl" />
+            </button>
+            <button
+              className={style.filterButton}
+              onClick={() => handlePriceChange("precioAsc")}
+            >
+              <FaSortNumericUpAlt className="text-3xl" />
+            </button>
+          </div>
+        </div>
+
+        <div className={style.titleAndButton}>
+          <p className={style.textButton}>Rating</p>
+          <div className={style.buttonGroup}>
+            <button
+              className={style.filterButton}
+              onClick={() => handleRatingChange("ratingDesc")}
+            >
+              <FaStar className="text-1xl" />
+              <FaRegStar className="text-1xl" />
+              <FaRegStar className="text-1xl" />
+            </button>
+            <button
+              className={style.filterButton}
+              onClick={() => handleRatingChange("ratingAsc")}
+            >
+              <FaStar className="text-1xl" />
+              <FaStar className="text-1xl" />
+              <FaStar className="text-1xl" />
+            </button>
           </div>
         </div>
       </div>
+      <button className={style.filterButton} onClick={() => cleanFilters()}>
+        <p className={style.textButton}>Limpier Filtros</p>
+      </button>
     </div>
   );
 }
