@@ -8,8 +8,8 @@ import { Rating } from "primereact/rating";
 import { FaDog, FaCrow, FaCat } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
 import { Button } from "primereact/button";
-import { CreateBooking } from "../Components/CreateBooking";
-import MapDetail from "./MapDetail";
+//import { CreateBooking } from "../Components/CreateBooking";
+//import MapDetail from "./MapDetail";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { localhost, verification2fa } from "../REDUX/actions/action";
@@ -17,7 +17,7 @@ import { Card } from "primereact/card";
 import { Link, useNavigate } from "react-router-dom";
 import { BookingDatatables } from "../Components/BookingTable";
 import "./stylesPerfil.css"
-import MapView from "../Components/MapView";
+//import MapView from "../Components/MapView";
 
 
 export const PersonalProfile = () => {
@@ -138,7 +138,7 @@ dispatch(verification2fa(data))
      
           <div className="photoMap">
             <div className="photoMap2">
-              <Image
+              <img className="imgPerfil"
               src={
                 fullInfo
                 ? fullInfo.profileImgURL
@@ -147,67 +147,68 @@ dispatch(verification2fa(data))
                 : profileDefault
               }
               alt="Image"
-              width="230px"
-              height="250px"
               preview
               />
             </div>
-            <div className="map">
-              <Link to={`/editProfile`} className="link">
-                <Button
+            <div className="EditPerfil">
+              <Link to={`/editProfile`} className="buttomPerfile">
+                <buttom
                   label="Editar perfil"
-                  className="p-button-sm p-button-info p-button-rounded"
-                  />
+                  >Editar Perfil</buttom>
               </Link>
-              <label>Verificacion en 2 pasos! 
-              <input
-              type="checkbox"
-              onChange={e=>{handleCheck()}}
-                label="Verificacion en 2 pasos"
-                className="p-button-sm p-button-warning p-button-rounded"
-                /></label>
-              <Button
-              onClick={e=>{handleReset()}}
-                label="Cambiar contraseña"
-                className="p-button-sm p-button-warning p-button-rounded"
-                />
 
-              <Link to={userData.keeper === true ?`/formpublic`: "/formpublicServ"} className="link">
-                <Button
+              <Link to={userData.keeper === true ?`/formpublic`: "/formpublicServ"} className="buttomPerfile">
+                <buttom
                   label="Crear post"
-                  className="p-button-sm p-button-warning p-button-rounded"
-                  />
+                 
+                  >Crear Post</buttom>
               </Link>
+              <button
+                  onClick={e=>{handleReset()}}
+                  label="Cambiar contraseña"
+                  className="buttomPerfile2"
+                  >Cambiar contraseña
+              </button>
 
-              <Link to={`/editProfile`} className="link">
+              <label className="buttomPerfile">
+              <input
+                  type="checkbox"
+                  onChange={e=>{handleCheck()}}
+                  label="Verificacion en 2 pasos"
+                  className="buttomPerfile"
+              />Verificacion 2FA 
+              </label>           
+
+             {/*  <Link to={`/editProfile`} className="link">
                 <Button
                   label="asd"
                   className="p-button-sm p-button-warning p-button-rounded"
                   />
-              </Link>
+              </Link> */}
             </div>
-            {/* <div style={{ height: '50vh', width: '50vh' }}>
+              {/*  <div style={{ height: '50vh', width: '50vh' }}>
                 <MapView 
                     coordinates={coordinates}
                 />
-            </div> */}
+            </div>  */}
           </div>
-          <div className="subData">
+          <div className="PerfilData">
               <h3>{fullInfo ? fullInfo.title : null}</h3>
-              <p className="description">
+              <p className="pDeBio">
                 {fullInfo ? fullInfo.bio : null}
               </p>
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
               {fullInfo?
                 <>
                 {fullInfo.keeper?
-                  <p>Contrataciones: {fullInfo.bookings}</p>
+                  <p className="pDePerfilContrataciones">Contrataciones: {fullInfo.bookings}</p>
                   :
                   <p>Reservaciones: {fullInfo.reservaciones.filter((v)=>{return (v.status=='approved' || v.status=='completed')}).length}</p>
                 } 
                 </>
               :null}
-              <p>Rating:</p>
+              <div className="pDePerfilRating">
+              <p className="styleratingP">Rating:</p>
               <Rating
                 className="text-white"
                 value={fullInfo ? fullInfo.rating : null}
@@ -215,8 +216,9 @@ dispatch(verification2fa(data))
                 stars={5}
                 cancel={false}
                 />
+              </div>  
               {/* <p>Precio: ${price}</p> */}
-              <p>Direccion: {fullInfo ? fullInfo.address : null}</p>
+              <p className="pDePerfilDireccion">Direccion: {fullInfo ? fullInfo.address : null}</p>
               {/* <p>Tipo:</p> {petIcon}
               <p>Tamaño:</p> {sizeText} */}
             </div>
@@ -224,22 +226,23 @@ dispatch(verification2fa(data))
 
       <div>
       <div className="contrainerTitelh4">
-      <h4 onClick={(e) => {handleComent()}}>Comentarios</h4>
-      <h4 onClick={(e) => {handlePost()}}>Posteos</h4>
-      <h4 onClick={(e) => {handleContrataciones()}}>Contrataciones</h4>
+      <h4 className="DespliegueDeInfo" onClick={(e) => {handleComent()}}>Comentarios</h4>
+      <h4 className="DespliegueDeInfo" onClick={(e) => {handlePost()}}>Posteos</h4>
+      <h4 className="DespliegueDeInfo" onClick={(e) => {handleContrataciones()}}>Contrataciones</h4>
       </div>
         <div >
           <div className={posteos === true ? 'notDisabled' : 'Disabled'}>
           {fullInfo
             ? fullInfo.posteos.map((p) => {
               return (
-                <Card>
-                    <p>Descripcion: {p.description}</p>
-                    <p>Price: $ {p.price}</p>
-
-                    <p>Tamaño: {p.size}</p>
-                    <p>Tipo: {p.type}</p>
+                <div className="pDePerfilPosteosContainer">
+                <Card className="pDePerfilPosteos">
+                    <h4 className="pDePerfilPosteos">Descripcion:</h4><p className="pDePerfilPosteos"> {p.description}</p>
+                    <h4 className="pDePerfilPosteos">Price: $</h4><p className="pDePerfilPosteos">{p.price}</p>
+                    <h4 className="pDePerfilPosteos">Tamaño:</h4><p className="pDePerfilPosteos">{p.size}</p>
+                    <h4 className="pDePerfilPosteos">Tipo:</h4><p className="pDePerfilPosteos">{p.type}</p>
                   </Card>
+                </div>  
                 );
               })
               : null}
@@ -256,6 +259,7 @@ dispatch(verification2fa(data))
                     key={i.id}
                     rating={i.rate}
                     message={i.message}
+                    
                     />
                 </div>
               );
@@ -270,8 +274,8 @@ dispatch(verification2fa(data))
   <div className={contrataciones === true ? 'notDisabled' : 'Disabled'}>
   {
   fullInfo? 
-  fullInfo.keeper ? <BookingDatatables title={'Información'} /*data={fullInfo?fullInfo.contrataciones:null}*/ /> :
-  <BookingDatatables title={'Reservaciones'}  /*data={fullInfo?fullInfo.reservaciones:null}*/  />
+  fullInfo.keeper ? <BookingDatatables title={'Contrataciones'} data={fullInfo?fullInfo.contrataciones:null} /> :
+  <BookingDatatables title={'Reservaciones'}  data={fullInfo?fullInfo.reservaciones:null}  />
   :null}
   </div>
   </div>
