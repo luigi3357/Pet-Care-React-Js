@@ -4,135 +4,28 @@
   box-sizing: border-box;
 }
 
-.footer {
-  margin: 0 auto;
-  margin-bottom: 0;
-  padding-top: 40px;
+.footerContainer {
   width: 100%;
-  height: auto;
-  border-top: 1px solid #ccc;
-  background-color: rgb(245, 245, 245);
-  /* box-shadow: 0 0 5px #000; */
-}
-
-.content {
-  margin: 0 auto;
-  width: 960px;
-}
-
-.row {
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #ccc;
+  background-color: #ffffff;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.row:last-child {
-  margin: 0;
-  border: none;
+.footerImg {
+  width: 100px;
+  margin: 10px 0px;
 }
 
-.column {
-  /* padding-right: 20px; */
-  width: 220px;
-  font-size: 15px;
-  text-align: left;
-  /* border-right: 1px solid #ccc; */
-  /* background: #fff; */
-}
-
-.column:first-child {
-  width: 240px;
-}
-
-.column:last-child {
-  border: none;
-}
-
-.column .phones,
-.column .titles {
-  line-height: 25px;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.column .titles {
-  line-height: 20px;
-  font-size: 14px;
-}
-
-.column .text {
-  line-height: 20px;
-  font-size: 14px;
-}
-
-.column .text {
-  cursor: pointer;
-}
-
-.column .hours {
-  font-size: 13px;
-}
-
-.input {
-  padding: 0 10px;
-  margin: 10px 0;
-  width: 180px;
-  height: 34px;
-  color: #495057;
-  font-size: 14px;
-  outline: none;
-  border: 1px solid #ccc;
-  /* border: 2px solid #cbeb40; */
-  /* background: #495057; */
-  /* opacity: 0.5; */
-}
-
-.go {
-  padding: 10px;
-  height: 34px;
-  cursor: pointer;
-  color: #fff;
-  background: #8848b8;
-  border: none;
-}
-
-.logo,
-.social {
+.footerContainerIcons {
   width: 200px;
-  height: 50px;
-}
-
-.social {
   display: flex;
   justify-content: space-around;
-  margin-top: 5px;
-  height: 30px;
-  opacity: 0.7;
 }
 
-.social img {
-  cursor: pointer;
-}
-
-.legal {
-  font-size: 12px;
-}
-
-.account {
-  margin-right: 30px;
-  width: 200px;
-  height: 50px;
-  background: #eee;
-}
-
-/* a {
-    color: #000;
-} */
-.legalito {
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ccc;
-  display: flex;
-  justify-content: center;
+.copy {
+  color: #2d333b;
+  margin: 10px 0px;
+  font-weight: 500;
 }
