@@ -1,11 +1,12 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import {createPost,getAllUsers} from '../../../REDUX/actions/action'
 import './Form.css'
 export default function FormCard(){
    
        const dispatch= useDispatch()
-    
+       const navigate = useNavigate()
        //   const typesState = useSelector((state)=> state.typePokemon)
        
        
@@ -79,9 +80,11 @@ export default function FormCard(){
             form.description.length > 0 &&
             form.description.length < 400 &&
             form.price.length  >= 1 &&
-            form.price.length <= 5&&
+            form.price.length <= 6&&
+            form.price > 0&&
             form.phone.length  >= 1 &&
             form.phone.length <= 15 &&
+            form.phone > 0&&
            form.type.length >= 1 &&
            form.type.length < 5 &&
            form.size.length >= 1 &&
@@ -198,6 +201,7 @@ export default function FormCard(){
         console.log(form)
         dispatch(createPost(form))
         alert('Servicio creado!')
+        navigate(`/`)
         setForm({
           title:'',
           description:'',
@@ -217,7 +221,7 @@ export default function FormCard(){
     
    
     return (
-      <body>
+      <body className='bodyforms'>
         <div>
            
         <div>
@@ -255,7 +259,7 @@ export default function FormCard(){
         </div>
         <div  className='form_group' >
            <label  className='form_label' >Numero de telefono</label> 
-           <input   className='form_input'  type='number' value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
+           <input  min="1"  className='form_input'  type='number' value={form.phone} name='phone' onChange={(e) =>handleChange(e)}/>
        {
            errors.phone && (<p  className='errortxt'>{errors.phone}</p>)
        }
@@ -263,7 +267,7 @@ export default function FormCard(){
       
         <div className='form_group'  >
            <label className='form_label' >Costo del servicio</label> 
-          <input   className='form_input'   type='number' min="1" value={form.price} name='price' onChange={(e)=>handleChange(e)}/>
+          <input    className='form_input'   type='number' min="1" value={form.price} name='price' onChange={(e)=>handleChange(e)}/>
                 {
                     errors.price && (<p className='errortxt'>{errors.price}</p>)
                 } 
@@ -298,12 +302,7 @@ export default function FormCard(){
            <label> Roedores</label>     
            </div>
           
-            {
-            form.type ? null : 
-            (
-              <p className='errortxt'>Se requiere un tipo de mascota</p>
-            ) 
-            }
+           
        
 
         
@@ -340,7 +339,7 @@ export default function FormCard(){
            <label>Grande</label>
            </div>
            {
-               form.size.length >= 1 ? null : (<p className='errorarray'>(Campos obligatorios)</p>) 
+               form.size.length >= 1 ?  (<p className='errorarray2'>(Campos obligatorios)</p>)  : (<p className='errorarray'>(Campos obligatorios)</p>) 
               } 
            
        
@@ -361,7 +360,7 @@ export default function FormCard(){
 
 
        <div> 
-                <button className={disableSubmit ?'form_submiterr' : 'form_submit'}  type='submit' disabled={disableSubmit}  >Crear Servicio!</button>
+                <button className={disableSubmit ?'form_submiterr':'form_submitone'}   type='submit' disabled={disableSubmit}  >Crear Servicio!</button>
        </div>
     
        </div>

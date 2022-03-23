@@ -128,7 +128,6 @@ export const Reset = () => {
 
   return (
     <div className="form-demo">
-      <NavBar />
       <Toast ref={notmatch} />
       <Toast ref={minpass} />
 
