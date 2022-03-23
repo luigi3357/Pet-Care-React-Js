@@ -2,6 +2,7 @@ import { Button } from "primereact/button";
 import React from "react";
 import { Link } from "react-router-dom";
 import { RatingDemo } from "./Review";
+import styles from'../Components/createBooking.module.css'
 
 
 export default function KeeperView({
@@ -108,9 +109,9 @@ export default function KeeperView({
         
         
         return (
-          <div>
+          <div className={styles.clientView}>
+            <div className={styles.clientView2}>
             <h1>#{checkout_details.id.slice(24)}</h1>
-            <div>
               <h2>Cuidador</h2>
               <p>
                 {checkout_details.keeper.name +

@@ -76,6 +76,18 @@ export const BookingDatatables = ({ title, data }) => {
       </Link>
     );
   };
+  const dateTemplateIn = (rowData)=>{
+    return(
+      <p>{rowData.check_in.slice(0,10)} </p>
+    )
+  }
+  const dateTemplateOut = (rowData)=>{
+    return(
+      <p>{rowData.check_out.slice(0,10)} </p>
+    )
+  }
+
+
 
   return (
     <div className="containerPrincipal">
@@ -97,8 +109,8 @@ export const BookingDatatables = ({ title, data }) => {
             header={title == "Reservaciones" ? "Cuidador" : "Cliente"}
             body={nameTemplate}
           />
-          <Column field="check_in" header="Entrada" />
-          <Column field="check_out" header="Salida" />
+          <Column field="check_in" header="Entrada" body={dateTemplateIn} />
+          <Column field="check_out" header="Salida" body={dateTemplateOut}/>
           <Column field="status" header="Estado" body={statusTemplate} />
           <Column field="price" header="Costo" />
           {/* <Column field="inventoryStatus" header="Status" body={statusTemplate} /> */}

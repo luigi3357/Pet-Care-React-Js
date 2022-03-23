@@ -1,6 +1,5 @@
 import axios from "axios";
 // import {  } from "../REDUX/actions/action";
-import { Button } from "primereact/button";
 import { Calendar } from "primereact/calendar";
 import { Dialog } from "primereact/dialog";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -8,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { localhost } from "../REDUX/actions/action";
+import styles from'../Components/createBooking.module.css'
 
 export function CreateBooking({ keeper, client, price, info, post_id }) {
   const navigate = useNavigate();
@@ -87,10 +87,9 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
   const postulacion ={owner: keeper.id, keeper: client.id, post: post_id }
 
   async function contactClient(){
-    await axios.post((`${localhost}/bookings/postular`, postulacion)).then((response)=>{
-      alert('Postulación enviada a '+ keeper.name)
+    await axios.post(`${localhost}/bookings/postular`, postulacion).then((response)=>{
     })
-    console.log({owner: keeper.id, keeper: client.id, post: post_id })
+    alert('Postulación enviada')
   }
 
   async function handleSubmit() {
@@ -114,16 +113,15 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
   function footerButton() {
     return (
       <div>
-        <Button
-          label="CREAR SOLICITUD"
-          className="p-button-rounded p-button-success p-button-raised"
+        <button
+          className={styles.singleButtonContainer}
           onClick={() => {
             handleSubmit();
           }}
-        />
-        <Button
-          label="CANCELAR"
-          className="p-button-rounded p-button-danger p-button-raised"
+        >CREAR SOLICITUD</button>
+        <button
+          
+          className={styles.singleButtonContainerCancel}
           onClick={() => {
             setDisplay(false);
             setComment("");
@@ -132,29 +130,29 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
             setTotal("");
             setdaysAmount(1);
           }}
-        />
+        >CANCELAR</button>
       </div>
     );
   }
 
   return (
     <div className="field col-12 md:col-4">
-      <Button
-        label={keeper.keeper? "RESERVAR" : "POSTULARME"}
-        className="p-button-rounded p-button-success p-button-raised"
-        onClick={keeper.keeper ? () => {
+      <button
+className={styles.singleButtonContainer}
+        
+        onClick={
+          keeper.keeper ? () => {
           setDisplay(true);
-        }: ()=>contactClient()}
-      />
+        }: 
+        ()=>contactClient()}
+      >{keeper.keeper? "RESERVAR" : "POSTULARME"}</button>
       <Dialog
+      header={`Solicitud de reserva` }
         visible={display}
         footer={footerButton}
         onHide={() => setDisplay(false)}
       >
-        <h2>Cuidador</h2>
-        <p>{keeper.name + " " + keeper.last_name}</p>
-        <h2>${total}</h2>
-        <label htmlFor="range">Registro</label>
+        <label className={styles.labelreserva} htmlFor="range">¿Cuando llega tu mascota?</label>
         <br />
         <Calendar
           id="range"
@@ -175,7 +173,8 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
           readOnlyInput
           />
         <br />
-        <label htmlFor="range">Salida</label>
+        <br />
+        <label className={styles.labelreserva} htmlFor="range">¿Cuando la pasas a buscar?</label>
         <br />
         <Calendar
           id="range"
@@ -192,11 +191,12 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
           }}
           selectionMode="single"
           readOnlyInput
-        />
+          />
         <br />
 
-        <h2>Comentarios</h2>
+        <h2 className={styles.comments}>Comentarios</h2>
         <InputTextarea
+          className={styles.textArea}
           rows={5}
           cols={30}
           value={comment}
@@ -205,7 +205,8 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
             setForm({ ...form, comment: e.target.value });
           }}
           maxLength={150}
-        />
+          />
+      <h2>Total a pagar ${total}</h2>
       </Dialog>
     </div>
   );
