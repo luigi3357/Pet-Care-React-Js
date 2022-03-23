@@ -1,8 +1,7 @@
-.bodyforms{
-  display:flex;
-  min-height:100vh;
-  background-color: #23282e;
-} 
+/* body{
+    display:flex;
+    min-height:100vh;
+} */
 .formpublic {
   background-color: white;
   margin: auto;

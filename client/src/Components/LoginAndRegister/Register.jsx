@@ -135,8 +135,15 @@ export const Register = () => {
   );
 
   return (
+    <div>
+      <NavBar/>
+    <div style={{ display:"flex", flexDirection:'column', alignItems:"center"}}>
+    <i
+    className="pi pi-users"
+    style={{ fontSize: "5rem", color: "var(--green-500)",}}>
+    </i>
+  </div>
     <div className="form-demo">
-      <NavBar />
       <Toast ref={notmatch} />
       <Toast ref={minpass} />
       
@@ -184,7 +191,7 @@ export const Register = () => {
 
       <div className="flex justify-content-center">
         <div className="card">
-          <h5 className="text-center">Register</h5>
+          <h5 className="text-center">Registro</h5>
           <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
             <div className="field">
               <span className="p-float-label">
@@ -363,10 +370,11 @@ export const Register = () => {
                       {...field} value={false}>Soy Solicitante</option>
           </select>
              )}/>
-            <Button type="submit" label="Submit" className="mt-2" />
+            <Button type="submit" label="Registrar" className="mt-2" />
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -60,9 +60,6 @@ function AdminHome(){
 function banUser(){
             const id = selectedUsers.map(e=>e.id)
             dispatch(adminDeleteUsers(id))
-            const chg = users
-            setSelectedUsers(null)
-            console.log(chg)
           
         }
 
@@ -235,8 +232,8 @@ function deletePost(){
                     sortMode="single" sortField="name" sortOrder={1} responsiveLayout="scroll"
                     expandableRowGroups expandedRows={expandedRows} onRowToggle={(e) => setExpandedRows(e.data)}
                     onRowExpand={onRowGroupExpand} onRowCollapse={onRowGroupCollapse}
-                    rowGroupHeaderTemplate={headerTemplate}
-                    size="small" scrollable scrollHeight="400px" style={{width:1040}}>
+                    rowGroupHeaderTemplate={headerTemplate} style={{width:850}}
+                    size="small" scrollable scrollHeight="400px" >
                     <Column selectionMode="multiple" headerStyle={{ width: '3em' }} style={{ minWidth: '50px' }}></Column>
                     <Column field="last_name" header="Apellido" style={{ minWidth: '100px'}}></Column>
                     <Column field="name" header="Nombre" style={{ minWidth: '100px' }}></Column>
