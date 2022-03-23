@@ -9,7 +9,7 @@ import styles from "../Components/NavBar.module.css";
 import logo from "./../assets/logoPetCareBlanco.svg";
 import { getLogOut } from "../REDUX/actions/action";
 import { AiOutlineLogout } from "react-icons/ai";
-import {FaBars} from "react-icons/fa"
+import { FaBars } from "react-icons/fa";
 
 export const NavBar = () => {
   const dispatch = useDispatch();
@@ -33,45 +33,37 @@ export const NavBar = () => {
   function handleLogOut() {
     dispatch(getLogOut());
   }
-console.log(logged,"algo")
+  console.log(logged, "algo");
   return (
     <div className={styles.navBarContainer}>
       <div className={styles.nav}>
         <Link to="/">
-          <Image className={styles.logo} src={logo} alt="Image Text" imageStyle={{ width: " 60px" }} />
+          <img className={styles.logo} src={logo} alt="logo" />
         </Link>
-        <button className={styles.navHam}>
-          <FaBars/>
-        </button>
+
         <ul className={styles.navMenu}>
           <li className={styles.navMenuItem}>
             <Link className={style.link} to="/">
-              <Button
-                label="Inicio"
-                icon="pi pi-fw pi-home"
-                className="p-button-sm p-button-rounded p-button-info p-button-outlined"
-              />
+              <button className={styles.singleButtonContainer}>Inicio</button>
             </Link>
           </li>
           <li className={styles.navMenuItem}>
             {logged ? null : (
               <Link className={style.link} to="/Register">
-                <Button
-                  label="Registrarse"
-                  className="p-button-sm p-button-info p-button-rounded"
-                />
+                <button className={styles.singleButtonContainer3}>
+                  Registrarse
+                </button>
               </Link>
             )}
           </li>
           <li className={styles.navMenuItem}>
-          {logged ? null : (
-            <Link className={style.link} to="/Login">
-              <Button
-                label="Iniciar Sesion"
-                className="p-button-sm p-button-secondary p-button-rounded"
-              />
-            </Link>
-          )}
+            {logged ? null : (
+              <Link className={style.link} to="/Login">
+                <button className={styles.singleButtonContainer2}>
+                  Iniciar sesion
+                </button>
+              </Link>
+            )}
           </li>
           <li className={styles.navMenuItem}>
             {logged ? (
