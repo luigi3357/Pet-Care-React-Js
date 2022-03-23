@@ -17,6 +17,8 @@ import { Card } from "primereact/card";
 import { Link, useNavigate } from "react-router-dom";
 import { BookingDatatables } from "../Components/BookingTable";
 import "./stylesPerfil.css"
+import MapView from "../Components/MapView";
+
 
 export const PersonalProfile = () => {
   const { id } = useParams(); // recibo el id por params para buscar la info con la ruta /users/profile/id
@@ -40,6 +42,26 @@ const dispatch = useDispatch()
   const [comentarios, setComentarios] = useState(true);
   const [posteos, setPosteos] = useState(false);
   const [contrataciones, setContrataciones] = useState(false);
+
+  const [coordinates, setCoordinates] = useState({});
+    
+     useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                setCoordinates({
+                    lng: position.coords.longitude,
+                    lat: position.coords.latitude
+                })
+                //console.log(coordinates.longitude)
+            }, 
+            function (error) {
+                console.log(error)
+            },
+            {
+                enableHighAccuracy: true
+            }
+        );
+    },[]); 
 
   function handlePost(){
     setPosteos(!posteos);
@@ -164,6 +186,11 @@ dispatch(verification2fa(data))
                   className="p-button-sm p-button-warning p-button-rounded"
                   />
               </Link> */}
+            </div>
+            <div style={{ height: '50vh', width: '50vh' }}>
+                <MapView 
+                    coordinates={coordinates}
+                />
             </div>
           </div>
           <div className="subData">
