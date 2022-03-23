@@ -1,6 +1,9 @@
 
 /* FormDemo.css */
-
+/* .containerLogin{
+    min-width: 100%;
+    border: 2px solid red;
+} */
 .form-demo .card {
     min-width: 450px;
 }

@@ -53,6 +53,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         login: [],
       };
+      case ACTION_TYPES.GET_ADMIN_ALL:
+        return {
+          ...state,
+          users: action.payload,
+        };
     
     case ACTION_TYPES.FETCH_ALL_POSTS:
       return {

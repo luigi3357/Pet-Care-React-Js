@@ -68,7 +68,20 @@ export function register(payload) {
     });
   };
 }
-
+//register google
+export function registerGoogle(payload) {
+  return async (dispatch) => {
+    let json = await axios.post(`${localhost}/registerGoogle`, payload)
+    .then((response)=>{
+      console.log(response.data,"soy el response")
+      localStorage.setItem('login', JSON.stringify(response.data))
+      dispatch({
+        type: ACTION_TYPES.REGISTER_LOGIN,
+        payload: response.data
+      })
+    });
+  };
+}
 // Login and AllUsers
 
 export function getAllUsers() {
@@ -217,12 +230,21 @@ export function getFiltered(payload) {
   };
 }
 
-export function getSearch(payload) {
+export const verification2fa = (payload) => {
+  console.log(payload)
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/users/security/`, payload);
+    return json;
+  };
+};
+
+export function getSearch(keywords) {
   return async function (dispatch) {
-    let result = await axios.get(`${localhost}/search`, { payload });
+    let result = await axios.get(`${localhost}/search?keyword=` + keywords.replace(" ", "+") );
+    console.log(result.data)
     dispatch({
       type: ACTION_TYPES.GET_SEARCH,
-      payload: result,
+      payload: result.data,
     });
   };
 }
@@ -233,7 +255,6 @@ export function getLogOut() {
       type: ACTION_TYPES.GET_LOGOUT,
     });
   };
-
 }
 
 //delete usuario desde admin
@@ -256,5 +277,4 @@ export function adminDeleteReviews(id) {
     let json = await axios.delete(`${localhost}/Admin/delete/` + id);
     return json;
   };
-
 }
