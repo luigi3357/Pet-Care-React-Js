@@ -1,10 +1,11 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import {createPost} from '../../../REDUX/actions/action'
 import './Form.css'
 export default function FormCard(){
   const dispatch= useDispatch()
-    
+  const navigate = useNavigate()
   // const  idautor = useSelector((state)=> state.login)
   // const  user = useSelector((state)=> state.users)
   // const oneUser = user.filter(e => e.id === idautor.id)
@@ -74,8 +75,10 @@ export default function FormCard(){
             form.description.length < 400 &&
             form.price.length  >= 1 &&
             form.price.length <= 6 &&
+            form.price > 0&&
             form.phone.length  >= 1 &&
             form.phone.length <= 15 &&
+            form.phone > 0&&
            form.type.length >= 1 &&
            form.type.length < 5 &&
            form.size.length >= 1 &&
@@ -192,6 +195,7 @@ export default function FormCard(){
         console.log(form)
         dispatch(createPost(form))
         alert('Servicio creado!')
+        navigate(`/`)
         setForm({
             title:'',
             description:'',
@@ -212,7 +216,7 @@ export default function FormCard(){
     
    
     return (
-      <body>
+      <body className='bodyforms'>
       <div>
          
       <div>
@@ -293,12 +297,7 @@ export default function FormCard(){
          <label> Roedores</label>     
          </div>
         
-          {
-          errors.type && 
-          (
-            <p className='errortxt'>{errors.type}</p>
-          ) 
-          }
+         
      
 
       
@@ -356,7 +355,7 @@ export default function FormCard(){
 
 
      <div> 
-              <button className={disableSubmit ?'form_submiterr' : 'form_submit'} type='submit' disabled={disableSubmit}  >Buscar servicio!</button>
+              <button className={disableSubmit ?'form_submiterr' : 'form_submitone'} type='submit' disabled={disableSubmit}  >Buscar servicio!</button>
      </div>
   
      </div>

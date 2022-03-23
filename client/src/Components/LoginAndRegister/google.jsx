@@ -39,8 +39,7 @@ export function Google() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>React Google Login App</h1>
+        
         <div>
           {loginData ? (
             <div>
@@ -50,14 +49,14 @@ export function Google() {
           ) : (
             <GoogleLogin
               clientId="618049573683-n0hug6dkdnf01ftbjamk6pes6ub3jmv7.apps.googleusercontent.com"
-              buttonText="inicia sesion con Google"
+              buttonText="Iniciar sesion con Google"
               onSuccess={handleLogin}
               onFailure={handleFailure}
               cookiePolicy={'single_host_origin'}
             ></GoogleLogin>
           )}
         </div>
-      </header>
+    
     </div>
   );
 }

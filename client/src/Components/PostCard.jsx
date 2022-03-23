@@ -66,12 +66,16 @@ export default function PostCard({ post }) {
           src={author.profileImgURL ? author.profileImgURL : profileDefault}
           alt={`imagen de perfil de ${title}`}
         />
-        <div>
+        <div className={style.titlecards}>
           <h4 className="capitalize">{`${author.name} ${author.last_name}`}</h4>
-
+       
           <div className={style.ratingCont}>
             <div>
-              <p className={style.title}>Rating </p>
+              <h4 className={style.titlecards}>Rating: </h4>
+              </div>
+<div className={style.ratingrat}>
+
+
               <Rating
                 className="text-white"
                 value={ratingCalculation()}
@@ -79,18 +83,21 @@ export default function PostCard({ post }) {
                 stars={5}
                 cancel={false}
               />
-            </div>
-            <div>
-              <p className={style.title}>Contrataciones</p>
-              <p className={style.title}>{author.bookings}</p>
+           </div>
+          </div>
+          <div className={style.petsize}>
+            <p className={style.peticon}>{petIcon}</p>
+            <div className={style.petsizecont}>
+              <h4 className="capitalize">{size}</h4>
+              <h5  className={style.sizeTxt}>(De {sizeText})</h5>
             </div>
           </div>
-          <div className={style.ratingCont}>
-            <p cla>{petIcon}</p>
-            <div>
-              <p className="capitalize">{size}</p>
-              <p>{sizeText}</p>
+          <div className={style.contratacionn}>
+              <h4 className={style.titlecards}>Contrataciones:</h4>
+              <h4 className={style.titlecards}>{author.bookings}</h4>
             </div>
+          <div>
+            <h5>Desde ${post.price}ARS</h5>
           </div>
           <Link
             to={`/Profile/${author.id}`}
