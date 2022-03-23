@@ -141,6 +141,7 @@ function rootReducer(state = initialState, action) {
             filtered_posts: filteredCopy3.sort((a, b) => {
               if (Number(a.author.rating) > Number(b.author.rating)) return -1;
               if (Number(b.author.rating) > Number(a.author.rating)) return 1;
+              return 0;
             }),
           };
           case "ratingDesc":
@@ -150,6 +151,7 @@ function rootReducer(state = initialState, action) {
             filtered_posts: filteredCopy4.sort((a, b) => {
               if (a.author.rating > b.author.rating) return 1;
               if (b.author.rating > a.author.rating) return -1;
+              return 0;
             }),
           };
         default:

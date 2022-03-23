@@ -74,7 +74,7 @@ export default function PostCard({ post }) {
               <p className={style.title}>Rating </p>
               <Rating
                 className="text-white"
-                value={ratingCalculation}
+                value={ratingCalculation()}
                 readOnly
                 stars={5}
                 cancel={false}

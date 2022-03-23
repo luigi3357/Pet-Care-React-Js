@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts } from "../../REDUX/actions/action";
 import PostCard from "../PostCard";
 import { Carousel } from 'primereact/carousel';
-import FeaturedCard from "./FeaturedCard";
+// import FeaturedCard from "./FeaturedCard";
 
 
 export const DataScrollerLoaderDemo = () => {
@@ -17,6 +17,19 @@ export const DataScrollerLoaderDemo = () => {
   useEffect(() => {
     dispatch(fetchAllPosts());
   }, []);
+
+
+function gettingFeatured(){
+  const orderedListByRatingDesc = filtered_posts.sort((a, b) => {
+          
+    if (a.author.rating > b.author.rating) return 1;
+      if (b.author.rating > a.author.rating) return -1;
+      return 0;
+    }
+  )
+  
+
+}
 
   const responsiveOptions = [
     {
@@ -36,12 +49,11 @@ export const DataScrollerLoaderDemo = () => {
     },
   ];
 
-
   const productTemplate = (product) => {
     return (
       <div >
         <div >
-          <FeaturedCard post={product}/>
+          {/* <FeaturedCard post={product}/> */}
            
         </div>
       </div>
