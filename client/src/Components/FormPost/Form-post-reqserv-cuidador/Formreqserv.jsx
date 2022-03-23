@@ -3,6 +3,7 @@ import { useDispatch,useSelector, } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import {createPost} from '../../../REDUX/actions/action'
 import AddressAutocom from '../../AddressAutocom';
+import {Link} from 'react-router-dom'
 import './Form.css'
 export default function FormCard(){
   const dispatch= useDispatch()
@@ -69,20 +70,20 @@ export default function FormCard(){
     const disableSubmit = useMemo(() =>{
         if(
           form.title.length > 0 &&
-          form.title.length < 50 &&
-         
-          form.description.length > 0 &&
-          form.description.length < 400 &&
-          form.price.length  >= 1 &&
-          form.price.length <= 6&&
-          form.price > 0&&
-          form.phone.length  >= 1 &&
-          form.phone.length <= 15 &&
-          form.phone > 0&&
-         form.type.length  >0 &&
-         form.size.length > 0&&
-         form.address.length > 0 &&
-         form.address.length < 150 
+            form.title.length < 50 &&
+           
+            form.description.length > 0 &&
+            form.description.length < 400 &&
+            form.price.length  >= 1 &&
+            form.price.length <= 6&&
+            form.price > 0&&
+            form.phone.length  >= 1 &&
+            form.phone.length <= 15 &&
+            form.phone > 0&&
+           form.type.length  >0 &&
+           form.size.length > 0&&
+           form.address.length > 0 &&
+           form.address.length < 150 
            ){
               return false;
            }else{
@@ -334,6 +335,15 @@ export default function FormCard(){
      </div>
   
      </div>
+
+
+     <Link to={`/PersonalProfile/${author.id}`}>
+        <button className='form_backp' type='button'>
+                Volver
+            </button>
+        </Link>
+  
+
      </form>
 
  

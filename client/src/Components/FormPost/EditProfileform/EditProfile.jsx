@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { editProfilePost, getLogin } from "../../../REDUX/actions/action";
 import AddressAutocom from "../../AddressAutocom";
+import {Link} from 'react-router-dom'
 import './EditProfile.css'
 export default function FormPayData() {
   const dispatch = useDispatch();
@@ -54,8 +55,8 @@ export default function FormPayData() {
   const [errors, setErrors] = useState({});
   const [form, setForm] = useState({
     name: "",
-    lastname: "",
-    location: "",
+    last_name:"",
+    location: '',
     phone: "",
     bio: "",
     email: author.email,
@@ -85,6 +86,7 @@ export default function FormPayData() {
  
 
   function handleChange(e) {
+    
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -97,29 +99,30 @@ export default function FormPayData() {
   //   );
    }
 
-  function handleSubmit(e) {
-      e.preventDefault();
-      const newLocation = window.localStorage.getItem("newLocation");
-      if (newLocation) {
-        setForm({ ...form, location: [JSON.parse(newLocation)] });
-      }
-      dispatch(editProfilePost(form));
-      setTimeout(() => {
-      dispatch(getLogin(form.email));
-        alert("Su perfil a sido editado!");
-         navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
-      }, 1000);
-
-      setForm({
-        name: "",
-        last_name: "",
-        location: "",
-        phone: "",
-        bio: "",
-        email: "",
-        profileImgURL: "",
-      });
+   function handleSubmit(e) {
+    e.preventDefault();
+    const newLocation = window.localStorage.getItem("newLocation");
+    if (newLocation) {
+      setForm({ ...form, location: [JSON.parse(newLocation)] });
     }
+    dispatch(editProfilePost(form));
+    console.log(form, 'soy el form')
+    setTimeout(() => {
+    dispatch(getLogin(form.email));
+      alert("Su perfil a sido editado!");
+       navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
+    }, 1000);
+
+    setForm({
+      name: "",
+      last_name: "",
+      location: "",
+      phone: "",
+      bio: "",
+      email: "",
+      profileImgURL: "",
+    });
+  }
   
 
   return (
@@ -152,8 +155,8 @@ export default function FormPayData() {
             <input  className='form_input'
             maxLength="15"
               type="text"
-              value={form.lastname}
-              name="lastname"
+              value={form.last_name}
+              name="last_name"
               placeholder={
                   JSON.parse(localStorage.login).last_name
               }
@@ -237,7 +240,11 @@ export default function FormPayData() {
           
 
         </div>
-     
+        <Link to={`/PersonalProfile/${author.id}`}>
+        <button className='form_backep' type='button'>
+                Volver
+            </button>
+        </Link>
       </form>
     </div>
     </div>

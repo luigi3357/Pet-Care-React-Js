@@ -9,7 +9,7 @@ const {
   } = require("../services/ratingCalculation");
 const { Update } = require("../services/updateUser");
 const router = Router();
-const {sendEmail} = require("../services/sendEmail");
+const {sendEmail} = require("../services/SendEmail");
 
 /*         get users coordinates          */
 

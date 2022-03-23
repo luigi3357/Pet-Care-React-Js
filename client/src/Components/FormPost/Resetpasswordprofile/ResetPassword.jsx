@@ -3,9 +3,9 @@ import bcrypt from "bcryptjs";
 import { useSelector, useDispatch } from 'react-redux'
 import {getAllUsers, resetPassword} from '../../../REDUX/actions/action'
 import './Resetpassword.css'
-import { useNavigate } from "react-router-dom";
+import {Link} from "react-router-dom";
 export default function ResetPassword() {
-    const navigate = useNavigate()
+    
     // const  idautor = useSelector((state)=> state.login)
     // const  user = useSelector((state)=> state.users)
     const author= JSON.parse(localStorage.getItem("login"))
@@ -157,7 +157,7 @@ if(verifyPassword === false){
     console.log(submit)
     dispatch(resetPassword(submit))
         alert('Contraseña cambiada')
-         navigate(`/`)
+       
       
  
   
@@ -225,7 +225,16 @@ return (
 
        
         </div>
+        <Link to={`/PersonalProfile/${author.id}`}>
+        <button className='form_backp' type='button'>
+                Volver
+            </button>
+        </Link>
         </form>
+      
+        <div>
+          
+        </div>
     </div>
 </div>
     </body>

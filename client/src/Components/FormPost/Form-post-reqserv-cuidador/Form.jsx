@@ -2,6 +2,7 @@ import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import {createPost,getAllUsers} from '../../../REDUX/actions/action'
+import {Link} from 'react-router-dom'
 import './Form.css'
 export default function FormCard(){
    
@@ -335,6 +336,13 @@ export default function FormCard(){
        </div>
     
        </div>
+       <Link to={`/PersonalProfile/${author.id}`}>
+        <button className='form_backp' type='button'>
+                Volver
+            </button>
+        </Link>
+
+
        </form>
 
    
