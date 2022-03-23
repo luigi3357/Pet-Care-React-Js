@@ -1,0 +1,77 @@
+.container{
+    min-width: 100%;
+}
+.containerAuxiliar{
+    display: grid;
+    grid-template-columns: 300px 1040px;
+}
+.profileCardContainer{
+    border-radius: 10px;
+    border: 1px solid rgb(206, 206, 206);
+    display:grid;
+    grid-template-rows: repeat(3,1fr);
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 10px;
+    margin: 5px 0px;
+}
+
+.subData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.description {
+    margin: 0px 5px;
+    text-align: center;
+}
+
+
+.subContainer {
+    min-width: 100%;
+    display: flex;
+    gap: 10px;
+    border: 1px solid black;
+}
+
+.photoMap {
+    width: 100%;
+    text-align: center;
+}
+
+.photoMap2{
+    margin-bottom:10px;
+}
+
+.map {
+    max-width: 300px;
+}
+
+.link {
+    text-decoration: none;
+    border: none;
+}
+
+.notDisabled{
+    display: block;
+}
+.Disabled{
+    display:none;
+}
+.contrainerTitelh4{
+    width: 100%;
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.containerComentarios{
+    min-width: 400px;
+    max-width:100%;
+}
