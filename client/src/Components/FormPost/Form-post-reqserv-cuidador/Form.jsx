@@ -214,8 +214,9 @@ export default function FormCard(){
      
        
         <div  className='form_group'>
-           <label className='form_label' >Description</label> 
-           <input className='form_input' type='text'  value={form.description} name='description' onChange={(e) =>handleChange(e)}/>
+           <label className='form_label' >Descripción</label> 
+         <textarea className='form_input' type='text' maxLength={300} cols={5} rows={4}  value={form.description} name='description' onChange={(e) =>handleChange(e)}/>
+
            {
                 errors.description && (<p  className='errortxt'>{errors.description}</p>)
             }

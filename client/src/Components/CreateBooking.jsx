@@ -1,6 +1,5 @@
 import axios from "axios";
 // import {  } from "../REDUX/actions/action";
-import { Button } from "primereact/button";
 import { Calendar } from "primereact/calendar";
 import { Dialog } from "primereact/dialog";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -8,8 +7,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { localhost } from "../REDUX/actions/action";
+import styles from'../Components/createBooking.module.css'
 
-export function CreateBooking({ keeper, client, price, info }) {
+export function CreateBooking({ keeper, client, price, info, post_id }) {
   const navigate = useNavigate();
   const [total, setTotal] = useState("");
   const [dates2, setDates2] = useState(null);
@@ -17,6 +17,8 @@ export function CreateBooking({ keeper, client, price, info }) {
   const [comment, setComment] = useState("");
   const [restricted, setRestricted] = useState([]);
   const [daysAmount, setdaysAmount] = useState(1);
+  const [display, setDisplay] = useState(false);
+
   const [form, setForm] = useState({
     client_id: client.id,
     keeper_id: keeper.id,
@@ -82,14 +84,24 @@ export function CreateBooking({ keeper, client, price, info }) {
     })
     return restricteDays;
   }
+  const postulacion ={owner: keeper.id, keeper: client.id, post: post_id }
 
-
-
+  async function contactClient(){
+    await axios.post(`${localhost}/bookings/postular`, postulacion).then((response)=>{
+    })
+    alert('Postulación enviada')
+  }
 
   async function handleSubmit() {
     await axios.post(`${localhost}/bookings/create`, form).then((response) => {
       if(response.status==201){
         setDisplay(false)
+        setComment("");
+            setDates2(null);
+            setDates3(null);
+            setTotal("");
+            setdaysAmount(1);
+            navigate(`/`)
         return alert('Reserva creada con éxito')
       }}).catch((e)=>{
         console.log(e)
@@ -98,20 +110,18 @@ export function CreateBooking({ keeper, client, price, info }) {
       })
     };
   
-  const [display, setDisplay] = useState(false);
   function footerButton() {
     return (
       <div>
-        <Button
-          label="CREAR SOLICITUD"
-          className="p-button-rounded p-button-success p-button-raised"
+        <button
+          className={styles.singleButtonContainer}
           onClick={() => {
             handleSubmit();
           }}
-        />
-        <Button
-          label="CANCELAR"
-          className="p-button-rounded p-button-danger p-button-raised"
+        >CREAR SOLICITUD</button>
+        <button
+          
+          className={styles.singleButtonContainerCancel}
           onClick={() => {
             setDisplay(false);
             setComment("");
@@ -120,30 +130,29 @@ export function CreateBooking({ keeper, client, price, info }) {
             setTotal("");
             setdaysAmount(1);
           }}
-        />
+        >CANCELAR</button>
       </div>
     );
   }
 
   return (
     <div className="field col-12 md:col-4">
-      <Button
-        label="RESERVAR"
-        className="p-button-rounded p-button-success p-button-raised"
-        onClick={() => {
-          console.log(restricted)
+      <button
+className={styles.singleButtonContainer}
+        
+        onClick={
+          keeper.keeper ? () => {
           setDisplay(true);
-        }}
-      />
+        }: 
+        ()=>contactClient()}
+      >{keeper.keeper? "RESERVAR" : "POSTULARME"}</button>
       <Dialog
+      header={`Solicitud de reserva` }
         visible={display}
         footer={footerButton}
         onHide={() => setDisplay(false)}
       >
-        <h2>Cuidador</h2>
-        <p>{keeper.name + " " + keeper.last_name}</p>
-        <h2>${total}</h2>
-        <label htmlFor="range">Registro</label>
+        <label className={styles.labelreserva} htmlFor="range">¿Cuando llega tu mascota?</label>
         <br />
         <Calendar
           id="range"
@@ -164,7 +173,8 @@ export function CreateBooking({ keeper, client, price, info }) {
           readOnlyInput
           />
         <br />
-        <label htmlFor="range">Salida</label>
+        <br />
+        <label className={styles.labelreserva} htmlFor="range">¿Cuando la pasas a buscar?</label>
         <br />
         <Calendar
           id="range"
@@ -181,11 +191,12 @@ export function CreateBooking({ keeper, client, price, info }) {
           }}
           selectionMode="single"
           readOnlyInput
-        />
+          />
         <br />
 
-        <h2>Comentarios</h2>
+        <h2 className={styles.comments}>Comentarios</h2>
         <InputTextarea
+          className={styles.textArea}
           rows={5}
           cols={30}
           value={comment}
@@ -194,7 +205,8 @@ export function CreateBooking({ keeper, client, price, info }) {
             setForm({ ...form, comment: e.target.value });
           }}
           maxLength={150}
-        />
+          />
+      <h2>Total a pagar ${total}</h2>
       </Dialog>
     </div>
   );

@@ -36,6 +36,7 @@
   left: 5px;
 }
 .form_input {
+  resize: none;
   width: 100%;
   background: none;
   color: black;
