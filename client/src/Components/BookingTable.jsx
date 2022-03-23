@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { localhost } from "../REDUX/actions/action";
-
+import "./Bookingstyle.css"
 
 
 //La tabla recibe title 'Reservaciones' o 'Contrataciones'
@@ -76,9 +76,21 @@ export const BookingDatatables = ({ title, data }) => {
       </Link>
     );
   };
+  const dateTemplateIn = (rowData)=>{
+    return(
+      <p>{rowData.check_in.slice(0,10)} </p>
+    )
+  }
+  const dateTemplateOut = (rowData)=>{
+    return(
+      <p>{rowData.check_out.slice(0,10)} </p>
+    )
+  }
+
+
 
   return (
-    <div style={{ width: 600 }}>
+    <div className="containerPrincipal">
       <div className="card">
         <DataTable
           value={loading ? null : details}
@@ -97,8 +109,8 @@ export const BookingDatatables = ({ title, data }) => {
             header={title == "Reservaciones" ? "Cuidador" : "Cliente"}
             body={nameTemplate}
           />
-          <Column field="check_in" header="Entrada" />
-          <Column field="check_out" header="Salida" />
+          <Column field="check_in" header="Entrada" body={dateTemplateIn} />
+          <Column field="check_out" header="Salida" body={dateTemplateOut}/>
           <Column field="status" header="Estado" body={statusTemplate} />
           <Column field="price" header="Costo" />
           {/* <Column field="inventoryStatus" header="Status" body={statusTemplate} /> */}

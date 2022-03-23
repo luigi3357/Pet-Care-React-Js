@@ -2,6 +2,7 @@ import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import {createPost} from '../../../REDUX/actions/action'
+import AddressAutocom from '../../AddressAutocom';
 import './Form.css'
 export default function FormCard(){
   const dispatch= useDispatch()
@@ -82,9 +83,9 @@ export default function FormCard(){
            form.type.length >= 1 &&
            form.type.length < 5 &&
            form.size.length >= 1 &&
-           form.size.length < 4 &&
-           form.address.length > 0 &&
-           form.address.length < 150 
+           form.size.length < 4 
+          //  form.address.length > 0 &&
+          //  form.address.length < 150 
            ){
               return false;
            }else{
@@ -185,16 +186,21 @@ export default function FormCard(){
             && !form.phone 
             && !form.size 
             && !form.type 
-            && !form.address){
+            && !form.address
+            ){
             alert('FORMULARIO VACIO')
         }
         
     else  {
-         e.preventDefault()
+      e.preventDefault();
+      const newLocation = window.localStorage.getItem("newLocation");
+      if (newLocation) {
+        setForm({ ...form, location: [JSON.parse(newLocation)] });
+      }
     
         console.log(form)
         dispatch(createPost(form))
-        alert('Servicio creado!')
+        alert('Petición creada con éxito!')
         navigate(`/`)
         setForm({
             title:'',
@@ -240,16 +246,17 @@ export default function FormCard(){
      
       <div  className='form_group'>
          <label className='form_label' >Describa sus requisitos de la mascota</label> 
-         <input className='form_input' type='text'  value={form.description} name='description' onChange={(e) =>handleChange(e)}/>
+         <textarea className='form_input' type='text' maxLength={300} cols={5} rows={4}  value={form.description} name='description' onChange={(e) =>handleChange(e)}/>
          {
               errors.description && (<p  className='errortxt'>{errors.description}</p>)
           }
       </div>
       <div className='form_group'>
          <label className='form_label'>Direccion donde vive con la mascota</label> 
-         <input className='form_input'  type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/>
+         <AddressAutocom />
+         {/* <input className='form_input'  type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/> */}
          {
-              errors.address && (<p className='errortxt'>{errors.address}</p>)
+              // errors.address && (<p className='errortxt'>{errors.address}</p>)
           }
       </div>
       <div  className='form_group' >

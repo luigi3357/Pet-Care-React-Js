@@ -10,7 +10,7 @@ import style from "./../Pages/global.module.css";
 
 export default function PostCard({ post }) {
   const { title, author, type, size } = post;
-
+  const loggedUser = JSON.parse(localStorage.login);
   let petIcon;
   let sizeText;
 
@@ -45,21 +45,20 @@ export default function PostCard({ post }) {
     default:
       break;
   }
-  function ratingCalculation(){
-    let lowerInt = Math.floor(author.rating)
-    let diffRating = author.rating - lowerInt
-    if(diffRating<0.75){
-      return lowerInt
+  function ratingCalculation() {
+    let lowerInt = Math.floor(author.rating);
+    let diffRating = author.rating - lowerInt;
+    if (diffRating < 0.75) {
+      return lowerInt;
     }
-    return Math.ceil(author.rating)
+    return Math.ceil(author.rating);
   }
-
 
   return (
     <div className={style.postCardContainer}>
       {/* <Fav id = {id} /> */}
       <div className={style.postCardSubContainer}>
-      {/* <DeletePost id={id}/> */}
+        {/* <DeletePost id={id}/> */}
 
         <img
           className={style.imgPerfil}
@@ -68,14 +67,12 @@ export default function PostCard({ post }) {
         />
         <div className={style.titlecards}>
           <h4 className="capitalize">{`${author.name} ${author.last_name}`}</h4>
-       
+
           <div className={style.ratingCont}>
             <div>
               <h4 className={style.titlecards}>Rating: </h4>
-              </div>
-<div className={style.ratingrat}>
-
-
+            </div>
+            <div className={style.ratingrat}>
               <Rating
                 className="text-white"
                 value={ratingCalculation()}
@@ -83,37 +80,45 @@ export default function PostCard({ post }) {
                 stars={5}
                 cancel={false}
               />
-           </div>
+            </div>
           </div>
           <div className={style.petsize}>
             <p className={style.peticon}>{petIcon}</p>
             <div className={style.petsizecont}>
               <h4 className="capitalize">{size}</h4>
-              <h5  className={style.sizeTxt}>(De {sizeText})</h5>
+              <h5 className={style.sizeTxt}>(De {sizeText})</h5>
             </div>
           </div>
           <div className={style.contratacionn}>
-              <h4 className={style.titlecards}>Contrataciones:</h4>
-              <h4 className={style.titlecards}>{author.bookings}</h4>
-            </div>
+            <h4 className={style.titlecards}>Contrataciones:</h4>
+            <h4 className={style.titlecards}>{author.bookings}</h4>
+          </div>
           <div>
             <h5>Desde ${post.price}ARS</h5>
           </div>
-          <Link
-            to={`/Profile/${author.id}`}
-            state={post}
-            className={style.link}
-            id="Profile"
-          >
-            <Button
-              className="p-button-rounded p-button-success p-button-lg mb-3"
-              id="detailsBtn"
-              title="Detalles"
-              value="Detalles"
+          {loggedUser ? (
+            <Link
+              to={
+                loggedUser.id !== author.id
+                  ? `/Profile/${author.id}`
+                  : `/PersonalProfile/${loggedUser.id}`
+              }
+              state={post}
+              className={style.link}
+              id="Profile"
             >
-              Mas info
-            </Button>
-          </Link>
+              <button className={style.singleButtonContainer}>Mas info</button>
+            </Link>
+          ) : (
+            <Link
+              to={`/Profile/${author.id}`}
+              state={post}
+              className={style.link}
+              id="Profile"
+            >
+              <button className={style.singleButtonContainer}>Mas info</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

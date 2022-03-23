@@ -239,7 +239,6 @@ export const Register = () => {
                     <InputText
                       id={field.last_name}
                       {...field}
-                      autoFocus
                       keyfilter="alpha"
                       className={classNames({
                         "p-invalid": fieldState.invalid,

@@ -2,6 +2,8 @@ import { Button } from "primereact/button";
 import React from "react";
 import { Link } from "react-router-dom";
 import { RatingDemo } from "./Review";
+import styles from'../Components/createBooking.module.css'
+
 
 export default function ClientView({
   checkout_details,
@@ -42,23 +44,25 @@ export default function ClientView({
             onClick={submit}
           />
         );
-  
+
       case "completed":
         return (
           <div>
-          
-          <p>Esta reserva fue completada</p>
-          {
-            !checkout_details.client_review ?
-            <>
-            <Link to={"/"}>volver</Link>
-          <p >Dejanos tu opinión sobre {checkout_details.keeper.name}</p>
-          <RatingDemo  client_id={checkout_details.client_id} keeper_id={checkout_details.keeper_id} booking_id={checkout_details.id}  />
-            </>
-          :null}
-        </div>
-      );
-  
+            <p>Esta reserva fue completada</p>
+            {!checkout_details.client_review ? (
+              <>
+                <Link to={"/"}>volver</Link>
+                <p>Dejanos tu opinión sobre {checkout_details.keeper.name}</p>
+                <RatingDemo
+                  client_id={checkout_details.client_id}
+                  keeper_id={checkout_details.keeper_id}
+                  booking_id={checkout_details.id}
+                />
+              </>
+            ) : null}
+          </div>
+        );
+
       default:
         return (
           <div>
@@ -78,34 +82,38 @@ export default function ClientView({
     );
   }
   return (
-    <div>
+    <div className={styles.clientView}>
+      <div className={styles.clientView2}>
+
       <h1>#{checkout_details.id.slice(24)}</h1>
-      <div>
         <h2>Cuidador</h2>
         <Link to={`/Profile/${checkout_details.keeper.id}`}>
-
-        <p>
-          {checkout_details.keeper.name +
-            " " +
-            checkout_details.keeper.last_name}
-        </p>
+          <p>
+            {checkout_details.keeper.name +
+              " " +
+              checkout_details.keeper.last_name}
+          </p>
         </Link>
         <p>{checkout_details.keeper.phone} </p>
+        <div className={styles.poneleNombre}>
+
         <h2>Dueño</h2>
         <p>
           {checkout_details.client.name +
             " " +
             checkout_details.client.last_name}
         </p>
+            </div>
         <p>{checkout_details.client.phone} </p>
         <h2>Registro</h2>
-        <p>{checkout_details.check_in.slice(0,10)}</p>
+        <p>{checkout_details.check_in.slice(0, 10)}</p>
         <h2>Salida</h2>
-        <p>{checkout_details.check_out.slice(0,10)}</p>
+        <p>{checkout_details.check_out.slice(0, 10)}</p>
 
         <h2>TOTAL</h2>
         <h2>${checkout_details.price}</h2>
 
+        <h2>{checkout_details.comment}</h2>
         <h2>{checkout_details.comment}</h2>
         {payButton(checkout_details.status, submit)}
         {!status.includes(checkout_details.status) && cancelButton(cancelOrder)}
@@ -113,4 +121,3 @@ export default function ClientView({
     </div>
   );
 }
-
