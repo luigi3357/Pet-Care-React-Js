@@ -3,13 +3,12 @@ html {
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #2D333B;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   font-weight: normal;
-  color: #495057;
+  color:#ffffff ;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: .1em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -195,5 +194,7 @@ span.flag {
 img.flag {
   width:30px
 }
+
+
 
                   

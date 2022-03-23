@@ -11,6 +11,7 @@ import { classNames } from 'primereact/utils';
 import { useDispatch, useSelector } from "react-redux";
 import  { getLogin } from '../../REDUX/actions/action';
 import { useNavigate } from 'react-router-dom';
+import { NavBar } from '../NavBar';
 
 
 
@@ -66,6 +67,14 @@ export const MailCode = () => {
     const dialogFooterExist = <div className="flex justify-content-center"><Button label="OK" className="p-button-text" autoFocus onClick={() => setShowExist(false)} /></div>;
 
     return (
+        <div>
+            <div style={{marginTop:30}}>
+            <div style={{ display:"flex", flexDirection:'column', alignItems:"center"}}>
+                <i
+                className="pi pi-key"
+                style={{ fontSize: "5rem", color: "var(--green-500)",}}>
+                </i>
+            </div>
         <div className="form-demo">
             <Toast ref={notmatch} />
             <Toast ref={minpass} />
@@ -91,7 +100,7 @@ export const MailCode = () => {
 
             <div className="flex justify-content-center">
                 <div className="card">
-                    <h5 className="text-center">Register</h5>
+                    <h5 className="text-center">Ingrese el codigo</h5>
                     <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
 
                         <div className="field">
@@ -114,6 +123,8 @@ export const MailCode = () => {
                     </form>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     );
 }

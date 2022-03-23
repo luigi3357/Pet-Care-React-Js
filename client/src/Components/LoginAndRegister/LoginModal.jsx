@@ -15,6 +15,11 @@ import { NavBar } from "../NavBar";
 import './FormDemo.css'
 import style from '../../Pages/global.module.css'
 import {Google} from './google'
+import '../../index.css'
+import "primeflex/primeflex.css";
+import "primeicons/primeicons.css";
+import "primereact/resources/primereact.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -135,12 +140,23 @@ export const Login = () => {
   );
 
   return (
-   <div className="flex justify-content-center flex-column" >
-      <div className="flex justify-content-center flex-column">
+  <div >
+
+    <NavBar/>
+    
+    <div>
+      <div style={{ display:"flex", flexDirection:'column', alignItems:"center"}}>
+        <i
+        className="pi pi-user"
+        style={{ fontSize: "5rem", color: "var(--green-500)",}}>
+        </i>
+      </div>
+  
+      
         <div className="form-demo">
 
           <Toast ref={notmatch} />
-          <div>
+         
 
             <Dialog
               visible={showMessage}
@@ -225,11 +241,10 @@ export const Login = () => {
                 </p>
               </div>
             </Dialog>
+        
             
-        <NavBar />
-
-            <div className={style.container}>
-              <div className="card px-8">
+            <div className="flex justify-content-center">
+              <div className="card">
                 <h5 className="text-center"> Iniciar Sesion </h5>
                 <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
                   <div className="field">
@@ -295,45 +310,31 @@ export const Login = () => {
                 </form>
                 <div style={{ textAlign: "center" }}>
                   <div>
+                    <div style={{marginTop:10}}>
                     <Link to="/forgotPassword">Olvidaste tu contraseña?</Link>
-                  </div>
-
-                  <div>
-                    <p>No tienes cuenta?</p>
+                    </div>
+                    <h6>No tienes cuenta?</h6>
                     <Link to="/register">
-                      <p>REGISTRATE</p>
+                      <h4>REGISTRATE</h4>
                     </Link>
                   </div>
-
-                  <div>
-                    {/* <a href="http://localhost:3001/Auth/login/federated/google">
-              Google
-            </a> */}
-
-                    <div className="button-demo">
-                      <div className="card">
-
-                        <div className="template">
-                          <Button className="google p-0">
-                            <i className="pi pi-google px-2"></i>
-                            {/* <span className="px-3">Google</span> */}
-                            <a className="px-3" href="http://localhost:3001/Auth/login/federated/google">
-                              Google
-                            </a>
-                          </Button>
+                    
                           <div>
                             <Google/>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+
+                  
                 </div>
-              </div>
-            </div>
+             </div>
           </div>
-        </div>
-      </div>   
-      </div> 
+      </div>
+    </div>
+ </div>   
+   
+
+     
+      
+      
+      
   );
 };
