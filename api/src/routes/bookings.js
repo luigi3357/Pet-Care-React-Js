@@ -31,7 +31,7 @@ router.post("/create", async (req, res, next) => {
                           Comments: ${comment}
         `;
         //envia el email
-        let send1 = sendEmail(foundClient.email, mensaje, asunto);
+        let send1 = sendEmail(foundClient.email, mensaje1, asunto1);
         ///////////////////////////////////////////////////////////
         let asunto2 = `Solicitud de reserva`;
         let mensaje2 = `Te han dejado una solicitud de reserva. Datos: 
@@ -42,7 +42,7 @@ router.post("/create", async (req, res, next) => {
                           Comments: ${comment}
         `;
         //envia el email
-        let send2 = sendEmail(foundKeeper.email, mensaje, asunto);
+        let send2 = sendEmail(foundKeeper.email, mensaje2, asunto2);
         return res.status(201).send("Tu reserva se ha creado con éxito");
       }
       return res.status(400).send("no se encontraron los usuarios");
