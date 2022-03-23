@@ -4,6 +4,7 @@ import ACTION_TYPES from "../actionTypes/actionTypes";
 const initialState = {
   users: "",
   login: [],
+  login2:[],
   all_posts: [],
   filtered_posts: [],
   urlMP: "",
@@ -40,6 +41,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         login: action.payload,
       };
+      case ACTION_TYPES.GET_LOGIN_FORGOT:
+        console.log(action.payload);
+        return {
+          ...state,
+          login2: action.payload,
+        };
     case ACTION_TYPES.REGISTER_LOGIN:
       console.log(action.payload);
       localStorage.setItem('login',JSON.stringify(action.payload))

@@ -30,15 +30,15 @@ export const Reset = () => {
     repeatPassword: "",   
   };
   const users = useSelector((state) => state.users);
-  const use = useSelector((state) => state.login);
+  const use = useSelector((state) => state.login2);
 
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
 
-  console.log(users,"soy users")
-  console.log(use,"soy login")
+  console.log(users,"soy users reset")
+  console.log(use,"soy login2")
 
 
 

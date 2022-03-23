@@ -9,7 +9,7 @@ import { Divider } from 'primereact/divider';
 import { Toast } from 'primereact/toast';
 import { classNames } from 'primereact/utils';
 import { useDispatch, useSelector } from "react-redux";
-import  { getLogin } from '../../REDUX/actions/action';
+import  { getLoginForgot } from '../../REDUX/actions/action';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -24,20 +24,20 @@ export const MailCode = () => {
     const defaultValues = {
        token: '',                     
     }
-    const users = useSelector((state)=>state.login)    
+    const users = useSelector((state)=>state.login2)    
 
     useEffect(() => {
-        dispatch(getLogin(users.email));
+        dispatch(getLoginForgot(users.email));
       }, [dispatch]);
 
       
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
     
-
+console.log(users,"users token")
     const onSubmit = (data) => {
         if (data.token) {
-            dispatch(getLogin(users.email)); 
+            dispatch(getLoginForgot(users.email)); 
             if (users.token === data.token) {
            setShowMessage(true)
             } else {
@@ -45,6 +45,7 @@ export const MailCode = () => {
             }
           }
     };
+
     function handleNavigate() {
         setShowMessage(false)
         navigate("/reset")

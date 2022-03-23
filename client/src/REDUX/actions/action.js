@@ -128,7 +128,16 @@ export const getLogin = (email) => {
     });
   };
 };
-
+export const getLoginForgot = (email) => {
+  return async (dispatch) => {
+    await axios.get(`${localhost}/login/` + email).then((response) => {
+      dispatch({
+        type: ACTION_TYPES.GET_LOGIN_FORGOT,
+        payload: response.data,
+      });
+    });
+  };
+};
 //forgot password
 
 export const forgotPassword = (payload) => {
@@ -154,7 +163,6 @@ export const resetPassword = (payload) => {
 };
 
 /*               HomeScreen             */
-
 export function fetchAllPosts() {
   return function (dispatch) {
     axios

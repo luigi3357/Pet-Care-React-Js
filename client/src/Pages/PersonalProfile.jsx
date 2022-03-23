@@ -12,7 +12,7 @@ import { CreateBooking } from "../Components/CreateBooking";
 import MapDetail from "./MapDetail";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { localhost, verification2fa } from "../REDUX/actions/action";
+import { getLogin, localhost, verification2fa } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
 import { Link, useNavigate } from "react-router-dom";
 import { BookingDatatables } from "../Components/BookingTable";
@@ -65,7 +65,10 @@ const dispatch = useDispatch()
       key_2fa: userData.key_2fa === true? false:true
     }
     console.log(data,"soy data")
-dispatch(verification2fa(data))
+    dispatch(getLogin(userData.email))
+    setTimeout(() => {
+      dispatch(verification2fa(data))
+    },1000)
   }
   useEffect(() => {
     axios

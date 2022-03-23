@@ -7,7 +7,7 @@ import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import { useDispatch, useSelector } from "react-redux";
-import { forgotPassword, getAllUsers, getLogin } from '../../REDUX/actions/action';
+import { forgotPassword, getAllUsers, getLoginForgot } from '../../REDUX/actions/action';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -30,11 +30,12 @@ export const ForgotPassword = () => {
 
     const onSubmit = (data) => {
         const oneUser = users.filter(e=> e.email === data.email)
+        console.log(data,"dataforgot")
         if(oneUser.length){
             setFormData(data);
             setShowMessage(true);
             dispatch(forgotPassword(data));
-            dispatch(getLogin(data.email));
+            dispatch(getLoginForgot(data.email));
             setTimeout(() => {
                 navigate("/mailcode")
               }, 2000);            
