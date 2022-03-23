@@ -112,9 +112,7 @@ router.get("/login/:email", async (req, res) => {
 /*         Account Delete          */
 router.put("/admindelete", async (req, res) => {
     const { email, name, last_name, phone, bio, location, myImages, profileImgURL,id} = req.body
-    if(id){
 
-    }
     const ids ={ id:req.body.toString()}
      console.log(ids)
     let user = await search(ids)
