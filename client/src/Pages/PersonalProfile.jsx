@@ -11,19 +11,19 @@ import { MdPestControlRodent } from "react-icons/md";
 import { Button } from "primereact/button";
 import { CreateBooking } from "../Components/CreateBooking";
 import MapDetail from "./MapDetail";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { localhost } from "../REDUX/actions/action";
+import { localhost, verification2fa } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BookingDatatables } from "../Components/BookingTable";
 
 
 export const PersonalProfile = () => {
   const { id } = useParams(); // recibo el id por params para buscar la info con la ruta /users/profile/id
-
+const navigate = useNavigate()
   const location = useLocation();
-
+const dispatch = useDispatch()
   const loginUser = useSelector((state) => state.login); // obtengo la info del estado login para saber si entro a un perfil estando logeado o no. se usa para botones de reserva y para saber si el logeado esta viendo su perfil, para renderizar los botones de editar perfil y seguridad
 
   const [logged, setLogged] = useState(null); // estado local para guardar la info del logeado (usado para el localstorage)
@@ -40,7 +40,15 @@ export const PersonalProfile = () => {
   
   let petIcon;
   let sizeText;
-  
+  function handleCheck(){
+    console.log(userData.email,"soy userdata")
+    const data ={
+      email: userData.email,
+      key_2fa: userData.key_2fa === true? false:true
+    }
+    console.log(data,"soy data")
+dispatch(verification2fa(data))
+  }
   useEffect(() => {
     axios
     .get(`${localhost}/users/profile/` + id)
@@ -77,6 +85,9 @@ export const PersonalProfile = () => {
     default:
       break;
   }
+  function handleReset(){
+    navigate("/resetPassword")
+  }
 
   return (
     <div className={style.container}>
@@ -104,16 +115,20 @@ export const PersonalProfile = () => {
                   className="p-button-sm p-button-info p-button-rounded"
                   />
               </Link>
-              <Button
+              <label>Verificacion en 2 pasos! 
+              <input
+              type="checkbox"
+              onChange={e=>{handleCheck()}}
                 label="Verificacion en 2 pasos"
                 className="p-button-sm p-button-warning p-button-rounded"
-                />
+                /></label>
               <Button
+              onClick={e=>{handleReset()}}
                 label="Cambiar contraseña"
                 className="p-button-sm p-button-warning p-button-rounded"
                 />
 
-              <Link to={`/formpublic`} className={style.link}>
+              <Link to={userData.keeper === true ?`/formpublic`: "/formpublicServ"} className={style.link}>
                 <Button
                   label="Crear post"
                   className="p-button-sm p-button-warning p-button-rounded"

@@ -230,6 +230,14 @@ export function getFiltered(payload) {
   };
 }
 
+export const verification2fa = (payload) => {
+  console.log(payload)
+  return async (dispatch) => {
+    let json = await axios.put(`${localhost}/users/security/`, payload);
+    return json;
+  };
+};
+
 export function getSearch(keywords) {
   return async function (dispatch) {
     let result = await axios.get(`${localhost}/search?keyword=` + keywords.replace(" ", "+") );
