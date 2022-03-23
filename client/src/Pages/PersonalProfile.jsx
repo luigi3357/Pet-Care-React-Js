@@ -115,7 +115,7 @@ export const PersonalProfile = () => {
               }
               alt="Image"
               width="230px"
-              height="250px"
+              height="290px"
               preview
               />
             </div>
@@ -142,30 +142,30 @@ export const PersonalProfile = () => {
                   />
               </Link>
 
-              <Link to={`/editProfile`} className="link">
+             {/*  <Link to={`/editProfile`} className="link">
                 <Button
                   label="asd"
                   className="p-button-sm p-button-warning p-button-rounded"
                   />
-              </Link>
+              </Link> */}
             </div>
           </div>
           <div className="subData">
               <h3>{fullInfo ? fullInfo.title : null}</h3>
-              <p className="description">
+              <p className="pDePerfilPosteos"> 
                 {fullInfo ? fullInfo.bio : null}
               </p>
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
               {fullInfo?
                 <>
                 {fullInfo.keeper?
-                  <p>Contrataciones: {fullInfo.bookings}</p>
+                  <p className="pDePerfil">Contrataciones: {fullInfo.bookings}</p>
                   :
-                  <p>Reservaciones: {fullInfo.reservaciones.filter((v)=>{return (v.status=='approved' || v.status=='completed')}).length}</p>
+                  <p className="pDePerfil">Reservaciones: {fullInfo.reservaciones.filter((v)=>{return (v.status=='approved' || v.status=='completed')}).length}</p>
                 } 
                 </>
               :null}
-              <p>Rating:</p>
+              <p className="pDePerfil">Rating:</p>
               <Rating
                 className="text-white"
                 value={fullInfo ? fullInfo.rating : null}
@@ -174,7 +174,7 @@ export const PersonalProfile = () => {
                 cancel={false}
                 />
               {/* <p>Precio: ${price}</p> */}
-              <p>Direccion: {fullInfo ? fullInfo.address : null}</p>
+              <p className="pDePerfil">Direccion: {fullInfo ? fullInfo.address : null}</p>
               {/* <p>Tipo:</p> {petIcon}
               <p>Tamaño:</p> {sizeText} */}
             </div>
@@ -191,13 +191,14 @@ export const PersonalProfile = () => {
           {fullInfo
             ? fullInfo.posteos.map((p) => {
               return (
-                <Card>
-                    <p>Descripcion: {p.description}</p>
-                    <p>Price: $ {p.price}</p>
-
-                    <p>Tamaño: {p.size}</p>
-                    <p>Tipo: {p.type}</p>
+                <div className="pDePerfilPosteosContainer">
+                <Card className="pDePerfilPosteos">
+                    <h4 className="pDePerfilPosteos">Descripcion:</h4><p className="pDePerfilPosteos"> {p.description}</p>
+                    <h4 className="pDePerfilPosteos">Price: $</h4><p className="pDePerfilPosteos">{p.price}</p>
+                    <h4 className="pDePerfilPosteos">Tamaño:</h4><p className="pDePerfilPosteos">{p.size}</p>
+                    <h4 className="pDePerfilPosteos">Tipo:</h4><p className="pDePerfilPosteos">{p.type}</p>
                   </Card>
+                </div>  
                 );
               })
               : null}
@@ -214,6 +215,7 @@ export const PersonalProfile = () => {
                     key={i.id}
                     rating={i.rate}
                     message={i.message}
+                    
                     />
                 </div>
               );
@@ -228,8 +230,8 @@ export const PersonalProfile = () => {
   <div className={contrataciones === true ? 'notDisabled' : 'Disabled'}>
   {
   fullInfo? 
-  fullInfo.keeper ? <BookingDatatables title={'Información'} /*data={fullInfo?fullInfo.contrataciones:null}*/ /> :
-  <BookingDatatables title={'Reservaciones'}  /*data={fullInfo?fullInfo.reservaciones:null}*/  />
+  fullInfo.keeper ? <BookingDatatables title={'Contrataciones'} data={fullInfo?fullInfo.contrataciones:null} /> :
+  <BookingDatatables title={'Reservaciones'}  data={fullInfo?fullInfo.reservaciones:null}  />
   :null}
   </div>
   </div>

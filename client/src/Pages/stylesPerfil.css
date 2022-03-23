@@ -1,5 +1,7 @@
 .container{
     min-width: 100%;
+    background-color: #0D1117;
+    color: white;
 }
 .containerAuxiliar{
     display: grid;
@@ -64,6 +66,7 @@
 }
 .Disabled{
     display:none;
+    position: absolute;
 }
 .contrainerTitelh4{
     width: 100%;
@@ -74,4 +77,19 @@
 .containerComentarios{
     min-width: 400px;
     max-width:100%;
+}
+
+.pDePerfil{
+    color:white;
+}
+
+.pDePerfilPosteos{
+    color: white;
+    background-color:#0D1117;
+}
+.pDePerfilPosteosContainer{
+    border:solid white 2px;
+    border-radius:5px;
+    margin-bottom: 15px;
+    margin-right: 2%;
 }
