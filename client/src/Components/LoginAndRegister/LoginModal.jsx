@@ -14,12 +14,13 @@ import { Toast } from "primereact/toast";
 import { NavBar } from "../NavBar";
 import './FormDemo.css'
 import style from '../../Pages/global.module.css'
-
+import {Google} from './google'
 
 export const Login = () => {
   const navigate = useNavigate()
   const [showMessage, setShowMessage] = useState(false);
   const [showExist, setShowExist] = useState(false);
+  const [showBan, setShowBan] = useState(false);
   const [showVerify, setShowVerify] = useState(false);
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
@@ -53,14 +54,19 @@ export const Login = () => {
 
     if (!oneUser.length) {
       setShowExist(true);
-    } else {
-      if (oneUser.map(e => e.Admin)[0] === true) {
-        dispatch(getAllUsers())
-        setTimeout(() => {
-          navigate("/adminHome")
-        })
+    } else {     
+      if (oneUser.map(e => e.deleted)[0] === true) {
+        setShowBan(true)
+        return
       }
       if (verifyPassword === true) {
+        if (oneUser.map(e => e.Admin)[0] === true) {
+          dispatch(getAllUsers())
+          dispatch(getLogin(data.email));
+          setTimeout(() => {
+            navigate("/adminHome")
+          })
+        }
         if (validar[0] === true) {
           dispatch(secondaryVerification(data2))
           setShowVerify(true)
@@ -98,7 +104,7 @@ export const Login = () => {
   };
 
   const dialogFooter = (
-    <div className="flex justify-content-center">
+    <div className="flex justify-content-center" >
       <Button
         label="OK"
         className="p-button-text"
@@ -117,170 +123,208 @@ export const Login = () => {
       />
     </div>
   );
+  const dialogFooterBan = (
+    <div className="flex justify-content-center">
+      <Button
+        label="OK"
+        className="p-button-text"
+        autoFocus
+        onClick={() => setShowBan(false)}
+      />
+    </div>
+  );
 
   return (
-    <div className={style.container}>
-      <NavBar />
-      <div className="form-demo">
+   <div className="flex justify-content-center flex-column" >
+      <div className="flex justify-content-center flex-column">
+        <div className="form-demo">
 
-        <Toast ref={notmatch} />
-        <div>
-          <Dialog
-            visible={showMessage}
-            onHide={() => setShowMessage(false)}
-            position="top"
-            footer={dialogFooter}
-            showHeader={false}
-            breakpoints={{ "960px": "80vw" }}
-            style={{ width: "30vw" }}
-          >
-            <div className="flex justify-content-center flex-column pt-6 px-3">
-              <i
-                className="pi pi-check-circle"
-                style={{ fontSize: "5rem", color: "var(--green-500)" }}
-              ></i>
-              <h5>Ingreso correctamente!</h5>
-              <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-                <b>Bienvenido a Pet-Care</b>.
-              </p>
-            </div>
-          </Dialog>
+          <Toast ref={notmatch} />
+          <div>
 
-          <Dialog
-            visible={showMessage}
-            onHide={() => setShowVerify(false)}
-            position="top"
-            footer={dialogFooter}
-            showHeader={false}
-            breakpoints={{ "960px": "80vw" }}
-            style={{ width: "30vw" }}
-          >
-            <div className="flex justify-content-center flex-column pt-6 px-3">
-              <i
-                className="pi pi-check-circle"
-                style={{ fontSize: "5rem", color: "var(--green-500)" }}
-              ></i>
-              <h5>Redirigiendo !</h5>
-              <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-                <b>Debes validar tu codigo</b>.
-              </p>
-            </div>
-          </Dialog>
+            <Dialog
+              visible={showMessage}
+              onHide={() => setShowMessage(false)}
+              position="top"
+              footer={dialogFooter}
+              showHeader={false}
+              breakpoints={{ "960px": "80vw" }}
+              style={{ width: "30vw" }}
+            >
+              <div className="flex justify-content-center flex-column pt-6 px-3">
+                <i
+                  className="pi pi-check-circle"
+                  style={{ fontSize: "5rem", color: "var(--green-500)" }}
+                ></i>
+                <h5>Ingreso correctamente!</h5>
+                <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+                  <b>Bienvenido a Pet-Care</b>.
+                </p>
+              </div>
+            </Dialog>
 
-          <Dialog
-            visible={showExist}
-            onHide={() => setShowExist(false)}
-            position="top"
-            footer={dialogFooterExist}
-            showHeader={false}
-            breakpoints={{ "960px": "80vw" }}
-            style={{ width: "30vw" }}
-          >
-            <div className="flex justify-content-center flex-column pt-6 px-3">
-              <i
-                className="pi pi-times-circle"
-                style={{ fontSize: "5rem", color: "var(--orange-500)" }}
-              ></i>
-              <h5>Error</h5>
-              <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-                <b>El email no tiene una cuenta creada. Registrate!</b>.
-              </p>
-            </div>
-          </Dialog>
+            <Dialog
+              visible={showMessage}
+              onHide={() => setShowVerify(false)}
+              position="top"
+              footer={dialogFooter}
+              showHeader={false}
+              breakpoints={{ "960px": "80vw" }}
+              style={{ width: "30vw" }}
+            >
+              <div className="flex justify-content-center flex-column pt-6 px-3">
+                <i
+                  className="pi pi-check-circle"
+                  style={{ fontSize: "5rem", color: "var(--green-500)" }}
+                ></i>
+                <h5>Redirigiendo !</h5>
+                <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+                  <b>Debes validar tu codigo</b>.
+                </p>
+              </div>
+            </Dialog>
 
-          <div className="flex justify-content-center">
-            <div className="card">
-              <h5 className="text-center"> Iniciar Sesion </h5>
-              <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
-                <div className="field">
-                  <span className="p-float-label p-input-icon-right">
-                    <i className="pi pi-envelope" />
-                    <Controller
-                      name="email"
-                      control={control}
-                      rules={{
-                        required: "Email es requerido.",
-                        pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                          message: "Email Invalido. E.g. example@email.com",
-                        },
-                      }}
-                      render={({ field, fieldState }) => (
-                        <InputText
-                          id={field.name}
-                          {...field}
-                          className={classNames({
-                            "p-invalid": fieldState.invalid,
-                          })}
-                        />
-                      )}
-                    />
-                    <label
-                      htmlFor="email"
-                      className={classNames({ "p-error": !!errors.email })}
-                    >
-                      Email*
-                    </label>
-                  </span>
-                  {getFormErrorMessage("email")}
-                </div>
+            <Dialog
+              visible={showExist}
+              onHide={() => setShowExist(false)}
+              position="top"
+              footer={dialogFooterExist}
+              showHeader={false}
+              breakpoints={{ "960px": "80vw" }}
+              style={{ width: "30vw" }}
+            >
+              <div className="flex justify-content-center flex-column pt-6 px-3">
+                <i
+                  className="pi pi-times-circle"
+                  style={{ fontSize: "5rem", color: "var(--orange-500)" }}
+                ></i>
+                <h5>Error</h5>
+                <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+                  <b>El email no tiene una cuenta creada. Registrate!</b>.
+                </p>
+              </div>
+            </Dialog>
 
-                <div className="field">
-                  <span className="p-float-label">
-                    <Controller
-                      name="password"
-                      control={control}
-                      rules={{ required: "La contraseña es requerida." }}
-                      render={({ field, fieldState }) => (
-                        <Password
-                          id={field.name}
-                          {...field}
-                          toggleMask
-                          className={classNames({
-                            "p-invalid": fieldState.invalid,
-                          })}
-                        />
-                      )}
-                    />
-                    <label
-                      htmlFor="password"
-                      className={classNames({ "p-error": errors.password })}
-                    >
-                      Contraseña*
-                    </label>
-                  </span>
-                  {getFormErrorMessage("password")}
-                </div>
-                <Button type="submit" label="Enviar" />
-              </form>
-              <div style={{ textAlign: "center" }}>
-                <div>
-                  <Link to="/forgotPassword">Olvidaste tu contraseña?</Link>
-                </div>
+            <Dialog
+              visible={showBan}
+              onHide={() => setShowBan(false)}
+              position="top"
+              footer={dialogFooterBan}
+              showHeader={false}
+              breakpoints={{ "960px": "80vw" }}
+              style={{ width: "30vw" }}
+            >
+              <div className="flex justify-content-center flex-column pt-6 px-3">
+                <i
+                  className="pi pi-times-circle"
+                  style={{ fontSize: "5rem", color: "var(--orange-500)" }}
+                ></i>
+                <h5>Error</h5>
+                <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
+                  <b>Su cuenta fue desactivada o baneada si cree que hay un error comuniquese con PetCare3456789@gmail.com!</b>.
+                </p>
+              </div>
+            </Dialog>
+            
+        <NavBar />
 
-                <div>
-                  <p>No tienes cuenta?</p>
-                  <Link to="/register">
-                    <p>REGISTRATE</p>
-                  </Link>
-                </div>
+            <div className={style.container}>
+              <div className="card px-8">
+                <h5 className="text-center"> Iniciar Sesion </h5>
+                <form onSubmit={handleSubmit(onSubmit)} className="p-fluid">
+                  <div className="field">
+                    <span className="p-float-label p-input-icon-right">
+                      <i className="pi pi-envelope" />
+                      <Controller
+                        name="email"
+                        control={control}
+                        rules={{
+                          required: "Email es requerido.",
+                          pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                            message: "Email Invalido. E.g. example@email.com",
+                          },
+                        }}
+                        render={({ field, fieldState }) => (
+                          <InputText
+                            id={field.name}
+                            {...field}
+                            className={classNames({
+                              "p-invalid": fieldState.invalid,
+                            })}
+                          />
+                        )}
+                      />
+                      <label
+                        htmlFor="email"
+                        className={classNames({ "p-error": !!errors.email })}
+                      >
+                        Email*
+                      </label>
+                    </span>
+                    {getFormErrorMessage("email")}
+                  </div>
 
-                <div>
-                  {/* <a href="http://localhost:3001/Auth/login/federated/google">
+                  <div className="field">
+                    <span className="p-float-label">
+                      <Controller
+                        name="password"
+                        control={control}
+                        rules={{ required: "La contraseña es requerida." }}
+                        render={({ field, fieldState }) => (
+                          <Password
+                            id={field.name}
+                            {...field}
+                            toggleMask
+                            className={classNames({
+                              "p-invalid": fieldState.invalid,
+                            })}
+                          />
+                        )}
+                      />
+                      <label
+                        htmlFor="password"
+                        className={classNames({ "p-error": errors.password })}
+                      >
+                        Contraseña*
+                      </label>
+                    </span>
+                    {getFormErrorMessage("password")}
+                  </div>
+                  <Button type="submit" label="Enviar" />
+                </form>
+                <div style={{ textAlign: "center" }}>
+                  <div>
+                    <Link to="/forgotPassword">Olvidaste tu contraseña?</Link>
+                  </div>
+
+                  <div>
+                    <p>No tienes cuenta?</p>
+                    <Link to="/register">
+                      <p>REGISTRATE</p>
+                    </Link>
+                  </div>
+
+                  <div>
+                    {/* <a href="http://localhost:3001/Auth/login/federated/google">
               Google
             </a> */}
 
-                  <div className="button-demo">
-                    <div className="card">
+                    <div className="button-demo">
+                      <div className="card">
 
-                      <div className="template">
-                        <Button className="google p-0">
-                          <i className="pi pi-google px-2"></i>
-                          {/* <span className="px-3">Google</span> */}
-                          <a className="px-3" href="http://localhost:3001/Auth/login/federated/google">
-                            Google
-                          </a>
-                        </Button>
+                        <div className="template">
+                          <Button className="google p-0">
+                            <i className="pi pi-google px-2"></i>
+                            {/* <span className="px-3">Google</span> */}
+                            <a className="px-3" href="http://localhost:3001/Auth/login/federated/google">
+                              Google
+                            </a>
+                          </Button>
+                          <div>
+                            <Google/>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -289,7 +333,7 @@ export const Login = () => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div>   
+      </div> 
   );
 };

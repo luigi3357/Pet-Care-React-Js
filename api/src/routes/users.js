@@ -128,12 +128,12 @@ router.put("/edit", async (req, res) => {
 //ruta para editar si quiere o no 2FA y un cambio de contraseña
 
 router.put("/security", async (req, res) => {
-  const { email, password, key_2fa } = req.body
-
+  const { email, key_2fa } = req.body
+console.log(req.body)
   let user = await search({ email: email})
-  let passwordHasheada= await hash(password)
+
   if (user) {
-      let resetInfoUser = await User.update({ password: passwordHasheada, key_2fa:key_2fa  },   
+      let resetInfoUser = await User.update({ key_2fa:key_2fa  },   
           { where: { email:email }})
       return res.send(resetInfoUser)
   }
@@ -155,7 +155,6 @@ router.put("/fav", async (req, res) => {
 
 router.get("/", async (req, res) => {
   const infoUser = await infoTotalDb();  
-  console.log(infoUser[0])
   res.send(infoUser);  
 });
 

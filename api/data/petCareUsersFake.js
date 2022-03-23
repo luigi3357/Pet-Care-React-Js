@@ -194,11 +194,12 @@ const user = [
   },
   {
     email: "admin@gmail.com",
-    password: "admin123456",
+    password:"$2a$10$XS4U7EY7H7bVTsmNa6nMvOLKlSrGr5p/14JWQG8SRseiK6zyBw1DK",
     name: "admin",
     last_name: "admin",
     bio: "soy admin",
     phone: "911-12345678",
+    Admin:true,
     location: [
       {
         direccion: "admin",

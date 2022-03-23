@@ -31,6 +31,8 @@ server.use((req, res, next) => {
   next();
 });
 
+// server.use(passport.initialize)
+
 server.use(session({
   secret: 'keyboard cat',
   resave: false,

@@ -31,7 +31,7 @@ export const NavBar = () => {
   function handleLogOut() {
     dispatch(getLogOut());
   }
-
+console.log(logged,"algo")
   return (
     <div className={style.navBarContainer}>
       <Image src={logo} alt="Image Text" imageStyle={{ width: " 50px" }} />
