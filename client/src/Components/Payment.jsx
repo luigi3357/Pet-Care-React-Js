@@ -50,7 +50,6 @@ export function Payment() {
     }, 500);
   }
   
-
   return (
     <div>
       {!loading && (

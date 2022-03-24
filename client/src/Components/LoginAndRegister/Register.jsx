@@ -53,7 +53,6 @@ export const Register = () => {
   }
 
   const onSubmit = (data) => {
-    console.log(data)
     const oneUser = users.filter((e) => e.email === data.email);
     if (oneUser.length) {
       setShowExist(true);
@@ -163,7 +162,7 @@ export const Register = () => {
           ></i>
           <h5>Registration Successful!</h5>
           <p style={{ lineHeight: 1.5, textIndent: "1rem" }}>
-            Bienvenido <b>{formData.name}</b>!
+            Bienvenido <b>{formData.name} a Pet-Care</b>!
           </p>
         </div>
       </Dialog>

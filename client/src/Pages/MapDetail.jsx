@@ -11,7 +11,6 @@ export default function MapDetail() {
           lng: position.coords.longitude,
           lat: position.coords.latitude,
         });
-        //console.log(coordinates.longitude)
       },
       function (error) {
         console.log(error);

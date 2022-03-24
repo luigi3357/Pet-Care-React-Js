@@ -32,9 +32,7 @@ export const RatingDemo = ({client_id, keeper_id, booking_id}) => {
   };
 
   function submitHandler(e){
-    console.log(payload)
       axios.post(`${localhost}/reviews/create`,payload)
-      .then((response)=>console.log(response.data))
       .then(()=>{setButtonSend(false)})
       .then(()=> setTimeout(() => {
         navigate(-1)

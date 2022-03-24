@@ -57,7 +57,6 @@ export const Profile = (post) => {
     }
   }, [loginUser]);
   const [fullInfo, setfullInfo] = useState();
-  console.log(fullInfo, "APENAS RENDERIZA");
   let petIcon;
   let sizeText;
 
@@ -206,7 +205,7 @@ export const Profile = (post) => {
         </div>
         <div className={mapa === true ? 'notDisabled' : 'Disabled'}>
         
-        <MapDetail />
+        {/* <MapDetail /> */}
        
         </div>
         </div>

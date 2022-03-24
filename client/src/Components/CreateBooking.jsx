@@ -104,7 +104,6 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
             navigate(`/`)
         return alert('Reserva creada con éxito')
       }}).catch((e)=>{
-        console.log(e)
         alert('Hubo un error')
         setDisplay(false)
       })
