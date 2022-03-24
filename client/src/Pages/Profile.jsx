@@ -31,7 +31,7 @@ export const Profile = (post) => {
 
   //para los estilos:
   const [comentariosTerceros, setComentariosTerceros] = useState(false);
-  const [posteosTerceros, setPosteosTerceros] = useState(true);
+  const [posteosTerceros, setPosteosTerceros] = useState(false);
   const [mapa, setMapa] = useState(false);
   function handlePost(){
     setComentariosTerceros(false);
@@ -154,10 +154,10 @@ export const Profile = (post) => {
             ? fullInfo.posteos.map((p) => {
                 return (
                   <div className="cardConstainer5">
-                    <h5>Descripcion:</h5><p className="pInfoCard5"> {p.description}</p>
-                    <h5>Price: $</h5><p className="pInfoCard5"> {p.price}</p>
-                    <h5>Tamaño:</h5><p className="pInfoCard5"> {p.size}</p>
-                    <h5>Tipo:</h5><p className="pInfoCard5"> {p.type}</p>
+                    <h5 className="typeh5">Descripcion:</h5><p className="pInfoCard5"> {p.description}</p>
+                    <h5 className="typeh5">Price: $</h5><p className="pInfoCard5"> {p.price}</p>
+                    <h5 className="typeh5">Tamaño:</h5><p className="pInfoCard5"> {p.size}</p>
+                    <h5 className="typeh5">Tipo:</h5><p className="pInfoCard5"> {p.type}</p>
                     {logged ? (
                       <CreateBooking
                         keeper={fullInfo}

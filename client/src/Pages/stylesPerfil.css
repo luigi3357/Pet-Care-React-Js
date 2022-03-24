@@ -105,8 +105,8 @@ body {
 }
 
 .pDePerfilPosteos {
-  color: white;
-  background-color: #242930;
+  color: rgb(0, 0, 0);
+  background-color: #FFFFFF;
 }
 .pDeBio {
   width: 100%;
@@ -243,6 +243,37 @@ img {
   background-color: #17817f;
   font-weight: 700;
   width: 80%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.buttomPerfile3 {
+  border-radius: 3px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  border: solid 1px rgb(0, 0, 0);
+  background-color: #FFFFFF;
+  font-weight: 700;
+  width: 100%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.buttomPerfile3:hover {
+  border-radius: 3px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  border: solid 1px rgb(0, 0, 0);
+  background-color: #17817f;
+  font-weight: 700;
+  width: 100%;
   padding: 10px;
   margin-left: auto;
   margin-right: auto;

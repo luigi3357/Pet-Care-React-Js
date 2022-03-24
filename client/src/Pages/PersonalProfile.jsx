@@ -19,7 +19,7 @@ import { BookingDatatables } from "../Components/BookingTable";
 import "./stylesPerfil.css";
 import MapView from "../Components/MapView";
 import MapDetail from "./MapDetail";
-
+import DeletePost from "../Components/Botones/DeletePost"
 export const PersonalProfile = () => {
   const { id } = useParams(); // recibo el id por params para buscar la info con la ruta /users/profile/id
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ export const PersonalProfile = () => {
     }
   }, [loginUser]);
 
-  const [comentarios, setComentarios] = useState(true);
+  const [comentarios, setComentarios] = useState(false);
   const [posteos, setPosteos] = useState(false);
   const [contrataciones, setContrataciones] = useState(false);
   const [mapa, setMapa] = useState(false);
@@ -220,7 +220,7 @@ export const PersonalProfile = () => {
                       Contrataciones: {fullInfo.bookings}
                     </p>
                   ) : (
-                    <p>
+                    <p className="pDePerfilContrataciones">
                       Reservaciones:{" "}
                       {
                         fullInfo.reservaciones.filter((v) => {
@@ -293,8 +293,9 @@ export const PersonalProfile = () => {
                             <h4 className="pDePerfilPosteos">Tipo:</h4>
                             <p className="pDePerfilPosteos">{p.type}</p>
                             <Link to={`/editForm/${p.id}`}>
-                              <button>Editar Publicacion</button>
+                              <button className="buttomPerfile3">Editar Publicación</button>
                             </Link>
+                            <DeletePost className="buttomPerfile3" id={p.id}/>
                           </Card>
                         </div>
                       );
