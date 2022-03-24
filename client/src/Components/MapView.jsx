@@ -19,8 +19,7 @@ const Map = ({ setCoordinates, coordinates, cards }) => {
     dispatch(usersCoordinates());
   }, [dispatch]);
 
-  console.log(coordinates, "prueba+++++++++");
-  console.log(showPointers, "objetousers");
+
 
   return (
     <div style={{ height: "50vh", width: "50vh" }}>

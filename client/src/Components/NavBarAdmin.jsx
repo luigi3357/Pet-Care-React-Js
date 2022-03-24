@@ -23,7 +23,6 @@ export const NavBarAdmin = () => {
       setLogged(loggedStorage);
     }
   }, [login]);
-  console.log("soy login", logged);
   // useEffect(()=>{
   //   if(!logged){
   //     setLogged(login)
@@ -33,7 +32,6 @@ export const NavBarAdmin = () => {
   function handleLogOut() {
     dispatch(getLogOut());
   }
-  console.log(logged, "algo");
   return (
     <div className={styles.navBarContainer}>
       <div className={styles.nav}>
@@ -43,7 +41,6 @@ export const NavBarAdmin = () => {
 
         <ul className={styles.navMenu}>   
           <li className={styles.navMenuItemLogout}>
-            {console.log(logged)}
             {logged ? (
               <Link
                 onClick={(e) => {

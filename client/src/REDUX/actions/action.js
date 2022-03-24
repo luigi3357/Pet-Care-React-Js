@@ -10,7 +10,6 @@ export function usersCoordinates(){
   return async function (dispatch) {
     
       var json = await axios.get(`${localhost}/users/usersCoordinates`)
-      //console.log(json, "jsonuserCoordinates")
       return dispatch({
         type: ACTION_TYPES.GET_USERS_COORDINATES,
         payload: json.data
@@ -59,7 +58,6 @@ export function register(payload) {
   return async (dispatch) => {
     let json = await axios.post(`${localhost}/register`, payload)
     .then((response)=>{
-      console.log(response.data)
       localStorage.setItem('login', JSON.stringify(response.data))
       dispatch({
         type: ACTION_TYPES.REGISTER_LOGIN,
@@ -73,7 +71,6 @@ export function registerGoogle(payload) {
   return async (dispatch) => {
     let json = await axios.post(`${localhost}/registerGoogle`, payload)
     .then((response)=>{
-      console.log(response.data,"soy el response")
       localStorage.setItem('login', JSON.stringify(response.data))
       dispatch({
         type: ACTION_TYPES.REGISTER_LOGIN,
@@ -189,7 +186,6 @@ export const editProfilePost = (payload) => {
 // añade favoritos
 export const addFavoritos = (payload) => {
   return async (dispatch) => {
-    console.log(payload);
     let json = await axios.put(`${localhost}/users/fav`, payload);
     return json;
   };
@@ -239,7 +235,6 @@ export function getFiltered(payload) {
 }
 
 export const verification2fa = (payload) => {
-  console.log(payload)
   return async (dispatch) => {
     let json = await axios.put(`${localhost}/users/security/`, payload);
     return json;
@@ -249,7 +244,6 @@ export const verification2fa = (payload) => {
 export function getSearch(keywords) {
   return async function (dispatch) {
     let result = await axios.get(`${localhost}/search?keyword=` + keywords.replace(" ", "+") );
-    console.log(result.data)
     dispatch({
       type: ACTION_TYPES.GET_SEARCH,
       payload: result.data,

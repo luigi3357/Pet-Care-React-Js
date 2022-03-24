@@ -44,8 +44,7 @@ export const Verification = () => {
     const onSubmit = (data) => {
         if (data.token_2fa) {
             dispatch(getLogin(users.email)); 
-            console.log(users.token_2FA,"token 2fa guardado")
-            console.log(data.token_2fa, "data")
+            
             if (users.token_2FA === data.token_2fa) {
            setShowMessage(true)
             } else {

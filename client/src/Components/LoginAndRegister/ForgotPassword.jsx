@@ -31,7 +31,6 @@ export const ForgotPassword = () => {
 
     const onSubmit = (data) => {
         const oneUser = users.filter(e=> e.email === data.email)
-        console.log(data,"dataforgot")
         if(oneUser.length){
             setFormData(data);
             setShowMessage(true);

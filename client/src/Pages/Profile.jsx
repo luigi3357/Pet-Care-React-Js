@@ -57,7 +57,6 @@ export const Profile = (post) => {
     }
   }, [loginUser]);
   const [fullInfo, setfullInfo] = useState();
-  console.log(fullInfo, "APENAS RENDERIZA");
   let petIcon;
   let sizeText;
 

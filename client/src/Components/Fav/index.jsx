@@ -5,14 +5,10 @@ import { addFavoritos } from "../../REDUX/actions/action";
 
 export default function Fav({ id }) {
   const users = useSelector((state) => state.login)
-  console.log(id)
   const dispatch = useDispatch()
   const favoritosAnteriores = !users.favoritos? []: users.favoritos;
-  console.log(favoritosAnteriores)
   const array = [];
   const favoritos = array.push(id);
-  console.log(favoritos)
-  console.log(favoritos.length, "soy fav!!!!!!!!")
   const data1 = {
     email: users.email,
     favoritos: favoritos

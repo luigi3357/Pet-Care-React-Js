@@ -50,7 +50,6 @@ export function Payment() {
     }, 500);
   }
   
-console.log(checkout_details,"soy checout")
   return (
     <div>
       {!loading && (

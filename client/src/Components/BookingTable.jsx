@@ -22,11 +22,9 @@ export const BookingDatatables = ({ title, data }) => {
       setDetails(response.data);
     });
     setTimeout(() => {
-      console.log(data);
       setLoading(false);
     }, 1000);
   }, []);
-  console.log(details);
 
   const statusTemplate = (rowData) => {
     switch (rowData.status) {

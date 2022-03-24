@@ -17,7 +17,6 @@ export default function AddressAutocom (){
 
         const results = await geocodeByAddress(value);
         const latlng = await getLatLng(results[0])
-        console.log(value)
         setAddress(value)
         setCoordinates(latlng)
         const objetoLocation = {

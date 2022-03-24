@@ -37,8 +37,7 @@ export const Reset = () => {
   }, [dispatch]);
 
 
-  console.log(users,"soy users reset")
-  console.log(use,"soy login2")
+
 
 
 

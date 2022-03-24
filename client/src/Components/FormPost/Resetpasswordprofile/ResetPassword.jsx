@@ -11,7 +11,6 @@ export default function ResetPassword() {
     // const  idautor = useSelector((state)=> state.login)
     // const  user = useSelector((state)=> state.users)
     const author = JSON.parse(localStorage.getItem("login"))
-    console.log(author)
     const users = useSelector((state) => state.users);
     function validate() { }
 
@@ -112,7 +111,6 @@ export default function ResetPassword() {
             ...form,
             [e.target.name]: e.target.value
         }))
-        //  console.log(e.target.value)
 
 
     }
@@ -128,16 +126,12 @@ export default function ResetPassword() {
 
 
         // const onePass =oneUser.map(e => e.password)
-        console.log(author.id, 'estoy dentro de resetsubmit')
     const verifyPassword = await bcrypt.compare(form.password,passVerify);
-       console.log(verifyPassword,"verify")
     if(verifyPassword === false){
         alert('Su contraseña actual no coincide')  
        
     }else{
         dispatch(getAllUsers())
-        console.log(form)
-        console.log(submit)
         dispatch(resetPassword(submit))
             alert('Contraseña cambiada')
     }

@@ -53,7 +53,6 @@ export const PersonalProfile = () => {
           lng: position.coords.longitude,
           lat: position.coords.latitude,
         });
-        //console.log(coordinates.longitude)
       },
       function (error) {
         console.log(error);
@@ -96,7 +95,6 @@ export const PersonalProfile = () => {
     }
     dispatch(verification2fa(data))
     setTimeout(() => {
-      console.log(data)
 
       dispatch(getLogin(userData.email))
 

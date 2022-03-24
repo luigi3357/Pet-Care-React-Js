@@ -53,7 +53,6 @@ export const Register = () => {
   }
 
   const onSubmit = (data) => {
-    console.log(data)
     const oneUser = users.filter((e) => e.email === data.email);
     if (oneUser.length) {
       setShowExist(true);

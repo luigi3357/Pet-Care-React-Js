@@ -35,7 +35,6 @@ export const MailCode = () => {
 
     const { control, formState: { errors }, handleSubmit, reset } = useForm({ defaultValues });
     
-console.log(users,"users token")
     const onSubmit = (data) => {
         if (data.token) {
             dispatch(getLoginForgot(users.email)); 

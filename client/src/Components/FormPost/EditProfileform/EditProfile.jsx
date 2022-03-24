@@ -12,7 +12,6 @@ export default function FormPayData() {
 
   
   const author= JSON.parse(localStorage.getItem("login"))
-   console.log(author)
   // function validate(form) {
   //   let errors = {};
   //   if (!form.name) {
@@ -74,7 +73,6 @@ export default function FormPayData() {
         reader.readAsDataURL(file)
         reader.onload=function(){
             var base64 = reader.result;
-           console.log(base64)
         //    return base64;
             setForm({
                 ...form,
@@ -83,7 +81,6 @@ export default function FormPayData() {
         }
     })
    };
-   console.log(form.profileImgURL, 'soylaimagendePerfil')
  
 
   function handleChange(e) {
@@ -104,9 +101,7 @@ export default function FormPayData() {
     e.preventDefault();
     const newLocation = window.localStorage.getItem("newLocation");
     if (newLocation) {
-      console.log(newLocation)
       let form2={...form, location: [JSON.parse(newLocation)]} 
-      console.log(form2)
       dispatch(editProfilePost(form2));
     }else{
       dispatch(editProfilePost(form));
