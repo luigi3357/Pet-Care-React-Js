@@ -9,7 +9,7 @@ const {
   } = require("../services/ratingCalculation");
 const { Update } = require("../services/updateUser");
 const router = Router();
-const {sendEmail} = require("../services/sendEmail");
+const {sendEmail} = require("../services/SendEmail");
 
 /*         get users coordinates          */
 
@@ -95,7 +95,7 @@ router.put("/delete/:id", async (req, res, next) => {
 
 router.put("/edit", async (req, res) => {
   const { email, name, last_name, phone, bio, location, myImages, profileImgURL} = req.body
-  console.log(req.body)
+  console.log(req.body, 'soy el body')
   let user = await search({ email: email})
   if (user) {
       let resetInfoUser = await User.update({
