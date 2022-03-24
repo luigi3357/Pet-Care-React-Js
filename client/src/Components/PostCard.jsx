@@ -6,11 +6,13 @@ import { Button } from "primereact/button";
 import { FaDog, FaCrow, FaCat } from "react-icons/fa";
 import { MdPestControlRodent } from "react-icons/md";
 import style from "./../Pages/global.module.css";
+import { useSelector } from "react-redux";
 // import { DeletePost } from "./Botones/DeletePost";
 
 export default function PostCard({ post }) {
   const { title, author, type, size } = post;
   const loggedUser = JSON.parse(localStorage.login);
+ /*  const loggedUser = useSelector((state) => state.login) */
   let petIcon;
   let sizeText;
 
