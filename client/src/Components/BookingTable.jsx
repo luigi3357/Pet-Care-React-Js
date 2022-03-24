@@ -91,7 +91,7 @@ export const BookingDatatables = ({ title, data }) => {
     <div className="containerPrincipal">
       <div className="card">
         <DataTable
-          value={loading ? null : data}
+          value={loading ? null : (title=='Reservaciones' ? data.reservaciones : data.contrataciones)}
           size="small"
           header={title}
           responsiveLayout="stack"

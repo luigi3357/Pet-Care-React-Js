@@ -336,12 +336,12 @@ export const PersonalProfile = () => {
                   fullInfo.keeper ? (
                     <BookingDatatables
                       title={"Contrataciones"}
-                      data={fullInfo ? (fullInfo.contrataciones?fullInfo.contrataciones:null) : null}
+                      data={fullInfo}
                     />
                   ) : (
                     <BookingDatatables
                       title={"Reservaciones"}
-                      data={fullInfo ? (fullInfo.reservaciones?fullInfo.reservaciones:null) : null}
+                      data={fullInfo}
                       
                     />
                   )
