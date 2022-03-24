@@ -125,7 +125,7 @@ export const Profile = (post) => {
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
               <p className="pDePerfilContrataciones5">Contrataciones: {fullInfo.bookings}</p>
               <div className="pDePerfilRating5">
-              <p className="pDePerfilContrataciones5">Rating:</p>
+              <p className="pDePerfilContrataciones5">Calificación:</p>
               <Rating
                 className="text-white"
                 value={fullInfo.rating}
@@ -142,7 +142,7 @@ export const Profile = (post) => {
         <div>
         <div className="contrainerTitelh4Perfil5">
         <h4 className="DespliegueDeInfo5" onClick={(e) => {handleComent()}}>Comentarios</h4>
-        <h4 className="DespliegueDeInfo5" onClick={(e) => {handlePost()}}>Posteos</h4>
+        <h4 className="DespliegueDeInfo5" onClick={(e) => {handlePost()}}>Publicaciones</h4>
         <h4 className="DespliegueDeInfo5" onClick={(e) => {handleMap()}}>Mapa</h4>
         </div>
         
@@ -154,7 +154,7 @@ export const Profile = (post) => {
                 return (
                   <div className="cardConstainer5">
                     <h5 className="typeh5">Descripcion:</h5><p className="pInfoCard5"> {p.description}</p>
-                    <h5 className="typeh5">Price: $</h5><p className="pInfoCard5"> {p.price}</p>
+                    <h5 className="typeh5">Precio: </h5><p className="pInfoCard5"> ${p.price}</p>
                     <h5 className="typeh5">Tamaño:</h5><p className="pInfoCard5"> {p.size}</p>
                     <h5 className="typeh5">Tipo:</h5><p className="pInfoCard5"> {p.type}</p>
                     {logged ? (
@@ -200,7 +200,7 @@ export const Profile = (post) => {
               );
             })
           ) : (
-            <h5>El usuario aún no posee Comentarios</h5>
+            <h5>El usuario aún no posee comentarios</h5>
           )}
         </div>
         <div className={mapa === true ? 'notDisabled' : 'Disabled'}>

@@ -72,7 +72,7 @@ export default function PostCard({ post }) {
 
           <div className={style.ratingCont}>
             <div>
-              <h4 className={style.titlecards}>Rating: </h4>
+              <h4 className={style.titlecards}>Calificación: </h4>
             </div>
             <div className={style.ratingrat}>
               <Rating
@@ -96,7 +96,7 @@ export default function PostCard({ post }) {
             <h4 className={style.titlecards}>{author.bookings}</h4>
           </div>
           <div>
-            <h5>Desde ${post.price}ARS</h5>
+            <h5>Desde ARS${post.price}</h5>
           </div>
           {loggedUser ? (
             <Link

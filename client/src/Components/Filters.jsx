@@ -117,7 +117,7 @@ export default function Filters() {
         </div>
 
         <div className={style.titleAndButton}>
-          <p className={style.textButton}>Rating</p>
+          <p className={style.textButton}>Calificación</p>
           <div className={style.buttonGroup}>
             <button
               className={style.filterButton}

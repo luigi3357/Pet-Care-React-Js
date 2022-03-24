@@ -234,7 +234,7 @@ export const PersonalProfile = () => {
                 </>
               ) : null}
               <div className="pDePerfilRating">
-                <p className="styleratingP">Rating:</p>
+                <p className="styleratingP">Calificación:</p>
                 <Rating
                   className="text-white"
                   value={fullInfo ? fullInfo.rating : null}
@@ -244,6 +244,9 @@ export const PersonalProfile = () => {
                 />
               </div>
               {/* <p>Precio: ${price}</p> */}
+              <p className="pDePerfilDireccion">
+                Direccion: {fullInfo ? (fullInfo.location? (fullInfo.location.length>0 ? fullInfo.location[0].address : null):null):null }
+              </p>
               {/* <p>Tipo:</p> {petIcon}
               <p>Tamaño:</p> {sizeText} */}
             </div>
@@ -265,7 +268,7 @@ export const PersonalProfile = () => {
                   handlePost();
                 }}
               >
-                Posteos
+                Publicaciones
               </h4>
               <h4
                 className="DespliegueDeInfo"
