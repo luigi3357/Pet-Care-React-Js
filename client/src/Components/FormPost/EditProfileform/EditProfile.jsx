@@ -231,13 +231,7 @@ export default function FormPayData() {
               Realizar cambios
             </button>
           </div>
-
-         
-       
-          
-
-        </div>
-     
+        </div>     
       </form>
     </div>
     </div>
