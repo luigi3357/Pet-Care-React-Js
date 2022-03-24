@@ -200,11 +200,11 @@ export const PersonalProfile = () => {
                   />
               </Link> */}
               </div>
-               <div style={{ height: '50vh', width: '50vh' }}>
+               {/* <div style={{ height: '50vh', width: '50vh' }}>
                 <MapView 
                     coordinates={coordinates}
                 />
-            </div> 
+            </div>  */}
             </div>
             <div className="PerfilData">
               <h3>{fullInfo ? fullInfo.title : null}</h3>
@@ -336,12 +336,13 @@ export const PersonalProfile = () => {
                   fullInfo.keeper ? (
                     <BookingDatatables
                       title={"Contrataciones"}
-                      data={fullInfo ? fullInfo.contrataciones : null}
+                      data={fullInfo ? (fullInfo.contrataciones?fullInfo.contrataciones:null) : null}
                     />
                   ) : (
                     <BookingDatatables
                       title={"Reservaciones"}
-                      data={fullInfo ? fullInfo.reservaciones : null}
+                      data={fullInfo ? (fullInfo.reservaciones?fullInfo.reservaciones:null) : null}
+                      
                     />
                   )
                 ) : null}

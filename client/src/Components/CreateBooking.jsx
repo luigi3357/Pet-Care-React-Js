@@ -18,9 +18,9 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
   const [restricted, setRestricted] = useState([]);
   const [daysAmount, setdaysAmount] = useState(1);
   const [display, setDisplay] = useState(false);
-
+const clientid_LS = JSON.parse(localStorage.login)
   const [form, setForm] = useState({
-    client_id: client.id,
+    client_id: clientid_LS.id,
     keeper_id: keeper.id,
     price: price,
   });
@@ -84,7 +84,7 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
     })
     return restricteDays;
   }
-  const postulacion ={owner: keeper.id, keeper: client.id, post: post_id }
+  const postulacion ={owner: keeper.id, keeper: clientid_LS.id, post: post_id }
 
   async function contactClient(){
     await axios.post(`${localhost}/bookings/postular`, postulacion).then((response)=>{
