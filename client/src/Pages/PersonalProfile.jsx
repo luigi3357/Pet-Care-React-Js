@@ -194,16 +194,18 @@ dispatch(verification2fa(data))
           </div>
           <div className="PerfilData">
               <h3>{fullInfo ? fullInfo.title : null}</h3>
+              {fullInfo && fullInfo.bio ?
               <p className="pDeBio">
                 {fullInfo ? fullInfo.bio : null}
-              </p>
+              </p> :null
+              }
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
               {fullInfo?
                 <>
                 {fullInfo.keeper?
                   <p className="pDePerfilContrataciones">Contrataciones: {fullInfo.bookings}</p>
                   :
-                  <p>Reservaciones: {fullInfo.reservaciones.filter((v)=>{return (v.status=='approved' || v.status=='completed')}).length}</p>
+                  <p className="pDePerfilContrataciones">Reservaciones: {fullInfo.reservaciones.filter((v)=>{return (v.status=='approved' || v.status=='completed')}).length}</p>
                 } 
                 </>
               :null}
@@ -224,7 +226,7 @@ dispatch(verification2fa(data))
             </div>
         </div>
 
-      <div>
+      <div className="profileCardContainer2">
       <div className="contrainerTitelh4">
       <h4 className="DespliegueDeInfo" onClick={(e) => {handleComent()}}>Comentarios</h4>
       <h4 className="DespliegueDeInfo" onClick={(e) => {handlePost()}}>Posteos</h4>

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router";
 import { NavBar } from "../Components/NavBar";
 import profileDefault from "./../assets/profile.jpg";
-import style from "./global.module.css";
 import ReviewCard from "../Components/ReviewCard";
 import { Rating } from "primereact/rating";
 import { FaDog, FaCrow, FaCat } from "react-icons/fa";
@@ -17,6 +16,9 @@ import { localhost } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
 import { Link } from "react-router-dom";
 import {fetchAllPosts} from '../REDUX/actions/action'
+import "./stylesProfileTerceros.css"
+
+
 export const Profile = (post) => {
   const { id } = useParams();
   const location = useLocation();
@@ -26,6 +28,20 @@ export const Profile = (post) => {
   const loginUser = useSelector((state) => state.login);
   const loginUser2 = JSON.parse(localStorage.login)
   const [logged, setLogged] = useState(null);
+
+  //para los estilos:
+  const [comentariosTerceros, setComentariosTerceros] = useState(false);
+  const [posteosTerceros, setPosteosTerceros] = useState(true);
+
+  function handlePost(){
+    setComentariosTerceros(false);
+    setPosteosTerceros(!posteosTerceros);
+  }
+  function handleComent(){
+    setComentariosTerceros(!comentariosTerceros)
+    setPosteosTerceros(false)
+  }
+
   useEffect(() => {
     const logStorage = window.localStorage.getItem("login");
 
@@ -80,30 +96,28 @@ export const Profile = (post) => {
     dispatch(fetchAllPosts())
   }
   return (
-    <div className={style.container}>
+    <div className="container5">
       <NavBar />
-      {fullInfo? <div className={style.subContainer}>
-        <div className={style.photoMap}>
-          <div className={style.photoMap}>
-            <Image
+      {fullInfo? <div className="containerAuxiliar5">
+        <div className="photoMapPrincipal5">
+          <div className="photoMap5">
+            <img className="imgPerfil5"
               src={fullInfo ? fullInfo.profileImgURL : profileDefault}
               alt="Image"
               width="250"
               preview
             />
-            <div className={style.map}></div>
-          </div>
-        </div>
-        <div className={style.profileCardContainer}>
-          <div className={style.data}>
-            <div className={style.subData}>
-              <h3>{fullInfo.name.toUpperCase() +' '+ fullInfo.last_name.toUpperCase()}</h3>
-              <p className={style.description}>
+             <div className="subData5">
+              <h4>{fullInfo.name.toUpperCase() +' '+ fullInfo.last_name.toUpperCase()}</h4>
+              {fullInfo && fullInfo.bio ?
+              <p className="pDeBio5">
                 {fullInfo.bio}
-              </p>
+              </p> :null
+              }
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
-              <p>Contrataciones: {fullInfo.bookings}</p>
-              <p>Rating:</p>
+              <p className="pDePerfilContrataciones5">Contrataciones: {fullInfo.bookings}</p>
+              <div className="pDePerfilRating5">
+              <p className="pDePerfilContrataciones5">Rating:</p>
               <Rating
                 className="text-white"
                 value={fullInfo.rating}
@@ -111,18 +125,29 @@ export const Profile = (post) => {
                 stars={5}
                 cancel={false}
               />
+              </div> 
               {/* <p>Precio: ${price}</p> */}
-              <p>Direccion: {fullInfo.location? fullInfo.location[0].address: null}</p>
+              <p className="pDePerfilDireccion5">Direccion: {fullInfo.location? fullInfo.location[0].address: null}</p>
             </div>
           </div>
-          <h4>Posteos</h4>
+        </div>
+        <div>
+        <div className="contrainerTitelh4Perfil5">
+        <h4 className="DespliegueDeInfo5" onClick={(e) => {handleComent()}}>Comentarios</h4>
+        <h4 className="DespliegueDeInfo5" onClick={(e) => {handlePost()}}>Posteos</h4>
+        </div>
+        
+        <div className="profileCardContainer5">
+          
+        <div className={posteosTerceros === true ? 'notDisabled' : 'Disabled'}>
           {fullInfo
             ? fullInfo.posteos.map((p) => {
                 return (
-                  <Card>
-                    <p>Descripcion: {p.description}</p>
-                    <p>Price: $ {p.price}</p>
-
+                  <div className="cardConstainer5">
+                    <h5>Descripcion:</h5><p className="pInfoCard5"> {p.description}</p>
+                    <h5>Price: $</h5><p className="pInfoCard5"> {p.price}</p>
+                    <h5>Tamaño:</h5><p className="pInfoCard5"> {p.size}</p>
+                    <h5>Tipo:</h5><p className="pInfoCard5"> {p.type}</p>
                     {logged ? (
                       <CreateBooking
                         keeper={fullInfo}
@@ -132,25 +157,25 @@ export const Profile = (post) => {
                         post_id={p.id}
                       />
                     ) : (
-                      <div>
-                        <Link className={style.link} to="/Register">
+                      <div className="test5">
+                        <Link className="link" to="/Register">
                           <Button
                             label="Registrarse para reservar"
-                            className="p-button-sm p-button-info p-button-rounded"
+                            className="test5"
                           />
                         </Link>
                       </div>
                     )}
-                    <p>Tamaño: {p.size}</p>
-                    <p>Tipo: {p.type}</p>
+                    
              
-                  </Card>
+                  </div>
                 );
               })
             : null}
-           
+          </div>
 
-          <h4>Comentarios</h4>
+          <div className="containerComentarios5">      
+          <div className={comentariosTerceros === true ? 'notDisabled' : 'Disabled'}>
           {fullInfo.reviews ? (
             fullInfo.reviews.map((i) => {
               return (
@@ -165,9 +190,16 @@ export const Profile = (post) => {
               );
             })
           ) : (
-            <h5>El usuario aún no posee reviews</h5>
+            <h5>El usuario aún no posee Comentarios</h5>
           )}
         </div>
+        </div>    
+
+
+        </div>
+
+
+      </div>
       </div>
       :null}
     </div>

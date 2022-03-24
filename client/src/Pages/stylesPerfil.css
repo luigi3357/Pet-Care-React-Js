@@ -15,7 +15,7 @@ body{
   }
 .containerAuxiliar{
     display: grid;
-    grid-template-columns: 35% 62%;
+    grid-template-columns: 25% 74%;
 }/* 1040px */
 .profileCardContainer{
     border-radius: 10px;
@@ -64,7 +64,7 @@ body{
 }
 
 .photoMap {
-    width: 200px;
+    width: 230px;
     text-align: center;
 }
 
@@ -191,10 +191,14 @@ img{
 
 .DespliegueDeInfo{
     cursor: pointer;
+    padding:6px
 }
 .DespliegueDeInfo:hover{
     cursor: pointer;
     background-color:#17817F;
+    border-radius: 3px;
+    padding:5px;
+    border: solid white 1px;
 }
 
 .EditPerfil {
@@ -215,13 +219,29 @@ img{
     font-weight: 700;
     font-size:0.9rem;
     width: 80%;
-    padding: 10px;
+    padding: 14px;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     cursor: pointer;
     margin-bottom: 10px;
 }
+.buttomPerfile2:hover{
+    border-radius: 3px;
+    color: white;
+    border: solid 1px white;
+    background-color:#17817F;
+    font-weight: 700;
+    font-size:0.9rem;
+    width: 80%;
+    padding: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
 .buttomPerfile{
     border-radius: 3px;
     text-decoration: none;

@@ -1,0 +1,205 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+}
+
+.container5{
+    min-width: 100%;
+    background-color: #2D333B;
+    color: white;
+    margin-top: 60px;
+    display: grid;
+    
+}
+.containerAuxiliar5{
+    display: grid;
+    grid-template-columns: 24% 74%;
+}
+.subContainer5{
+    display: grid;
+    grid-template-columns: 26% 74%;
+}
+img{
+    object-fit:cover;
+}
+.imgPerfil5{
+    width:80%;
+    height:250;
+    border-radius: 3px;
+    margin-top:5px; 
+}
+.photoMap5{
+    width: 300px;
+    margin-top:5px; 
+    margin-left: 20px;
+}
+.photoMapPrincipal5{
+    width: 250px;
+}
+
+.map5 {
+    max-width: 300px;
+}
+
+.profileCardContainer5 {
+    border-radius: 3px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.data5 {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 3px;
+    margin: 5px 0px;
+}
+
+.subData5 {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 3px;
+}
+
+.description5 {
+    margin: 0px 5px;
+    text-align: center;
+}
+
+.DespliegueDeInfo5{
+    cursor: pointer;
+    padding:6px
+}
+.link5 {
+    text-decoration: none;
+    border: none;
+}
+  
+.notDisabled{
+    display: block;
+}
+.Disabled{
+    display:none;
+}
+
+.contrainerTitelh4Perfil5{
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border:solid 1px #CECECE;
+    padding-right: 30px;
+    padding-left:30px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-radius: 3px;
+}
+
+.profileCardContainer5{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: start;
+}
+
+.pDePerfilPosteos5{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.test5{
+    width: 100%;
+    text-align: center;
+    margin-left: 23px;
+    margin-right: auto;
+}
+
+.cardConstainer5{
+    align-self: start;
+    width: 300px;
+    height: 100%;
+    border: solid white 1px;
+    text-align: center;
+    display:flex;
+    flex-direction: column;    
+}
+.pInfoCard5{
+    text-align: center;
+    color: white;
+}
+
+.pDeBio5{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: white;
+    border: solid 1px white;
+    background-color:#242930;
+    font-weight: 700;
+    width: 80%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.pDePerfilContrataciones5{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: white;
+    border: solid 1px white;
+    background-color:#242930;
+    font-weight: 700;
+    width: 80%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.pDePerfilRating5{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: white;
+    border: solid 1px white;
+    background-color:#242930;
+    font-weight: 700;
+    width: 80%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.pDePerfilDireccion5{
+    color: white;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
