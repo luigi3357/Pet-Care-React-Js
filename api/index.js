@@ -14,6 +14,7 @@ conn.sync({ force: true }).then(async () => {
           email: element.email,
           name: element.name,
           last_name: element.last_name,
+          keeper: element.keeper,
           bio: element.bio,
           location: element.location,
           password: element.password,

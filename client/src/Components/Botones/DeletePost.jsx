@@ -4,28 +4,29 @@ import 'primereact/resources/primereact.css';
 import 'primeflex/primeflex.css';
 import '../../index.css';
 import ReactDOM from 'react-dom';
-
+import "../../Pages/stylesProfileTerceros.css"
 import React, { Component } from 'react';
 import { Button } from 'primereact/button';
 import './ButtonDemo.css';
 import { deletePost, fetchAllPosts } from "../../REDUX/actions/action";
 import { useDispatch, useSelector } from "react-redux";
-
-export function DeletePost ({id}) {
+import {useNavigate} from "react-router-dom";
+export default function DeletePost ({id}) {
 
     const dispatch =useDispatch()
-
+    const navigate = useNavigate();
     function handleDelete(e){
         e.preventDefault();        
         dispatch(deletePost(id));
         dispatch(fetchAllPosts())
+        navigate("/")
     }
 
         return (
-            <div className="button-demo">
-                <div className="card">
-                    <span className="p-buttonset">                       
-                        <Button onClick={(e)=>{handleDelete(e)}} label="Delete" icon="pi pi-trash" />                       
+            <div>
+                <div>
+                    <span>                       
+                        <button className="buttomPerfile3" onClick={(e)=>{handleDelete(e)}} label="Delete">Eliminar</button>                     
                     </span>                 
                    
                 </div>

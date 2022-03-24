@@ -6,8 +6,9 @@ const user = [
     password: "juliohernandez123",
     name: "julio",
     last_name: "hernandez",
-    bio: "Hola!! soy Julio Hernandez de Quilmes BA, soy psicólogo de profesión y estoy terminando mi segunda carrera en MV ,trabajo de apoyo en la clínica veterinaria de mi tío así que tengo conocimientos y experiencia necesaria para atender las necesidades de sus mascotas con precio",
+    bio: "Hola!! soy Julio Hernandez de Quilmes BA, soy psicólogo de profesión y estoy terminando mi segunda carrera en MV ,trabajo de apoyo en la clínica veterinaria de mi tío así que tengo conocimientos y experiencia necesaria para atender las necesidades de sus mascotas.",
     phone: "911-12345678",
+    keeper: true,
     location: [
       {
         direccion: "Av. Hipólito Yrigoyen 373",
@@ -28,6 +29,7 @@ const user = [
     email: "francomiño@gmail.com",
     password: "francomiño123",
     name: "franco",
+    keeper: true,
     last_name: "miño",
     phone: "911-23456781",
     bio: "Hola!! soy Franco Miño de Quilmes BA, Me dedico al adiestramiento canino, a la rehabilitación de perros con problemas de conducta. Me dedico al 100% a amar a los pequeños peludos que me dejan a cuidar como si estuvieran en su casa",
@@ -52,6 +54,7 @@ const user = [
     email: "luiscataldo@gmail.com",
     password: "luiscataldo123",
     name: "luis",
+    keeper: true,
     last_name: "cataldo",
     phone: "911-34567812",
     location: [
@@ -77,6 +80,7 @@ const user = [
     password: "darianesquivel123",
     name: "darian",
     last_name: "esquivel",
+    keeper: true,
     phone: "911-45678123",
     bio: "Hola!! soy Darian Esquivel de morón BA, tus mascotas no sentirán el cambio de casa porque al quedar con nosotros entran en un ambiente de hogar y con la seguridad de un médico en casa.",
     location: [
@@ -101,6 +105,7 @@ const user = [
     password: "pablomoyano123",
     name: "pablo",
     last_name: "moyano",
+    keeper: true,
     phone: "911-56781234",
     location: [
       {
@@ -124,6 +129,7 @@ const user = [
     email: "sebastianguerra@gmail.com",
     password: "sebastianguerra123",
     name: "sebastian",
+    keeper: true,
     last_name: "guerra",
     phone: "911-67812345",
     location: [
@@ -147,6 +153,7 @@ const user = [
   {
     email: "lucasduran@gmail.com",
     password: "lucasduran123",
+    keeper: true,
     name: "lucas",
     bio: "Hola!! soy Lucas Duran de Lomas de Zamora BA, rescatista de animales desde hace más de 3 años. Mi vida y mi pasión son los animales. Gracias a mi trabajo como voluntario rescatista he tenido la oportunidad de convivir con cientos de perros y gatos, lo que me ha ayudado a comprender su comportamiento, emociones y necesidades físicas.",
     last_name: "duran",
@@ -174,6 +181,7 @@ const user = [
     bio: "Hola!! soy Juan Paraducha de Palermo BA, he sido cuidador desde hace varios meses, amo los animales en especial a los perros. Cuento con un jardín amplio donde las mascotas pueden divertirse, tomar el sol y jugar sin salir de casa",
     name: "juan",
     last_name: "paraducha",
+    keeper: true,
     phone: "911-81234567",
     location: [
       {
@@ -198,6 +206,8 @@ const user = [
     name: "admin",
     last_name: "admin",
     bio: "soy admin",
+    keeper: false,
+
     phone: "911-12345678",
     Admin:true,
     location: [
@@ -227,7 +237,7 @@ const post = [
     title: "Acerca de Julio Hernandez",
     price: 50,
     description:
-      "Hola!! soy Julio Hernandez, cuido roedores, de Jueves a Domingo desde las 7:00 am, si recoges tu mascota después de las 15:00 hrs se cobrará día completo, precio 50 USD",
+      "Hola!! soy Julio Hernandez, cuido roedores, de Jueves a Domingo desde las 7:00 am, si recoges tu mascota después de las 15:00 hrs se cobrará día completo. ",
   },
   {
     email: "juliohernandez@gmail.com",
@@ -236,7 +246,7 @@ const post = [
     title: "Acerca de Julio Hernandez",
     price: 80,
     description:
-      "Hola!! soy Julio Hernandez, cuido perros peuqeños, de Lunes a Miercoles desde las 7:00 am, si recoges tu mascota después de las 15:00 hrs se cobrará día completo, precio 80 USD",
+      "Hola!! soy Julio Hernandez, cuido perros peuqeños, de Lunes a Miercoles desde las 7:00 am, si recoges tu mascota después de las 15:00 hrs se cobrará día completo.",
   },
   {
     email: "francomiño@gmail.com",
@@ -245,7 +255,7 @@ const post = [
     price: 100,
     title: "Acerca de Franco Miño",
     description:
-      "Hola!! soy Franco Miño, amo los gatos así que me dedico a ellos 100%, no importa si son grandes, medianos o pequeños. Los cuido de Lunes a Domingo en cualquier horario. Es importante que no olvides tener su esquema de vacunación, precio 100 USD",
+      "Hola!! soy Franco Miño, amo los gatos así que me dedico a ellos 100%, no importa si son grandes, medianos o pequeños. Los cuido de Lunes a Domingo en cualquier horario. Es importante que no olvides tener su esquema de vacunación.",
   },
   {
     email: "luiscataldo@gmail.com",
@@ -254,7 +264,7 @@ const post = [
     title: "Acerca de Luis Cataldo",
     price:120,
     description:
-      "Hola!! soy Luis Cataldo, Cuido perros pequeños. Para que tu peludo este mas comodo, es importante: Alimento para todos los días, Plato de comida, Cartilla de vacunación completa y al día, libre de parásitos, así todos están protegidos !!Solo cuido mascotas esterilizadas, precio 120 USD",
+      "Hola!! soy Luis Cataldo, Cuido perros pequeños. Para que tu peludo este mas comodo, es importante: Alimento para todos los días, Plato de comida, Cartilla de vacunación completa y al día, libre de parásitos, así todos están protegidos !!Solo cuido mascotas esterilizadas. ",
   },
   {
     email: "luiscataldo@gmail.com",
@@ -263,7 +273,7 @@ const post = [
     title: "Acerca de Luis Cataldo",
     price: 170,
     description:
-      "Hola!! soy Luis Cataldo, Cuido perros grandes. Para que tu peludo este mas comodo, es importante: Alimento para todos los días, Plato de comida, Cartilla de vacunación completa y al día, libre de parásitos, así todos están protegidos !!Solo cuido mascotas esterilizadas, precio 170 USD",
+      "Hola!! soy Luis Cataldo, Cuido perros grandes. Para que tu peludo este mas comodo, es importante: Alimento para todos los días, Plato de comida, Cartilla de vacunación completa y al día, libre de parásitos, así todos están protegidos !!Solo cuido mascotas esterilizadas.",
   },
   {
     email: "darianesquivel@gmail.com",
@@ -272,7 +282,7 @@ const post = [
     size: "mediano",
     price: 90,
     description:
-      "Hola!! soy Darian Esquivel cuido aves, de Lunes a Viernes desde las 12:00 m, si recoges tu mascota después de las 14:00 hrs se cobrará día completo, precio 90 USD",
+      "Hola!! soy Darian Esquivel cuido aves, de Lunes a Viernes desde las 12:00 m, si recoges tu mascota después de las 14:00 hrs se cobrará día completo.",
   },
   {
     email: "pablomoyano@gmail.com",
@@ -281,7 +291,7 @@ const post = [
     size: "grande",
     price:70,
     description:
-      "Hola!! soy Pablo Moyano, Me encantan las aves! Las cuido fines de semana. Lo que requerimos para poder cuidar de tu pequeñín es necesario que traiga su comida, precio 70 USD",
+      "Hola!! soy Pablo Moyano, Me encantan las aves! Las cuido fines de semana. Lo que requerimos para poder cuidar de tu pequeñín es necesario que traiga su comida.",
   },
   {
     email: "sebastianguerra@gmail.com",
@@ -290,7 +300,7 @@ const post = [
     size: "pequeño",
     price:200,
     description:
-      "Hola!! soy Sebastian Guerra, Me ofrezco al cuidado porque crecí con 3 de ellos. Cuido de Lunes a Viernes, precio 200 USD",
+      "Hola!! soy Sebastian Guerra, Me ofrezco al cuidado porque crecí con 3 de ellos. Cuido de Lunes a Viernes",
   },
   {
     email: "lucasduran@gmail.com",
@@ -299,7 +309,7 @@ const post = [
     size: "mediano",
     price:50,
     description:
-      "Hola!! soy Lucas Duran, rescatista de animales. Cuido tus gatos de Sabado a Lunes, desde las 8:00 am hasta las 22:00, precio 50 USD",
+      "Hola!! soy Lucas Duran, rescatista de animales. Cuido tus gatos de Sabado a Lunes, desde las 8:00 am hasta las 22:00.",
   },
   {
     email: "lucasduran@gmail.com",
@@ -308,7 +318,7 @@ const post = [
     size: "mediano",
     price: 150,
     description:
-      "Hola!! soy Lucas Duran, rescatista de animales. Cuido tus perros de Sabado a Lunes, desde las 8:00 am hasta las 22:00, precio 150 USD",
+      "Hola!! soy Lucas Duran, rescatista de animales. Cuido tus perros de Sabado a Lunes, desde las 8:00 am hasta las 22:00.",
   },
   {
     email: "juanparaducha@gmail.com",
@@ -317,7 +327,7 @@ const post = [
     size: "grande",
     price:350,
     description:
-      "Hola!! soy Juan Paraducha, he sido cuidador de perros toda mi vida, es importante que tengan su esquema de vacunación al día. Cuido tus canes de Lunes a Viernes las 24 horas del día. precio 350 USD",
+      "Hola!! soy Juan Paraducha, he sido cuidador de perros toda mi vida, es importante que tengan su esquema de vacunación al día. Cuido tus canes de Lunes a Viernes las 24 horas del día. ",
   },{
     email: "juanparaducha@gmail.com",
     title: "Acerca de Juan Paraducha",
@@ -325,7 +335,7 @@ const post = [
     size: "pequeño",
     price: 300,
     description:
-      "Hola!! soy Juan Paraducha, he sido cuidador de perros toda mi vida, es importante que tengan su esquema de vacunación al día. Cuido tus canes de Lunes a Viernes las 24 horas del día. precio 300 USD",
+      "Hola!! soy Juan Paraducha, he sido cuidador de perros toda mi vida, es importante que tengan su esquema de vacunación al día. Cuido tus canes de Lunes a Viernes las 24 horas del día. ",
   },
 ];
 const feedback = [
