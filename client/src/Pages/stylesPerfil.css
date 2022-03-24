@@ -63,7 +63,7 @@ body {
 }
 
 .photoMap {
-  width: 200px;
+  width: 230px;
   text-align: center;
 }
 
@@ -105,8 +105,8 @@ body {
 }
 
 .pDePerfilPosteos {
-  color: white;
-  background-color: #242930;
+  color: rgb(0, 0, 0);
+  background-color: #FFFFFF;
 }
 .pDeBio {
   width: 100%;
@@ -187,6 +187,9 @@ img {
 
 .DespliegueDeInfo {
   cursor: pointer;
+  padding:15px;
+  border-radius: 3px;
+ 
 }
 .DespliegueDeInfo:hover {
   cursor: pointer;
@@ -247,8 +250,98 @@ img {
   cursor: pointer;
   margin-bottom: 10px;
 }
+.buttomPerfile3 {
+  border-radius: 3px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  border: solid 1px rgb(0, 0, 0);
+  background-color: #FFFFFF;
+  font-weight: 700;
+  width: 100%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.buttomPerfile3:hover {
+  border-radius: 3px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  border: solid 1px rgb(0, 0, 0);
+  background-color: #17817f;
+  font-weight: 700;
+  width: 100%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
 .imgPerfil {
   width: 80%;
   height: 250;
   border-radius: 3px;
+}
+@media (max-width: 922px) {
+  .contrainerTitelh4 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: solid 1px #cecece;
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-radius: 3px;
+  }
+  .containerAuxiliar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+
+@media (max-width: 645px) {
+  .containerAuxiliar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  } /* 1040px */
+  .profileCardContainer {
+    border-radius: 10px;
+    border: 1px solid rgb(206, 206, 206);
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .photoMap {
+    width: 320px;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .contrainerTitelh4 {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: solid 1px #cecece;
+    margin:0px;
+    padding: 0px;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .probandoSiEsContenedor{
+    min-width:320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

@@ -137,8 +137,9 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
 
   return (
     <div className="field col-12 md:col-4">
+      {/* tengo que editar este boton */}
       <button
-className={styles.singleButtonContainer}
+          className={styles.singleButtonContainer}
         
         onClick={
           keeper.keeper ? () => {

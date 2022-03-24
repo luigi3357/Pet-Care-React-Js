@@ -24,8 +24,7 @@ export default function MapDetail() {
 
   return (
     <div>
-      <h1>MAP</h1>
-      <div style={{ height: "20vh", width: "20vh" }}>
+      <div style={{ height: "375", width: "375" }}>
         <MapView coordinates={coordinates} />
       </div>
     </div>

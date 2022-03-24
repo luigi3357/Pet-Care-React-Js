@@ -1,0 +1,323 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+}
+
+.container5{
+    min-width: 100%;
+    background-color: #2d333b;
+    color: white;
+    margin-top: 60px;
+    
+}
+.cardComentariosContainer{
+    background-color:white;
+    width: 375px;
+    height: 100%;
+    border-radius: 3px;
+    color: #000;
+    padding: 10px 5px 10px 5px;
+
+}
+.DespliegueDeInfo5 {
+    cursor: pointer;
+    padding:15px;
+    border-radius: 3px;
+   
+}
+.DespliegueDeInfo5:hover {
+    cursor: pointer;
+    background-color: #17817f;
+}
+.containerButtom{
+    margin-top: 15px;
+}
+.test5{
+    margin-top: 30px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+}
+.test5:hover{
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #17817f;
+    color: white;
+}
+.containerAuxiliar5{
+    display: grid;
+    grid-template-columns: 20% 79.5%;
+}
+/* .subContainer5{
+    display: grid;
+    grid-template-columns: 25% 74%;
+} */
+img{
+    object-fit:cover;
+}
+.imgPerfil5{
+    width:80%;
+    height:250;
+    border-radius: 3px;
+    margin-top:5px; 
+}
+.photoMap5{
+    width: 100%;
+    margin-top:5px; 
+    
+}
+.photoMapPrincipal5{
+    width: 230px;
+    text-align: center;
+}
+
+.map5 {
+    max-width: 300px;
+}
+
+.profileCardContainer5 {
+    border-radius: 3px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.data5 {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 3px;
+    margin: 5px 0px;
+}
+
+.subData5 {
+   
+    margin-left: 5px;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    width: 260px;
+    border: 1px solid rgb(206, 206, 206);
+    border-radius: 3px;
+}
+
+.description5 {
+    margin: 0px 5px;
+    text-align: center;
+}
+
+.DespliegueDeInfo5{
+    cursor: pointer;
+    padding:6px
+}
+.link5 {
+    text-decoration: none;
+    border: none;
+}
+  
+.notDisabled{
+    display: block;
+}
+.Disabled{
+    display:none;
+}
+
+.contrainerTitelh4Perfil5{
+    width: 373px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    height: 100px;
+    border-radius: 3px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border:solid 1px #CECECE;
+}
+
+.profileCardContainer5{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+
+.pDePerfilPosteos5{
+    margin-left: auto;
+    margin-right: auto;
+}
+.link2{
+    padding:15px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.containerButtom{
+    margin-left: auto;
+    margin-right: auto;
+}
+.test5{
+    width: 150px;
+    height:40px;
+    text-align: center;
+    align-items: center;
+    margin-left: 23px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.typeh5{
+    margin-top:10px;
+    margin-bottom: 10px;
+    color:black;
+}
+.cardConstainer5{
+    width: 375px;
+    height: 100%;
+    border: solid rgb(0, 0, 0) 1px;
+    background-color: white;
+    text-align: center;
+    display:flex;
+    flex-direction: column;    
+    padding:15px;
+    border-radius: 3px;
+}
+.pInfoCard5{
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+
+.pDeBio5{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: white;
+    border: solid 1px white;
+    background-color:#242930;
+    font-weight: 700;
+    width: 80%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.pDePerfilContrataciones5{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: white;
+    border: solid 1px white;
+    background-color:#242930;
+    font-weight: 700;
+    width: 80%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.pDePerfilRating5{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: white;
+    border: solid 1px white;
+    background-color:#242930;
+    font-weight: 700;
+    width: 80%;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.pDePerfilDireccion5{
+    color: white;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+@media (max-width: 775px) {
+    .contrainerTitelh4Perfil5 {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      border: solid 1px #cecece;
+      height: 300px;
+    }
+    .containerAuxiliar5 {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      flex-wrap: wrap;
+    }
+    .cardConstainer5{
+        width: 300px;
+        height: 100%;
+        border: solid white 1px;
+        text-align: center;
+        display:flex;
+        flex-direction: column;    
+        padding:15px;
+    }
+  }
+  @media (max-width: 655px) {
+    .contrainerTitelh4Perfil5 {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      border: solid 1px #cecece;
+      height: 300px;
+      justify-content:center;
+        align-items:center;
+      margin-left: 40px;  
+    }
+    .containerAuxiliar5 {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content:center;
+        align-items:center;
+    }
+    .cardConstainer5{
+        width: 320px;
+        height: 100%;
+        border: solid white 1px;
+        text-align: center;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction: column;    
+        padding:15px;
+    }
+    .cardComentariosContainer{
+        background-color:white;
+        width: 320px;
+        height: 100%;
+        border-radius: 3px;
+        color: #000;
+    }
+  }
+

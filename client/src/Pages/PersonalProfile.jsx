@@ -19,7 +19,7 @@ import { BookingDatatables } from "../Components/BookingTable";
 import "./stylesPerfil.css";
 import MapView from "../Components/MapView";
 import MapDetail from "./MapDetail";
-
+import DeletePost from "../Components/Botones/DeletePost"
 export const PersonalProfile = () => {
   const { id } = useParams(); // recibo el id por params para buscar la info con la ruta /users/profile/id
   const navigate = useNavigate();
@@ -39,10 +39,10 @@ export const PersonalProfile = () => {
     }
   }, [loginUser]);
 
-  const [comentarios, setComentarios] = useState(true);
+  const [comentarios, setComentarios] = useState(false);
   const [posteos, setPosteos] = useState(false);
   const [contrataciones, setContrataciones] = useState(false);
-
+  const [mapa, setMapa] = useState(false);
   const [coordinates, setCoordinates] = useState({});
 
   useEffect(() => {
@@ -62,21 +62,29 @@ export const PersonalProfile = () => {
       }
     );
   }, []);
-
+  function handleMap(){
+    setComentarios(false);
+    setContrataciones(false);
+    setPosteos(false);
+    setMapa(!mapa)
+  }
   function handlePost() {
     setPosteos(!posteos);
     setComentarios(false);
     setContrataciones(false);
+    setMapa(false)
   }
   function handleComent() {
     setPosteos(false);
     setComentarios(!comentarios);
+    setMapa(false)
     setContrataciones(false);
   }
   function handleContrataciones() {
     setPosteos(false);
     setComentarios(false);
     setContrataciones(!contrataciones);
+    setMapa(false)
   }
   let petIcon;
   let sizeText;
@@ -200,7 +208,10 @@ export const PersonalProfile = () => {
             </div>
             <div className="PerfilData">
               <h3>{fullInfo ? fullInfo.title : null}</h3>
+              {fullInfo && fullInfo.bio ?
               <p className="pDeBio">{fullInfo ? fullInfo.bio : null}</p>
+              :null
+              }
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
               {fullInfo ? (
                 <>
@@ -209,7 +220,7 @@ export const PersonalProfile = () => {
                       Contrataciones: {fullInfo.bookings}
                     </p>
                   ) : (
-                    <p>
+                    <p className="pDePerfilContrataciones">
                       Reservaciones:{" "}
                       {
                         fullInfo.reservaciones.filter((v) => {
@@ -233,15 +244,12 @@ export const PersonalProfile = () => {
                 />
               </div>
               {/* <p>Precio: ${price}</p> */}
-              <p className="pDePerfilDireccion">
-                Direccion: {fullInfo ? fullInfo.address : null}
-              </p>
               {/* <p>Tipo:</p> {petIcon}
               <p>Tamaño:</p> {sizeText} */}
             </div>
           </div>
 
-          <div>
+          <div className="probandoSiEsContenedor">
             <div className="contrainerTitelh4">
               <h4
                 className="DespliegueDeInfo"
@@ -267,6 +275,7 @@ export const PersonalProfile = () => {
               >
                 Contrataciones
               </h4>
+              <h4 className="DespliegueDeInfo" onClick={(e) => {handleMap()}}>Mapa</h4>
             </div>
             <div>
               <div className={posteos === true ? "notDisabled" : "Disabled"}>
@@ -284,8 +293,9 @@ export const PersonalProfile = () => {
                             <h4 className="pDePerfilPosteos">Tipo:</h4>
                             <p className="pDePerfilPosteos">{p.type}</p>
                             <Link to={`/editForm/${p.id}`}>
-                              <button>Editar Publicacion</button>
+                              <button className="buttomPerfile3">Editar Publicación</button>
                             </Link>
+                            <DeletePost className="buttomPerfile3" id={p.id}/>
                           </Card>
                         </div>
                       );
@@ -334,7 +344,9 @@ export const PersonalProfile = () => {
                 ) : null}
               </div>
             </div>
+            <div className={mapa === true ? 'notDisabled' : 'Disabled'}>
             <MapDetail />
+            </div>
           </div>
         </div>
       </div>
