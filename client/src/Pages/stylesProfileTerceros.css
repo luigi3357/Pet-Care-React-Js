@@ -11,14 +11,24 @@
     margin-top: 60px;
     
 }
+.DespliegueDeInfo5 {
+    cursor: pointer;
+    padding:15px;
+    border-radius: 3px;
+   
+}
+.DespliegueDeInfo5:hover {
+    cursor: pointer;
+    background-color: #17817f;
+}
 .containerAuxiliar5{
     display: grid;
-    grid-template-columns: 20% 70%;
+    grid-template-columns: 20% 79.5%;
 }
-.subContainer5{
+/* .subContainer5{
     display: grid;
-    grid-template-columns: 26% 74%;
-}
+    grid-template-columns: 25% 74%;
+} */
 img{
     object-fit:cover;
 }
@@ -29,7 +39,7 @@ img{
     margin-top:5px; 
 }
 .photoMap5{
-    width: 300px;
+    width: 100%;
     margin-top:5px; 
     
 }
@@ -62,11 +72,14 @@ img{
 }
 
 .subData5 {
-    
+   
+    margin-left: 5px;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    width: 260px;
     border: 1px solid rgb(206, 206, 206);
     border-radius: 3px;
 }
@@ -93,16 +106,16 @@ img{
 }
 
 .contrainerTitelh4Perfil5{
-    width: 100%;
+    width: 373px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    height: 100px;
+    
     display:flex;
     flex-direction: row;
     justify-content: space-around;
     border:solid 1px #CECECE;
-    padding-right: 30px;
-    padding-left:30px;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-radius: 3px;
 }
 
 .profileCardContainer5{
@@ -116,6 +129,12 @@ img{
 .pDePerfilPosteos5{
     margin-left: auto;
     margin-right: auto;
+}
+.link2{
+    padding:15px;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 .containerButtom{
     margin-left: auto;
@@ -132,13 +151,13 @@ img{
 }
 
 .cardConstainer5{
-    align-self: start;
-    width: 100%;
+    width: 375px;
     height: 100%;
     border: solid white 1px;
     text-align: center;
     display:flex;
     flex-direction: column;    
+    padding:15px;
 }
 .pInfoCard5{
     text-align: center;
@@ -209,3 +228,59 @@ img{
     margin-bottom: 15px;
     font-weight: 700;
 }
+
+@media (max-width: 775px) {
+    .contrainerTitelh4Perfil5 {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      border: solid 1px #cecece;
+      height: 300px;
+    }
+    .containerAuxiliar5 {
+      display: grid;
+      grid-template-columns: 30% 70%;
+      flex-wrap: wrap;
+    }
+    .cardConstainer5{
+        width: 300px;
+        height: 100%;
+        border: solid white 1px;
+        text-align: center;
+        display:flex;
+        flex-direction: column;    
+        padding:15px;
+    }
+  }
+  @media (max-width: 655px) {
+    .contrainerTitelh4Perfil5 {
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      border: solid 1px #cecece;
+      height: 300px;
+      justify-content:center;
+        align-items:center;
+      margin-left: 40px;  
+    }
+    .containerAuxiliar5 {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content:center;
+        align-items:center;
+    }
+    .cardConstainer5{
+        width: 320px;
+        height: 100%;
+        border: solid white 1px;
+        text-align: center;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction: column;    
+        padding:15px;
+    }
+  }

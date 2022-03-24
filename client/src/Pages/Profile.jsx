@@ -107,7 +107,9 @@ export const Profile = (post) => {
       {fullInfo? <div className="containerAuxiliar5">
         <div className="photoMapPrincipal5">
           <div className="photoMapPrincipal5">
-            <div className="photoMap5">
+            
+             <div className="subData5">
+             <div className="photoMap5">
             <img className="imgPerfil5"
               src={fullInfo ? fullInfo.profileImgURL : profileDefault}
               alt="Image"
@@ -115,7 +117,6 @@ export const Profile = (post) => {
               preview
             />
             </div>
-             <div className="subData5">
               <h4>{fullInfo.name.toUpperCase() +' '+ fullInfo.last_name.toUpperCase()}</h4>
               {fullInfo && fullInfo.bio ?
               <p className="pDeBio5">
@@ -135,10 +136,11 @@ export const Profile = (post) => {
               />
               </div> 
               {/* <p>Precio: ${price}</p> */}
-              <p className="pDePerfilDireccion5">Direccion: {fullInfo.location? fullInfo.location[0].address: null}</p>
+              <p className="pDePerfilContrataciones5">Direccion: {fullInfo.location? fullInfo.location[0].address: null}</p>
             </div>
           </div>
         </div>
+        <div>
         <div className="contrainerTitelh4Perfil5">
         <h4 className="DespliegueDeInfo5" onClick={(e) => {handleComent()}}>Comentarios</h4>
         <h4 className="DespliegueDeInfo5" onClick={(e) => {handlePost()}}>Posteos</h4>
@@ -166,11 +168,11 @@ export const Profile = (post) => {
                       />
                     ) : (
                       <div className="containerButtom">
-                        <Link className="link" to="/Register">
+                        <Link className="link2" to="/Register">
                           <button
                            label="Registrarse para reservar"
                            className="test5">
-                            
+                            Registrate
                             </button>
                         </Link>
                       </div>
@@ -202,13 +204,14 @@ export const Profile = (post) => {
             <h5>El usuario aún no posee Comentarios</h5>
           )}
         </div>
-        
-        </div>    
         <div className={mapa === true ? 'notDisabled' : 'Disabled'}>
         
         <MapDetail />
        
         </div>
+        </div>
+        </div>    
+        
 
       </div>
       :null}
