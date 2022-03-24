@@ -15,6 +15,7 @@
 .containerAuxiliar5{
     display: grid;
     grid-template-columns: 24% 74%;
+    align-items: center;
 }
 .subContainer5{
     display: grid;
@@ -110,24 +111,30 @@ img{
     margin-left: auto;
     margin-right: auto;
     display: flex;
-    align-items: start;
+    align-items: center;
 }
 
 .pDePerfilPosteos5{
     margin-left: auto;
     margin-right: auto;
 }
-
-.test5{
-    width: 100%;
-    text-align: center;
-    margin-left: 23px;
+.containerButtom{
+    margin-left: auto;
     margin-right: auto;
+}
+.test5{
+    width: 150px;
+    height:40px;
+    text-align: center;
+    align-items: center;
+    margin-left: 23px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .cardConstainer5{
     align-self: start;
-    width: 300px;
+    width: 100%;
     height: 100%;
     border: solid white 1px;
     text-align: center;

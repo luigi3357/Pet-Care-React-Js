@@ -157,12 +157,13 @@ export const Profile = (post) => {
                         post_id={p.id}
                       />
                     ) : (
-                      <div className="test5">
+                      <div className="containerButtom">
                         <Link className="link" to="/Register">
-                          <Button
-                            label="Registrarse para reservar"
-                            className="test5"
-                          />
+                          <button
+                           label="Registrarse para reservar"
+                           className="test5">
+                            
+                            </button>
                         </Link>
                       </div>
                     )}
