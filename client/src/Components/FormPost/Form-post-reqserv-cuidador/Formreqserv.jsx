@@ -159,7 +159,7 @@ export default function FormCard(){
         console.log( [JSON.parse(newLocation).address].toString(), 'soy el newlocation string')
         console.log(form2 , 'soy el FORM 2 ')
         dispatch(createPost(form2))
-      //  navigate(`/`)
+       navigate(`/`)
         setForm({
           title:'',
           description:'',

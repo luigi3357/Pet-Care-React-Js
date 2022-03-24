@@ -114,7 +114,7 @@ export default function FormPayData() {
     setTimeout(() => {
     dispatch(getLogin(form.email));
       alert("Su perfil a sido editado!");
-      //   navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
+        navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
       }, 1000);
 
       setForm({
@@ -220,8 +220,8 @@ export default function FormPayData() {
 
           <div className='form_group'>
             <label className='form_label'>Biografia</label>
-            <input  className='form_inputdes'
-            maxLength="60"
+            <textarea className='form_inputdes'
+            maxLength="150"
               type="text"
               value={form.bio}
               name="bio"

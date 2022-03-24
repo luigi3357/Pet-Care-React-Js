@@ -145,16 +145,19 @@ async function  resetSubmit (e) {
     // const onePass =oneUser.map(e => e.password)
     console.log(author.id, 'estoy dentro de resetsubmit')
     const  verifyPassword = await bcrypt.compare(form.password,author.password);   
-    
+    console.log(verifyPassword,"verify")
 
 if(verifyPassword === false){
+    console.log("entre")
     e.preventDefault()
+    console.log("entre al prevent")
     alert('Su contraseña actual no coincide')
+    console.log('pase')
 }else{
-  
+  console.log("entre al else")
     e.preventDefault()
-    console.log(form)
-    console.log(submit)
+    console.log(form,"soy form")
+    console.log(submit,"submit")
     dispatch(resetPassword(submit))
         alert('Contraseña cambiada')
        
@@ -163,7 +166,7 @@ if(verifyPassword === false){
   
 }
   
-navigate(`/`)
+
 
 
 
