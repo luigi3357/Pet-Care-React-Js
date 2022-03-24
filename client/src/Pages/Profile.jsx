@@ -26,7 +26,7 @@ export const Profile = (post) => {
   // const { description, title, author, updatedAt, type, size, address, price } =
   //   location.state;
   const loginUser = useSelector((state) => state.login);
-  const loginUser2 = JSON.parse(localStorage.login);
+  //const loginUser2 = JSON.parse(localStorage.login);
   const [logged, setLogged] = useState(null);
 
   //para los estilos:
@@ -161,7 +161,7 @@ export const Profile = (post) => {
                       <CreateBooking
                         keeper={fullInfo}
                         price={p.price}
-                        client={loginUser2}
+                        client={loginUser}
                         info={fullInfo}
                         post_id={p.id}
                       />
@@ -205,7 +205,7 @@ export const Profile = (post) => {
         </div>
         <div className={mapa === true ? 'notDisabled' : 'Disabled'}>
         
-        {/* <MapDetail /> */}
+        <MapDetail />
        
         </div>
         </div>

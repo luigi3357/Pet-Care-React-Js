@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import styles from "../Components/createBooking.module.css";
 import ClientView from "./ClientView";
 import KeeperView from "./KeeperView";
 import { changeBookingStatus, fetchCheckOutDetails, postPayment } from "../REDUX/actions/action";
@@ -70,7 +71,7 @@ export function Payment() {
               status={statusClosed}
             />
           ) : (
-            <p>no tienes acceso a esta informacion</p>
+            <p className={styles.pBookingDetails}>no tienes acceso a esta informacion</p>
           )}
         </div>
       )}
