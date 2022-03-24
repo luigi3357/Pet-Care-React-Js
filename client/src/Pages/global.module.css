@@ -243,6 +243,7 @@
 .searchBar {
   width: 250px;
   border: none;
+  color: #00cfc3;
   background-color: #3d3f42;
   padding: 15px 10px;
   border-radius: 20px;

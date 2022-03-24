@@ -106,7 +106,7 @@ export const Profile = (post) => {
                 <p className={style.description}>{fullInfo.bio}</p>
                 {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
                 <p>Contrataciones: {fullInfo.bookings}</p>
-                <p>Rating:</p>
+                <p>Calificación:</p>
                 <Rating
                   className="text-white"
                   value={fullInfo.rating}
@@ -121,7 +121,7 @@ export const Profile = (post) => {
                 </p>
               </div>
             </div>
-            <h4>Posteos</h4>
+            <h4>Publicaciones</h4>
             {fullInfo
               ? fullInfo.posteos.map((p) => {
                   return (
