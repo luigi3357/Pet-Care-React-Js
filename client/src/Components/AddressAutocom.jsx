@@ -14,14 +14,15 @@ export default function AddressAutocom (){
     const placeholder = JSON.parse(localStorage.login).location
 
     const handleSelect = async value => {
+
         const results = await geocodeByAddress(value);
         const latlng = await getLatLng(results[0])
-        console.log(results)
+        console.log(value)
         setAddress(value)
         setCoordinates(latlng)
         const objetoLocation = {
             ...latlng,
-            address: address,
+            address: value,
         }
         window.localStorage.setItem('newLocation', JSON.stringify(objetoLocation))
     }

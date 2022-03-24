@@ -1,11 +1,13 @@
 import axios from "axios";
-// import {  } from "../REDUX/actions/action";
 import { Button } from "primereact/button";
-//import { useDispatch, useSelector } from "react-redux";
 import { Skeleton } from "primereact/skeleton";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { localhost } from "../REDUX/actions/action";
+import styles from "../Components/createBooking.module.css";
+import { NavBar } from "./NavBar";
+import Footer from "./Footer/Footer";
+
 
 function loader() {
   return (
@@ -58,39 +60,30 @@ export function ConfirmationMP() {
       .then((response) => {
         setDetails(response.data);
       });
+
     setLoading(false);
+    setTimeout(() => {
+      navigate(`/PersonalProfile/${logged.id}`)
+      
+    }, 2000);
   }, []);
 
   return (
-    <div>
+    <div className={styles.ConfirmationMP}>
+      <NavBar />
+
       {/* {(!loading)&& <p>hubo un problema con el pago</p>} */}
       {loading ? (
         loader()
       ) : (
-        <div style={{}}>
+        <div className={styles.redirect}>
           {serverCheck ? <h1>Pago Aprobado</h1> : <h1>Pago Rechazado</h1>}
-          <h1>#{bookingID.slice(24)}</h1>
-          <h2>Cuidador</h2>
-          <p>{details.keeper.name + " " + details.keeper.last_name}</p>
-          <p>{details.keeper.phone} </p>
-          <h2>Dueño</h2>
-          <p>{details.client.name + " " + details.client.last_name}</p>
-          <p>{details.client.phone} </p>
-          <h2>Registro</h2>
-          <p>{details.check_in}</p>
-          <h2>Salida</h2>
-          <p>{details.check_out}</p>
-          <h2>${details.price}</h2>
-
+            <p className={styles.predirect}>redirigiendo al perfil...</p>
           {/* <h2>{details.comments}</h2> */}
-          <Link
-            to={`/PersonalProfile/${details.client.id}`}
-            id="Personal Profile"
-          >
-            ir a mi perfil
-            </Link>
+          
         </div>
       )}
+      <Footer />
     </div>
   );
 }

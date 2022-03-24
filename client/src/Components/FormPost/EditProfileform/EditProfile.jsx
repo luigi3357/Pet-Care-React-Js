@@ -7,6 +7,7 @@ import './EditProfile.css'
 export default function FormPayData() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
+  const [formLocation,setFormLocation]= useState(null)
 
   
   const author= JSON.parse(localStorage.getItem("login"))
@@ -101,9 +102,13 @@ export default function FormPayData() {
       e.preventDefault();
       const newLocation = window.localStorage.getItem("newLocation");
       if (newLocation) {
-        setForm({ ...form, location: [JSON.parse(newLocation)] });
+        console.log(newLocation)
+        let form2={...form, location: [JSON.parse(newLocation)]} 
+        console.log(form2)
+        dispatch(editProfilePost(form2));
+      }else{
+        dispatch(editProfilePost(form));
       }
-      dispatch(editProfilePost(form));
       setTimeout(() => {
       dispatch(getLogin(form.email));
         alert("Su perfil a sido editado!");
