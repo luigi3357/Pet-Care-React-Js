@@ -7,7 +7,7 @@ import { Dialog } from 'primereact/dialog';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import { useDispatch, useSelector } from "react-redux";
-import { forgotPassword, getAllUsers, getLogin } from '../../REDUX/actions/action';
+import { forgotPassword, getAllUsers, getLoginForgot } from '../../REDUX/actions/action';
 import { useNavigate } from 'react-router-dom';
 import { NavBar } from '../NavBar';
 import  s from './stylelogin.module.css'
@@ -35,7 +35,7 @@ export const ForgotPassword = () => {
             setFormData(data);
             setShowMessage(true);
             dispatch(forgotPassword(data));
-            dispatch(getLogin(data.email));
+            dispatch(getLoginForgot(data.email));
             setTimeout(() => {
                 navigate("/mailcode")
               }, 2000);            
@@ -101,9 +101,9 @@ export const ForgotPassword = () => {
             <Dialog visible={showMessage} onHide={() => setShowMessage(false)} position="top" footer={dialogFooter} showHeader={false} breakpoints={{ '960px': '80vw' }} style={{ width: '30vw' }}>
                 <div className="flex justify-content-center flex-column pt-6 px-3">
                     <i className="pi pi-check-circle" style={{ fontSize: '5rem', color: 'var(--green-500)' }}></i>
-                    <h5>Registration Successful!</h5>
+                    <h5>Verifica tu correo!</h5>
                     <p style={{ lineHeight: 1.5, textIndent: '1rem' }}>
-                        Your account is registered under name <b>{formData.name}</b>, under lastname <b>{formData.name}</b>, and email <b>{formData.email}</b>.
+                       Se ha enviado un mensaje a tu correo electronico.
                     </p>
                 </div>
             </Dialog>

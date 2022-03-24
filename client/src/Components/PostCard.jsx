@@ -11,8 +11,8 @@ import { useSelector } from "react-redux";
 
 export default function PostCard({ post }) {
   const { title, author, type, size } = post;
-  const loggedUser = JSON.parse(localStorage.login);
- /*  const loggedUser = useSelector((state) => state.login) */
+  // const loggedUser = JSON.parse(localStorage.login);
+  const loggedUser = useSelector((state) => state.login) 
   let petIcon;
   let sizeText;
 

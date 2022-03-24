@@ -103,7 +103,6 @@ export default function FormPayData () {
     else  {
          e.preventDefault()
     
-        console.log(form)
        // dispatch(postPublic(form))
         alert('Paga enviada!')
         setForm({
@@ -115,7 +114,6 @@ export default function FormPayData () {
             author_id:'idautor',
           
         })
-        console.log(form)
     }
    //     dispatch(fetchAllPosts())
    }

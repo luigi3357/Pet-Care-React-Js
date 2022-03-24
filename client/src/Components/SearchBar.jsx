@@ -18,7 +18,6 @@ export default function SearchBar() {
   // },[dispatch])
 
   function handleSearchInput(e) {
-    console.log(e);
     setSearch(e.target.value);
   }
 

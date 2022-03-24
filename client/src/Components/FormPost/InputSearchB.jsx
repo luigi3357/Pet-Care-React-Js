@@ -9,7 +9,6 @@ export default function SearchInput (){
     function handleSearch(e){
         e.preventDefault()
         setName(e.target.value)
-        console.log(name)
     }
         
     function handleSubmit(e){
@@ -17,7 +16,6 @@ export default function SearchInput (){
         
         // dispatch((name))
         // setName("")
-        console.log(`aqui esta el submit ${name}`)
     }
 
 

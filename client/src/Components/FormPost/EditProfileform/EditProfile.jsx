@@ -12,7 +12,6 @@ export default function FormPayData() {
 
   
   const author= JSON.parse(localStorage.getItem("login"))
-   console.log(author)
   // function validate(form) {
   //   let errors = {};
   //   if (!form.name) {
@@ -74,7 +73,6 @@ export default function FormPayData() {
         reader.readAsDataURL(file)
         reader.onload=function(){
             var base64 = reader.result;
-           console.log(base64)
         //    return base64;
             setForm({
                 ...form,
@@ -83,7 +81,6 @@ export default function FormPayData() {
         }
     })
    };
-   console.log(form.profileImgURL, 'soylaimagendePerfil')
  
 
   function handleChange(e) {
@@ -99,22 +96,21 @@ export default function FormPayData() {
   //     })
   //   );
    }
-
-  function handleSubmit(e) {
-      e.preventDefault();
-      const newLocation = window.localStorage.getItem("newLocation");
-      if (newLocation) {
-        console.log(newLocation)
-        let form2={...form, location: [JSON.parse(newLocation)]} 
-        console.log(form2)
-        dispatch(editProfilePost(form2));
-      }else{
-        dispatch(editProfilePost(form));
-      }
-      setTimeout(() => {
-      dispatch(getLogin(form.email));
-        alert("Su perfil a sido editado!");
-         navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
+   
+   function handleSubmit(e) {
+    e.preventDefault();
+    const newLocation = window.localStorage.getItem("newLocation");
+    if (newLocation) {
+      let form2={...form, location: [JSON.parse(newLocation)]} 
+      dispatch(editProfilePost(form2));
+    }else{
+      dispatch(editProfilePost(form));
+    }
+    
+    setTimeout(() => {
+    dispatch(getLogin(form.email));
+      alert("Su perfil a sido editado!");
+        navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
       }, 1000);
 
       setForm({
@@ -220,8 +216,8 @@ export default function FormPayData() {
 
           <div className='form_group'>
             <label className='form_label'>Biografia</label>
-            <input  className='form_inputdes'
-            maxLength="60"
+            <textarea className='form_inputdes'
+            maxLength="150"
               type="text"
               value={form.bio}
               name="bio"

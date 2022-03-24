@@ -12,7 +12,7 @@ import { Button } from "primereact/button";
 //import MapDetail from "./MapDetail";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { localhost, verification2fa } from "../REDUX/actions/action";
+import { getLogin, localhost, verification2fa } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
 import { Link, useNavigate } from "react-router-dom";
 import { BookingDatatables } from "../Components/BookingTable";
@@ -38,6 +38,7 @@ export const PersonalProfile = () => {
       setLogged(loggedStorage);
     }
   }, [loginUser]);
+  const userData2 = useSelector((state) => state.login)
 
   const [comentarios, setComentarios] = useState(false);
   const [posteos, setPosteos] = useState(false);
@@ -52,7 +53,6 @@ export const PersonalProfile = () => {
           lng: position.coords.longitude,
           lat: position.coords.latitude,
         });
-        //console.log(coordinates.longitude)
       },
       function (error) {
         console.log(error);
@@ -89,13 +89,16 @@ export const PersonalProfile = () => {
   let petIcon;
   let sizeText;
   function handleCheck() {
-    console.log(userData.email, "soy userdata");
     const data = {
       email: userData.email,
-      key_2fa: userData.key_2fa === true ? false : true,
-    };
-    console.log(data, "soy data");
-    dispatch(verification2fa(data));
+      key_2fa: userData2.key_2fa === true ? false : true
+    }
+    dispatch(verification2fa(data))
+    setTimeout(() => {
+
+      dispatch(getLogin(userData.email))
+
+    }, 2000)
   }
   useEffect(() => {
     axios
@@ -134,7 +137,7 @@ export const PersonalProfile = () => {
       break;
   }
   function handleReset() {
-    navigate("/resetPassword");
+    navigate("/resetPassword")
   }
 
   return (
@@ -184,13 +187,10 @@ export const PersonalProfile = () => {
                 <label className="buttomPerfile">
                   <input
                     type="checkbox"
-                    onChange={(e) => {
-                      handleCheck();
-                    }}
+                    onChange={e => { handleCheck() }}
                     label="Verificacion en 2 pasos"
                     className="buttomPerfile"
-                  />
-                  Verificacion 2FA
+                  />Verificacion 2FA
                 </label>
 
                 {/*  <Link to={`/editProfile`} className="link">
@@ -345,7 +345,7 @@ export const PersonalProfile = () => {
               </div>
             </div>
             <div className={mapa === true ? 'notDisabled' : 'Disabled'}>
-            <MapDetail />
+            {/* <MapDetail /> */}
             </div>
           </div>
         </div>

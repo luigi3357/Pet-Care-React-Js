@@ -19,8 +19,7 @@ const Map = ({ setCoordinates, coordinates, cards }) => {
     dispatch(usersCoordinates());
   }, [dispatch]);
 
-  console.log(coordinates, "prueba+++++++++");
-  console.log(showPointers, "objetousers");
+
 
   return (
     <div style={{ height: "50vh", width: "50vh" }}>
@@ -52,7 +51,7 @@ const Map = ({ setCoordinates, coordinates, cards }) => {
               lng={pointers.location[0].lng}
               key={pointers.id}
             >
-              <Link to={"/Profile/" + `${pointers.id}`}>
+              <Link to={`/Profile/${pointers.id}`}>
                 <p>{pointers.name}</p>
                 <img
                   style={{ height: "3vh", width: "3vh" }}

@@ -15,7 +15,6 @@ export const Home = () => {
     dispatch(fetchAllPosts());
   }, []);
 
-  console.log(filtered_posts);
   return (
     <div className={style.homeContainer}>
       <NavBar />

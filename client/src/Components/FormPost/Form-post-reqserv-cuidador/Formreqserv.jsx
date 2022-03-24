@@ -1,7 +1,7 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import {createPost} from '../../../REDUX/actions/action'
+import {createPost, fetchAllPosts} from '../../../REDUX/actions/action'
 import AddressAutocom from '../../AddressAutocom';
 import {Link} from 'react-router-dom'
 
@@ -13,10 +13,8 @@ export default function FormCard(){
   // const  user = useSelector((state)=> state.users)
   // const oneUser = user.filter(e => e.id === idautor.id)
   // const oneEmail =oneUser.map(e => e.email)
-  // console.log(oneEmail ,'soy oneEmail')
         
   const author= JSON.parse(localStorage.getItem("login"))
-  console.log(author)
         
 
         const [form,setForm]= useState({
@@ -124,7 +122,6 @@ export default function FormCard(){
        ...form,
         type: e.target.value,
    }))
-       console.log(form.type)
      }
       
 
@@ -144,7 +141,6 @@ export default function FormCard(){
      ...form,
       size: e.target.value,
  }))
-     console.log(form.type)
      }
 
 
@@ -154,12 +150,10 @@ export default function FormCard(){
       e.preventDefault()
       const newLocation = window.localStorage.getItem("newLocation");
       if (newLocation) {
-        console.log(newLocation)
         let form2={...form, location: [JSON.parse(newLocation).address].toString()} 
-        console.log( [JSON.parse(newLocation).address].toString(), 'soy el newlocation string')
-        console.log(form2 , 'soy el FORM 2 ')
         dispatch(createPost(form2))
-      //  navigate(`/`)
+        dispatch(fetchAllPosts())
+       navigate(`/`)
         setForm({
           title:'',
           description:'',
