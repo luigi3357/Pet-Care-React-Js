@@ -15,14 +15,10 @@ import axios from "axios";
 import { localhost } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
 import {fetchAllPosts} from '../REDUX/actions/action'
 import "./stylesProfileTerceros.css"
 
 
-=======
-import { fetchAllPosts } from "../REDUX/actions/action";
->>>>>>> 78b3d8a4da770d498765add709519f81ee78041e
 export const Profile = (post) => {
   const { id } = useParams();
   const location = useLocation();
@@ -36,16 +32,22 @@ export const Profile = (post) => {
   //para los estilos:
   const [comentariosTerceros, setComentariosTerceros] = useState(false);
   const [posteosTerceros, setPosteosTerceros] = useState(true);
-
+  const [mapa, setMapa] = useState(false);
   function handlePost(){
     setComentariosTerceros(false);
     setPosteosTerceros(!posteosTerceros);
+    setMapa(false)
   }
   function handleComent(){
     setComentariosTerceros(!comentariosTerceros)
     setPosteosTerceros(false)
+    setMapa(false)
   }
-
+  function handleMap(){
+    setComentariosTerceros(false);
+    setPosteosTerceros(false)
+    setMapa(!mapa)
+  }
   useEffect(() => {
     const logStorage = window.localStorage.getItem("login");
 
@@ -102,16 +104,17 @@ export const Profile = (post) => {
   return (
     <div className="container5">
       <NavBar />
-<<<<<<< HEAD
       {fullInfo? <div className="containerAuxiliar5">
         <div className="photoMapPrincipal5">
-          <div className="photoMap5">
+          <div className="photoMapPrincipal5">
+            <div className="photoMap5">
             <img className="imgPerfil5"
               src={fullInfo ? fullInfo.profileImgURL : profileDefault}
               alt="Image"
               width="250"
               preview
             />
+            </div>
              <div className="subData5">
               <h4>{fullInfo.name.toUpperCase() +' '+ fullInfo.last_name.toUpperCase()}</h4>
               {fullInfo && fullInfo.bio ?
@@ -136,10 +139,10 @@ export const Profile = (post) => {
             </div>
           </div>
         </div>
-        <div>
         <div className="contrainerTitelh4Perfil5">
         <h4 className="DespliegueDeInfo5" onClick={(e) => {handleComent()}}>Comentarios</h4>
         <h4 className="DespliegueDeInfo5" onClick={(e) => {handlePost()}}>Posteos</h4>
+        <h4 className="DespliegueDeInfo5" onClick={(e) => {handleMap()}}>Mapa</h4>
         </div>
         
         <div className="profileCardContainer5">
@@ -181,7 +184,7 @@ export const Profile = (post) => {
           </div>
 
           <div className="containerComentarios5">      
-          <div className={comentariosTerceros === true ? 'notDisabled' : 'Disabled'}>
+          
           {fullInfo.reviews ? (
             fullInfo.reviews.map((i) => {
               return (
@@ -199,110 +202,16 @@ export const Profile = (post) => {
             <h5>El usuario aún no posee Comentarios</h5>
           )}
         </div>
+        
         </div>    
-
-
+        <div className={mapa === true ? 'notDisabled' : 'Disabled'}>
+        
+        <MapDetail />
+       
         </div>
 
-
-      </div>
       </div>
       :null}
-=======
-      {fullInfo ? (
-        <div className={style.subContainer}>
-          <div className={style.photoMap}>
-            <div className={style.photoMap}>
-              <Image
-                src={fullInfo ? fullInfo.profileImgURL : profileDefault}
-                alt="Image"
-                width="250"
-                preview
-              />
-              <div className={style.map}></div>
-            </div>
-          </div>
-          <div className={style.profileCardContainer}>
-            <div className={style.data}>
-              <div className={style.subData}>
-                <h3>
-                  {fullInfo.name.toUpperCase() +
-                    " " +
-                    fullInfo.last_name.toUpperCase()}
-                </h3>
-                <p className={style.description}>{fullInfo.bio}</p>
-                {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
-                <p>Contrataciones: {fullInfo.bookings}</p>
-                <p>Rating:</p>
-                <Rating
-                  className="text-white"
-                  value={fullInfo.rating}
-                  readOnly
-                  stars={5}
-                  cancel={false}
-                />
-                {/* <p>Precio: ${price}</p> */}
-                <p>
-                  Direccion:{" "}
-                  {fullInfo.location ? fullInfo.location[0].address : null}
-                </p>
-              </div>
-            </div>
-            <h4>Posteos</h4>
-            {fullInfo
-              ? fullInfo.posteos.map((p) => {
-                  return (
-                    <Card>
-                      <p>Descripcion: {p.description}</p>
-                      <p>Price: $ {p.price}</p>
-
-                      {logged ? (
-                        <CreateBooking
-                          keeper={fullInfo}
-                          price={p.price}
-                          client={loginUser2}
-                          info={fullInfo}
-                          post_id={p.id}
-                        />
-                      ) : (
-                        <div>
-                          <Link className={style.link} to="/Register">
-                            <Button
-                              label="Registrarse para reservar"
-                              className="p-button-sm p-button-info p-button-rounded"
-                            />
-                          </Link>
-                        </div>
-                      )}
-                      <p>Tamaño: {p.size}</p>
-                      <p>Tipo: {p.type}</p>
-                    </Card>
-                  );
-                })
-              : null}
-
-            <h4>Comentarios</h4>
-            {fullInfo.reviews ? (
-              fullInfo.reviews.map((i) => {
-                return (
-                  <div>
-                    <ReviewCard
-                      id={i.id}
-                      key={i.id}
-                      rating={i.rate}
-                      message={i.message}
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <h5>El usuario aún no posee reviews</h5>
-            )}
-          </div>
-        </div>
-      ) : null}
-      <MapDetail />
->>>>>>> 78b3d8a4da770d498765add709519f81ee78041e
     </div>
   );
 };

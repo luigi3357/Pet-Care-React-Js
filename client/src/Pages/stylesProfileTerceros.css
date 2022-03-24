@@ -6,16 +6,14 @@
 
 .container5{
     min-width: 100%;
-    background-color: #2D333B;
+    background-color: #2d333b;
     color: white;
     margin-top: 60px;
-    display: grid;
     
 }
 .containerAuxiliar5{
     display: grid;
-    grid-template-columns: 24% 74%;
-    align-items: center;
+    grid-template-columns: 20% 70%;
 }
 .subContainer5{
     display: grid;
@@ -33,10 +31,11 @@ img{
 .photoMap5{
     width: 300px;
     margin-top:5px; 
-    margin-left: 20px;
+    
 }
 .photoMapPrincipal5{
-    width: 250px;
+    width: 230px;
+    text-align: center;
 }
 
 .map5 {
