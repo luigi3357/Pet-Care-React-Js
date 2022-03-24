@@ -200,11 +200,11 @@ export const PersonalProfile = () => {
                   />
               </Link> */}
               </div>
-              {/*  <div style={{ height: '50vh', width: '50vh' }}>
+               <div style={{ height: '50vh', width: '50vh' }}>
                 <MapView 
                     coordinates={coordinates}
                 />
-            </div>  */}
+            </div> 
             </div>
             <div className="PerfilData">
               <h3>{fullInfo ? fullInfo.title : null}</h3>
@@ -348,7 +348,7 @@ export const PersonalProfile = () => {
               </div>
             </div>
             <div className={mapa === true ? 'notDisabled' : 'Disabled'}>
-            {/* <MapDetail /> */}
+            <MapDetail />
             </div>
           </div>
         </div>
