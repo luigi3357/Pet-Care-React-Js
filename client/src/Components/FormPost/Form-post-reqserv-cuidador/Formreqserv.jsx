@@ -3,6 +3,8 @@ import { useDispatch,useSelector, } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import {createPost} from '../../../REDUX/actions/action'
 import AddressAutocom from '../../AddressAutocom';
+import {Link} from 'react-router-dom'
+
 import './Form.css'
 export default function FormCard(){
   const dispatch= useDispatch()
@@ -22,8 +24,8 @@ export default function FormCard(){
         description:'',
         price:'',
        email: author.email,
-        type:[],
-        size:[],
+        type:'',
+        size:'',
         address:'',
         phone:'',
         author_id:author.id,
@@ -34,58 +36,56 @@ export default function FormCard(){
             errors.title = 'Se requiere un titulo'
       
         } 
-         if (!form.description  ){
-            errors.description = 'Se requiere una descripcion'
-        } 
-         if (!form.price){
-            errors.price = 'Introduzca el precio de su servicio'
-        }
-         if (form.price.length <= 0 ){
-            errors.price = 'El precio no puede ser 0 o menor'
-        }  if (form.price.length > 6 ){
-          errors.price = 'El precio no puede ser mayor a 6 digitos'
+        if (!form.description  ){
+          errors.description = 'Se requiere una descripcion'
+      } 
+       if (!form.price){
+          errors.price = 'Introduzca el precio de su servicio'
       }
-         if (form.type.length < 1 ){
-            errors.type = 'Se solicita el tipo de mascota'
-        } if (form.type.length > 5 ){
-            errors.type = 'No puede seleccionar 2 veces el mismo'
-        } if (form.size.length < 1  ){
-          errors.size = 'Se solicita el tamaño de mascota'
-      } if (form.size.length > 3 ){
-          errors.size = 'No puede seleccionar 2 veces el mismo'
-      } if(!form.address){
-        errors.address = 'Se requiere su direccion'
-      } if(!form.phone){
-        errors.phone = 'Se requiere su numero de telefono'
-      }
-      if(!form.phone.length > 13){
-        errors.phone = 'Su numero contiene demasiado digitos'
-      }
+       if (form.price.length <= 0 ){
+          errors.price = 'El precio no puede ser 0 o menor'
+      }  if (form.price.length > 6 ){
+        errors.price = 'El precio no puede ser mayor a 6 digitos'
+    } if ( form.price === 0){
+      errors.price = 'El precio no puede ser 0'
+  }
+  
+       if (!form.type ){
+          errors.type = 'Se solicita el tipo de mascota'
+      } if (!form.size ){
+        errors.type = 'Se solicita el tamaño de mascota'
+    } 
+      
+      if(!form.phone){
+      errors.phone = 'Se requiere su numero de telefono'
+    }
+    if(!form.phone.length > 13){
+      errors.phone = 'Su numero contiene demasiado digitos'
+    }
          
       return errors;
+    
     }
     
     const [errors,setErrors]= useState({})
     const [disabled, setDisabled] = useState(true)
     const disableSubmit = useMemo(() =>{
         if(
-            form.title.length > 0 &&
+          form.title.length > 0 &&
             form.title.length < 50 &&
            
             form.description.length > 0 &&
             form.description.length < 400 &&
             form.price.length  >= 1 &&
-            form.price.length <= 6 &&
+            form.price.length <= 6&&
             form.price > 0&&
-            form.phone.length  >= 1 &&
+            form.price != 0 && 
+            form.phone.length  > 0 &&
             form.phone.length <= 15 &&
             form.phone > 0&&
-           form.type.length >= 1 &&
-           form.type.length < 5 &&
-           form.size.length >= 1 &&
-           form.size.length < 4 
-          //  form.address.length > 0 &&
-          //  form.address.length < 150 
+           form.type.length  >0 &&
+           form.size.length > 0
+        
            ){
               return false;
            }else{
@@ -113,34 +113,19 @@ export default function FormCard(){
        }
    
        function handleCheckType(e){
-        if(!form.type.includes(e.target.value)){
-            setForm({
-                ...form,
-                type:[...form.type, e.target.value]
-            })
-           }
-           if (e.target.checked) {
-             //cuando este es seleccionado guarda el tipo en un arreglo
-             setForm({
-               ...form,
-               type: [...form.type, e.target.value],
-             });
-           }
-           if (!e.target.checked) {
-             //cuando el tipo es deselecconado, lo saca del array de tipos
-             form.type.splice(form.type.indexOf(e.target.value), 1);
-             setForm({
-               ...form,
-             });
-             console.log(form.type)
-           }
-           setErrors(validate({
-            ...form,
-            [e.target.name]: e.target.value,
-        }))
-            console.log(form.type)
-          }
- 
+        
+        setForm({
+          ...form,
+          type: e.target.value
+        });
+      
+      
+      setErrors(validate({
+       ...form,
+        type: e.target.value,
+   }))
+       console.log(form.type)
+     }
       
 
 
@@ -148,76 +133,52 @@ export default function FormCard(){
 
         
         
-       function handleSelectS(e){
-        if(form.size.includes(e.target.value)){
-            setForm({
-                ...form,
-                size:[...form.size,]
-            })
-           }
-           if (e.target.checked) {
-             //cuando este es seleccionado guarda el tipo en un arreglo
-             setForm({
-               ...form,
-               size: [...form.size, e.target.value],
-             });
-           }
-           if (!e.target.checked) {
-             //cuando el tipo es deselecconado, lo saca del array de tipos
-             form.size.splice(form.size.indexOf(e.target.value), 1);
-             setForm({
-               ...form,
-             });
-             console.log(form.size)
-           }
-           setErrors(validate({
-            ...form,
-            [e.target.name]: e.target.value,
-        }))
-            console.log(form.size)
-       }
+     function handleSelectS(e){
+      setForm({
+        ...form,
+        size: e.target.value
+      });
+    
+    
+    setErrors(validate({
+     ...form,
+      size: e.target.value,
+ }))
+     console.log(form.type)
+     }
+
 
    
 
     function handleSubmit(e){
-        if(!form.title 
-            && !form.description 
-            && !form.price 
-            && !form.phone 
-            && !form.size 
-            && !form.type 
-            && !form.address
-            ){
-            alert('FORMULARIO VACIO')
-        }
-        
-    else  {
-      e.preventDefault();
+      e.preventDefault()
       const newLocation = window.localStorage.getItem("newLocation");
       if (newLocation) {
-        setForm({ ...form, location: [JSON.parse(newLocation)] });
-      }
-    
-        console.log(form)
-        dispatch(createPost(form))
-        alert('Petición creada con éxito!')
-        navigate(`/`)
+        console.log(newLocation)
+        let form2={...form, location: [JSON.parse(newLocation).address].toString()} 
+        console.log( [JSON.parse(newLocation).address].toString(), 'soy el newlocation string')
+        console.log(form2 , 'soy el FORM 2 ')
+        dispatch(createPost(form2))
+      //  navigate(`/`)
         setForm({
-            title:'',
-            description:'',
-            price:'',
-            email:  author.email,
-            image:[],
-            type:[],
-            size:[],
-            address:'',
-            phone:'',
-            author_id:author.id,
+          title:'',
+          description:'',
+          price:'',
+         email:  author.email,
+          type:'',
+          size:'',
+          address:'',
+          phone:'',
+          author_id:author.id,
           
         })
-    }
-
+      }else{
+        e.preventDefault()
+        alert('Se requiere su ubicacion')
+      }
+    
    }
+
 
     
    
@@ -254,10 +215,7 @@ export default function FormCard(){
       <div className='form_group'>
          <label className='form_label'>Direccion donde vive con la mascota</label> 
          <AddressAutocom />
-         {/* <input className='form_input'  type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/> */}
-         {
-              // errors.address && (<p className='errortxt'>{errors.address}</p>)
-          }
+        
       </div>
       <div  className='form_group' >
          <label  className='form_label' >Numero de telefono</label> 
@@ -286,21 +244,21 @@ export default function FormCard(){
           <div>
            <input  onChange={(e)=>{handleCheckType(e)
        }
-      } type="checkbox" name="perro" value='perro' />
+      } type="radio" name="tipo" value='perro' />
       <label> Perro</label>  
        
           </div>
         <div>
-          <input   onChange={handleCheckType}type="checkbox"  name="gato" value='gato'/>
+          <input   onChange={handleCheckType}type="radio"  name="tipo" value='gato'/>
         <label> Gato</label> 
         </div>
               
        <div>
-         <input  onChange={handleCheckType} type="checkbox"  name="aves" value='aves' />
+         <input  onChange={handleCheckType} type="radio"  name="tipo" value='aves' />
        <label> Aves</label> 
        </div>
          <div>
-          <input  onChange={handleCheckType} type="checkbox"  name="roedores" value= 'roedores' />
+          <input  onChange={handleCheckType} type="radio"  name="tipo" value= 'roedores' />
          <label> Roedores</label>     
          </div>
         
@@ -325,19 +283,19 @@ export default function FormCard(){
          <input 
        onChange={(e)=>{handleSelectS(e)
        }
-      } type="checkbox" name="pequeño" value='pequeño' />
+      } type="radio" name="tamaño" value='pequeño' />
       <label>Pequeño</label>
      </div>
      
      <div>
             
          
-         <input   onChange={handleSelectS}type="checkbox"  name="mediano" value='mediano'/>
+         <input   onChange={handleSelectS}type="radio"  name="tamaño" value='mediano'/>
              <label>Mediano</label>
          </div>   
          <div>
 
-         <input  onChange={handleSelectS} type="checkbox"  name="grande" value='grande' />
+         <input  onChange={handleSelectS} type="radio"  name="tamaño" value='grande' />
          <label>Grande</label>
          </div>
              
@@ -366,6 +324,15 @@ export default function FormCard(){
      </div>
   
      </div>
+
+
+     <Link to={`/PersonalProfile/${author.id}`}>
+        <button className='form_backp' type='button'>
+                Volver
+            </button>
+        </Link>
+  
+
      </form>
 
  
