@@ -76,7 +76,7 @@ router.delete("/delete/:id", async (req, res, next) => {
 
 router.put("/edit", async (req, res, next) => {
   const { title, description, price, type, size, address, phone, id, author_id } = req.body
-  console.log(req.body)
+  console.log(req.body )
   console.log(id,' soy el id' )
   const post = await Post.findOne({ where:{id:id}  });
 

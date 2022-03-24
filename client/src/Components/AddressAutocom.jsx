@@ -21,7 +21,7 @@ export default function AddressAutocom (){
         setCoordinates(latlng)
         const objetoLocation = {
             ...latlng,
-            address: address,
+            address: value,
         }
         window.localStorage.setItem('newLocation', JSON.stringify(objetoLocation))
     }

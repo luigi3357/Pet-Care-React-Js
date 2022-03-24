@@ -56,7 +56,7 @@ export default function FormPayData() {
   const [form, setForm] = useState({
     name: "",
     last_name:"",
-    location: '',
+    location: [],
     phone: "",
     bio: "",
     email: author.email,
@@ -98,31 +98,35 @@ export default function FormPayData() {
   //     })
   //   );
    }
-
+   
    function handleSubmit(e) {
     e.preventDefault();
     const newLocation = window.localStorage.getItem("newLocation");
     if (newLocation) {
-      setForm({ ...form, location: [JSON.parse(newLocation)] });
+      console.log(newLocation)
+      let form2={...form, location: [JSON.parse(newLocation)]} 
+      console.log(form2)
+      dispatch(editProfilePost(form2));
+    }else{
+      dispatch(editProfilePost(form));
     }
-    dispatch(editProfilePost(form));
-    console.log(form, 'soy el form')
+    
     setTimeout(() => {
     dispatch(getLogin(form.email));
       alert("Su perfil a sido editado!");
-       navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
-    }, 1000);
+      //   navigate(`/PersonalProfile/${JSON.parse(localStorage.login).id}`)
+      }, 1000);
 
-    setForm({
-      name: "",
-      last_name: "",
-      location: "",
-      phone: "",
-      bio: "",
-      email: "",
-      profileImgURL: "",
-    });
-  }
+      setForm({
+        name: "",
+        last_name: "",
+        location:[],
+        phone: "",
+        bio: "",
+        email: "",
+        profileImgURL: "",
+      });
+    }
   
 
   return (

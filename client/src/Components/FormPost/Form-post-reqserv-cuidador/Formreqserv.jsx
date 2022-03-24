@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {createPost} from '../../../REDUX/actions/action'
 import AddressAutocom from '../../AddressAutocom';
 import {Link} from 'react-router-dom'
+
 import './Form.css'
 export default function FormCard(){
   const dispatch= useDispatch()
@@ -45,16 +46,17 @@ export default function FormCard(){
           errors.price = 'El precio no puede ser 0 o menor'
       }  if (form.price.length > 6 ){
         errors.price = 'El precio no puede ser mayor a 6 digitos'
-    }
+    } if ( form.price === 0){
+      errors.price = 'El precio no puede ser 0'
+  }
+  
        if (!form.type ){
           errors.type = 'Se solicita el tipo de mascota'
       } if (!form.size ){
         errors.type = 'Se solicita el tamaño de mascota'
     } 
       
-      if(!form.address){
-      errors.address = 'Se requiere su direccion'
-    } if(!form.phone){
+      if(!form.phone){
       errors.phone = 'Se requiere su numero de telefono'
     }
     if(!form.phone.length > 13){
@@ -77,13 +79,13 @@ export default function FormCard(){
             form.price.length  >= 1 &&
             form.price.length <= 6&&
             form.price > 0&&
-            form.phone.length  >= 1 &&
+            form.price != 0 && 
+            form.phone.length  > 0 &&
             form.phone.length <= 15 &&
             form.phone > 0&&
            form.type.length  >0 &&
-           form.size.length > 0&&
-           form.address.length > 0 &&
-           form.address.length < 150 
+           form.size.length > 0
+        
            ){
               return false;
            }else{
@@ -149,44 +151,34 @@ export default function FormCard(){
    
 
     function handleSubmit(e){
-        if(!form.title 
-            && !form.description 
-            && !form.price 
-            && !form.phone 
-            && !form.size 
-            && !form.type 
-            && !form.address
-            ){
-            alert('FORMULARIO VACIO')
-        }
-        
-    else  {
-      e.preventDefault();
+      e.preventDefault()
       const newLocation = window.localStorage.getItem("newLocation");
       if (newLocation) {
-        setForm({ ...form, location: [JSON.parse(newLocation)] });
-      }
-    
-        console.log(form)
-        dispatch(createPost(form))
-        alert('Petición creada con éxito!')
-        navigate(`/`)
+        console.log(newLocation)
+        let form2={...form, location: [JSON.parse(newLocation).address].toString()} 
+        console.log( [JSON.parse(newLocation).address].toString(), 'soy el newlocation string')
+        console.log(form2 , 'soy el FORM 2 ')
+        dispatch(createPost(form2))
+      //  navigate(`/`)
         setForm({
-            title:'',
-            description:'',
-            price:'',
-            email:  author.email,
-        
-            type:'',
-            size:'',
-            address:'',
-            phone:'',
-            author_id:author.id,
+          title:'',
+          description:'',
+          price:'',
+         email:  author.email,
+          type:'',
+          size:'',
+          address:'',
+          phone:'',
+          author_id:author.id,
           
         })
-    }
-
+      }else{
+        e.preventDefault()
+        alert('Se requiere su ubicacion')
+      }
+    
    }
+
 
     
    
@@ -223,10 +215,7 @@ export default function FormCard(){
       <div className='form_group'>
          <label className='form_label'>Direccion donde vive con la mascota</label> 
          <AddressAutocom />
-         {/* <input className='form_input'  type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/> */}
-         {
-              // errors.address && (<p className='errortxt'>{errors.address}</p>)
-          }
+        
       </div>
       <div  className='form_group' >
          <label  className='form_label' >Numero de telefono</label> 

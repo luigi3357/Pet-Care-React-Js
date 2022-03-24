@@ -3,6 +3,7 @@ import { useDispatch,useSelector, } from 'react-redux';
 import { editPost,getAllUsers } from '../../../REDUX/actions/action';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import AddressAutocom from '../../AddressAutocom';
 import {Link} from 'react-router-dom'
 import './Form.css'
 export default function FormCard(){
@@ -48,9 +49,10 @@ export default function FormCard(){
           form.description.length < 400 &&
           form.price.length <= 6&&
            form.price > 0&&
-           form.phone > 0 &&
-          form.phone.length <= 15 &&
-          form.address.length < 150 
+           form.price != 0 && 
+           form.phone >= 0 &&
+          form.phone.length <= 15 
+        
         
          
          
@@ -140,39 +142,33 @@ export default function FormCard(){
    
 
     function handleSubmit(e){
-        if(!form.title 
-            && !form.description 
-            && !form.price 
-            && !form.phone 
-            && !form.size 
-            && !form.type 
-            && !form.address){
-            alert('FORMULARIO VACIO')
-        }
-        
-    else  {
-         e.preventDefault()
-    
-        console.log(form)
-        dispatch(editPost(form))
-        navigate(`/`)
-        alert('Servicio editado!')
-        setForm({
+        e.preventDefault()
+        const newLocation = window.localStorage.getItem("newLocation");
+        if (newLocation) {
+          console.log(newLocation)
+          let form2={...form, location: [JSON.parse(newLocation).address].toString()} 
+          console.log( [JSON.parse(newLocation).address].toString(), 'soy el newlocation string')
+          console.log(form2 , 'soy el FORM 2 ')
+          dispatch(editPost(form2))
+          navigate(`/`)
+          setForm({
             title:'',
             description:'',
             price:'',
+           email:  author.email,
             type:'',
             size:'',
             address:'',
             phone:'',
-            id:filterpostt.map(e => e.id).toString(),
-            author_id: author.id ,
+            author_id:author.id,
             
-          
-        })
-    }
-   
-  }
+          })
+        }else{
+          e.preventDefault()
+          alert('Se requiere su ubicacion')
+        }
+      
+     }
 
     
    
@@ -209,7 +205,7 @@ export default function FormCard(){
         </div>
         <div  className='form_group'>
            <label className='form_label' >Direccion</label> 
-           <input  className='form_input'  type='text'  value={form.address} name='address' onChange={(e) =>handleChange(e)}/>
+           <AddressAutocom/>
            {
                 errors.address && (<p className='errortxt'>{errors.address}</p>)
             }
