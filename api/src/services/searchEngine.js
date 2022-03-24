@@ -32,9 +32,7 @@ async function searchingMachine(keywords) {
             model: Review,
             as: "reviews",
             order: [["createdAt", "DESC"]],
-            attributes: ["id", "rate", "message", "from_id", "updatedAt"],
           },
-          attributes: ["name", "last_name", "rating", "bookings"],
         },      
       });
       foundPosts.push(keywordSearch);

@@ -1,6 +1,7 @@
  .bodyforms{
     display:flex;
     min-height:100vh;
+    color:  #202020d2;
 } */
 .formpublic {
   
@@ -18,7 +19,7 @@
   display: grid;
   gap: 2.5em;
 }
-.form_title {
+.form_title33 {
   font-size: 2rem;
   margin-bottom: 0.5em;
   text-align: center;
@@ -71,6 +72,18 @@
   padding: 0.8em 6em;
   border: none;
   border-radius: 0.5em;
+}
+.form_backp{
+  background-color: #3866f2;
+  color: #fff;
+
+  font-size: 1rem;
+  padding: 0.2em 3em;
+  border: none;
+  border-radius: 0.5em;
+  width: auto;
+  margin-top: 15px;
+  opacity: 0.8;
 }
 
 .errortxt {

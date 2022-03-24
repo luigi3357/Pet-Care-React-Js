@@ -84,6 +84,19 @@
   border: none;
   border-radius: 0.5em;
 }
+
+.form_backep{
+  background-color: #3866f2;
+  color: #fff;
+
+  font-size: 1rem;
+  padding: 0.2em 3em;
+  border: none;
+  border-radius: 0.5em;
+  width: auto;
+  margin-top: 65px;
+  opacity: 0.8;
+}
 .form_cancell {
   margin-top: 30px;
   text-align: center;
