@@ -10,23 +10,27 @@ import { MdPestControlRodent } from "react-icons/md";
 import { Button } from "primereact/button";
 import { CreateBooking } from "../Components/CreateBooking";
 import MapDetail from "./MapDetail";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { localhost } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import {fetchAllPosts} from '../REDUX/actions/action'
 import "./stylesProfileTerceros.css"
 
 
+=======
+import { fetchAllPosts } from "../REDUX/actions/action";
+>>>>>>> 78b3d8a4da770d498765add709519f81ee78041e
 export const Profile = (post) => {
   const { id } = useParams();
   const location = useLocation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // const { description, title, author, updatedAt, type, size, address, price } =
   //   location.state;
   const loginUser = useSelector((state) => state.login);
-  const loginUser2 = JSON.parse(localStorage.login)
+  const loginUser2 = JSON.parse(localStorage.login);
   const [logged, setLogged] = useState(null);
 
   //para los estilos:
@@ -60,7 +64,7 @@ export const Profile = (post) => {
       .get(`${localhost}/users/profile/` + id)
       .then((r) => setfullInfo(r.data));
   }, []);
-  
+
   // switch () {
   //   case "gato":
   //     petIcon = <FaCat className="text-5xl" />;
@@ -92,12 +96,13 @@ export const Profile = (post) => {
   //   default:
   //     break;
   // }
-  function editPublic (e){
-    dispatch(fetchAllPosts())
+  function editPublic(e) {
+    dispatch(fetchAllPosts());
   }
   return (
     <div className="container5">
       <NavBar />
+<<<<<<< HEAD
       {fullInfo? <div className="containerAuxiliar5">
         <div className="photoMapPrincipal5">
           <div className="photoMap5">
@@ -203,6 +208,101 @@ export const Profile = (post) => {
       </div>
       </div>
       :null}
+=======
+      {fullInfo ? (
+        <div className={style.subContainer}>
+          <div className={style.photoMap}>
+            <div className={style.photoMap}>
+              <Image
+                src={fullInfo ? fullInfo.profileImgURL : profileDefault}
+                alt="Image"
+                width="250"
+                preview
+              />
+              <div className={style.map}></div>
+            </div>
+          </div>
+          <div className={style.profileCardContainer}>
+            <div className={style.data}>
+              <div className={style.subData}>
+                <h3>
+                  {fullInfo.name.toUpperCase() +
+                    " " +
+                    fullInfo.last_name.toUpperCase()}
+                </h3>
+                <p className={style.description}>{fullInfo.bio}</p>
+                {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
+                <p>Contrataciones: {fullInfo.bookings}</p>
+                <p>Rating:</p>
+                <Rating
+                  className="text-white"
+                  value={fullInfo.rating}
+                  readOnly
+                  stars={5}
+                  cancel={false}
+                />
+                {/* <p>Precio: ${price}</p> */}
+                <p>
+                  Direccion:{" "}
+                  {fullInfo.location ? fullInfo.location[0].address : null}
+                </p>
+              </div>
+            </div>
+            <h4>Posteos</h4>
+            {fullInfo
+              ? fullInfo.posteos.map((p) => {
+                  return (
+                    <Card>
+                      <p>Descripcion: {p.description}</p>
+                      <p>Price: $ {p.price}</p>
+
+                      {logged ? (
+                        <CreateBooking
+                          keeper={fullInfo}
+                          price={p.price}
+                          client={loginUser2}
+                          info={fullInfo}
+                          post_id={p.id}
+                        />
+                      ) : (
+                        <div>
+                          <Link className={style.link} to="/Register">
+                            <Button
+                              label="Registrarse para reservar"
+                              className="p-button-sm p-button-info p-button-rounded"
+                            />
+                          </Link>
+                        </div>
+                      )}
+                      <p>Tamaño: {p.size}</p>
+                      <p>Tipo: {p.type}</p>
+                    </Card>
+                  );
+                })
+              : null}
+
+            <h4>Comentarios</h4>
+            {fullInfo.reviews ? (
+              fullInfo.reviews.map((i) => {
+                return (
+                  <div>
+                    <ReviewCard
+                      id={i.id}
+                      key={i.id}
+                      rating={i.rate}
+                      message={i.message}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <h5>El usuario aún no posee reviews</h5>
+            )}
+          </div>
+        </div>
+      ) : null}
+      <MapDetail />
+>>>>>>> 78b3d8a4da770d498765add709519f81ee78041e
     </div>
   );
 };
