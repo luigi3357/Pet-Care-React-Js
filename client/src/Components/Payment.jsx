@@ -46,7 +46,7 @@ export function Payment() {
     };
     dispatch(changeBookingStatus(newStatus));
     setTimeout(() => {
-      navigate("/");
+      navigate(-1);
     }, 500);
   }
   

@@ -88,8 +88,8 @@ export function CreateBooking({ keeper, client, price, info, post_id }) {
 
   async function contactClient(){
     await axios.post(`${localhost}/bookings/postular`, postulacion).then((response)=>{
+      alert('Postulación enviada')
     })
-    alert('Postulación enviada')
   }
 
   async function handleSubmit() {

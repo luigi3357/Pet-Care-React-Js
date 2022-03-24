@@ -65,7 +65,7 @@ export default function Filters() {
         <div className={style.titleAndButton2}>
           <SearchBar />
           <button className={style.filterButton} onClick={() => cleanFilters()}>
-            <p className={style.textButton}>Limpier Filtros</p>
+            <p className={style.textButton}>Limpiar Filtros</p>
           </button>
         </div>
         <div className={style.titleAndButton}>

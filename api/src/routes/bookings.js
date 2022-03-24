@@ -116,9 +116,9 @@ router.put("/update", async (req, res, next) => {
       { include: ["client", "keeper"] }
     );
     if (booking) {
+      const keeper = await User.findOne({ where: { id: booking.keeper_id } });
       await Booking.update({ status: status }, { where: { id } });
       if (status == "completed") {
-        const keeper = await User.findOne({ where: { id: booking.keeper_id } });
         let newAmount = keeper.bookings + 1;
         await User.update(
           { bookings: newAmount },
@@ -150,5 +150,6 @@ router.post("/postular", async (req, res, next) => {
   let mensaje = `${employee.name} ${employee.last_name} se ha postulado para cuidar una de tus mascotas. Visita su perfil para organizar una reserva`;
   //envia el email
   let send = sendEmail(dueño.email, mensaje, asunto);
+  res.send('ok')
 });
 module.exports = router;

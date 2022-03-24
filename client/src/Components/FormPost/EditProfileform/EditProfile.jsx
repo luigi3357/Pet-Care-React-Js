@@ -8,6 +8,7 @@ import './EditProfile.css'
 export default function FormPayData() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
+  const [formLocation,setFormLocation]= useState(null)
 
   
   const author= JSON.parse(localStorage.getItem("login"))

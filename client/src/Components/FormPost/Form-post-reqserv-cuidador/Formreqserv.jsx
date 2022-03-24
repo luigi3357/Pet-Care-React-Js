@@ -1,7 +1,7 @@
 import React,{useState, useMemo,useEffect} from 'react'
 import { useDispatch,useSelector, } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import {createPost} from '../../../REDUX/actions/action'
+import {createPost, fetchAllPosts} from '../../../REDUX/actions/action'
 import AddressAutocom from '../../AddressAutocom';
 import {Link} from 'react-router-dom'
 
@@ -159,6 +159,7 @@ export default function FormCard(){
         console.log( [JSON.parse(newLocation).address].toString(), 'soy el newlocation string')
         console.log(form2 , 'soy el FORM 2 ')
         dispatch(createPost(form2))
+        dispatch(fetchAllPosts())
        navigate(`/`)
         setForm({
           title:'',

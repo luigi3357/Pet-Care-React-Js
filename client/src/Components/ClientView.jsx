@@ -1,9 +1,9 @@
-import { Button } from "primereact/button";
 import React from "react";
 import { Link } from "react-router-dom";
 import { RatingDemo } from "./Review";
-import styles from'../Components/createBooking.module.css'
-
+import styles from "../Components/createBooking.module.css";
+import { NavBar } from "../Components/NavBar";
+import Footer from "./Footer/Footer";
 
 export default function ClientView({
   checkout_details,
@@ -15,44 +15,71 @@ export default function ClientView({
     switch (status) {
       case "pending":
         return (
-          <p>
-            el cuidador aun no acepta tu solicitud
-            <Link to={"/"}>volver</Link>
+          <p className={styles.pBookingDetails}>
+            {"el cuidador aún no acepta tu solicitud "}
+            <Link
+              className={styles.nolink}
+              to={`/PersonalProfile/${checkout_details.client.id}`}
+            >
+              volver
+            </Link>
           </p>
         );
       case "rejected":
         return (
-          <div>
-            <p>el cuidador declinó tu solicitud</p>
-            <p>Se ha cerrado la operacion</p>
-            <Link to={"/"}>volver</Link>
-          </div>
+            <p className={styles.pBookingDetails}>
+              {'el cuidador declinó tu solicitud. Se ha cerrado la operacion '}
+            <Link className={styles.nolink} to={"/"}>
+              volver
+            </Link>
+            </p>
         );
       case "cancelled":
         return (
-          <div>
-            <p>Cancelaste la reserva</p>
-            <p>Se ha cerrado la operacion</p>
-            <Link to={"/"}>volver</Link>
-          </div>
+            <p className={styles.pBookingDetails}>
+              {'Cancelaste la reserva. Se ha cerrado la operación '}
+            
+            <Link
+              className={styles.nolink}
+              to={`/PersonalProfile/${checkout_details.client.id}`}
+              >
+              volver
+            </Link>
+              </p>
         );
       case "accepted":
         return (
-          <Button
-            label={"Pagar"}
-            className="p-button-rounded p-button-success p-button-raised"
+          <button
+            className={styles.singleButtonContainerOrder}
             onClick={submit}
-          />
+          >
+            pagar
+          </button>
         );
 
       case "completed":
         return (
           <div>
-            <p>Esta reserva fue completada</p>
+            <p className={styles.pBookingDetails}>
+              {'Esta reserva fue completada '}
+              <Link
+                  className={styles.nolink}
+                  to={`/PersonalProfile/${checkout_details.keeper.id}`}
+                  >
+                  volver
+                </Link>
+            </p>
             {!checkout_details.client_review ? (
               <>
-                <Link to={"/"}>volver</Link>
-                <p>Dejanos tu opinión sobre {checkout_details.keeper.name}</p>
+                <Link
+                  className={styles.nolink}
+                  to={`/PersonalProfile/${checkout_details.client.id}`}
+                >
+                  volver
+                </Link>
+                <p className={styles.pBookingDetails}>
+                  Dejanos tu opinión sobre {checkout_details.keeper.name}
+                </p>
                 <RatingDemo
                   client_id={checkout_details.client_id}
                   keeper_id={checkout_details.keeper_id}
@@ -65,59 +92,89 @@ export default function ClientView({
 
       default:
         return (
-          <div>
-            <p>Reserva en curso</p>
-            <Link to={"/"}>volver</Link>
-          </div>
+            <p className={styles.pBookingDetails}>{'Reserva en curso. '}
+            <Link
+              className={styles.nolink}
+              to={`/PersonalProfile/${checkout_details.client.id}`}
+              >
+              volver
+            </Link>
+              </p>
         );
     }
   }
   function cancelButton(cancel) {
     return (
-      <Button
-        label={"Cancelar"}
-        className="p-button-rounded p-button-danger p-button-raised"
+      <button
+        className={styles.singleButtonContainerCancelOrder}
         onClick={cancel}
-      />
+      >
+        Cancelar
+      </button>
     );
   }
   return (
     <div className={styles.clientView}>
+      <NavBar />
+
       <div className={styles.clientView2}>
+        <div className={styles.headerD}>
+          <h2 className={styles.titulo}>
+            detalles de la reserva #{checkout_details.id.slice(24)}
+          </h2>
+        </div>
+        <div className={styles.clientView2}>
+          <div className={styles.subcontainer}>
+            <h2>Cuidador</h2>
+            <Link
+              className={styles.nolink}
+              to={`/Profile/${checkout_details.keeper.id}`}
+            >
+              <p className={styles.pBookingDetailsLink}>
+                {checkout_details.keeper.name +
+                  " " +
+                  checkout_details.keeper.last_name}
+              </p>
+            </Link>
+            <p className={styles.pBookingDetails}>
+              {"Teléfono " + checkout_details.keeper.phone}
+            </p>
+          </div>
+          <div className={styles.subcontainer}>
+            <h2>Dueño</h2>
+            <p className={styles.pBookingDetails}>
+              {checkout_details.client.name +
+                " " +
+                checkout_details.client.last_name}
+            </p>
+            <p className={styles.pBookingDetails}>
+              {"Teléfono " + checkout_details.client.phone}
+            </p>
+          </div>
+          <div className={styles.subcontainer}>
+            <h2>Entrada</h2>
+            <p className={styles.pBookingDetails}>
+              {checkout_details.check_in.slice(0, 10)}
+            </p>
+            <h2>Salida</h2>
+            <p className={styles.pBookingDetails}>
+              {checkout_details.check_out.slice(0, 10)}
+            </p>
+          </div>
 
-      <h1>#{checkout_details.id.slice(24)}</h1>
-        <h2>Cuidador</h2>
-        <Link to={`/Profile/${checkout_details.keeper.id}`}>
-          <p>
-            {checkout_details.keeper.name +
-              " " +
-              checkout_details.keeper.last_name}
-          </p>
-        </Link>
-        <p>{checkout_details.keeper.phone} </p>
-        <div className={styles.poneleNombre}>
+          <h2>TOTAL ${checkout_details.price}</h2>
 
-        <h2>Dueño</h2>
-        <p>
-          {checkout_details.client.name +
-            " " +
-            checkout_details.client.last_name}
-        </p>
-            </div>
-        <p>{checkout_details.client.phone} </p>
-        <h2>Registro</h2>
-        <p>{checkout_details.check_in.slice(0, 10)}</p>
-        <h2>Salida</h2>
-        <p>{checkout_details.check_out.slice(0, 10)}</p>
-
-        <h2>TOTAL</h2>
-        <h2>${checkout_details.price}</h2>
-
-        <h2>{checkout_details.comment}</h2>
-        <h2>{checkout_details.comment}</h2>
-        {payButton(checkout_details.status, submit)}
-        {!status.includes(checkout_details.status) && cancelButton(cancelOrder)}
+          <h2>Comentarios</h2>
+          <p className={styles.pBookingDetails}>{checkout_details.comment}</p>
+          <br />
+          <div className={styles.botonesOrder}>
+            {payButton(checkout_details.status, submit)}
+            {!status.includes(checkout_details.status) &&
+              cancelButton(cancelOrder)}
+          </div>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }

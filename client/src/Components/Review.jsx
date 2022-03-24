@@ -5,7 +5,11 @@ import {useDispatch, useSelector} from 'react-redux'
 import axios from "axios";
 import { Button } from "primereact/button";
 import { localhost } from "../REDUX/actions/action";
+import styles from "../Components/createBooking.module.css";
+
+
 import { Dialog } from "primereact/dialog";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const RatingDemo = ({client_id, keeper_id, booking_id}) => {
   const [rate, setRate] = useState(null);
@@ -13,6 +17,7 @@ export const RatingDemo = ({client_id, keeper_id, booking_id}) => {
   const [display, setDisplay] = useState(false);
   const [buttonSend, setButtonSend] = useState(true);
   // let logedUser = useSelector((state) => state.login);
+  const navigate = useNavigate()
 
   
   const dispatch = useDispatch()
@@ -28,16 +33,22 @@ export const RatingDemo = ({client_id, keeper_id, booking_id}) => {
 
   function submitHandler(e){
     console.log(payload)
-      axios.post(`https://petcare2000.herokuapp.com/reviews/create`,payload).then((response)=>console.log(response.data)).then(()=>{setButtonSend(false)})
+      axios.post(`${localhost}/reviews/create`,payload)
+      .then((response)=>console.log(response.data))
+      .then(()=>{setButtonSend(false)})
+      .then(()=> setTimeout(() => {
+        navigate(-1)
+      }, 1000));
       setDisplay(false)
   }
   function reviewButton(){
     return(
-      <Button  onClick={()=>setDisplay(true)} label='OPINAR' />
+      <button  onClick={()=>setDisplay(true)} className={styles.singleButtonContainerOrder} >opinar</button>
     )
   }
 
 
+  
 
   return (
   <div>
@@ -47,7 +58,7 @@ export const RatingDemo = ({client_id, keeper_id, booking_id}) => {
       header={<h1>Déjanos tu opinión</h1>}
       draggable={false}
       visible={display}
-        footer={<Button label="Enviar" disabled={!buttonSend} onClick={()=>submitHandler()}/>}
+        footer={<button disabled={!buttonSend} className={styles.singleButtonContainer} onClick={()=>submitHandler()}>enviar</button>}
         onHide={() => setDisplay(false)} >
       <div className="card">
         <h5>Calificación</h5>
