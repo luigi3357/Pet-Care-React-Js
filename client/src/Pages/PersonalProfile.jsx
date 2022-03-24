@@ -345,7 +345,7 @@ export const PersonalProfile = () => {
               </div>
             </div>
             <div className={mapa === true ? 'notDisabled' : 'Disabled'}>
-            <MapDetail />
+            {/* <MapDetail /> */}
             </div>
           </div>
         </div>

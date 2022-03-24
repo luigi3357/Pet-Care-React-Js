@@ -205,7 +205,7 @@ export const Profile = (post) => {
         </div>
         <div className={mapa === true ? 'notDisabled' : 'Disabled'}>
         
-        <MapDetail />
+        {/* <MapDetail /> */}
        
         </div>
         </div>
