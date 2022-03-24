@@ -51,6 +51,7 @@ export const Login = () => {
     const oneUser = users.filter((e) => e.email === data.email);
     const passVerify = oneUser.map((e) => e.password).toString();
     const verifyPassword = await bcrypt.compare(data.password, passVerify);
+    console.log(verifyPassword)
     const data2 = {
       email: oneUser.map(e => e.email),
       name: oneUser.map(e => e.name)

@@ -16,21 +16,21 @@ import { getLogin, localhost, verification2fa } from "../REDUX/actions/action";
 import { Card } from "primereact/card";
 import { Link, useNavigate } from "react-router-dom";
 import { BookingDatatables } from "../Components/BookingTable";
-import "./stylesPerfil.css"
-//import MapView from "../Components/MapView";
-
+import "./stylesPerfil.css";
+import MapView from "../Components/MapView";
+import MapDetail from "./MapDetail";
 
 export const PersonalProfile = () => {
   const { id } = useParams(); // recibo el id por params para buscar la info con la ruta /users/profile/id
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.login); // obtengo la info del estado login para saber si entro a un perfil estando logeado o no. se usa para botones de reserva y para saber si el logeado esta viendo su perfil, para renderizar los botones de editar perfil y seguridad
 
   const [logged, setLogged] = useState(null); // estado local para guardar la info del logeado (usado para el localstorage)
 
   const [fullInfo, setfullInfo] = useState(); // el estado para guardar toda la info del id con el que se entro al perfil
-  const userData = JSON.parse(localStorage.login)
+  const userData = JSON.parse(localStorage.login);
   useEffect(() => {
     const logStorage = window.localStorage.getItem("login");
     if (logStorage) {
@@ -51,32 +51,32 @@ export const PersonalProfile = () => {
       function (position) {
         setCoordinates({
           lng: position.coords.longitude,
-          lat: position.coords.latitude
-        })
+          lat: position.coords.latitude,
+        });
         //console.log(coordinates.longitude)
       },
       function (error) {
-        console.log(error)
+        console.log(error);
       },
       {
-        enableHighAccuracy: true
+        enableHighAccuracy: true,
       }
     );
   }, []);
 
   function handlePost() {
     setPosteos(!posteos);
-    setComentarios(false)
-    setContrataciones(false)
+    setComentarios(false);
+    setContrataciones(false);
   }
   function handleComent() {
     setPosteos(false);
-    setComentarios(!comentarios)
-    setContrataciones(false)
+    setComentarios(!comentarios);
+    setContrataciones(false);
   }
   function handleContrataciones() {
     setPosteos(false);
-    setComentarios(false)
+    setComentarios(false);
     setContrataciones(!contrataciones);
   }
   let petIcon;
@@ -140,10 +140,10 @@ export const PersonalProfile = () => {
       <div className="container">
         <div className="containerAuxiliar">
           <div className="photoMap">
-
             <div className="photoMap">
               <div className="photoMap2">
-                <img className="imgPerfil"
+                <img
+                  className="imgPerfil"
                   src={
                     fullInfo
                       ? fullInfo.profileImgURL
@@ -157,22 +157,25 @@ export const PersonalProfile = () => {
               </div>
               <div className="EditPerfil">
                 <Link to={`/editProfile`} className="buttomPerfile">
-                  <buttom
-                    label="Editar perfil"
-                  >Editar Perfil</buttom>
+                  <buttom label="Editar perfil">Editar Perfil</buttom>
                 </Link>
 
-                <Link to={userData.keeper === true ? `/formpublic` : "/formpublicServ"} className="buttomPerfile">
-                  <buttom
-                    label="Crear post"
-
-                  >Crear Post</buttom>
+                <Link
+                  to={
+                    userData.keeper === true ? `/formpublic` : "/formpublicServ"
+                  }
+                  className="buttomPerfile"
+                >
+                  <buttom label="Crear post">Crear Post</buttom>
                 </Link>
                 <button
-                  onClick={e => { handleReset() }}
+                  onClick={(e) => {
+                    handleReset();
+                  }}
                   label="Cambiar contraseña"
                   className="buttomPerfile2"
-                >Cambiar contraseña
+                >
+                  Cambiar contraseña
                 </button>
 
                 <label className="buttomPerfile">
@@ -199,19 +202,28 @@ export const PersonalProfile = () => {
             </div>
             <div className="PerfilData">
               <h3>{fullInfo ? fullInfo.title : null}</h3>
-              <p className="pDeBio">
-                {fullInfo ? fullInfo.bio : null}
-              </p>
+              <p className="pDeBio">{fullInfo ? fullInfo.bio : null}</p>
               {/* <p>Fecha: {updatedAt.slice(0, 10)}</p> */}
-              {fullInfo ?
+              {fullInfo ? (
                 <>
-                  {fullInfo.keeper ?
-                    <p className="pDePerfilContrataciones">Contrataciones: {fullInfo.bookings}</p>
-                    :
-                    <p>Reservaciones: {fullInfo.reservaciones.filter((v) => { return (v.status == 'approved' || v.status == 'completed') }).length}</p>
-                  }
+                  {fullInfo.keeper ? (
+                    <p className="pDePerfilContrataciones">
+                      Contrataciones: {fullInfo.bookings}
+                    </p>
+                  ) : (
+                    <p>
+                      Reservaciones:{" "}
+                      {
+                        fullInfo.reservaciones.filter((v) => {
+                          return (
+                            v.status == "approved" || v.status == "completed"
+                          );
+                        }).length
+                      }
+                    </p>
+                  )}
                 </>
-                : null}
+              ) : null}
               <div className="pDePerfilRating">
                 <p className="styleratingP">Rating:</p>
                 <Rating
@@ -223,7 +235,9 @@ export const PersonalProfile = () => {
                 />
               </div>
               {/* <p>Precio: ${price}</p> */}
-              <p className="pDePerfilDireccion">Direccion: {fullInfo ? fullInfo.address : null}</p>
+              <p className="pDePerfilDireccion">
+                Direccion: {fullInfo ? fullInfo.address : null}
+              </p>
               {/* <p>Tipo:</p> {petIcon}
               <p>Tamaño:</p> {sizeText} */}
             </div>
@@ -231,34 +245,60 @@ export const PersonalProfile = () => {
 
           <div>
             <div className="contrainerTitelh4">
-              <h4 className="DespliegueDeInfo" onClick={(e) => { handleComent() }}>Comentarios</h4>
-              <h4 className="DespliegueDeInfo" onClick={(e) => { handlePost() }}>Posteos</h4>
-              <h4 className="DespliegueDeInfo" onClick={(e) => { handleContrataciones() }}>Contrataciones</h4>
+              <h4
+                className="DespliegueDeInfo"
+                onClick={(e) => {
+                  handleComent();
+                }}
+              >
+                Comentarios
+              </h4>
+              <h4
+                className="DespliegueDeInfo"
+                onClick={(e) => {
+                  handlePost();
+                }}
+              >
+                Posteos
+              </h4>
+              <h4
+                className="DespliegueDeInfo"
+                onClick={(e) => {
+                  handleContrataciones();
+                }}
+              >
+                Contrataciones
+              </h4>
             </div>
-            <div >
-              <div className={posteos === true ? 'notDisabled' : 'Disabled'}>
+            <div>
+              <div className={posteos === true ? "notDisabled" : "Disabled"}>
                 {fullInfo
                   ? fullInfo.posteos.map((p) => {
-                    return (
-                      <div className="pDePerfilPosteosContainer">
-                        <Card className="pDePerfilPosteos">
-
-                          <h4 className="pDePerfilPosteos">Descripcion:</h4><p className="pDePerfilPosteos"> {p.description}</p>
-                          <h4 className="pDePerfilPosteos">Price: $</h4><p className="pDePerfilPosteos">{p.price}</p>
-                          <h4 className="pDePerfilPosteos">Tamaño:</h4><p className="pDePerfilPosteos">{p.size}</p>
-                          <h4 className="pDePerfilPosteos">Tipo:</h4><p className="pDePerfilPosteos">{p.type}</p>
-                          <Link to={`/editForm/${p.id}`}>
-                            <button >Editar Publicacion</button>
-                          </Link>
-                        </Card>
-                      </div>
-                    );
-                  })
+                      return (
+                        <div className="pDePerfilPosteosContainer">
+                          <Card className="pDePerfilPosteos">
+                            <h4 className="pDePerfilPosteos">Descripcion:</h4>
+                            <p className="pDePerfilPosteos"> {p.description}</p>
+                            <h4 className="pDePerfilPosteos">Price: $</h4>
+                            <p className="pDePerfilPosteos">{p.price}</p>
+                            <h4 className="pDePerfilPosteos">Tamaño:</h4>
+                            <p className="pDePerfilPosteos">{p.size}</p>
+                            <h4 className="pDePerfilPosteos">Tipo:</h4>
+                            <p className="pDePerfilPosteos">{p.type}</p>
+                            <Link to={`/editForm/${p.id}`}>
+                              <button>Editar Publicacion</button>
+                            </Link>
+                          </Card>
+                        </div>
+                      );
+                    })
                   : null}
               </div>
             </div>
             <div className="containerComentarios">
-              <div className={comentarios === true ? 'notDisabled' : 'Disabled'}>
+              <div
+                className={comentarios === true ? "notDisabled" : "Disabled"}
+              >
                 {fullInfo ? (
                   fullInfo.reviews?.map((i) => {
                     return (
@@ -268,7 +308,6 @@ export const PersonalProfile = () => {
                           key={i.id}
                           rating={i.rate}
                           message={i.message}
-
                         />
                       </div>
                     );
@@ -278,20 +317,29 @@ export const PersonalProfile = () => {
                 )}
               </div>
             </div>
-            <div >
-
-              <div className={contrataciones === true ? 'notDisabled' : 'Disabled'}>
-                {
-                  fullInfo ?
-                    fullInfo.keeper ? <BookingDatatables title={'Contrataciones'} data={fullInfo ? fullInfo.contrataciones : null} /> :
-                      <BookingDatatables title={'Reservaciones'} data={fullInfo ? fullInfo.reservaciones : null} />
-                    : null}
+            <div>
+              <div
+                className={contrataciones === true ? "notDisabled" : "Disabled"}
+              >
+                {fullInfo ? (
+                  fullInfo.keeper ? (
+                    <BookingDatatables
+                      title={"Contrataciones"}
+                      data={fullInfo ? fullInfo.contrataciones : null}
+                    />
+                  ) : (
+                    <BookingDatatables
+                      title={"Reservaciones"}
+                      data={fullInfo ? fullInfo.reservaciones : null}
+                    />
+                  )
+                ) : null}
               </div>
             </div>
+            <MapDetail />
           </div>
         </div>
       </div>
     </div>
   );
-
 };

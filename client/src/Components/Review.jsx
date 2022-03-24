@@ -28,7 +28,7 @@ export const RatingDemo = ({client_id, keeper_id, booking_id}) => {
 
   function submitHandler(e){
     console.log(payload)
-      axios.post(`${localhost}/reviews/create`,payload).then((response)=>console.log(response.data).then(()=>{setButtonSend(false)}))
+      axios.post(`https://petcare2000.herokuapp.com/reviews/create`,payload).then((response)=>console.log(response.data)).then(()=>{setButtonSend(false)})
       setDisplay(false)
   }
   function reviewButton(){

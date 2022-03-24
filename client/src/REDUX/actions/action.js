@@ -157,7 +157,7 @@ export const secondaryVerification = (payload) => {
 //reset
 export const resetPassword = (payload) => {
   return async (dispatch) => {
-    let json = await axios.put(`${localhost}/reset`, payload);
+    let json = await axios.put(`https://petcare2000.herokuapp.com/reset`, payload);
     return json;
   };
 };
